@@ -78,19 +78,19 @@ gulp.task('rev', () => {
         .pipe(gulp.dest('public/manifest/'))
 })
 
-// gulp.task('rev_collector', () => {
-//     return gulp.src(['public/manifest/**/*.json', 'views/layouts/app.pug'])
-//         .pipe( revCollector({
-//             replaceReved: true
-//         }))
-//         .pipe( gulp.dest('views/layouts/') )
-// })
+gulp.task('rev_collector', () => {
+    return gulp.src(['public/manifest/**/*.json', 'views/layouts/app.pug'])
+        .pipe( revCollector({
+            replaceReved: true
+        }))
+        .pipe( gulp.dest('views/layouts/') )
+})
 
-// gulp.task('rev_clean', function() {
-//     return gulp.src( ['public/*.*'], {read: false})
-//         .pipe( revOutdated(1) )
-//         .pipe( cleaner() );
-// });
+gulp.task('rev_clean', function() {
+    return gulp.src( ['public/*.*'], {read: false})
+        .pipe( revOutdated(1) )
+        .pipe( cleaner() );
+});
 
 // gulp.task('production', (callback) => {
 //     runSequence(
