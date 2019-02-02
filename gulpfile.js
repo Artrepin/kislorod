@@ -79,7 +79,7 @@ gulp.task('rev', () => {
 })
 
 gulp.task('rev_collector', () => {
-    return gulp.src(['public/manifest/**/*.json', 'views/layouts/app.pug'])
+    return gulp.src(['public/manifest/**/*.json', 'views/layouts/layout.pug'])
         .pipe( revCollector({
             replaceReved: true
         }))
