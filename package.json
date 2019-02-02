@@ -1,0 +1,35 @@
+{
+  "name": "kislorod",
+  "version": "1.0.0",
+  "description": "http://kislorod123.ru/",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ilya-soloveyv/kislorod.git"
+  },
+  "keywords": [
+    "kislorod"
+  ],
+  "author": "ilya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ilya-soloveyv/kislorod/issues"
+  },
+  "homepage": "https://github.com/ilya-soloveyv/kislorod#readme",
+  "dependencies": {
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "jquery": "^3.3.1",
+    "jquery-ui": "^1.12.1",
+    "pug": "^2.0.3",
+    "vue": "^2.5.22"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.0",
+    "gulp-nodemon": "^2.4.2",
+    "gulp-sass": "^4.0.2"
+  }
+}

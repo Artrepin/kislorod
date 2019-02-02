@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        title= title
+        if env.NODE_ENV == 'development'
+            link(rel="stylesheet", href="/src/css/app.css")
+        else
+            //- link(rel="stylesheet", href="/app.min.css")
+    body
+        block main
+        if env.NODE_ENV == 'development'
+            script(src='/vue/vue.js')
+            script(src='/jquery/jquery.min.js')
+            script(src='/jquery-ui/widget.js')
+            script(src='/jquery-ui/widgets/mouse.js')
+            script(src='/jquery-ui/widgets/slider.js')            
+            script(src="/src/js/components/jquery.ui.touch-punch.min.js")
+            script(src="/src/js/components/jquery.fancybox.js")
+            script(src="/src/js/components/jquery.maskedinput.js")
+            script(src="/src/js/components/jquery.form.js")
+            script(src="/src/js/components/slick.js")
+            script(src="/src/js/components/parsley.min.js")
+            script(src="/src/js/data.js")
+            script(src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyDaTR54DQg3iCDju-I25nyfPLf3oP_MUDc")
+            script(src='/src/js/google_map.js')
+            script(src='/src/js/welcome.js')
+        else
+            //- script(src='/app.min.js')

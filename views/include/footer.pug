@@ -1,0 +1,160 @@
+.contact-screen
+    .main
+        img.contact-screen__dots(src='/images/contact_dots.png', alt='')
+        img.contact-screen__marker(src='/images/marker_big.png', alt='')
+        .head-screen.contact-screen__top
+            .contact-screen__title
+                h2.fons_size44 Посетите наш офис в Сочи
+            .contact-screen__link
+                a.fw_medium.link-more(href='#')
+                    | Как проехать в офис 
+                    span.icon-arrow.link-more__arrow
+        #map.map.mt70
+        .contact-screen__bottom.mt40
+            .contact-screen__item
+                .font_size22.ff_trajan Центральный офис:  
+                .mt10.contact-adress
+                    .contact-adress__icon.icon-map-marker
+                    #mapAdress.font_size14.fw_medium Краснодарский край, г.Сочи, Воскресенская, д.14/1, офис 103 
+            .contact-screen__item
+                .font_size22.ff_trajan Телефон:
+                .contact-phone
+                    .contact-phone__icon.icon-telephone
+                    .contact-phone__text.fw_medium +7 ( 862 ) 225 65 05
+                button.button.button_yelow.button_medium.mt25 Обратный звонок
+            .contact-screen__item
+                .font_size22.ff_trajan Почта:
+                .contact-mail
+                    .contact-mail__icon.icon-message
+                    .contact-mail__text.fw_medium info@kislorod123.ru
+footer.footer
+    .main
+        .footer__inside-wrap
+            a.footer__logo(href='/index.html')
+                img(src='/images/logo.svg', alt='')
+            .footer__right
+                .footer__info
+                    h3.font_size22.fw_medium
+                        | Агентство элитной недвижимости 
+                        br
+                        | в городе Сочи
+                    .mt10
+                        .font_size14.fw_medium
+                            a.fade05(href='#') Политика конфиденциальности
+                        .font_size14.fw_medium
+                            a.fade05(href='#') Реквизиты
+                a.footer__develop.font_size14.fw_medium.fade05(href='http://artrepin.ru', target='_blank')
+                    img.footer__develop-logo(src='/images/logo_repin.svg', alt='')
+                    | Разработка — 
+                    br
+                    | Картина Репина
+.popup-wrap.js-popup-call
+    .popup-wrap__inside-wrap
+        .popup-overlay.js-popup-close
+        .popup
+            .popup__expert
+                img(src='/images/experts/1_mirror.png', alt='')
+            .popup__close.js-popup-close.js-svg(data-svg-src='/images/icons/close.svg')
+            .popup__inside-wrap
+                .callback
+                    .font_size44.ff_trajan Закажите обратный звонок 
+                    .mt15
+                        .font_size22.ff_trajan
+                            | Менеджер перезвонит 
+                            br
+                            | вам в ближайшее время
+                    form.ajax-form.callback__form(action='send.php', method='post', data-parsley-validate='', enctype='multipart/form-data')
+                        input(type='hidden', name='subj', value='')
+                        .message-list.mt50
+                            .message-list__item
+                                label.message-checkbox
+                                    input.message-checkbox__input(type='radio', value='WhatsApp', name='message', checked='')
+                                    span.message-checkbox__btn
+                                        span.message-checkbox__icon.icon-whatsapp
+                                    span.message-checkbox__text-wrap
+                                        span.message-checkbox__text WhatsApp
+                            .message-list__item
+                                label.message-checkbox
+                                    input.message-checkbox__input(type='radio', value='Viber', name='message')
+                                    span.message-checkbox__btn
+                                        span.message-checkbox__icon.message-checkbox__icon_viber.icon-viber
+                                    span.message-checkbox__text-wrap
+                                        span.message-checkbox__text Viber
+                            .message-list__item
+                                label.message-checkbox
+                                    input.message-checkbox__input(type='radio', value='Telegram', name='message')
+                                    span.message-checkbox__btn
+                                        span.message-checkbox__icon.icon-telegram
+                                    span.message-checkbox__text-wrap
+                                        span.message-checkbox__text Telegram
+                        .input-box
+                            input.input-text.input-text_border(type='text', name='name', required='', data-parsley-errors-messages-disabled='', placeholder='Введите ваше имя')
+                            label.input-box__icon.icon-user
+                        .input-box.mt10
+                            input.input-text.input-text_border(type='tel', name='phone', required='', data-parsley-errors-messages-disabled='', placeholder='+7 (___) ___-__-__')
+                            label.input-box__icon.icon-telephone
+                        button.button.button_big.button_blue.button_blue2.mt30(type='submit', name='call2')
+                            | Заказать звонок
+                            span.button__arrow.icon-arrow
+                        .polity-box.mt35
+                            .polity-box__dot
+                            .font_size12.fw_medium.fade05
+                                | Вы соглашаетесь с условиями 
+                                br
+                                | обработки персональных данных 
+                                br
+                                a(href='#') ознакомиться
+.popup-wrap.js-popup-thanck
+    .popup-wrap__inside-wrap
+        .popup-overlay.js-popup-close
+        .popup
+            .popup__close.js-popup-close.js-svg(data-svg-src='/images/icons/close.svg')
+            .popup__inside-wrap
+                .font_size44.ff_trajan
+                    | Спасибо за заявку. 
+                    br
+                    | Менеджер перезвонит вам 
+                    br
+                    | в ближайшее время
+                .desc.mt30
+                    img.desc__icon(src='/images/icons/ribbon.png', alt='')
+                    p.font_size14.fade05.fw_medium
+                        | А пока посмотрите наши соцсети, и следите за информацией об открытии 
+                        br
+                        | продаж в новых ЖК, результатах юридической экспертизы по ним, акции и т.д. 
+                        br
+                        | Будтье в курсе последних новостей в сфере недвижимости!
+                .social-groups.row.mt70
+                    .col-min-4.social-groups__item
+                        a.social-groups__link(href='#', target='_blank')
+                            span.social-groups__content
+                                span.social-groups__icon.icon-vk
+                                span.social-groups__text.ff_trajan
+                                    | Группа
+                                    br
+                                    | Вконтакте
+                        a.link-more.fw_medium.mt25(href='#', target='_blank')
+                            | Подписаться 
+                            span.link-more__arrow.icon-arrow
+                    .col-min-4.social-groups__item
+                        a.social-groups__link(href='#', target='_blank')
+                            span.social-groups__content
+                                span.social-groups__icon.social-groups__icon_fb.icon-facebook
+                                span.social-groups__text.ff_trajan
+                                    | Группа
+                                    br
+                                    | Facebook
+                        a.link-more.fw_medium.mt25(href='#', target='_blank')
+                            | Подписаться 
+                            span.link-more__arrow.icon-arrow
+                    .col-min-4.social-groups__item
+                        a.social-groups__link(href='#', target='_blank')
+                            span.social-groups__content
+                                span.social-groups__icon.social-groups__icon_fb.icon-instagram
+                                span.social-groups__text.ff_trajan
+                                    | Группа
+                                    br
+                                    | Instagram
+                        a.link-more.fw_medium.mt25(href='#', target='_blank')
+                            | Подписаться 
+                            span.link-more__arrow.icon-arrow
