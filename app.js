@@ -50,7 +50,7 @@ app.post('/send', (req, res) => {
             secure: true,
             auth: {
                 user: "kislorod123.ru@yandex.ru",
-                pass: "qewfej-xezceb-3bUtvy"
+                pass: process.env.EMAIL_PASS
             }
         })
     } catch (e) {
