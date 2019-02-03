@@ -59,7 +59,7 @@ app.post('/send', (req, res) => {
     
     let mailOptions = {
         from: 'kislorod123.ru@yandex.ru',
-        to: 'info@kislorod123.ru, vlasova@kislorod123.ru',
+        to: 'info@kislorod123.ru, vlasova@kislorod123.ru, ilya.soloveyv@gmail.com',
         subject: 'Обращение с сайта kislorod123.ru',
         text: 'Обращение с сайта kislorod123.ru',
         html: output
