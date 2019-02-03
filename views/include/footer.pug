@@ -63,7 +63,7 @@ footer.footer
                             | Менеджер перезвонит 
                             br
                             | вам в ближайшее время
-                    form.ajax-form.callback__form(action='send.php', method='post', data-parsley-validate='', enctype='multipart/form-data')
+                    form.ajax-form.callback__form(action='/send', method='post', data-parsley-validate='', enctype='multipart/form-data')
                         input(type='hidden', name='subj', value='')
                         .message-list.mt50
                             .message-list__item

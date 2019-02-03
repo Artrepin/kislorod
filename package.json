@@ -20,10 +20,12 @@
   },
   "homepage": "https://github.com/ilya-soloveyv/kislorod#readme",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "jquery": "^3.3.1",
     "jquery-ui": "^1.12.1",
+    "nodemailer": "^5.1.1",
     "pug": "^2.0.3",
     "vue": "^2.5.22"
   },
