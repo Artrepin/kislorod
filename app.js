@@ -59,7 +59,8 @@ app.post('/send', (req, res) => {
     
     let mailOptions = {
         from: 'kislorod123.ru@yandex.ru',
-        to: 'info@kislorod123.ru, vlasova@kislorod123.ru, ilya.soloveyv@gmail.com',
+        // to: 'info@kislorod123.ru, vlasova@kislorod123.ru, ilya.soloveyv@gmail.com',
+        to: 'ilya.soloveyv@gmail.com',
         subject: 'Обращение с сайта kislorod123.ru',
         text: 'Обращение с сайта kislorod123.ru',
         html: output
@@ -70,10 +71,9 @@ app.post('/send', (req, res) => {
             return console.log(error);
             // return console.log('Error');
         } else {
-            // console.log('Message sent: %s', info.messageId);
-            // console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+            console.log('Message sent: %s', info.messageId);
+            console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
         }
-        // res.render('feed-ok', {msg: 'В ближайшее время мы с Вами свяжемся и ответим на все вопросы'});
     })
 
     res.send(true)
