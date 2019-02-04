@@ -8,7 +8,6 @@ app.locals.env = process.env;
 var bodyParser = require('body-parser')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-const nodemailer = require("nodemailer")
 
 app.use('/vue', express.static(__dirname + '/node_modules/vue/dist'))
 app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist'))
@@ -41,42 +40,24 @@ app.post('/send', (req, res) => {
     if (req.body.budget) output+= "<p>На какой бюджет рассчитываете?: " + req.body.budget + "</p>"
     if (req.body.kredit) output+= "<p>Нужна ли рассрочка или ипотека?: " + req.body.kredit + "</p>"
 
-    let smtpTransport;
-    
-    try {
-        smtpTransport = nodemailer.createTransport({
-            host: 'smtp.yandex.ru',
-            port: 465,
-            secure: true,
-            auth: {
-                user: "kislorod123.ru@yandex.ru",
-                pass: process.env.EMAIL_PASS
-            }
-        })
-    } catch (e) {
-        return console.log('Error: ' + e.name + ":" + e.message)
-    }
-    
-    let mailOptions = {
-        from: 'kislorod123.ru@yandex.ru',
-        // to: '<info@kislorod123.ru>, <vlasova@kislorod123.ru>',
-        to: '<ilya.soloveyv@gmail.com>',
+    var mailgun = require('mailgun-js')({
+        apiKey: process.env.MAILGUN_APIKEY,
+        domain: process.env.MAILGUN_DOMAIN
+    })
+
+    var data = {
+        from: process.env.MAILGUN_MAILFROM,
+        to: process.env.MAILGUN_MAILTO,
         subject: 'Обращение с сайта kislorod123.ru',
         text: 'Обращение с сайта kislorod123.ru',
         html: output
     }
     
-    smtpTransport.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            return console.log(error);
-            // return console.log('Error');
-        } else {
-            console.log('Message sent: %s', info.messageId);
-            console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-        }
+    mailgun.messages().send(data, function (error, body) {
+        console.log(body)
+        res.send(true)
     })
 
-    res.send(true)
 })
 
 app.listen(process.env.PORT, () => {
