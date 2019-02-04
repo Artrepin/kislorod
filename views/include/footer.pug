@@ -5,7 +5,7 @@
         .head-screen.contact-screen__top
             .contact-screen__title
                 h2.fons_size44 Посетите наш офис в Сочи
-            .contact-screen__link
+            //- .contact-screen__link
                 a.fw_medium.link-more(href='#')
                     | Как проехать в офис 
                     span.icon-arrow.link-more__arrow
@@ -21,7 +21,7 @@
                 .contact-phone
                     .contact-phone__icon.icon-telephone
                     .contact-phone__text.fw_medium +7 ( 862 ) 225 65 05
-                button.button.button_yelow.button_medium.mt25 Обратный звонок
+                button.button.button_yelow.button_medium.mt25.js-popup-show(data-popup-name='js-popup-call', data-popup-subj='Заявка на обратный звонок с футера') Обратный звонок
             .contact-screen__item
                 .font_size22.ff_trajan Почта:
                 .contact-mail
