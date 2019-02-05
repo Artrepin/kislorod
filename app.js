@@ -5,9 +5,10 @@ app.set('view engine', 'pug')
 app.use(express.static('public'))
 require('dotenv').config()
 app.locals.env = process.env;
-var bodyParser = require('body-parser')
+const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+const AmoCRM = require('amocrm-js')
 
 app.use('/vue', express.static(__dirname + '/node_modules/vue/dist'))
 app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist'))
@@ -16,7 +17,7 @@ app.use('/jquery-ui', express.static(__dirname + '/node_modules/jquery-ui/ui'))
 const data = {}
 
 app.get('/', (req, res) => {
-    data.title = "Кислород"
+    data.title = "Центр недвижимости «Кислород»"
     res.render('welcome/welcome', data)
 })
 
@@ -57,6 +58,29 @@ app.post('/send', (req, res) => {
         console.log(body)
         res.send(true)
     })
+
+})
+
+app.get('/amocrm', (req, res) => {
+
+    const crm = new AmoCRM({
+        domain: process.env.AMOCRM_DOMAIN,
+        auth: {
+            login: process.env.AMOCRM_LOGIN,
+            hash: process.env.AMOCRM_HASH
+        }
+    })
+    crm.connect()
+
+    // crm.request.get( '/api/v2/account' ).then( data => {
+    //     console.log( 'Полученные данные', data )
+    //     res.send(true)
+    // }).catch( e => {
+    //     console.log( 'Произошла ошибка', e );
+    //     res.send(true)
+    // })
+
+    res.send(true)
 
 })
 

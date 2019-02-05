@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/ilya-soloveyv/kislorod#readme",
   "dependencies": {
+    "amocrm-js": "^1.0.6",
     "body-parser": "^1.18.3",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",

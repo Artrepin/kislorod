@@ -34,8 +34,9 @@ gulp.task('js_min', () => {
 			'node_modules/jquery/dist/jquery.min.js',
 			'node_modules/jquery-ui/ui/widget.js',
 			'node_modules/jquery-ui/ui/widgets/mouse.js',
-			'node_modules/jquery-ui/ui/widgets/slider.js',
+            'node_modules/jquery-ui/ui/widgets/slider.js',
 
+            'public/src/js/jquery.arcticmodal-0.3.min.js',
 			'public/src/js/components/jquery.ui.touch-punch.min.js',
 			'public/src/js/components/jquery.fancybox.js',
 			'public/src/js/components/jquery.maskedinput.js',
@@ -63,6 +64,7 @@ gulp.task('js_min', () => {
 gulp.task('css_min', () => {
     return gulp
         .src([
+            'public/src/css_static/jquery.arcticmodal-0.3.css',
             'public/src/css/app.css'
         ])
         .pipe(concat('app.min.css'))
