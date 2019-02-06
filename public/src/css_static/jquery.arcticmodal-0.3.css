@@ -38,24 +38,23 @@
 .box-modal-index-video {
     padding: 0;
     width: auto;
-    max-width: 1080px;
+    width: 1080px;
+    height: 607px;
 }
 @media (max-width: 1250px) {
     .box-modal-index-video {
-        max-width: 720px;
+        width: 720px;
+        height: 405px;
     }
 }
 @media (max-width: 900px) {
     .box-modal-index-video {
-        max-width: 320px;
+        width: 320px;
+        height: 180px;
     }
 }
 .box-modal-index-video .box-modal {
     overflow: hidden;
-}
-.box-modal-index-video video {
-    display: block;
-    border-radius: 6px;
 }
 .box-modal-index-video .arcticmodal-close {
     position: absolute;
