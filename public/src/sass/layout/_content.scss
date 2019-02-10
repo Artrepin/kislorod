@@ -1465,6 +1465,14 @@
     }
 }
 
+.contact-screen__item .social {
+    padding-top: 15px;
+    justify-content: left;
+    a {
+        color: black;
+    }
+}
+
 .catalog-filter {
     background: #1c1f2c;
     border-radius: 4px;
@@ -2745,7 +2753,7 @@ input::-webkit-inner-spin-button {
                 justify-content: flex-start;
             }
             .number-text__number {
-                width: 71px;
+                width: 130px;
                 text-align: center;
             }
         }

@@ -9,6 +9,66 @@ const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 const AmoCRM = require('amocrm-js')
+const crm = new AmoCRM({
+    domain: process.env.AMOCRM_DOMAIN,
+    auth: {
+        login: process.env.AMOCRM_LOGIN,
+        hash: process.env.AMOCRM_HASH
+    }
+})
+
+
+
+
+
+// crm.connect().then((data) => {
+//     crm.request.get( '/api/v2/contacts', {
+//         // id: '8144077',
+//         query: {
+//             'custom_fields//74913': '79876523070'
+//         }        
+//     }).then( data => {
+//         // console.log(data._embedded['items'][0]['custom_fields'][0]['values'][0]['value'])
+//         console.log(data._links.self.href)
+//         console.log(data._embedded['items'].length)
+//         // data._embedded['items'].forEach(element => {
+//         //     console.log(element)
+//         //     // console.log(element.custom_fields)
+//         // })
+        
+//         // console.log(data._links)
+//         // console.log(data._embedded['items'])
+//         // return false
+//         // console.log( 'Полученные данные', data )
+//     }).catch( e => {
+//         console.log( 'Произошла ошибка', e )
+//     })
+// })
+
+
+var month_rus = [
+    ['январь'],
+    ['февраль'],
+    ['март'],
+    ['апрель'],
+    ['май'],
+    ['июнь'],
+    ['июль'],
+    ['август'],
+    ['сентябрь'],
+    ['октябрь'],
+    ['ноябрь'],
+    ['декабрь'],
+]
+
+
+
+
+
+
+
+
+
 
 app.use('/vue', express.static(__dirname + '/node_modules/vue/dist'))
 app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist'))
@@ -18,6 +78,8 @@ const data = {}
 
 app.get('/', (req, res) => {
     data.title = "Центр недвижимости «Кислород»"
+    data.current_month = month_rus[new Date().getMonth()][0]
+    data.current_year = new Date().getFullYear()
     res.render('welcome/welcome', data)
 })
 
@@ -61,26 +123,103 @@ app.post('/send', (req, res) => {
 
 })
 
-app.get('/amocrm', (req, res) => {
+app.get('/amocrm', (req, res, next) => {
 
-    const crm = new AmoCRM({
-        domain: process.env.AMOCRM_DOMAIN,
-        auth: {
-            login: process.env.AMOCRM_LOGIN,
-            hash: process.env.AMOCRM_HASH
-        }
+    crm.connect().then((data) => {
+        // crm.request.get( '/api/v2/account' ).then( data => {
+        //     console.log( 'Полученные данные', data )
+        // }).catch( e => {
+        //     console.log( 'Произошла ошибка', e )
+        // })
+    
+        crm.request.get( '/api/v2/contacts', {
+            id: '8144077',
+            // 'custom_fields': '79876523070'
+            // 74913: '79876523070'
+        }).then( data => {
+            data._embedded['items'].forEach(element => {
+                res.json(element)
+                // console.log(element.custom_fields)
+            })
+            
+            // console.log(data._links)
+            // console.log(data._embedded['items'])
+            // return false
+            // console.log( 'Полученные данные', data )
+        }).catch( e => {
+            console.log( 'Произошла ошибка', e )
+        })
+    
+    
+        // crm.request.get( '/api/v2/contacts', { id: 8144077 } ).then( data => {
+        //     console.log(data._links)
+        //     data._embedded['items'].forEach(element => {
+        //         console.log(element.custom_fields)
+        //     })
+        //     // console.log(data._embedded['items'])
+        //     // return false
+        //     // console.log( 'Полученные данные', data )
+        // }).catch( e => {
+        //     console.log( 'Произошла ошибка', e )
+        // })
+    
+        
     })
-    crm.connect()
+    
+    
+
+
+
+    // res.send(200)
+
+    // console.log(crm)
+
+    // crm.connect().catch(next)
 
     // crm.request.get( '/api/v2/account' ).then( data => {
-    //     console.log( 'Полученные данные', data )
-    //     res.send(true)
+    //     console.log( 'Полученные данные', data );
     // }).catch( e => {
     //     console.log( 'Произошла ошибка', e );
-    //     res.send(true)
     // })
 
-    res.send(true)
+    // res.json(111)
+     
+    // crm.connect().catch(next)
+    
+    // amoClient.auth(process.env.AMOCRM_DOMAIN, process.env.AMOCRM_LOGIN, process.env.AMOCRM_HASH).then(function (data) {
+        // console.log(data)
+        // res.send(true)
+        // if (res.auth === true) {
+        //     amoClient.addLeads([{name: 'Test'}]).then(function (leadsIds) {
+        //         console.log('leadsIds: ', leadsIds)
+        //         if (leadsIds[0] && leadsIds[0].id) {
+        //             amoClient.listLeads({id: leadsIds[0].id}).then(function (leads) {
+        //                 console.log('lead: ', leads[0])
+        //             })
+        //         }
+        //     })
+        // }
+    // }).catch(next)
+
+    
+    
+    // amoClient.auth(process.env.AMOCRM_DOMAIN, process.env.AMOCRM_LOGIN, process.env.AMOCRM_HASH).then(function (res) {
+        // res.send(res)
+        // console.log('auth res: ', res)
+        // if (res.auth === true) {
+        //     amoClient.addLeads([{name: 'Test'}]).then(function (leadsIds) {
+        //         console.log('leadsIds: ', leadsIds)
+        //         if (leadsIds[0] && leadsIds[0].id) {
+        //             amoClient.listLeads({id: leadsIds[0].id}).then(function (leads) {
+        //                 console.log('lead: ', leads[0])
+        //             })
+        //         }
+        //     })
+        // }
+    // })
+    
+
+    
 
 })
 
