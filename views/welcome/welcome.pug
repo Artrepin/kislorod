@@ -68,9 +68,9 @@ block main
                                 br
                                 | о компании
                         .mt55
-                            .font_size14.fw_medium Получите подборку лучших предложений за январь
+                            .font_size14.fw_medium Получите подборку лучших предложений за #{current_month}
                             .year.mt10
-                                .font_size120.color_yelow 2019
+                                .font_size120.color_yelow= current_year
                                 .year__text.color_yelow
                                     .year__medal.icon-medal
                                     .font_size22.ff_trajan.fw_medium ГОДА
@@ -373,12 +373,12 @@ block main
                                         | идеальный вариант
                             .agency-catalog__numbers
                                 .number-text.color_yelow
-                                    .font_size120.number-text__number 17
+                                    .font_size120.number-text__number 448
                                     .font_size22.ff_trajan.fw_medium
-                                        | жилых 
+                                        | жилых комплексов
                                         br
-                                        | комплексов
-                                .number-text.color_yelow
+                                        | домов и земельных участков
+                                //- .number-text.color_yelow
                                     .font_size120.number-text__number 3
                                     .font_size22.ff_trajan.fw_medium
                                         | коттеджных 
@@ -1044,7 +1044,7 @@ block main
                             .mt15
                                 p.font_size22.ff_trajan
                                     | Если перед покупкой нового жилья вам необходимо продать предыдущую квартиру, мы справимся с этим.
-                        .apartment-screen__desc
+                        //- .apartment-screen__desc
                             .font_size14.fw_medium
                                 | Мы хорошо умеем продавать вторичную недвижимость. 
                                 br
@@ -1229,38 +1229,52 @@ block main
                         .certificat
                             img.certificat__img(src='/images/certification/scan1.jpg', alt='')
                             .certificat__caption
-                                .font_size14.fw_medium Лицензия на осуществление строительной деятельности №23913491-07
-                            a.fancybox.certificat__zoom(href='/images/certification/scan1.jpg', rel='certification')
+                                .font_size14.fw_medium Сертификат официального партнера ПАО "Сбербанк"
+                            a.fancybox.certificat__zoom(href='/images/certification/scan1_big.jpg', rel='certification')
                                 span.certificat__zoom-icon
                     .certification-slider__slide
+                        .certificat
+                            img.certificat__img(src='/images/certification/scan2.jpg', alt='')
+                            .certificat__caption
+                                .font_size14.fw_medium Сертификат "Система обучения сотрудников Профессионал". Технология Евгения Котова
+                            a.fancybox.certificat__zoom(href='/images/certification/scan2_big.jpg', rel='certification')
+                                span.certificat__zoom-icon
+                    .certification-slider__slide
+                        .certificat
+                            img.certificat__img(src='/images/certification/scan3.jpg', alt='')
+                            .certificat__caption
+                                .font_size14.fw_medium Сертификат "Система обучения сотрудников Профессионал". Технология Евгения Котова
+                            a.fancybox.certificat__zoom(href='/images/certification/scan3_big.jpg', rel='certification')
+                                span.certificat__zoom-icon
+                    //- .certification-slider__slide
                         .certificat
                             img.certificat__img(src='/images/certification/scan2.jpg', alt='')
                             .certificat__caption
                                 .font_size14.fw_medium Лицензия на осуществление строительной деятельности №23913491-07
                             a.fancybox.certificat__zoom(href='/images/certification/scan1.jpg', rel='certification')
                                 span.certificat__zoom-icon
-                    .certification-slider__slide
+                    //- .certification-slider__slide
                         .certificat
                             img.certificat__img(src='/images/certification/scan3.jpg', alt='')
                             .certificat__caption
                                 .font_size14.fw_medium Лицензия на осуществление строительной деятельности №23913491-07
                             a.fancybox.certificat__zoom(href='/images/certification/scan1.jpg', rel='certification')
                                 span.certificat__zoom-icon
-                    .certification-slider__slide
+                    //- .certification-slider__slide
                         .certificat
                             img.certificat__img(src='/images/certification/scan1.jpg', alt='')
                             .certificat__caption
                                 .font_size14.fw_medium Лицензия на осуществление строительной деятельности №23913491-07
                             a.fancybox.certificat__zoom(href='/images/certification/scan1.jpg', rel='certification')
                                 span.certificat__zoom-icon
-                    .certification-slider__slide
+                    //- .certification-slider__slide
                         .certificat
                             img.certificat__img(src='/images/certification/scan2.jpg', alt='')
                             .certificat__caption
                                 .font_size14.fw_medium Лицензия на осуществление строительной деятельности №23913491-07
                             a.fancybox.certificat__zoom(href='/images/certification/scan1.jpg', rel='certification')
                                 span.certificat__zoom-icon
-                    .certification-slider__slide
+                    //- .certification-slider__slide
                         .certificat
                             img.certificat__img(src='/images/certification/scan3.jpg', alt='')
                             .certificat__caption
@@ -1332,16 +1346,16 @@ block main
                                     | 2018 года
                             .expert-box__center
                                 .font_size22.ff_trajan.font_upper.fw_medium
-                                    | Вдовин 
+                                    | Балынская
                                     br
-                                    | олег
+                                    | Александра
                                 .mt15
                                     .font_size14.fw_medium
                                         | Менеджер по работе 
                                         br
                                         | с клиентами
                             .expert-box__foto
-                                img(src='/images/experts/2.png', alt='')
+                                img(src='/images/experts/woman.png', alt='')
                     .experts-screen__right
                         h2.font_size44 Задайте вопрос нашему лучшему специалисту
                         .mt20
