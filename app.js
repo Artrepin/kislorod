@@ -17,35 +17,6 @@ const crm = new AmoCRM({
     }
 })
 
-
-
-
-
-// crm.connect().then((data) => {
-//     crm.request.get( '/api/v2/contacts', {
-//         // id: '8144077',
-//         query: {
-//             'custom_fields//74913': '79876523070'
-//         }        
-//     }).then( data => {
-//         // console.log(data._embedded['items'][0]['custom_fields'][0]['values'][0]['value'])
-//         console.log(data._links.self.href)
-//         console.log(data._embedded['items'].length)
-//         // data._embedded['items'].forEach(element => {
-//         //     console.log(element)
-//         //     // console.log(element.custom_fields)
-//         // })
-        
-//         // console.log(data._links)
-//         // console.log(data._embedded['items'])
-//         // return false
-//         // console.log( 'Полученные данные', data )
-//     }).catch( e => {
-//         console.log( 'Произошла ошибка', e )
-//     })
-// })
-
-
 var month_rus = [
     ['январь'],
     ['февраль'],
@@ -103,68 +74,136 @@ app.post('/send', (req, res) => {
     if (req.body.budget) output+= "<p>На какой бюджет рассчитываете?: " + req.body.budget + "</p>"
     if (req.body.kredit) output+= "<p>Нужна ли рассрочка или ипотека?: " + req.body.kredit + "</p>"
 
-    var mailgun = require('mailgun-js')({
-        apiKey: process.env.MAILGUN_APIKEY,
-        domain: process.env.MAILGUN_DOMAIN
+    // amocrm send
+    var phone = Number(req.body.phone.replace(/\D+/g,""))
+
+    crm.connect().then((data) => {
+        var contacts_id = false
+        crm.request.get( '/api/v2/contacts', {
+            query: phone
+        }).then( data => {
+            // console.log(data)
+            if (Object.keys(data).length == 0) {
+                // console.log('Контакт не найден')
+                // Добавляем контакт
+                crm.Contact.insert([
+                    {
+                        name: req.body.name,
+                        custom_fields: [
+                            {
+                                id: "74913",
+                                values: [
+                                    {
+                                        value: phone,
+                                        enum: "154761"
+                                    }                        
+                                ]
+                            }
+                        ]
+                    }
+                ]).then( data => {
+                    contacts_id = data._response._embedded.items[0].id
+
+                    crm.Lead.insert([
+                        {
+                            name: "ТЕСТ",
+                            contacts_id: contacts_id
+                        }
+                    ]).then( data => {
+                        res.json(data)
+                    })
+                    // console.log(data)
+                    // res.json(data)
+                })                    
+                // ***
+            } else {
+                contacts_id = data._embedded.items[0].id
+
+                crm.Lead.insert([
+                    {
+                        name: "ТЕСТ",
+                        contacts_id: contacts_id
+                    }
+                ]).then( data => {
+                    res.json(data)
+                })
+
+                // console.log('Контакт найден', contacts_id)
+            }
+            // res.json(data)
+
+            // console.log(contacts_id)
+        })
     })
 
-    var data = {
-        from: process.env.MAILGUN_MAILFROM,
-        to: process.env.MAILGUN_MAILTO,
-        subject: 'Обращение с сайта kislorod123.ru',
-        text: 'Обращение с сайта kislorod123.ru',
-        html: output
-    }
+    // res.send(true)
+    // *** //
+
+
+    // var mailgun = require('mailgun-js')({
+    //     apiKey: process.env.MAILGUN_APIKEY,
+    //     domain: process.env.MAILGUN_DOMAIN
+    // })
+
+    // var data = {
+    //     from: process.env.MAILGUN_MAILFROM,
+    //     to: process.env.MAILGUN_MAILTO,
+    //     subject: 'Обращение с сайта kislorod123.ru',
+    //     text: 'Обращение с сайта kislorod123.ru',
+    //     html: output
+    // }
     
-    mailgun.messages().send(data, function (error, body) {
-        console.log(body)
-        res.send(true)
-    })
+
+    // mailgun.messages().send(data, function (error, body) {
+    //     console.log(body)
+    //     res.send(true)
+    // })
 
 })
 
+
 app.get('/amocrm', (req, res, next) => {
 
-    crm.connect().then((data) => {
-        // crm.request.get( '/api/v2/account' ).then( data => {
-        //     console.log( 'Полученные данные', data )
-        // }).catch( e => {
-        //     console.log( 'Произошла ошибка', e )
-        // })
+    // crm.connect().then((data) => {
+    //     // crm.request.get( '/api/v2/account' ).then( data => {
+    //     //     console.log( 'Полученные данные', data )
+    //     // }).catch( e => {
+    //     //     console.log( 'Произошла ошибка', e )
+    //     // })
     
-        crm.request.get( '/api/v2/contacts', {
-            id: '8144077',
-            // 'custom_fields': '79876523070'
-            // 74913: '79876523070'
-        }).then( data => {
-            data._embedded['items'].forEach(element => {
-                res.json(element)
-                // console.log(element.custom_fields)
-            })
+    //     crm.request.get( '/api/v2/contacts', {
+    //         id: '8144077',
+    //         // 'custom_fields': '79876523070'
+    //         // 74913: '79876523070'
+    //     }).then( data => {
+    //         data._embedded['items'].forEach(element => {
+    //             res.json(element)
+    //             // console.log(element.custom_fields)
+    //         })
             
-            // console.log(data._links)
-            // console.log(data._embedded['items'])
-            // return false
-            // console.log( 'Полученные данные', data )
-        }).catch( e => {
-            console.log( 'Произошла ошибка', e )
-        })
+    //         // console.log(data._links)
+    //         // console.log(data._embedded['items'])
+    //         // return false
+    //         // console.log( 'Полученные данные', data )
+    //     }).catch( e => {
+    //         console.log( 'Произошла ошибка', e )
+    //     })
     
     
-        // crm.request.get( '/api/v2/contacts', { id: 8144077 } ).then( data => {
-        //     console.log(data._links)
-        //     data._embedded['items'].forEach(element => {
-        //         console.log(element.custom_fields)
-        //     })
-        //     // console.log(data._embedded['items'])
-        //     // return false
-        //     // console.log( 'Полученные данные', data )
-        // }).catch( e => {
-        //     console.log( 'Произошла ошибка', e )
-        // })
+    //     // crm.request.get( '/api/v2/contacts', { id: 8144077 } ).then( data => {
+    //     //     console.log(data._links)
+    //     //     data._embedded['items'].forEach(element => {
+    //     //         console.log(element.custom_fields)
+    //     //     })
+    //     //     // console.log(data._embedded['items'])
+    //     //     // return false
+    //     //     // console.log( 'Полученные данные', data )
+    //     // }).catch( e => {
+    //     //     console.log( 'Произошла ошибка', e )
+    //     // })
     
         
-    })
+    // })
     
     
 
@@ -222,6 +261,68 @@ app.get('/amocrm', (req, res, next) => {
     
 
 })
+
+app.get('/amocrm/contact/add', (req, res) => {
+    crm.connect().then((data) => {
+        crm.Contact.insert([
+            {
+                name: "Тестовый контакт",
+                custom_fields: [
+                    {
+                        id: "74913",
+                        values: [
+                            {
+                                value: "79037876601",
+                                enum: "154761"
+                            }                        
+                        ]
+                    }
+                ]
+            }
+        ]).then( data => {
+            res.json(data)
+        })
+    })
+})
+
+app.get('/amocrm/contact/:id', (req, res) => {
+    crm.connect().then((data) => {
+        crm.request.get( '/api/v2/contacts', {
+            id: Number(req.params.id)
+        }).then( data => {
+            res.json(data)
+        }).catch( e => {
+            console.log( 'Произошла ошибка', e )
+        })
+    })
+})
+
+app.get('/amocrm/contact/find/:phone', (req, res) => {
+    // Тестовый телефон имеющийся в базе 79876523070
+    crm.connect().then((data) => {
+        crm.request.get( '/api/v2/contacts', {
+            query: req.params.phone
+        }).then( data => {
+            res.json(data)
+        }).catch( e => {
+            console.log( 'Произошла ошибка', e )
+        })
+    })
+})
+
+app.get('/amocrm/lead/add', (req, res) => {
+    crm.connect().then((data) => {
+        crm.Lead.insert([
+            {
+                name: "ТЕСТ"
+            }
+        ]).then( data => {
+            res.json(data)
+        })
+    })
+})
+
+
 
 app.listen(process.env.PORT, () => {
     console.log('Server is running...')
