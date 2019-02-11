@@ -56,8 +56,6 @@ app.get('/', (req, res) => {
 
 app.post('/send', (req, res) => {
 
-    console.log('send')
-
     var output = "<h3>Данные заявки:</h3>"
 
     if (req.body.subj) output+= "<p>Тема: " + req.body.subj + "</p>"
@@ -76,39 +74,90 @@ app.post('/send', (req, res) => {
     if (req.body.budget) output+= "<p>На какой бюджет рассчитываете?: " + req.body.budget + "</p>"
     if (req.body.kredit) output+= "<p>Нужна ли рассрочка или ипотека?: " + req.body.kredit + "</p>"
 
-    // // amocrm send
-    // var phone = Number(req.body.phone.replace(/\D+/g,""))
+    // amocrm send
+    var phone = Number(req.body.phone.replace(/\D+/g,""))
 
-    // crm.connect().then((data) => {
-    //     crm.request.get( '/api/v2/contacts', {
-    //         id: phone
-    //     }).then( data => {
-    //         res.json(data)
-    //     })
-    // })
+    crm.connect().then((data) => {
+        var contacts_id = false
+        crm.request.get( '/api/v2/contacts', {
+            query: phone
+        }).then( data => {
+            // console.log(data)
+            if (Object.keys(data).length == 0) {
+                // console.log('Контакт не найден')
+                // Добавляем контакт
+                crm.Contact.insert([
+                    {
+                        name: req.body.name,
+                        custom_fields: [
+                            {
+                                id: "74913",
+                                values: [
+                                    {
+                                        value: phone,
+                                        enum: "154761"
+                                    }                        
+                                ]
+                            }
+                        ]
+                    }
+                ]).then( data => {
+                    contacts_id = data._response._embedded.items[0].id
+
+                    crm.Lead.insert([
+                        {
+                            name: "ТЕСТ",
+                            contacts_id: contacts_id
+                        }
+                    ]).then( data => {
+                        res.json(data)
+                    })
+                    // console.log(data)
+                    // res.json(data)
+                })                    
+                // ***
+            } else {
+                contacts_id = data._embedded.items[0].id
+
+                crm.Lead.insert([
+                    {
+                        name: "ТЕСТ",
+                        contacts_id: contacts_id
+                    }
+                ]).then( data => {
+                    res.json(data)
+                })
+
+                // console.log('Контакт найден', contacts_id)
+            }
+            // res.json(data)
+
+            // console.log(contacts_id)
+        })
+    })
 
     // res.send(true)
-    // // *** //
+    // *** //
 
 
-    var mailgun = require('mailgun-js')({
-        apiKey: process.env.MAILGUN_APIKEY,
-        domain: process.env.MAILGUN_DOMAIN
-    })
+    // var mailgun = require('mailgun-js')({
+    //     apiKey: process.env.MAILGUN_APIKEY,
+    //     domain: process.env.MAILGUN_DOMAIN
+    // })
 
-    var data = {
-        from: process.env.MAILGUN_MAILFROM,
-        to: process.env.MAILGUN_MAILTO,
-        subject: 'Обращение с сайта kislorod123.ru',
-        text: 'Обращение с сайта kislorod123.ru',
-        html: output
-    }
+    // var data = {
+    //     from: process.env.MAILGUN_MAILFROM,
+    //     to: process.env.MAILGUN_MAILTO,
+    //     subject: 'Обращение с сайта kislorod123.ru',
+    //     text: 'Обращение с сайта kislorod123.ru',
+    //     html: output
+    // }
     
 
-    mailgun.messages().send(data, function (error, body) {
-        console.log(body)
-        res.send(true)
-    })
+    // mailgun.messages().send(data, function (error, body) {
+    //     console.log(body)
+    //     res.send(true)
+    // })
 
 })
 
@@ -269,7 +318,7 @@ app.get('/amocrm/lead/add', (req, res) => {
             }
         ]).then( data => {
             res.json(data)
-        })        
+        })
     })
 })
 
