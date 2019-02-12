@@ -74,34 +74,30 @@ app.post('/send', (req, res) => {
     if (req.body.budget) output+= "<p>На какой бюджет рассчитываете?: " + req.body.budget + "</p>"
     if (req.body.kredit) output+= "<p>Нужна ли рассрочка или ипотека?: " + req.body.kredit + "</p>"
 
+
+
     // amocrm send
     var phone = Number(req.body.phone.replace(/\D+/g,""))
+    var name = (req.body.name) ? req.body.name : 'Без имени'
+    var email = (req.body.email) ? req.body.email : false
+    var insert_contact_data = {}
+        insert_contact_data.name = name
+        insert_contact_data.custom_fields = []
+        insert_contact_data.custom_fields.push( { id: 74913, values: [{ value: phone, enum: 154761 }] } )
+        if (email) {
+            insert_contact_data.custom_fields.push( { id: 74915, values: [ { value: req.body.email, enum: 154773 } ] } )
+        }
+
+    // console.log(req.body.email)
+    // console.log(insert_contact_data)
 
     crm.connect().then((data) => {
         var contacts_id = false
         crm.request.get( '/api/v2/contacts', {
             query: phone
         }).then( data => {
-            // console.log(data)
             if (Object.keys(data).length == 0) {
-                // console.log('Контакт не найден')
-                // Добавляем контакт
-                crm.Contact.insert([
-                    {
-                        name: req.body.name,
-                        custom_fields: [
-                            {
-                                id: "74913",
-                                values: [
-                                    {
-                                        value: phone,
-                                        enum: "154761"
-                                    }                        
-                                ]
-                            }
-                        ]
-                    }
-                ]).then( data => {
+                crm.Contact.insert([ insert_contact_data ]).then( data => {
                     contacts_id = data._response._embedded.items[0].id
 
                     crm.Lead.insert([
@@ -110,12 +106,28 @@ app.post('/send', (req, res) => {
                             contacts_id: contacts_id
                         }
                     ]).then( data => {
-                        res.json(data)
+
+                        var mailgun = require('mailgun-js')({
+                            apiKey: process.env.MAILGUN_APIKEY,
+                            domain: process.env.MAILGUN_DOMAIN
+                        })
+                    
+                        var data = {
+                            from: process.env.MAILGUN_MAILFROM,
+                            to: process.env.MAILGUN_MAILTO,
+                            subject: 'Обращение с сайта kislorod123.ru',
+                            text: 'Обращение с сайта kislorod123.ru',
+                            html: output
+                        }
+                        
+                    
+                        mailgun.messages().send(data, function (error, body) {
+                            console.log(body)
+                            res.send(true)
+                        })
+
                     })
-                    // console.log(data)
-                    // res.json(data)
                 })                    
-                // ***
             } else {
                 contacts_id = data._embedded.items[0].id
 
@@ -125,39 +137,33 @@ app.post('/send', (req, res) => {
                         contacts_id: contacts_id
                     }
                 ]).then( data => {
-                    res.json(data)
+
+                    var mailgun = require('mailgun-js')({
+                        apiKey: process.env.MAILGUN_APIKEY,
+                        domain: process.env.MAILGUN_DOMAIN
+                    })
+                
+                    var data = {
+                        from: process.env.MAILGUN_MAILFROM,
+                        to: process.env.MAILGUN_MAILTO,
+                        subject: 'Обращение с сайта kislorod123.ru',
+                        text: 'Обращение с сайта kislorod123.ru',
+                        html: output
+                    }
+                    
+                
+                    mailgun.messages().send(data, function (error, body) {
+                        console.log(body)
+                        res.send(true)
+                    })
+                
+
                 })
 
-                // console.log('Контакт найден', contacts_id)
             }
-            // res.json(data)
-
-            // console.log(contacts_id)
         })
     })
 
-    // res.send(true)
-    // *** //
-
-
-    // var mailgun = require('mailgun-js')({
-    //     apiKey: process.env.MAILGUN_APIKEY,
-    //     domain: process.env.MAILGUN_DOMAIN
-    // })
-
-    // var data = {
-    //     from: process.env.MAILGUN_MAILFROM,
-    //     to: process.env.MAILGUN_MAILTO,
-    //     subject: 'Обращение с сайта kislorod123.ru',
-    //     text: 'Обращение с сайта kislorod123.ru',
-    //     html: output
-    // }
-    
-
-    // mailgun.messages().send(data, function (error, body) {
-    //     console.log(body)
-    //     res.send(true)
-    // })
 
 })
 
