@@ -54,9 +54,22 @@ app.get('/', (req, res) => {
     res.render('welcome/welcome', data)
 })
 
-app.post('/send', (req, res) => {
+app.get('/catalog', (req, res) => {
+    data.title = "Каталог недвижимости"
+    res.render('catalog/catalog', data)
+})
 
-    console.log('send')
+app.get('/about', (req, res) => {
+    data.title = "О центре недвижимости «Кислород»"
+    res.render('about/about', data)
+})
+
+app.get('/partner', (req, res) => {
+    data.title = "Наши партнеры"
+    res.render('partner/partner', data)
+})
+
+app.post('/send', (req, res) => {
 
     var output = "<h3>Данные заявки:</h3>"
 
@@ -76,39 +89,96 @@ app.post('/send', (req, res) => {
     if (req.body.budget) output+= "<p>На какой бюджет рассчитываете?: " + req.body.budget + "</p>"
     if (req.body.kredit) output+= "<p>Нужна ли рассрочка или ипотека?: " + req.body.kredit + "</p>"
 
-    // // amocrm send
-    // var phone = Number(req.body.phone.replace(/\D+/g,""))
-
-    // crm.connect().then((data) => {
-    //     crm.request.get( '/api/v2/contacts', {
-    //         id: phone
-    //     }).then( data => {
-    //         res.json(data)
-    //     })
-    // })
-
-    // res.send(true)
-    // // *** //
 
 
-    var mailgun = require('mailgun-js')({
-        apiKey: process.env.MAILGUN_APIKEY,
-        domain: process.env.MAILGUN_DOMAIN
+    // amocrm send
+    var phone = Number(req.body.phone.replace(/\D+/g,""))
+    var name = (req.body.name) ? req.body.name : 'Без имени'
+    var email = (req.body.email) ? req.body.email : false
+    var insert_contact_data = {}
+        insert_contact_data.name = name
+        insert_contact_data.custom_fields = []
+        insert_contact_data.custom_fields.push( { id: 74913, values: [{ value: phone, enum: 154761 }] } )
+        if (email) {
+            insert_contact_data.custom_fields.push( { id: 74915, values: [ { value: req.body.email, enum: 154773 } ] } )
+        }
+
+    // console.log(req.body.email)
+    // console.log(insert_contact_data)
+
+    crm.connect().then((data) => {
+        var contacts_id = false
+        crm.request.get( '/api/v2/contacts', {
+            query: phone
+        }).then( data => {
+            if (Object.keys(data).length == 0) {
+                crm.Contact.insert([ insert_contact_data ]).then( data => {
+                    contacts_id = data._response._embedded.items[0].id
+
+                    crm.Lead.insert([
+                        {
+                            name: "ТЕСТ",
+                            contacts_id: contacts_id
+                        }
+                    ]).then( data => {
+
+                        var mailgun = require('mailgun-js')({
+                            apiKey: process.env.MAILGUN_APIKEY,
+                            domain: process.env.MAILGUN_DOMAIN
+                        })
+                    
+                        var data = {
+                            from: process.env.MAILGUN_MAILFROM,
+                            to: process.env.MAILGUN_MAILTO,
+                            subject: 'Обращение с сайта kislorod123.ru',
+                            text: 'Обращение с сайта kislorod123.ru',
+                            html: output
+                        }
+                        
+                    
+                        mailgun.messages().send(data, function (error, body) {
+                            console.log(body)
+                            res.send(true)
+                        })
+
+                    })
+                })                    
+            } else {
+                contacts_id = data._embedded.items[0].id
+
+                crm.Lead.insert([
+                    {
+                        name: "ТЕСТ",
+                        contacts_id: contacts_id
+                    }
+                ]).then( data => {
+
+                    var mailgun = require('mailgun-js')({
+                        apiKey: process.env.MAILGUN_APIKEY,
+                        domain: process.env.MAILGUN_DOMAIN
+                    })
+                
+                    var data = {
+                        from: process.env.MAILGUN_MAILFROM,
+                        to: process.env.MAILGUN_MAILTO,
+                        subject: 'Обращение с сайта kislorod123.ru',
+                        text: 'Обращение с сайта kislorod123.ru',
+                        html: output
+                    }
+                    
+                
+                    mailgun.messages().send(data, function (error, body) {
+                        console.log(body)
+                        res.send(true)
+                    })
+                
+
+                })
+
+            }
+        })
     })
 
-    var data = {
-        from: process.env.MAILGUN_MAILFROM,
-        to: process.env.MAILGUN_MAILTO,
-        subject: 'Обращение с сайта kislorod123.ru',
-        text: 'Обращение с сайта kislorod123.ru',
-        html: output
-    }
-    
-
-    mailgun.messages().send(data, function (error, body) {
-        console.log(body)
-        res.send(true)
-    })
 
 })
 
@@ -269,7 +339,7 @@ app.get('/amocrm/lead/add', (req, res) => {
             }
         ]).then( data => {
             res.json(data)
-        })        
+        })
     })
 })
 
