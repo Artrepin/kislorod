@@ -364,6 +364,21 @@ $(document).ready(function(){
         $(".bank-list__input").attr("checked","checked");
         return false;
     });
+
+    $(".js-yes-price").mouseover(function(){
+        $(".modal-exit__zhurnal").addClass("active");
+    }).mouseleave(function(){
+        $(".modal-exit__zhurnal").removeClass("active");
+    });
+    
+    $(".js-show-requisites").click(function(){
+        $(".js-popup-requisites").fadeIn(500);
+        return false;
+    });
+    
+    $(".js-close-requisites").click(function(){
+        $(".js-popup-requisites").fadeOut(500);
+    });
     
 });
 
