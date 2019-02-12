@@ -54,6 +54,21 @@ app.get('/', (req, res) => {
     res.render('welcome/welcome', data)
 })
 
+app.get('/catalog', (req, res) => {
+    data.title = "Каталог недвижимости"
+    res.render('catalog/catalog', data)
+})
+
+app.get('/about', (req, res) => {
+    data.title = "О центре недвижимости «Кислород»"
+    res.render('about/about', data)
+})
+
+app.get('/partner', (req, res) => {
+    data.title = "Наши партнеры"
+    res.render('partner/partner', data)
+})
+
 app.post('/send', (req, res) => {
 
     var output = "<h3>Данные заявки:</h3>"
