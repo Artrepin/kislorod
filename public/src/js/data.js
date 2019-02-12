@@ -46,14 +46,14 @@ $(document).ready(function(){
         $("."+name).fadeIn(500);
         $("."+name+" .popup").addClass("popup_active");
         $("."+name+" input[name='subj']").val(subj);
-        $("body").css("overflow","hidden");
+        $("body").css("overflow-y","hidden");
         return false;
     });
     
     $(".js-popup-close").click(function() {
         $(".popup-wrap").fadeOut(500);
         $(".popup").removeClass("popup_active");
-        $("body").css("overflow","auto");
+        $("body").css("overflow-y","auto");
     });
     
     function thanck() {
