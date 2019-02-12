@@ -448,7 +448,7 @@
 
 .social {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     &__item {
         opacity: 0.3;
@@ -748,6 +748,7 @@
         }
         .social {
             width: 100%;
+            justify-content: center;
         }
     }
     .main-screen {
