@@ -67,9 +67,10 @@ $(document).ready(function(){
         beforeSubmit: function(){
             $(this).parsley({
             });
+            thanck();
         },
         success: function(){
-            thanck();
+            // thanck();
         }
     });
 	
