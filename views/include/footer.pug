@@ -47,12 +47,56 @@ footer.footer
                         .font_size14.fw_medium
                             a.fade05(href='#') Политика конфиденциальности
                         .font_size14.fw_medium
-                            a.fade05(href='#') Реквизиты
+                            a.fade05.js-show-requisites(href='#') Реквизиты
                 a.footer__develop.font_size14.fw_medium.fade05(href='http://artrepin.ru', target='_blank')
                     img.footer__develop-logo(src='/images/logo_repin.svg', alt='')
                     | Разработка — 
                     br
                     | Картина Репина
+.popup-requisites.js-popup-requisites
+  .main
+    .popup__close.js-close-requisites.js-svg(data-svg-src='/images/icons/close.svg')
+    .row
+      .col-sm-5.col-min-6
+        .font_size22.ff_trajan Центр недвижимости «Кислород»,  ООО "Сочи Лайф" г. Сочи, Краснодарский край
+        a.button.button_yelow.button_medium.mt25.popup-requisites__load(href='#') Скачать реквизиты компании
+      .col-sm-5.col-min-6
+        .requisites-list
+          .requisites-list__item.row
+            .col-min-4.requisites-list__col
+              .font_size14.fw_medium ИНН
+            .col-min-8.requisites-list__col
+              .font_size14.fw_medium.fade05 2366006696
+          .requisites-list__item.row
+            .col-min-4.requisites-list__col
+              .font_size14.fw_medium ОГРН
+            .col-min-8.requisites-list__col
+              .font_size14.fw_medium.fade05 1182375068303
+          .requisites-list__item.row
+            .col-min-4.requisites-list__col
+              .font_size14.fw_medium КПП
+            .col-min-8.requisites-list__col
+              .font_size14.fw_medium.fade05 236601001
+          .requisites-list__item.row
+            .col-min-4.requisites-list__col
+              .font_size14.fw_medium Расч/счет
+            .col-min-8.requisites-list__col
+              .font_size14.fw_medium.fade05 40702810430060006627
+          .requisites-list__item.row
+            .col-min-4.requisites-list__col
+              .font_size14.fw_medium БИК
+            .col-min-8.requisites-list__col
+              .font_size14.fw_medium.fade05 046015602
+          .requisites-list__item.row
+            .col-min-4.requisites-list__col
+              .font_size14.fw_medium Ген. директор
+            .col-min-8.requisites-list__col
+              .font_size14.fw_medium.fade05 Скрипко Иван Борисович
+          .requisites-list__item.row
+            .col-min-4.requisites-list__col
+              .font_size14.fw_medium Юр. Адрес
+            .col-min-8.requisites-list__col
+              .font_size14.fw_medium.fade05 354053, Краснодарский край, город Сочи, ул. Фадеева, д. 32/1, помещение 1
 .popup-wrap.js-popup-call
     .popup-wrap__inside-wrap
         .popup-overlay.js-popup-close

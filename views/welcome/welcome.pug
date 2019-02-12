@@ -1024,11 +1024,11 @@ block main
                                 .font_size14.fw_medium Отмена запрета на досрочное погашение
                             li.kredit-service__item
                                 .font_size14.fw_medium Согласование сложных ситуаций с банками
-                        //- .kredit-bottom.mt60
+                        .kredit-bottom.mt60
                             .kredit-bottom__img
                                 img(src='/images/key_kredit.png', alt='')
                             .kredit-bottom__button
-                                button.button.button_big.button_blue.button_blue2
+                                button.button.button_big.button_blue.button_blue2.js-popup-show(data-popup-name='js-popup-kredit')
                                     | Узнать вероятность одобрения ипотеки
                                     span.button__arrow.icon-arrow
                                 .mt30
@@ -1446,4 +1446,5 @@ block main
                                             | обработки персональных данных 
                                             br
                                             a(href='#') ознакомиться
+        include ../include/popup.pug                                        
         include ../include/footer.pug
