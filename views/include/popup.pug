@@ -1,0 +1,293 @@
+.popup-wrap.js-popup-kredit
+  .popup-wrap__inside-wrap
+    .popup-overlay.js-popup-close
+    .popup
+      .popup__close.js-popup-close.js-svg(data-svg-src='/images/icons/close.svg')
+      .popup__inside-wrap
+        .popup__kredit
+          .kredit-steps
+            .kredit-step.kredit-step_active
+              .font_size44.ff_trajan
+                | Пройдите тест 
+                br
+                | до конца и получите 
+                br
+                | льготные условия по ипотеке
+              .mt15
+                .font_size22.ff_trajan
+                  | Получите +50% к вероятности 
+                  br
+                  | одобрения заявки, заполнив 1-й шаг
+              .kredit-step__desc
+                .kredit-step__desc-left.mt10
+                  .font_size14.fw_medium.fade05 Получите +25% заполнив поле «Номер телефона»
+                .kredit-step__desc-right.mt10
+                  .desc
+                    img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
+                    p.font_size14.fw_medium.fade05
+                      | Осталось 4 
+                      br
+                      | вопросов из 4
+              .mt15.kredit-scale
+                .kredit-scale__load
+                  .kredit-scale__arrow.icon-play
+              form.ajax-form.kredit-step__form.row.js-kredit-step(action='#', method='post', data-parsley-validate='', enctype='multipart/form-data')
+                .col-min-6
+                  .input-box.mt40
+                    input.input-text.input-text_border(type='text', name='name', required='', data-parsley-errors-messages-disabled='', placeholder='Укажите ФИО')
+                    label.input-box__icon.icon-user
+                .col-min-6
+                  .input-box.mt40
+                    input.input-text.input-text_border(type='tel', name='phone', required='', data-parsley-errors-messages-disabled='', placeholder='Введите номер телефона*')
+                    label.input-box__icon.icon-telephone
+                .col-min-6
+                  .button-money.mt40
+                    button.button.button_big.button_blue.button_blue2(type='submit', name='send')
+                      | Следующий шаг
+                      span.button__arrow.icon-arrow
+                      img.button-money__img(src='/images/money_kredit.png', alt='')
+                .col-min-6
+                  .polity-box.mt45
+                    .polity-box__dot
+                    .font_size12.fw_medium.fade05
+                      | Вы соглашаетесь с условиями 
+                      br
+                      | обработки персональных данных 
+                      br
+                      a(href='#') ознакомиться
+            .kredit-step
+              .font_size44.ff_trajan
+                | Пройдите тест 
+                br
+                | до конца и получите 
+                br
+                | льготные условия по ипотеке
+              .mt15
+                .font_size22.ff_trajan
+                  | Получите +12% к вероятности 
+                  br
+                  | одобрения заявки, заполнив 2-й шаг
+              .kredit-step__desc
+                .kredit-step__desc-left.mt10
+                  .font_size14.fw_medium.fade05 Получите +12% заполнив поле «Стоимость квартиры»
+                .kredit-step__desc-right.mt10
+                  .desc
+                    img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
+                    p.font_size14.fw_medium.fade05
+                      | Осталось 3 
+                      br
+                      | вопросов из 4
+              .mt15.kredit-scale
+                .kredit-scale__load(style='width:25%')
+                  .kredit-scale__arrow.icon-play
+              form.ajax-form.kredit-step__form.row.js-kredit-step(action='#', method='post', data-parsley-validate='', enctype='multipart/form-data')
+                .col-min-6
+                  .input-box.mt40
+                    input.input-text.input-text_border(type='text', name='price', required='', data-parsley-errors-messages-disabled='', placeholder='Укажите стоимость квартиры')
+                    label.input-box__icon.icon-house
+                .col-min-6
+                .col-min-6
+                  .button-money.mt40
+                    button.button.button_big.button_blue.button_blue2(type='submit', name='send')
+                      | Следующий шаг
+                      span.button__arrow.icon-arrow
+                      img.button-money__img(src='/images/money_kredit.png', alt='')
+                .col-min-6
+                  .polity-box.mt45
+                    .polity-box__dot
+                    .font_size12.fw_medium.fade05
+                      | Вы соглашаетесь с условиями 
+                      br
+                      | обработки персональных данных 
+                      br
+                      a(href='#') ознакомиться
+            .kredit-step
+              .font_size44.ff_trajan
+                | Пройдите тест 
+                br
+                | до конца и получите 
+                br
+                | льготные условия по ипотеке
+              .mt15
+                .font_size22.ff_trajan
+                  | Получите +15% к вероятности 
+                  br
+                  | одобрения заявки, заполнив 3-й шаг
+              .kredit-step__desc
+                .kredit-step__desc-left.mt10
+                  .font_size14.fw_medium.fade05 Получите +15% заполнив поле «Первый взнос»
+                .kredit-step__desc-right.mt10
+                  .desc
+                    img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
+                    p.font_size14.fw_medium.fade05
+                      | Осталось 2 
+                      br
+                      | вопросов из 4
+              .mt15.kredit-scale
+                .kredit-scale__load(style='width:50%')
+                  .kredit-scale__arrow.icon-play
+              form.ajax-form.kredit-step__form.row.js-kredit-step(action='#', method='post', data-parsley-validate='', enctype='multipart/form-data')
+                .col-min-6
+                  .input-box.mt40
+                    input.input-text.input-text_border(type='text', name='coin', required='', data-parsley-errors-messages-disabled='', placeholder='Укажите сумму первого взноса')
+                    label.input-box__icon.icon-coin
+                .col-min-6
+                .col-min-6
+                  .button-money.mt40
+                    button.button.button_big.button_blue.button_blue2(type='submit', name='send')
+                      | Следующий шаг
+                      span.button__arrow.icon-arrow
+                      img.button-money__img(src='/images/money_kredit.png', alt='')
+                .col-min-6
+                  .polity-box.mt45
+                    .polity-box__dot
+                    .font_size12.fw_medium.fade05
+                      | Вы соглашаетесь с условиями 
+                      br
+                      | обработки персональных данных 
+                      br
+                      a(href='#') ознакомиться
+            .kredit-step
+              .font_size44.ff_trajan
+                | Пройдите тест 
+                br
+                | до конца и получите 
+                br
+                | льготные условия по ипотеке
+              .mt15
+                .font_size22.ff_trajan
+                  | Получите +15% к вероятности 
+                  br
+                  | одобрения заявки, заполнив последний шаг
+              .kredit-step__desc
+                .kredit-step__desc-left.mt10
+                  .font_size14.fw_medium.fade05 Получите +25% заполнив поле «Срок выплаты»
+                .kredit-step__desc-right.mt10
+                  .desc
+                    img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
+                    p.font_size14.fw_medium.fade05
+                      | Осталось 1 
+                      br
+                      | вопросов из 4
+              .mt15.kredit-scale
+                .kredit-scale__load(style='width:75%')
+                  .kredit-scale__arrow.icon-play
+              form.ajax-form.kredit-step__form.row.js-kredit-step(action='#', method='post', data-parsley-validate='', enctype='multipart/form-data')
+                .col-min-6
+                  .input-box.mt40
+                    input.input-text.input-text_border(type='text', name='calendar', required='', data-parsley-errors-messages-disabled='', placeholder='На какой срок получаете ипотеку')
+                    label.input-box__icon.icon-calendar
+                .col-min-6
+                .col-min-6
+                  .button-money.mt40
+                    button.button.button_big.button_blue.button_blue2(type='submit', name='send')
+                      | Следующий шаг
+                      span.button__arrow.icon-arrow
+                      img.button-money__img(src='/images/money_kredit.png', alt='')
+                .col-min-6
+                  .polity-box.mt45
+                    .polity-box__dot
+                    .font_size12.fw_medium.fade05
+                      | Вы соглашаетесь с условиями 
+                      br
+                      | обработки персональных данных 
+                      br
+                      a(href='#') ознакомиться
+            .kredit-step
+              .font_size44.ff_trajan
+                | Отлично. Мы получили 
+                br
+                | все нужные данные. 
+                br
+                | Остался последний шаг
+              .mt15
+                .font_size22.ff_trajan
+                  | Выберите банки-партнеры, 
+                  br
+                  | к которым  необходимо отправить заявку на ипотеку
+              form.kredit-step__form.ajax-form.row(action='#', method='post', data-parsley-validate='', enctype='multipart/form-data')
+                .col-min-12
+                  .bank-list
+                    label.bank-list__item
+                      input.bank-list__input(type='checkbox')
+                      img.bank-list__logo(src='/images/catalog/intel.png', alt='')
+                    label.bank-list__item
+                      input.bank-list__input(type='checkbox')
+                      img.bank-list__logo(src='/images/catalog/sega.png', alt='')
+                    label.bank-list__item
+                      input.bank-list__input(type='checkbox')
+                      img.bank-list__logo(src='/images/catalog/adidas.png', alt='')
+                    label.bank-list__item
+                      input.bank-list__input(type='checkbox')
+                      img.bank-list__logo(src='/images/catalog/burger_king.png', alt='')
+                    label.bank-list__item
+                      input.bank-list__input(type='checkbox')
+                      img.bank-list__logo(src='/images/catalog/nvidia.png', alt='')
+                  a.fw_medium.bank-list__all.mt15.js-all-banks(href='#') Отправить заявку во все банки-партнеры
+                .col-min-6
+                  .button-building.mt60
+                    button.button.button_big.button_blue.button_blue2(type='submit', name='send')
+                      | Отправить заявку на ипотеку
+                      span.button__arrow.icon-arrow
+                      img.button-building__img(src='/images/catalog/building.png', alt='')
+                .col-min-6
+                  .polity-box.mt65
+                    .polity-box__dot
+                    .font_size12.fw_medium.fade05
+                      | Вы соглашаетесь с условиями 
+                      br
+                      | обработки персональных данных 
+                      br
+                      a(href='#') ознакомиться
+          .popup__kredit-bottom
+            .font_size12.fade05
+              | Это безопасно, ваши данные защищены. 
+              br
+              | Мы не передаем данные 3-м лицам
+.popup-wrap.js-popup-exit
+  .popup-wrap__inside-wrap
+    .popup-overlay.js-popup-close
+    .popup
+      .popup__close.js-popup-close.js-svg(data-svg-src='/images/icons/close.svg')
+      .popup__inside-wrap
+        .modal-exit
+          .font_size44.ff_trajan
+            | Подождите. Не уходите 
+            br
+            | с пустыми руками
+          .mt20
+            .font_size22.ff_trajan Мы подготовили для вас подарок 
+          .desc.mt30
+            img.desc__icon(src='/images/icons/ribbon.png', alt='')
+            p.font_size14.fade05.fw_medium
+              | «10 советов, как подобрать квартиру и не 
+              br
+              | «слить» несколько миллионов рублей 
+              br
+              | и годы жизни на разбирательства»
+          .modal-exit__zhurnal.mt40
+            .modal-exit__zhurnal-line
+            .modal-exit__zhurnal-ellipse
+              img.modal-exit__zhurnal-img(src='/images/exit_zhurnal.png', alt='')
+          .modal-exit__form
+            .font_size18.ff_trajan.modal-exit__form-desc
+              | Скачайте презентацию и узнайте, как нужно 
+              br
+              | подойти к процессу подбора квартиры 
+              br
+              | и застройщика, на что обратить внимание 
+              br
+              | и как избежать основных ошибок
+            .modal-exit__buttons
+              button.button.button_big.button_blue.button_blue2.modal-exit__yes.js-yes-price
+                | Забрать подарок
+                span.button__arrow.icon-arrow.icon-arrow_rotate
+              a.modal-exit__no.font_size14.fw_medium.color_white.fade05.js-no-price(href='#') Отказаться от подарка
+            .polity-box.mt35
+              .polity-box__dot
+              .font_size12.fw_medium.fade05
+                | Вы соглашаетесь с условиями 
+                br
+                | обработки персональных данных 
+                br
+                a(href='#') ознакомиться                

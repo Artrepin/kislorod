@@ -129,6 +129,7 @@ gulp.task('bs', /* ['nodemon'], */ function() {
         files: [
             'views/**/*.*',
             'public/src/css/**/*.*',
+			'public/src/sass/**/*.*',
             'public/src/js/**/*.*'
         ],
         port: 7000

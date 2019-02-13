@@ -46,14 +46,14 @@ $(document).ready(function(){
         $("."+name).fadeIn(500);
         $("."+name+" .popup").addClass("popup_active");
         $("."+name+" input[name='subj']").val(subj);
-        $("body").css("overflow","hidden");
+        $("body").css("overflow-y","hidden");
         return false;
     });
     
     $(".js-popup-close").click(function() {
         $(".popup-wrap").fadeOut(500);
         $(".popup").removeClass("popup_active");
-        $("body").css("overflow","auto");
+        $("body").css("overflow-y","auto");
     });
     
     function thanck() {
@@ -364,6 +364,21 @@ $(document).ready(function(){
     $(".js-all-banks").click(function(){
         $(".bank-list__input").attr("checked","checked");
         return false;
+    });
+
+    $(".js-yes-price").mouseover(function(){
+        $(".modal-exit__zhurnal").addClass("active");
+    }).mouseleave(function(){
+        $(".modal-exit__zhurnal").removeClass("active");
+    });
+    
+    $(".js-show-requisites").click(function(){
+        $(".js-popup-requisites").fadeIn(500);
+        return false;
+    });
+    
+    $(".js-close-requisites").click(function(){
+        $(".js-popup-requisites").fadeOut(500);
     });
     
 });

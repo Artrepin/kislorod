@@ -6,6 +6,7 @@
 */
 
 .footer {
+    position: relative;
     &__inside-wrap {
         display: flex;
         justify-content: space-between;
@@ -42,6 +43,31 @@
             margin-bottom: toem(10,14);
             opacity: 0.4;
         }
+    }
+}
+
+.popup-requisites {
+    background: #fff;
+    box-shadow: 0 -20px 100px rgba(0,0,0,0.03);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: toem(45) 0 toem(45) 0;
+    display: none;
+    .popup__close {
+        right: 15px;
+        top: toem(5);
+    }
+    &__load {
+        max-width: toem(300);
+        margin-bottom: toem(25);
+    }
+}
+
+.requisites-list {
+    &__item:not(:last-child) {
+        margin-bottom: toem(8);
     }
 }
 
@@ -134,7 +160,42 @@
             max-width: 100%;
         }
     }
+    &__kredit {
+        position: relative;
+        padding-left: toem(18);
+        padding-right: toem(18);
+        &:before {
+            content: '';
+            display: block;
+            background: url(/images/catalog/key.png) 0 0 no-repeat;
+            width: toem(142);
+            height: toem(273);
+            background-size: 100% auto;
+            position: absolute;
+            top: toem(-120);
+            left: toem(-125);
+        }
+        .input-text {
+            border: 1px solid rgba(233,233,233,0.2);
+        }
+        &-bottom {
+            margin-top: toem(100);
+            display: flex;
+            align-items: center;
+            &:before {
+                content: '';
+                display: block;
+                width: 6px;
+                min-width: 6px;
+                height: 6px;
+                border-radius: 100%;
+                margin-right: toem(20);
+                background: $yelow;
+            }
+        }
+    }
 }
+
 
 
 .callback {
@@ -195,6 +256,65 @@
     }
 }
 
+.modal-exit {
+    &__zhurnal {
+        position: relative;
+        margin-right: toem(-15);
+        display: flex;
+        align-items: center;
+        margin-top: toem(-100);
+        &-line {
+            height: 1px;
+            width: 80%;
+            top: 50%;
+            background: #61636c;
+            @include transition($default-transition);
+        }
+        &-ellipse {
+            width: toem(291);
+            min-width: toem(291);
+            height: toem(291);
+            padding-top: toem(17);
+            border: 1px solid #61636c;
+            border-radius: 100%;
+            @include transition($default-transition);
+        }
+        &-img {
+            display: block;
+            width: toem(423);
+            margin-left: toem(-89);
+        }
+        &.active {
+            .modal-exit__zhurnal-line {
+                background: $blue;
+                box-shadow: 0 toem(-17) toem(90) $blue;
+            }
+            .modal-exit__zhurnal-ellipse {
+                border-color: $blue;
+                box-shadow: inset 0 0 toem(90) rgba(36,130,218,0.27), 0 toem(-17) toem(90) rgba(36,130,218,0.27);
+            }
+        }
+    }
+    &__form {
+        margin-top: toem(-100);
+        position: relative;
+    }
+    &__buttons {
+        display: flex;
+        align-items: center;
+    }
+    &__no {
+        display: inline-block;
+        text-decoration: underline;
+        margin-top: toem(40,14);
+    }
+    &__yes {
+        margin-top: toem(40);
+        width: toem(370);
+        margin-right: toem(40);
+    }
+}
+
 /* --------------------------------------------------------------------------// Popup */
 
 /* Parsley error */
@@ -220,11 +340,46 @@
     .popup {
         width: 70%;
     }
+    .modal-exit__zhurnal {
+        margin-right: toem(-60);
+    }
+}
+
+@include max(1025) {
+    .popup__kredit-bottom {
+        margin-top: toem(80);
+    }
 }
 
 @include max(900) {
     .popup {
         width: 100%;
+    }
+}
+
+@include max(600) {
+    .modal-exit {
+        &__zhurnal {
+            display: none;
+        }
+        &__form {
+            margin-top: toem(40);
+            &-desc {
+                br {
+                    display: none;
+                }
+            }
+        }
+        &__buttons {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        &__yes {
+            margin-right: 0;
+        }
+        &__no {
+            margin-top: 15px;
+        }
     }
 }
 
@@ -298,6 +453,20 @@
         }
         &__text, .link-more {
             display: none;
+        }
+    }
+    .popup-requisites .popup__close {
+        top: -20px;
+    }
+    .requisites-list {
+        &__item {
+            flex-wrap: nowrap;
+        }
+        .col-min-4 {
+            width: 34%;
+        }
+        .col-min-8 {
+            width: 66%;
         }
     }
 }
