@@ -46,14 +46,14 @@ $(document).ready(function(){
         $("."+name).fadeIn(500);
         $("."+name+" .popup").addClass("popup_active");
         $("."+name+" input[name='subj']").val(subj);
-        $("body").css("overflow-y","hidden");
+        $("body").css("overflow","hidden");
         return false;
     });
     
     $(".js-popup-close").click(function() {
         $(".popup-wrap").fadeOut(500);
         $(".popup").removeClass("popup_active");
-        $("body").css("overflow-y","auto");
+        $("body").css("overflow","auto");
     });
     
     function thanck() {
@@ -67,10 +67,9 @@ $(document).ready(function(){
         beforeSubmit: function(){
             $(this).parsley({
             });
-            thanck();
         },
         success: function(){
-            // thanck();
+            thanck();
         }
     });
 	
@@ -380,6 +379,192 @@ $(document).ready(function(){
     $(".js-close-requisites").click(function(){
         $(".js-popup-requisites").fadeOut(500);
     });
+    
+    if($('.js-team-slider').length) {
+		$('.js-team-slider').slick({
+			arrows: true,
+            prevArrow: '<button class="slick-arrow slick-arrow_prev icon-right-arrow"></button>',
+            nextArrow: '<button class="slick-arrow slick-arrow_next icon-right-arrow"></button>',
+			dots: false,
+			infinite: true,
+			speed: 500,
+			slidesToShow: 2,
+			slidesToScroll: 1,
+            responsive: [
+                {
+				  breakpoint: 479,
+				  settings: {
+					slidesToShow: 1,
+                      slidesToScroll: 1
+				  }
+				}
+			]
+		});
+	};
+    
+    if($('.js-history-slider').length) {
+		$('.js-history-slider').slick({
+			arrows: true,
+            prevArrow: '<button class="slick-arrow slick-arrow_prev icon-right-arrow"></button>',
+            nextArrow: '<button class="slick-arrow slick-arrow_next icon-right-arrow"></button>',
+			dots: false,
+			infinite: true,
+			speed: 500,
+			slidesToShow: 5,
+			slidesToScroll: 1,
+            responsive: [
+                {
+				  breakpoint: 900,
+				  settings: {
+					slidesToShow: 4,
+                      slidesToScroll: 1
+				  }
+				},{
+                    breakpoint: 600,
+				  settings: {
+					slidesToShow: 3,
+                      slidesToScroll: 1
+				  }
+                },{
+                    breakpoint: 400,
+				  settings: {
+					slidesToShow: 2,
+                      slidesToScroll: 1
+				  }
+                }
+			]
+		});
+	};
+    
+    if ( $(".js-history-scale").length ) {
+
+        $(".js-history-scale").slider({
+            range: "min",
+            min: 1,
+            max: 5,
+            value: 1,
+            step: 1,
+            slide: function( event, ui ) {
+                $(".history-line__time.active").removeClass("active");
+                $(".history-line__time[data-value='" + ui.value + "']").click();
+            }
+        });
+        
+        $(".history-line__time").click(function(){
+            
+            var year_val = $(this).data("value");
+            var year_index = $(this).index();
+            
+            if ( $(this).hasClass("active") ) {
+            } else {
+                $(".history-line__time.active").removeClass("active");
+                $(this).addClass("active");
+                
+                $(".js-history-scale").slider({
+                    value: year_val
+                });
+                
+                $(".history-slider:visible").hide();
+                $(".history-slider:eq("+year_index+")").fadeIn(700);
+                $(".js-history-slider").slick('refresh');
+                
+            }
+            
+        });
+        
+    }
+    
+    if($('.js-department-slider').length) {
+		$('.js-department-slider').slick({
+			arrows: true,
+            prevArrow: '<button class="slick-arrow slick-arrow_prev icon-right-arrow"></button>',
+            nextArrow: '<button class="slick-arrow slick-arrow_next icon-right-arrow"></button>',
+			dots: false,
+			infinite: true,
+			speed: 500,
+			slidesToShow: 4,
+			slidesToScroll: 1,
+            responsive: [
+                {
+				  breakpoint: 900,
+				  settings: {
+					slidesToShow: 3,
+                      slidesToScroll: 1
+				  }
+				},{
+                    breakpoint: 600,
+				  settings: {
+					slidesToShow: 2,
+                      slidesToScroll: 1
+				  }
+                },{
+                    breakpoint: 400,
+				  settings: {
+					slidesToShow: 1,
+                      slidesToScroll: 1
+				  }
+                }
+			]
+		});
+        
+        if ( viewport().width > 1360 ) {
+            setTimeout(function(){
+                $(".department-slider .slick-arrow").each(function(){
+                    var height_pic = $(".department-slider__foto:visible").height();
+                    height_pic = height_pic/2;
+                    $(this).css("top",height_pic);
+                });
+            },1000);
+        }
+        
+	};
+    
+    $(".department-tabs__item").click(function(){
+        
+        var tab_id = $(this).attr("href");
+        
+        if ( $(this).hasClass("department-tabs__item_active") ) {
+            
+        } else {
+            $(".department-tabs__item_active").removeClass("department-tabs__item_active");
+            $(this).addClass("department-tabs__item_active");
+            $(".department-slide:visible").hide();
+            $(".department-slide" + tab_id).fadeIn(500);
+            $(".js-department-slider").slick('refresh');
+            if ( viewport().width < 600 ) {
+                $("html, body").animate({
+                    scrollTop: $(".department-slides").offset().top - 50 + "px"
+                }, {
+                    duration: 1000
+                });
+            }
+        }
+        
+        return false;
+        
+    });
+    
+    if($('.js-reviews-slider').length) {
+		$('.js-reviews-slider').slick({
+			arrows: true,
+            prevArrow: '<button class="slick-arrow slick-arrow_prev icon-right-arrow"></button>',
+            nextArrow: '<button class="slick-arrow slick-arrow_next icon-right-arrow"></button>',
+			dots: false,
+			infinite: true,
+			speed: 500,
+			slidesToShow: 3,
+			slidesToScroll: 1,
+            responsive: [
+                {
+				  breakpoint: 1200,
+				  settings: {
+					slidesToShow: 1,
+                      slidesToScroll: 1
+				  }
+				}
+			]
+		});
+    };
     
 });
 
