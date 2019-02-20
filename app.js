@@ -1,14 +1,18 @@
 const express = require('express')
 const app = express()
 const pug = require('pug')
+const config = require('config')
+require('dotenv').config()
 app.set('view engine', 'pug')
 app.use(express.static('public'))
-require('dotenv').config()
 app.locals.env = process.env;
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-const amocrm = require('./amocrm')
+const amocrm = require('./modules/amocrm')
+
+const mysql = require('mysql')
+const async = require('async')
 
 var month_rus = [
     ['январь'],
@@ -26,21 +30,42 @@ var month_rus = [
 ]
 
 app.use('/vue', express.static(__dirname + '/node_modules/vue/dist'))
+app.use('/axios', express.static(__dirname + '/node_modules/axios/dist'))
+app.use('/vue-router', express.static(__dirname + '/node_modules/vue-router/dist'))
+app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist'))
 app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist'))
 app.use('/jquery-ui', express.static(__dirname + '/node_modules/jquery-ui/ui'))
 
 const data = {}
 
+app.get('/admin', (req, res) => {
+    res.render('admin/admin', data)
+})
+
 app.get('/', (req, res) => {
     data.title = "Центр недвижимости «Кислород»"
     data.current_month = month_rus[new Date().getMonth()][0]
     data.current_year = new Date().getFullYear()
+    data.buildings = []
     res.render('welcome/welcome', data)
 })
 
 app.get('/catalog', (req, res) => {
     data.title = "Каталог недвижимости"
-    res.render('catalog/catalog', data)
+    
+    let connection = mysql.createConnection(config.get('db'))
+    let query = "SELECT * FROM building t1";
+    connection.query(query, (err, rows, fields) => {
+        if (err) {
+            console.log('Error query: ' + err)
+            res.sendStatus(500)
+            return
+        }
+        data.buildings = rows;
+        res.render('catalog/catalog', data)
+    })
+    connection.end()
+    
 })
 
 app.get('/about', (req, res) => {
