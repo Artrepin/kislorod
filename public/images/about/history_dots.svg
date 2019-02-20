@@ -1,0 +1,329 @@
+<svg id="history_dots.svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="334" height="574" viewBox="0 0 334 574">
+  <defs>
+    <style>
+      .cls-1 {
+        filter: url(#filter);
+      }
+
+      .cls-2 {
+        opacity: 0.2;
+      }
+
+      .cls-3 {
+        fill: #f4f4f4;
+      }
+
+      .cls-4 {
+        filter: url(#filter-2);
+      }
+    </style>
+    <filter id="filter" filterUnits="userSpaceOnUse">
+      <feFlood result="flood"/>
+      <feComposite result="composite" operator="in" in2="SourceGraphic"/>
+      <feBlend result="blend" in2="SourceGraphic"/>
+    </filter>
+    <filter id="filter-2" filterUnits="userSpaceOnUse">
+      <feFlood result="flood" flood-color="#ccc"/>
+      <feComposite result="composite" operator="in" in2="SourceGraphic"/>
+      <feBlend result="blend" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="gdf" class="cls-1">
+    <g id="штука_копия" data-name="штука копия">
+      <g id="Группа_3" data-name="Группа 3" class="cls-2">
+        <circle id="Эллипс_5" data-name="Эллипс 5" class="cls-3" cx="182" cy="572" r="2"/>
+        <circle id="Эллипс_5_копия_2" data-name="Эллипс 5 копия 2" class="cls-3" cx="212" cy="572" r="2"/>
+        <circle id="Эллипс_5_копия_3" data-name="Эллипс 5 копия 3" class="cls-3" cx="242" cy="572" r="2"/>
+        <circle id="Эллипс_5_копия_4" data-name="Эллипс 5 копия 4" class="cls-3" cx="272" cy="572" r="2"/>
+        <circle id="Эллипс_5_копия_5" data-name="Эллипс 5 копия 5" class="cls-3" cx="302" cy="572" r="2"/>
+        <circle id="Эллипс_5_копия_6" data-name="Эллипс 5 копия 6" class="cls-3" cx="332" cy="572" r="2"/>
+        <circle id="Эллипс_5_копия_7" data-name="Эллипс 5 копия 7" class="cls-3" cx="182" cy="542" r="2"/>
+        <circle id="Эллипс_5_копия_7-2" data-name="Эллипс 5 копия 7" class="cls-3" cx="212" cy="542" r="2"/>
+        <circle id="Эллипс_5_копия_7-3" data-name="Эллипс 5 копия 7" class="cls-3" cx="242" cy="542" r="2"/>
+        <circle id="Эллипс_5_копия_7-4" data-name="Эллипс 5 копия 7" class="cls-3" cx="272" cy="542" r="2"/>
+        <circle id="Эллипс_5_копия_7-5" data-name="Эллипс 5 копия 7" class="cls-3" cx="302" cy="542" r="2"/>
+        <circle id="Эллипс_5_копия_7-6" data-name="Эллипс 5 копия 7" class="cls-3" cx="332" cy="542" r="2"/>
+        <circle id="Эллипс_5_копия_8" data-name="Эллипс 5 копия 8" class="cls-3" cx="182" cy="512" r="2"/>
+        <circle id="Эллипс_5_копия_8-2" data-name="Эллипс 5 копия 8" class="cls-3" cx="212" cy="512" r="2"/>
+        <circle id="Эллипс_5_копия_8-3" data-name="Эллипс 5 копия 8" class="cls-3" cx="242" cy="512" r="2"/>
+        <circle id="Эллипс_5_копия_8-4" data-name="Эллипс 5 копия 8" class="cls-3" cx="272" cy="512" r="2"/>
+        <circle id="Эллипс_5_копия_8-5" data-name="Эллипс 5 копия 8" class="cls-3" cx="302" cy="512" r="2"/>
+        <circle id="Эллипс_5_копия_8-6" data-name="Эллипс 5 копия 8" class="cls-3" cx="332" cy="512" r="2"/>
+        <circle id="Эллипс_5_копия_9" data-name="Эллипс 5 копия 9" class="cls-3" cx="182" cy="482" r="2"/>
+        <circle id="Эллипс_5_копия_9-2" data-name="Эллипс 5 копия 9" class="cls-3" cx="212" cy="482" r="2"/>
+        <circle id="Эллипс_5_копия_9-3" data-name="Эллипс 5 копия 9" class="cls-3" cx="242" cy="482" r="2"/>
+        <circle id="Эллипс_5_копия_9-4" data-name="Эллипс 5 копия 9" class="cls-3" cx="272" cy="482" r="2"/>
+        <circle id="Эллипс_5_копия_9-5" data-name="Эллипс 5 копия 9" class="cls-3" cx="302" cy="482" r="2"/>
+        <circle id="Эллипс_5_копия_9-6" data-name="Эллипс 5 копия 9" class="cls-3" cx="332" cy="482" r="2"/>
+        <circle id="Эллипс_5_копия_10" data-name="Эллипс 5 копия 10" class="cls-3" cx="182" cy="452" r="2"/>
+        <circle id="Эллипс_5_копия_10-2" data-name="Эллипс 5 копия 10" class="cls-3" cx="212" cy="452" r="2"/>
+        <circle id="Эллипс_5_копия_10-3" data-name="Эллипс 5 копия 10" class="cls-3" cx="242" cy="452" r="2"/>
+        <circle id="Эллипс_5_копия_10-4" data-name="Эллипс 5 копия 10" class="cls-3" cx="272" cy="452" r="2"/>
+        <circle id="Эллипс_5_копия_10-5" data-name="Эллипс 5 копия 10" class="cls-3" cx="302" cy="452" r="2"/>
+        <circle id="Эллипс_5_копия_10-6" data-name="Эллипс 5 копия 10" class="cls-3" cx="332" cy="452" r="2"/>
+      </g>
+      <g id="Группа_4" data-name="Группа 4" class="cls-2">
+        <g id="Группа_3_копия" data-name="Группа 3 копия">
+          <circle id="Эллипс_5-2" data-name="Эллипс 5" class="cls-3" cx="2" cy="572" r="2"/>
+          <circle id="Эллипс_5_копия_2-2" data-name="Эллипс 5 копия 2" class="cls-3" cx="32" cy="572" r="2"/>
+          <circle id="Эллипс_5_копия_3-2" data-name="Эллипс 5 копия 3" class="cls-3" cx="62" cy="572" r="2"/>
+          <circle id="Эллипс_5_копия_4-2" data-name="Эллипс 5 копия 4" class="cls-3" cx="92" cy="572" r="2"/>
+          <circle id="Эллипс_5_копия_5-2" data-name="Эллипс 5 копия 5" class="cls-3" cx="122" cy="572" r="2"/>
+          <circle id="Эллипс_5_копия_6-2" data-name="Эллипс 5 копия 6" class="cls-3" cx="152" cy="572" r="2"/>
+          <circle id="Эллипс_5_копия_7-7" data-name="Эллипс 5 копия 7" class="cls-3" cx="2" cy="542" r="2"/>
+          <circle id="Эллипс_5_копия_7-8" data-name="Эллипс 5 копия 7" class="cls-3" cx="32" cy="542" r="2"/>
+          <circle id="Эллипс_5_копия_7-9" data-name="Эллипс 5 копия 7" class="cls-3" cx="62" cy="542" r="2"/>
+          <circle id="Эллипс_5_копия_7-10" data-name="Эллипс 5 копия 7" class="cls-3" cx="92" cy="542" r="2"/>
+          <circle id="Эллипс_5_копия_7-11" data-name="Эллипс 5 копия 7" class="cls-3" cx="122" cy="542" r="2"/>
+          <circle id="Эллипс_5_копия_7-12" data-name="Эллипс 5 копия 7" class="cls-3" cx="152" cy="542" r="2"/>
+          <circle id="Эллипс_5_копия_8-7" data-name="Эллипс 5 копия 8" class="cls-3" cx="2" cy="512" r="2"/>
+          <circle id="Эллипс_5_копия_8-8" data-name="Эллипс 5 копия 8" class="cls-3" cx="32" cy="512" r="2"/>
+          <circle id="Эллипс_5_копия_8-9" data-name="Эллипс 5 копия 8" class="cls-3" cx="62" cy="512" r="2"/>
+          <circle id="Эллипс_5_копия_8-10" data-name="Эллипс 5 копия 8" class="cls-3" cx="92" cy="512" r="2"/>
+          <circle id="Эллипс_5_копия_8-11" data-name="Эллипс 5 копия 8" class="cls-3" cx="122" cy="512" r="2"/>
+          <circle id="Эллипс_5_копия_8-12" data-name="Эллипс 5 копия 8" class="cls-3" cx="152" cy="512" r="2"/>
+          <circle id="Эллипс_5_копия_9-7" data-name="Эллипс 5 копия 9" class="cls-3" cx="2" cy="482" r="2"/>
+          <circle id="Эллипс_5_копия_9-8" data-name="Эллипс 5 копия 9" class="cls-3" cx="32" cy="482" r="2"/>
+          <circle id="Эллипс_5_копия_9-9" data-name="Эллипс 5 копия 9" class="cls-3" cx="62" cy="482" r="2"/>
+          <circle id="Эллипс_5_копия_9-10" data-name="Эллипс 5 копия 9" class="cls-3" cx="92" cy="482" r="2"/>
+          <circle id="Эллипс_5_копия_9-11" data-name="Эллипс 5 копия 9" class="cls-3" cx="122" cy="482" r="2"/>
+          <circle id="Эллипс_5_копия_9-12" data-name="Эллипс 5 копия 9" class="cls-3" cx="152" cy="482" r="2"/>
+          <circle id="Эллипс_5_копия_10-7" data-name="Эллипс 5 копия 10" class="cls-3" cx="2" cy="452" r="2"/>
+          <circle id="Эллипс_5_копия_10-8" data-name="Эллипс 5 копия 10" class="cls-3" cx="32" cy="452" r="2"/>
+          <circle id="Эллипс_5_копия_10-9" data-name="Эллипс 5 копия 10" class="cls-3" cx="62" cy="452" r="2"/>
+          <circle id="Эллипс_5_копия_10-10" data-name="Эллипс 5 копия 10" class="cls-3" cx="92" cy="452" r="2"/>
+          <circle id="Эллипс_5_копия_10-11" data-name="Эллипс 5 копия 10" class="cls-3" cx="122" cy="452" r="2"/>
+          <circle id="Эллипс_5_копия_10-12" data-name="Эллипс 5 копия 10" class="cls-3" cx="152" cy="452" r="2"/>
+        </g>
+        <g id="Группа_3_копия_2" data-name="Группа 3 копия 2">
+          <circle id="Эллипс_5-3" data-name="Эллипс 5" class="cls-3" cx="182" cy="422" r="2"/>
+          <circle id="Эллипс_5_копия_2-3" data-name="Эллипс 5 копия 2" class="cls-3" cx="212" cy="422" r="2"/>
+          <circle id="Эллипс_5_копия_3-3" data-name="Эллипс 5 копия 3" class="cls-3" cx="242" cy="422" r="2"/>
+          <circle id="Эллипс_5_копия_4-3" data-name="Эллипс 5 копия 4" class="cls-3" cx="272" cy="422" r="2"/>
+          <circle id="Эллипс_5_копия_5-3" data-name="Эллипс 5 копия 5" class="cls-3" cx="302" cy="422" r="2"/>
+          <circle id="Эллипс_5_копия_6-3" data-name="Эллипс 5 копия 6" class="cls-3" cx="332" cy="422" r="2"/>
+          <circle id="Эллипс_5_копия_7-13" data-name="Эллипс 5 копия 7" class="cls-3" cx="182" cy="392" r="2"/>
+          <circle id="Эллипс_5_копия_7-14" data-name="Эллипс 5 копия 7" class="cls-3" cx="212" cy="392" r="2"/>
+          <circle id="Эллипс_5_копия_7-15" data-name="Эллипс 5 копия 7" class="cls-3" cx="242" cy="392" r="2"/>
+          <circle id="Эллипс_5_копия_7-16" data-name="Эллипс 5 копия 7" class="cls-3" cx="272" cy="392" r="2"/>
+          <circle id="Эллипс_5_копия_7-17" data-name="Эллипс 5 копия 7" class="cls-3" cx="302" cy="392" r="2"/>
+          <circle id="Эллипс_5_копия_7-18" data-name="Эллипс 5 копия 7" class="cls-3" cx="332" cy="392" r="2"/>
+          <circle id="Эллипс_5_копия_8-13" data-name="Эллипс 5 копия 8" class="cls-3" cx="182" cy="362" r="2"/>
+          <circle id="Эллипс_5_копия_8-14" data-name="Эллипс 5 копия 8" class="cls-3" cx="212" cy="362" r="2"/>
+          <circle id="Эллипс_5_копия_8-15" data-name="Эллипс 5 копия 8" class="cls-3" cx="242" cy="362" r="2"/>
+          <circle id="Эллипс_5_копия_8-16" data-name="Эллипс 5 копия 8" class="cls-3" cx="272" cy="362" r="2"/>
+          <circle id="Эллипс_5_копия_8-17" data-name="Эллипс 5 копия 8" class="cls-3" cx="302" cy="362" r="2"/>
+          <circle id="Эллипс_5_копия_8-18" data-name="Эллипс 5 копия 8" class="cls-3" cx="332" cy="362" r="2"/>
+          <circle id="Эллипс_5_копия_9-13" data-name="Эллипс 5 копия 9" class="cls-3" cx="182" cy="332" r="2"/>
+          <circle id="Эллипс_5_копия_9-14" data-name="Эллипс 5 копия 9" class="cls-3" cx="212" cy="332" r="2"/>
+          <circle id="Эллипс_5_копия_9-15" data-name="Эллипс 5 копия 9" class="cls-3" cx="242" cy="332" r="2"/>
+          <circle id="Эллипс_5_копия_9-16" data-name="Эллипс 5 копия 9" class="cls-3" cx="272" cy="332" r="2"/>
+          <circle id="Эллипс_5_копия_9-17" data-name="Эллипс 5 копия 9" class="cls-3" cx="302" cy="332" r="2"/>
+          <circle id="Эллипс_5_копия_9-18" data-name="Эллипс 5 копия 9" class="cls-3" cx="332" cy="332" r="2"/>
+          <circle id="Эллипс_5_копия_10-13" data-name="Эллипс 5 копия 10" class="cls-3" cx="182" cy="302" r="2"/>
+          <circle id="Эллипс_5_копия_10-14" data-name="Эллипс 5 копия 10" class="cls-3" cx="212" cy="302" r="2"/>
+          <circle id="Эллипс_5_копия_10-15" data-name="Эллипс 5 копия 10" class="cls-3" cx="242" cy="302" r="2"/>
+          <circle id="Эллипс_5_копия_10-16" data-name="Эллипс 5 копия 10" class="cls-3" cx="272" cy="302" r="2"/>
+          <circle id="Эллипс_5_копия_10-17" data-name="Эллипс 5 копия 10" class="cls-3" cx="302" cy="302" r="2"/>
+          <circle id="Эллипс_5_копия_10-18" data-name="Эллипс 5 копия 10" class="cls-3" cx="332" cy="302" r="2"/>
+        </g>
+        <g id="Группа_3_копия_3" data-name="Группа 3 копия 3">
+          <circle id="Эллипс_5-4" data-name="Эллипс 5" class="cls-3" cx="2" cy="422" r="2"/>
+          <circle id="Эллипс_5_копия_2-4" data-name="Эллипс 5 копия 2" class="cls-3" cx="32" cy="422" r="2"/>
+          <circle id="Эллипс_5_копия_3-4" data-name="Эллипс 5 копия 3" class="cls-3" cx="62" cy="422" r="2"/>
+          <circle id="Эллипс_5_копия_4-4" data-name="Эллипс 5 копия 4" class="cls-3" cx="92" cy="422" r="2"/>
+          <circle id="Эллипс_5_копия_5-4" data-name="Эллипс 5 копия 5" class="cls-3" cx="122" cy="422" r="2"/>
+          <circle id="Эллипс_5_копия_6-4" data-name="Эллипс 5 копия 6" class="cls-3" cx="152" cy="422" r="2"/>
+          <circle id="Эллипс_5_копия_7-19" data-name="Эллипс 5 копия 7" class="cls-3" cx="2" cy="392" r="2"/>
+          <circle id="Эллипс_5_копия_7-20" data-name="Эллипс 5 копия 7" class="cls-3" cx="32" cy="392" r="2"/>
+          <circle id="Эллипс_5_копия_7-21" data-name="Эллипс 5 копия 7" class="cls-3" cx="62" cy="392" r="2"/>
+          <circle id="Эллипс_5_копия_7-22" data-name="Эллипс 5 копия 7" class="cls-3" cx="92" cy="392" r="2"/>
+          <circle id="Эллипс_5_копия_7-23" data-name="Эллипс 5 копия 7" class="cls-3" cx="122" cy="392" r="2"/>
+          <circle id="Эллипс_5_копия_7-24" data-name="Эллипс 5 копия 7" class="cls-3" cx="152" cy="392" r="2"/>
+          <circle id="Эллипс_5_копия_8-19" data-name="Эллипс 5 копия 8" class="cls-3" cx="2" cy="362" r="2"/>
+          <circle id="Эллипс_5_копия_8-20" data-name="Эллипс 5 копия 8" class="cls-3" cx="32" cy="362" r="2"/>
+          <circle id="Эллипс_5_копия_8-21" data-name="Эллипс 5 копия 8" class="cls-3" cx="62" cy="362" r="2"/>
+          <circle id="Эллипс_5_копия_8-22" data-name="Эллипс 5 копия 8" class="cls-3" cx="92" cy="362" r="2"/>
+          <circle id="Эллипс_5_копия_8-23" data-name="Эллипс 5 копия 8" class="cls-3" cx="122" cy="362" r="2"/>
+          <circle id="Эллипс_5_копия_8-24" data-name="Эллипс 5 копия 8" class="cls-3" cx="152" cy="362" r="2"/>
+          <circle id="Эллипс_5_копия_9-19" data-name="Эллипс 5 копия 9" class="cls-3" cx="2" cy="332" r="2"/>
+          <circle id="Эллипс_5_копия_9-20" data-name="Эллипс 5 копия 9" class="cls-3" cx="32" cy="332" r="2"/>
+          <circle id="Эллипс_5_копия_9-21" data-name="Эллипс 5 копия 9" class="cls-3" cx="62" cy="332" r="2"/>
+          <circle id="Эллипс_5_копия_9-22" data-name="Эллипс 5 копия 9" class="cls-3" cx="92" cy="332" r="2"/>
+          <circle id="Эллипс_5_копия_9-23" data-name="Эллипс 5 копия 9" class="cls-3" cx="122" cy="332" r="2"/>
+          <circle id="Эллипс_5_копия_9-24" data-name="Эллипс 5 копия 9" class="cls-3" cx="152" cy="332" r="2"/>
+          <circle id="Эллипс_5_копия_10-19" data-name="Эллипс 5 копия 10" class="cls-3" cx="2" cy="302" r="2"/>
+          <circle id="Эллипс_5_копия_10-20" data-name="Эллипс 5 копия 10" class="cls-3" cx="32" cy="302" r="2"/>
+          <circle id="Эллипс_5_копия_10-21" data-name="Эллипс 5 копия 10" class="cls-3" cx="62" cy="302" r="2"/>
+          <circle id="Эллипс_5_копия_10-22" data-name="Эллипс 5 копия 10" class="cls-3" cx="92" cy="302" r="2"/>
+          <circle id="Эллипс_5_копия_10-23" data-name="Эллипс 5 копия 10" class="cls-3" cx="122" cy="302" r="2"/>
+          <circle id="Эллипс_5_копия_10-24" data-name="Эллипс 5 копия 10" class="cls-3" cx="152" cy="302" r="2"/>
+        </g>
+      </g>
+    </g>
+    <g id="штука_копия_2" data-name="штука копия 2">
+      <g id="Группа_3-2" data-name="Группа 3" class="cls-2">
+        <circle id="Эллипс_5-5" data-name="Эллипс 5" class="cls-3" cx="182" cy="272" r="2"/>
+        <circle id="Эллипс_5_копия_2-5" data-name="Эллипс 5 копия 2" class="cls-3" cx="212" cy="272" r="2"/>
+        <circle id="Эллипс_5_копия_3-5" data-name="Эллипс 5 копия 3" class="cls-3" cx="242" cy="272" r="2"/>
+        <circle id="Эллипс_5_копия_4-5" data-name="Эллипс 5 копия 4" class="cls-3" cx="272" cy="272" r="2"/>
+        <circle id="Эллипс_5_копия_5-5" data-name="Эллипс 5 копия 5" class="cls-3" cx="302" cy="272" r="2"/>
+        <circle id="Эллипс_5_копия_6-5" data-name="Эллипс 5 копия 6" class="cls-3" cx="332" cy="272" r="2"/>
+        <circle id="Эллипс_5_копия_7-25" data-name="Эллипс 5 копия 7" class="cls-3" cx="182" cy="242" r="2"/>
+        <circle id="Эллипс_5_копия_7-26" data-name="Эллипс 5 копия 7" class="cls-3" cx="212" cy="242" r="2"/>
+        <circle id="Эллипс_5_копия_7-27" data-name="Эллипс 5 копия 7" class="cls-3" cx="242" cy="242" r="2"/>
+        <circle id="Эллипс_5_копия_7-28" data-name="Эллипс 5 копия 7" class="cls-3" cx="272" cy="242" r="2"/>
+        <circle id="Эллипс_5_копия_7-29" data-name="Эллипс 5 копия 7" class="cls-3" cx="302" cy="242" r="2"/>
+        <circle id="Эллипс_5_копия_7-30" data-name="Эллипс 5 копия 7" class="cls-3" cx="332" cy="242" r="2"/>
+        <circle id="Эллипс_5_копия_8-25" data-name="Эллипс 5 копия 8" class="cls-3" cx="182" cy="212" r="2"/>
+        <circle id="Эллипс_5_копия_8-26" data-name="Эллипс 5 копия 8" class="cls-3" cx="212" cy="212" r="2"/>
+        <circle id="Эллипс_5_копия_8-27" data-name="Эллипс 5 копия 8" class="cls-3" cx="242" cy="212" r="2"/>
+        <circle id="Эллипс_5_копия_8-28" data-name="Эллипс 5 копия 8" class="cls-3" cx="272" cy="212" r="2"/>
+        <circle id="Эллипс_5_копия_8-29" data-name="Эллипс 5 копия 8" class="cls-3" cx="302" cy="212" r="2"/>
+        <circle id="Эллипс_5_копия_8-30" data-name="Эллипс 5 копия 8" class="cls-3" cx="332" cy="212" r="2"/>
+        <circle id="Эллипс_5_копия_9-25" data-name="Эллипс 5 копия 9" class="cls-3" cx="182" cy="182" r="2"/>
+        <circle id="Эллипс_5_копия_9-26" data-name="Эллипс 5 копия 9" class="cls-3" cx="212" cy="182" r="2"/>
+        <circle id="Эллипс_5_копия_9-27" data-name="Эллипс 5 копия 9" class="cls-3" cx="242" cy="182" r="2"/>
+        <circle id="Эллипс_5_копия_9-28" data-name="Эллипс 5 копия 9" class="cls-3" cx="272" cy="182" r="2"/>
+        <circle id="Эллипс_5_копия_9-29" data-name="Эллипс 5 копия 9" class="cls-3" cx="302" cy="182" r="2"/>
+        <circle id="Эллипс_5_копия_9-30" data-name="Эллипс 5 копия 9" class="cls-3" cx="332" cy="182" r="2"/>
+        <circle id="Эллипс_5_копия_10-25" data-name="Эллипс 5 копия 10" class="cls-3" cx="182" cy="152" r="2"/>
+        <circle id="Эллипс_5_копия_10-26" data-name="Эллипс 5 копия 10" class="cls-3" cx="212" cy="152" r="2"/>
+        <circle id="Эллипс_5_копия_10-27" data-name="Эллипс 5 копия 10" class="cls-3" cx="242" cy="152" r="2"/>
+        <circle id="Эллипс_5_копия_10-28" data-name="Эллипс 5 копия 10" class="cls-3" cx="272" cy="152" r="2"/>
+        <circle id="Эллипс_5_копия_10-29" data-name="Эллипс 5 копия 10" class="cls-3" cx="302" cy="152" r="2"/>
+        <circle id="Эллипс_5_копия_10-30" data-name="Эллипс 5 копия 10" class="cls-3" cx="332" cy="152" r="2"/>
+      </g>
+      <g id="Группа_4-2" data-name="Группа 4" class="cls-2">
+        <g id="Группа_3_копия-2" data-name="Группа 3 копия">
+          <circle id="Эллипс_5-6" data-name="Эллипс 5" class="cls-3" cx="2" cy="272" r="2"/>
+          <circle id="Эллипс_5_копия_2-6" data-name="Эллипс 5 копия 2" class="cls-3" cx="32" cy="272" r="2"/>
+          <circle id="Эллипс_5_копия_3-6" data-name="Эллипс 5 копия 3" class="cls-3" cx="62" cy="272" r="2"/>
+          <circle id="Эллипс_5_копия_4-6" data-name="Эллипс 5 копия 4" class="cls-3" cx="92" cy="272" r="2"/>
+          <circle id="Эллипс_5_копия_5-6" data-name="Эллипс 5 копия 5" class="cls-3" cx="122" cy="272" r="2"/>
+          <circle id="Эллипс_5_копия_6-6" data-name="Эллипс 5 копия 6" class="cls-3" cx="152" cy="272" r="2"/>
+          <circle id="Эллипс_5_копия_7-31" data-name="Эллипс 5 копия 7" class="cls-3" cx="2" cy="242" r="2"/>
+          <circle id="Эллипс_5_копия_7-32" data-name="Эллипс 5 копия 7" class="cls-3" cx="32" cy="242" r="2"/>
+          <circle id="Эллипс_5_копия_7-33" data-name="Эллипс 5 копия 7" class="cls-3" cx="62" cy="242" r="2"/>
+          <circle id="Эллипс_5_копия_7-34" data-name="Эллипс 5 копия 7" class="cls-3" cx="92" cy="242" r="2"/>
+          <circle id="Эллипс_5_копия_7-35" data-name="Эллипс 5 копия 7" class="cls-3" cx="122" cy="242" r="2"/>
+          <circle id="Эллипс_5_копия_7-36" data-name="Эллипс 5 копия 7" class="cls-3" cx="152" cy="242" r="2"/>
+          <circle id="Эллипс_5_копия_8-31" data-name="Эллипс 5 копия 8" class="cls-3" cx="2" cy="212" r="2"/>
+          <circle id="Эллипс_5_копия_8-32" data-name="Эллипс 5 копия 8" class="cls-3" cx="32" cy="212" r="2"/>
+          <circle id="Эллипс_5_копия_8-33" data-name="Эллипс 5 копия 8" class="cls-3" cx="62" cy="212" r="2"/>
+          <circle id="Эллипс_5_копия_8-34" data-name="Эллипс 5 копия 8" class="cls-3" cx="92" cy="212" r="2"/>
+          <circle id="Эллипс_5_копия_8-35" data-name="Эллипс 5 копия 8" class="cls-3" cx="122" cy="212" r="2"/>
+          <circle id="Эллипс_5_копия_8-36" data-name="Эллипс 5 копия 8" class="cls-3" cx="152" cy="212" r="2"/>
+          <circle id="Эллипс_5_копия_9-31" data-name="Эллипс 5 копия 9" class="cls-3" cx="2" cy="182" r="2"/>
+          <circle id="Эллипс_5_копия_9-32" data-name="Эллипс 5 копия 9" class="cls-3" cx="32" cy="182" r="2"/>
+          <circle id="Эллипс_5_копия_9-33" data-name="Эллипс 5 копия 9" class="cls-3" cx="62" cy="182" r="2"/>
+          <circle id="Эллипс_5_копия_9-34" data-name="Эллипс 5 копия 9" class="cls-3" cx="92" cy="182" r="2"/>
+          <circle id="Эллипс_5_копия_9-35" data-name="Эллипс 5 копия 9" class="cls-3" cx="122" cy="182" r="2"/>
+          <circle id="Эллипс_5_копия_9-36" data-name="Эллипс 5 копия 9" class="cls-3" cx="152" cy="182" r="2"/>
+          <circle id="Эллипс_5_копия_10-31" data-name="Эллипс 5 копия 10" class="cls-3" cx="2" cy="152" r="2"/>
+          <circle id="Эллипс_5_копия_10-32" data-name="Эллипс 5 копия 10" class="cls-3" cx="32" cy="152" r="2"/>
+          <circle id="Эллипс_5_копия_10-33" data-name="Эллипс 5 копия 10" class="cls-3" cx="62" cy="152" r="2"/>
+          <circle id="Эллипс_5_копия_10-34" data-name="Эллипс 5 копия 10" class="cls-3" cx="92" cy="152" r="2"/>
+          <circle id="Эллипс_5_копия_10-35" data-name="Эллипс 5 копия 10" class="cls-3" cx="122" cy="152" r="2"/>
+          <circle id="Эллипс_5_копия_10-36" data-name="Эллипс 5 копия 10" class="cls-3" cx="152" cy="152" r="2"/>
+        </g>
+        <g id="Группа_3_копия_3-2" data-name="Группа 3 копия 3">
+          <circle id="Эллипс_5-7" data-name="Эллипс 5" class="cls-3" cx="2" cy="122" r="2"/>
+          <circle id="Эллипс_5_копия_2-7" data-name="Эллипс 5 копия 2" class="cls-3" cx="32" cy="122" r="2"/>
+          <circle id="Эллипс_5_копия_3-7" data-name="Эллипс 5 копия 3" class="cls-3" cx="62" cy="122" r="2"/>
+          <circle id="Эллипс_5_копия_4-7" data-name="Эллипс 5 копия 4" class="cls-3" cx="92" cy="122" r="2"/>
+          <circle id="Эллипс_5_копия_5-7" data-name="Эллипс 5 копия 5" class="cls-3" cx="122" cy="122" r="2"/>
+          <circle id="Эллипс_5_копия_6-7" data-name="Эллипс 5 копия 6" class="cls-3" cx="152" cy="122" r="2"/>
+          <circle id="Эллипс_5_копия_7-37" data-name="Эллипс 5 копия 7" class="cls-3" cx="2" cy="92" r="2"/>
+          <circle id="Эллипс_5_копия_7-38" data-name="Эллипс 5 копия 7" class="cls-3" cx="32" cy="92" r="2"/>
+          <circle id="Эллипс_5_копия_7-39" data-name="Эллипс 5 копия 7" class="cls-3" cx="62" cy="92" r="2"/>
+          <circle id="Эллипс_5_копия_7-40" data-name="Эллипс 5 копия 7" class="cls-3" cx="92" cy="92" r="2"/>
+          <circle id="Эллипс_5_копия_7-41" data-name="Эллипс 5 копия 7" class="cls-3" cx="122" cy="92" r="2"/>
+          <circle id="Эллипс_5_копия_7-42" data-name="Эллипс 5 копия 7" class="cls-3" cx="152" cy="92" r="2"/>
+          <circle id="Эллипс_5_копия_8-37" data-name="Эллипс 5 копия 8" class="cls-3" cx="2" cy="62" r="2"/>
+          <circle id="Эллипс_5_копия_8-38" data-name="Эллипс 5 копия 8" class="cls-3" cx="32" cy="62" r="2"/>
+          <circle id="Эллипс_5_копия_8-39" data-name="Эллипс 5 копия 8" class="cls-3" cx="62" cy="62" r="2"/>
+          <circle id="Эллипс_5_копия_8-40" data-name="Эллипс 5 копия 8" class="cls-3" cx="92" cy="62" r="2"/>
+          <circle id="Эллипс_5_копия_8-41" data-name="Эллипс 5 копия 8" class="cls-3" cx="122" cy="62" r="2"/>
+          <circle id="Эллипс_5_копия_8-42" data-name="Эллипс 5 копия 8" class="cls-3" cx="152" cy="62" r="2"/>
+          <circle id="Эллипс_5_копия_9-37" data-name="Эллипс 5 копия 9" class="cls-3" cx="2" cy="32" r="2"/>
+          <circle id="Эллипс_5_копия_9-38" data-name="Эллипс 5 копия 9" class="cls-3" cx="32" cy="32" r="2"/>
+          <circle id="Эллипс_5_копия_9-39" data-name="Эллипс 5 копия 9" class="cls-3" cx="62" cy="32" r="2"/>
+          <circle id="Эллипс_5_копия_9-40" data-name="Эллипс 5 копия 9" class="cls-3" cx="92" cy="32" r="2"/>
+          <circle id="Эллипс_5_копия_9-41" data-name="Эллипс 5 копия 9" class="cls-3" cx="122" cy="32" r="2"/>
+          <circle id="Эллипс_5_копия_9-42" data-name="Эллипс 5 копия 9" class="cls-3" cx="152" cy="32" r="2"/>
+          <circle id="Эллипс_5_копия_10-37" data-name="Эллипс 5 копия 10" class="cls-3" cx="2" cy="2" r="2"/>
+          <circle id="Эллипс_5_копия_10-38" data-name="Эллипс 5 копия 10" class="cls-3" cx="32" cy="2" r="2"/>
+          <circle id="Эллипс_5_копия_10-39" data-name="Эллипс 5 копия 10" class="cls-3" cx="62" cy="2" r="2"/>
+          <circle id="Эллипс_5_копия_10-40" data-name="Эллипс 5 копия 10" class="cls-3" cx="92" cy="2" r="2"/>
+          <circle id="Эллипс_5_копия_10-41" data-name="Эллипс 5 копия 10" class="cls-3" cx="122" cy="2" r="2"/>
+          <circle id="Эллипс_5_копия_10-42" data-name="Эллипс 5 копия 10" class="cls-3" cx="152" cy="2" r="2"/>
+        </g>
+      </g>
+    </g>
+  </g>
+  <g id="Группа_3_копия_2-2" data-name="Группа 3 копия 2" class="cls-4">
+    <circle id="Эллипс_5-8" data-name="Эллипс 5" class="cls-3" cx="182" cy="122" r="2"/>
+    <circle id="Эллипс_5_копия_2-8" data-name="Эллипс 5 копия 2" class="cls-3" cx="212" cy="122" r="2"/>
+    <circle id="Эллипс_5_копия_3-8" data-name="Эллипс 5 копия 3" class="cls-3" cx="242" cy="122" r="2"/>
+    <circle id="Эллипс_5_копия_4-8" data-name="Эллипс 5 копия 4" class="cls-3" cx="272" cy="122" r="2"/>
+    <circle id="Эллипс_5_копия_5-8" data-name="Эллипс 5 копия 5" class="cls-3" cx="302" cy="122" r="2"/>
+    <circle id="Эллипс_5_копия_6-8" data-name="Эллипс 5 копия 6" class="cls-3" cx="332" cy="122" r="2"/>
+    <circle id="Эллипс_5_копия_7-43" data-name="Эллипс 5 копия 7" class="cls-3" cx="182" cy="92" r="2"/>
+    <circle id="Эллипс_5_копия_7-44" data-name="Эллипс 5 копия 7" class="cls-3" cx="212" cy="92" r="2"/>
+    <circle id="Эллипс_5_копия_7-45" data-name="Эллипс 5 копия 7" class="cls-3" cx="242" cy="92" r="2"/>
+    <circle id="Эллипс_5_копия_7-46" data-name="Эллипс 5 копия 7" class="cls-3" cx="272" cy="92" r="2"/>
+    <circle id="Эллипс_5_копия_7-47" data-name="Эллипс 5 копия 7" class="cls-3" cx="302" cy="92" r="2"/>
+    <circle id="Эллипс_5_копия_7-48" data-name="Эллипс 5 копия 7" class="cls-3" cx="332" cy="92" r="2"/>
+    <circle id="Эллипс_5_копия_8-43" data-name="Эллипс 5 копия 8" class="cls-3" cx="182" cy="62" r="2"/>
+    <circle id="Эллипс_5_копия_8-44" data-name="Эллипс 5 копия 8" class="cls-3" cx="212" cy="62" r="2"/>
+    <circle id="Эллипс_5_копия_8-45" data-name="Эллипс 5 копия 8" class="cls-3" cx="242" cy="62" r="2"/>
+    <circle id="Эллипс_5_копия_8-46" data-name="Эллипс 5 копия 8" class="cls-3" cx="272" cy="62" r="2"/>
+    <circle id="Эллипс_5_копия_8-47" data-name="Эллипс 5 копия 8" class="cls-3" cx="302" cy="62" r="2"/>
+    <circle id="Эллипс_5_копия_8-48" data-name="Эллипс 5 копия 8" class="cls-3" cx="332" cy="62" r="2"/>
+    <circle id="Эллипс_5_копия_9-43" data-name="Эллипс 5 копия 9" class="cls-3" cx="182" cy="32" r="2"/>
+    <circle id="Эллипс_5_копия_9-44" data-name="Эллипс 5 копия 9" class="cls-3" cx="212" cy="32" r="2"/>
+    <circle id="Эллипс_5_копия_9-45" data-name="Эллипс 5 копия 9" class="cls-3" cx="242" cy="32" r="2"/>
+    <circle id="Эллипс_5_копия_9-46" data-name="Эллипс 5 копия 9" class="cls-3" cx="272" cy="32" r="2"/>
+    <circle id="Эллипс_5_копия_9-47" data-name="Эллипс 5 копия 9" class="cls-3" cx="302" cy="32" r="2"/>
+    <circle id="Эллипс_5_копия_9-48" data-name="Эллипс 5 копия 9" class="cls-3" cx="332" cy="32" r="2"/>
+    <circle id="Эллипс_5_копия_10-43" data-name="Эллипс 5 копия 10" class="cls-3" cx="182" cy="2" r="2"/>
+    <circle id="Эллипс_5_копия_10-44" data-name="Эллипс 5 копия 10" class="cls-3" cx="212" cy="2" r="2"/>
+    <circle id="Эллипс_5_копия_10-45" data-name="Эллипс 5 копия 10" class="cls-3" cx="242" cy="2" r="2"/>
+    <circle id="Эллипс_5_копия_10-46" data-name="Эллипс 5 копия 10" class="cls-3" cx="272" cy="2" r="2"/>
+    <circle id="Эллипс_5_копия_10-47" data-name="Эллипс 5 копия 10" class="cls-3" cx="302" cy="2" r="2"/>
+    <circle id="Эллипс_5_копия_10-48" data-name="Эллипс 5 копия 10" class="cls-3" cx="332" cy="2" r="2"/>
+  </g>
+  <g id="Группа_3_копия_5" data-name="Группа 3 копия 5" class="cls-1">
+    <circle id="Эллипс_5-9" data-name="Эллипс 5" class="cls-3" cx="182" cy="571" r="2"/>
+    <circle id="Эллипс_5_копия_2-9" data-name="Эллипс 5 копия 2" class="cls-3" cx="212" cy="571" r="2"/>
+    <circle id="Эллипс_5_копия_3-9" data-name="Эллипс 5 копия 3" class="cls-3" cx="242" cy="571" r="2"/>
+    <circle id="Эллипс_5_копия_4-9" data-name="Эллипс 5 копия 4" class="cls-3" cx="272" cy="571" r="2"/>
+    <circle id="Эллипс_5_копия_5-9" data-name="Эллипс 5 копия 5" class="cls-3" cx="302" cy="571" r="2"/>
+    <circle id="Эллипс_5_копия_6-9" data-name="Эллипс 5 копия 6" class="cls-3" cx="332" cy="571" r="2"/>
+    <circle id="Эллипс_5_копия_7-49" data-name="Эллипс 5 копия 7" class="cls-3" cx="182" cy="541" r="2"/>
+    <circle id="Эллипс_5_копия_7-50" data-name="Эллипс 5 копия 7" class="cls-3" cx="212" cy="541" r="2"/>
+    <circle id="Эллипс_5_копия_7-51" data-name="Эллипс 5 копия 7" class="cls-3" cx="242" cy="541" r="2"/>
+    <circle id="Эллипс_5_копия_7-52" data-name="Эллипс 5 копия 7" class="cls-3" cx="272" cy="541" r="2"/>
+    <circle id="Эллипс_5_копия_7-53" data-name="Эллипс 5 копия 7" class="cls-3" cx="302" cy="541" r="2"/>
+    <circle id="Эллипс_5_копия_7-54" data-name="Эллипс 5 копия 7" class="cls-3" cx="332" cy="541" r="2"/>
+    <circle id="Эллипс_5_копия_8-49" data-name="Эллипс 5 копия 8" class="cls-3" cx="182" cy="511" r="2"/>
+    <circle id="Эллипс_5_копия_8-50" data-name="Эллипс 5 копия 8" class="cls-3" cx="212" cy="511" r="2"/>
+    <circle id="Эллипс_5_копия_8-51" data-name="Эллипс 5 копия 8" class="cls-3" cx="242" cy="511" r="2"/>
+    <circle id="Эллипс_5_копия_8-52" data-name="Эллипс 5 копия 8" class="cls-3" cx="272" cy="511" r="2"/>
+    <circle id="Эллипс_5_копия_8-53" data-name="Эллипс 5 копия 8" class="cls-3" cx="302" cy="511" r="2"/>
+    <circle id="Эллипс_5_копия_8-54" data-name="Эллипс 5 копия 8" class="cls-3" cx="332" cy="511" r="2"/>
+    <circle id="Эллипс_5_копия_9-49" data-name="Эллипс 5 копия 9" class="cls-3" cx="182" cy="481" r="2"/>
+    <circle id="Эллипс_5_копия_9-50" data-name="Эллипс 5 копия 9" class="cls-3" cx="212" cy="481" r="2"/>
+    <circle id="Эллипс_5_копия_9-51" data-name="Эллипс 5 копия 9" class="cls-3" cx="242" cy="481" r="2"/>
+    <circle id="Эллипс_5_копия_9-52" data-name="Эллипс 5 копия 9" class="cls-3" cx="272" cy="481" r="2"/>
+    <circle id="Эллипс_5_копия_9-53" data-name="Эллипс 5 копия 9" class="cls-3" cx="302" cy="481" r="2"/>
+    <circle id="Эллипс_5_копия_9-54" data-name="Эллипс 5 копия 9" class="cls-3" cx="332" cy="481" r="2"/>
+    <circle id="Эллипс_5_копия_10-49" data-name="Эллипс 5 копия 10" class="cls-3" cx="182" cy="451" r="2"/>
+    <circle id="Эллипс_5_копия_10-50" data-name="Эллипс 5 копия 10" class="cls-3" cx="212" cy="451" r="2"/>
+    <circle id="Эллипс_5_копия_10-51" data-name="Эллипс 5 копия 10" class="cls-3" cx="242" cy="451" r="2"/>
+    <circle id="Эллипс_5_копия_10-52" data-name="Эллипс 5 копия 10" class="cls-3" cx="272" cy="451" r="2"/>
+    <circle id="Эллипс_5_копия_10-53" data-name="Эллипс 5 копия 10" class="cls-3" cx="302" cy="451" r="2"/>
+    <circle id="Эллипс_5_копия_10-54" data-name="Эллипс 5 копия 10" class="cls-3" cx="332" cy="451" r="2"/>
+  </g>
+</svg>
