@@ -59,6 +59,7 @@ module.exports.addContact = addContact
 
 const checkContact = async (req = {}) => {
     return getContact(req).then(contact => {
+        console.log(contact)
         if (Object.entries(contact).length !== 0 && contact.constructor === Object) {
             return contact._embedded.items[0].id
         } else {
@@ -71,6 +72,7 @@ const checkContact = async (req = {}) => {
 module.exports.checkContact = checkContact
 
 const addLead = async (req = {}) => {
+    console.log('addLead request: '.req)
     return checkContact(req).then(id => {
         return amo.Lead.insert([
             {
