@@ -295,6 +295,9 @@
             }
         }
     }
+    &__trafik-img {
+        width: toem(279);
+    }
     &__form {
         margin-top: toem(-100);
         position: relative;
@@ -312,6 +315,21 @@
         margin-top: toem(40);
         width: toem(370);
         margin-right: toem(40);
+    }
+}
+
+.popup-menu {
+    &__item {
+        display: block;
+        font-size: toem(54);
+        color: #fff;
+        line-height: 1.2;
+        &:hover {
+            color: $yelow;
+        }
+    }
+    &__item:not(:first-child) {
+        margin-top: toem(20,54);
     }
 }
 
@@ -467,6 +485,11 @@
         }
         .col-min-8 {
             width: 66%;
+        }
+    }
+    .popup-menu {
+        &__item {
+            font-size: 32px;
         }
     }
 }

@@ -1,8 +1,8 @@
 @font-face {
     font-family: 'Museo Sans Cyrl';
     src: url('/fonts/MuseoSansCyrl-300.woff2') format('woff2'),
-        url('MuseoSansCyrl-300.woff') format('woff'),
-        url('MuseoSansCyrl-300.svg#MuseoSansCyrl-300') format('svg');
+        url('/fonts/MuseoSansCyrl-300.woff') format('woff'),
+        url('/fonts/MuseoSansCyrl-300.svg#MuseoSansCyrl-300') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -36,11 +36,11 @@
 
 @font-face {
   font-family: 'icomoon';
-  src:  url('/fonts/icomoon.eot?2t3xm0');
-  src:  url('/fonts/icomoon.eot?2t3xm0#iefix') format('embedded-opentype'),
-    url('/fonts/icomoon.ttf?2t3xm0') format('truetype'),
-    url('/fonts/icomoon.woff?2t3xm0') format('woff'),
-    url('/fonts/icomoon.svg?2t3xm0#icomoon') format('svg');
+  src:  url('/fonts/icomoon.eot?f6r4wt');
+  src:  url('/fonts/icomoon.eot?f6r4wt#iefix') format('embedded-opentype'),
+    url('/fonts/icomoon.ttf?f6r4wt') format('truetype'),
+    url('/fonts/icomoon.woff?f6r4wt') format('woff'),
+    url('/fonts/icomoon.svg?f6r4wt#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
