@@ -4,11 +4,11 @@ initMap();
 //     ["ЖК «Столичный»1", 43.41165699, 39.95744705, "http://localhost:3000/images/cases/gk1.jpg", "18 квартир", "Площадь: от 59 м2", "ОТ 6 700 000 ₽"],
 //     ["ЖК «Столичный»2", 43.4042992, 39.98285294, "http://localhost:3000/images/cases/gk1.jpg", "18 квартир", "Площадь: от 59 м2", "ОТ 6 700 000 ₽"],
 // ];
-if ( $("#map-object").length ) {
+if ( $("#map").length ) {
 var locations = [
     ["ЖК «Столичный»1", 43.4015339, 39.9794593, "http://localhost:3000/images/cases/gk1.jpg", "18 квартир", "Площадь: от 59 м2", "ОТ 6 700 000 ₽"]
 ];
-var map = new google.maps.Map(document.getElementById('map-object'), {
+var map = new google.maps.Map(document.getElementById('map'), {
 zoom: 12,
 center: new google.maps.LatLng(43.4015339, 39.9794593),
 mapTypeId: google.maps.MapTypeId.ROADMAP
