@@ -1,0 +1,43 @@
+html {
+    height: 100%;
+}
+body {
+    min-height: 100%;
+    display: flex;
+}
+.main {
+    flex-grow: 1;
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    .menu {
+        flex-basis: 200px;
+        flex-shrink: 0;
+        position: relative;
+        ul {
+            position: fixed;
+            left: 0;
+            top: 0;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            li {
+                padding: 6px 16px;
+                &:first-child {
+                    padding-top: 16px;
+                }
+                a {
+
+                }
+            }
+        }
+    }
+    .content {
+        flex-grow: 1;
+        padding: 16px;
+    }
+}
+.jumbotron {
+    margin: -16px -16px 16px;
+}

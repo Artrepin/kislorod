@@ -7,12 +7,66 @@ app.set('view engine', 'pug')
 app.use(express.static('public'))
 app.locals.env = process.env;
 const bodyParser = require('body-parser')
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json({ limit: '50mb' }))
+app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }))
 const amocrm = require('./modules/amocrm')
+const multer = require('multer')
 
 const mysql = require('mysql')
 const async = require('async')
+
+const Sequelize = require('sequelize')
+const sequelizePaginate = require('sequelize-paginate')
+const connection = new Sequelize(process.env.DATABASE_DB, process.env.DATABASE_USER, process.env.DATABASE_PASS, {
+    "dialect": "mysql",
+    "operatorsAliases": false
+})
+
+var Building = connection.define('building', {
+    iBuildingID: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    sBuildingTitle: Sequelize.STRING,
+    sBuildingAvatar: Sequelize.STRING,
+    sBuildingCoverSmall: Sequelize.STRING,
+    sBuildingCoverBig: Sequelize.STRING,
+    sBuildingDescription: Sequelize.TEXT,
+    fBuildingLocationeX: Sequelize.FLOAT,
+    fBuildingLocationeY: Sequelize.FLOAT,
+    sBuildingYoutube: Sequelize.STRING,
+    dBuildingReady: Sequelize.DATEONLY
+}, {
+    timestamps: false
+})
+sequelizePaginate.paginate(Building)
+
+var Advantage = connection.define('advantage', {
+    iAdvantageID: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    iBuildingID: Sequelize.INTEGER,
+    sAdvantageTitle: Sequelize.STRING
+}, {
+    timestamps: false
+})
+sequelizePaginate.paginate(Advantage)
+
+// connection.sync()
+
+
+
+function randomString() {
+    var text = ""
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+    for (var i = 0; i < 32; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length))
+    }
+    return text
+}
 
 var month_rus = [
     ['январь'],
@@ -32,15 +86,13 @@ var month_rus = [
 app.use('/vue', express.static(__dirname + '/node_modules/vue/dist'))
 app.use('/axios', express.static(__dirname + '/node_modules/axios/dist'))
 app.use('/vue-router', express.static(__dirname + '/node_modules/vue-router/dist'))
+app.use('/vue-picture-input', express.static(__dirname + '/node_modules/vue-picture-input/umd'))
+
 app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist'))
 app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist'))
 app.use('/jquery-ui', express.static(__dirname + '/node_modules/jquery-ui/ui'))
 
 const data = {}
-
-app.get('/admin', (req, res) => {
-    res.render('admin/admin', data)
-})
 
 app.get('/', (req, res) => {
     data.title = "Центр недвижимости «Кислород»"
@@ -122,8 +174,278 @@ app.post('/send', (req, res) => {
             res.send(true)
         })
     })
-
 })
+
+
+
+
+
+app.get('/admin', (req, res) => {
+    res.render('admin', data)
+})
+
+app.post('/admin/BuildingList', async (req, res) => {
+    res.json({
+        buildings: await Building.paginate({
+            page: (req.body.p) ? req.body.p : 1,
+            paginate: 5
+        })
+    })
+})
+app.post('/admin/BuildingEdit', async (req, res) => {
+    var building = await Building.findById(req.body.iBuildingID)
+        building.dataValues.advantage = await Advantage.findAll({
+            where: {
+                iBuildingID: req.body.iBuildingID
+            }
+        })
+
+    res.json({
+        building: building
+    })
+})
+app.post('/admin/BuildingUpdate', async (req, res) => {
+    var iBuildingID = (req.body.building.iBuildingID) ? req.body.building.iBuildingID : false
+
+    if (iBuildingID) {
+        await Building.update({
+            sBuildingTitle: req.body.building.sBuildingTitle,
+            sBuildingAvatar: req.body.building.sBuildingAvatar,
+            sBuildingCoverSmall: req.body.building.sBuildingCoverSmall,
+            sBuildingCoverBig: req.body.building.sBuildingCoverBig,
+            sBuildingDescription: req.body.building.sBuildingDescription,
+            fBuildingLocationeX: req.body.building.fBuildingLocationeX,
+            fBuildingLocationeY: req.body.building.fBuildingLocationeY,
+            sBuildingYoutube: req.body.building.sBuildingYoutube,
+        }, {
+            where: {
+                iBuildingID: iBuildingID
+            }
+        })
+    } else {
+        await Building.create({
+            sBuildingTitle: req.body.building.sBuildingTitle,
+            sBuildingAvatar: req.body.building.sBuildingAvatar,
+            sBuildingCoverSmall: req.body.building.sBuildingCoverSmall,
+            sBuildingCoverBig: req.body.building.sBuildingCoverBig,
+            sBuildingDescription: req.body.building.sBuildingDescription,
+            fBuildingLocationeX: req.body.building.fBuildingLocationeX,
+            fBuildingLocationeY: req.body.building.fBuildingLocationeY,
+            sBuildingYoutube: req.body.building.sBuildingYoutube,
+        }).then((response) => {
+            iBuildingID = response.iBuildingID
+        })        
+    }
+
+
+    if ('advantage_destroy' in req.body.building) {
+        await Advantage.destroy({
+            where: {
+                iAdvantageID: req.body.building.advantage_destroy
+            }
+        })
+    }
+
+    const advantageUpdate = async () => {
+        const advantages = req.body.building.advantage
+        for (const advantage of advantages) {
+            if (advantage.iAdvantageID) {
+                await Advantage.update({
+                    sAdvantageTitle: advantage.sAdvantageTitle
+                }, {
+                    where: {
+                        iAdvantageID: advantage.iAdvantageID
+                    }                    
+                })
+            } else {
+                await Advantage.create({
+                    iBuildingID: iBuildingID,
+                    sAdvantageTitle: advantage.sAdvantageTitle
+                })
+            }
+        }
+    }
+    
+    await advantageUpdate()
+
+
+    var building = await Building.findById(iBuildingID)
+        building.dataValues.advantage = await Advantage.findAll({ where: { iBuildingID: iBuildingID } })
+
+    res.json(building)
+
+    // return sequelize.transaction(function (t) {
+
+    //     return User.create({
+    //       firstName: 'Abraham',
+    //       lastName: 'Lincoln'
+    //     }, {transaction: t}).then(function (user) {
+    //       return user.setShooter({
+    //         firstName: 'John',
+    //         lastName: 'Boothe'
+    //       }, {transaction: t});
+    //     });
+      
+    //   }).then(function (result) {
+    //     // Transaction has been committed
+    //     // result is whatever the result of the promise chain returned to the transaction callback
+    //   }).catch(function (err) {
+    //     // Transaction has been rolled back
+    //     // err is whatever rejected the promise chain returned to the transaction callback
+    //   });
+
+
+    // if (req.body.building.iBuildingID) {
+        // let transaction
+
+        // try {
+        //     transaction = await sequelize.transaction()
+
+        //     await Building.findById(1, {transaction})
+
+        //     await Building.findById(2, {transaction})
+
+        //     await Building.findById(3, {transaction})
+  
+            // await Building.update({
+            //     sBuildingTitle: req.body.building.sBuildingTitle,
+            //     sBuildingAvatar: req.body.building.sBuildingAvatar,
+            //     sBuildingCoverSmall: req.body.building.sBuildingCoverSmall,
+            //     sBuildingCoverBig: req.body.building.sBuildingCoverBig,
+            //     sBuildingDescription: req.body.building.sBuildingDescription,
+            //     fBuildingLocationeX: req.body.building.fBuildingLocationeX,
+            //     fBuildingLocationeY: req.body.building.fBuildingLocationeY,
+            //     sBuildingYoutube: req.body.building.sBuildingYoutube,
+            // }, {
+            //     where: {
+            //         iBuildingID: req.body.building.iBuildingID
+            //     }
+            // }, {transaction})
+  
+            // if ('advantage_destroy' in req.body.building) {
+                // await Advantage.destroy({
+                //     where: {
+                //         iAdvantageID: req.body.building.advantage_destroy
+                //     }
+                // }, {transaction})
+            // }
+
+            // var building = await Building.findById(req.body.building.iBuildingID)
+                // building.dataValues.advantage = await Advantage.findAll({
+                //     where: {
+                //         iBuildingID: req.body.building.iBuildingID
+                //     },
+                //     transaction
+                // })
+
+
+            // res.json(building)
+  
+        //     await transaction.commit()
+        // } catch (err) {
+        //     await transaction.rollback()
+        // }
+
+        // await Building.update({
+        //     sBuildingTitle: req.body.building.sBuildingTitle,
+        //     sBuildingAvatar: req.body.building.sBuildingAvatar,
+        //     sBuildingCoverSmall: req.body.building.sBuildingCoverSmall,
+        //     sBuildingCoverBig: req.body.building.sBuildingCoverBig,
+        //     sBuildingDescription: req.body.building.sBuildingDescription,
+        //     fBuildingLocationeX: req.body.building.fBuildingLocationeX,
+        //     fBuildingLocationeY: req.body.building.fBuildingLocationeY,
+        //     sBuildingYoutube: req.body.building.sBuildingYoutube,
+        // }, {
+        //     where: {
+        //         iBuildingID: req.body.building.iBuildingID
+        //     }        
+        // }).then(async (response) => {
+            // if ('advantage_destroy' in req.body.building) {
+            //     await Advantage.destroy({
+            //         where: {
+            //             iAdvantageID: req.body.building.advantage_destroy
+            //         } 
+            //     })
+            // }
+        //     req.body.building.advantage.forEach(advantage => {
+        //         if (advantage.iAdvantageID) {
+        //             await Advantage.update({
+        //                 sAdvantageTitle: advantage.sAdvantageTitle
+        //             }, {
+        //                 where: {
+        //                     iAdvantageID: advantage.iAdvantageID
+        //                 }
+        //             })
+        //         } else {
+                    // await Advantage.create({
+                    //     iBuildingID: advantage.iBuildingID,
+                    //     sAdvantageTitle: advantage.sAdvantageTitle
+                    // })
+        //         }
+        //     })
+
+            // var building = await Building.findById(req.body.building.iBuildingID)
+            //     building.dataValues.advantage = await Advantage.findAll({
+            //         where: {
+            //             iBuildingID: req.body.building.iBuildingID
+            //         }
+            //     })
+
+
+            // res.json(building)
+        // })
+    // } else {
+        // await Building.create({
+        //     sBuildingTitle: req.body.building.sBuildingTitle,
+        //     sBuildingAvatar: req.body.building.sBuildingAvatar,
+        //     sBuildingCoverSmall: req.body.building.sBuildingCoverSmall,
+        //     sBuildingCoverBig: req.body.building.sBuildingCoverBig,
+        //     sBuildingDescription: req.body.building.sBuildingDescription,
+        //     fBuildingLocationeX: req.body.building.fBuildingLocationeX,
+        //     fBuildingLocationeY: req.body.building.fBuildingLocationeY,
+        //     sBuildingYoutube: req.body.building.sBuildingYoutube,
+        // }).then(async (response) => {
+        //     var building = await Building.findById(response.iBuildingID)
+        //         building.dataValues.advantage = await Advantage.findAll({
+        //             where: {
+        //                 iBuildingID: response.iBuildingID
+        //             }
+        //         })
+        //     res.json(building)
+        // })    
+    // }
+})
+app.post('/admin/BuildingRemove', async (req, res) => {
+    Building.destroy({
+        where: {
+            iBuildingID: req.body.building.iBuildingID,
+        }
+    }).then((response) => {
+        res.json(response)
+    })    
+})
+
+
+app.post('/admin/BuildingUploadAvatar', async (req, res) => {
+    var storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, './public/images/building')
+        },
+        filename: function (req, file, cb) {
+            cb(null, randomString() + '.jpg')
+        }
+    })
+    var upload = multer({ storage: storage }).single(req.headers.column)
+    upload(req, res, function (err) {
+        res.send({ file: req.file, body: req.body })
+    })
+})
+
+
+
+
+
+
 
 app.listen(process.env.PORT, () => {
     console.log('Server is running...')

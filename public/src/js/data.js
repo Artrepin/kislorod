@@ -267,7 +267,8 @@ $(document).ready(function(){
                 slider_min = slider_options.data("min"),
                 slider_max = slider_options.data("max"),
                 slider_step = slider_options.data("step"),
-                slider_meas = slider_options.data("meas");
+                slider_meas = slider_options.data("meas"),
+                slider_mask = $(this).find(".js-slider-mask");
             
             $(this).find(".js-slider").slider({
                 range: "min",
@@ -277,6 +278,7 @@ $(document).ready(function(){
                 step: slider_step,
                 slide: function( event, ui ) {
                     slider_options.val( ui.value + " " + slider_meas );
+                    slider_mask.val( ui.value );
                 }
             });
             
@@ -287,6 +289,42 @@ $(document).ready(function(){
             var slider_meas = $(this).closest(".js-slider-wrapper").find(".js-slider-options").data("meas");
             $(this).closest(".js-slider-wrapper").find(".js-slider").slider({value: slider_mask});
             $(this).closest(".js-slider-wrapper").find(".js-slider-options").val( slider_mask + " " + slider_meas  );
+        });
+    }
+    
+    if ( $(".js-slider-result").length ) {
+        
+        $(".js-slider-wrapper").each(function(){
+            
+            
+            var slider_options = $(this).find(".js-slider-options"),
+                slider_val = slider_options.data("value"),
+                slider_min = slider_options.data("min"),
+                slider_max = slider_options.data("max"),
+                slider_step = slider_options.data("step"),
+                slider_meas = slider_options.data("meas"),
+                slider_mask = $(this).find(".js-slider-mask"),
+                price = $("#price").val(),
+                customers = $("#customers").val(),
+                conversion = $("#conversion").val(),
+                conversion = 1 + ( conversion/100 ),
+                result = price * customers * conversion,
+                result2 = result/10000000;
+            
+            $(this).find(".js-slider-result").slider({
+                range: "min",
+                min: slider_min,
+                max: slider_max,
+                value: slider_val,
+                step: slider_step,
+                slide: function( event, ui ) {
+                    slider_options.val( ui.value + " " + slider_meas );
+                    slider_mask.val( ui.value );
+                    $(".result-box__circle").css("transform","scale(1)");
+                    $(".js-result-profit").text(result);
+                }
+            });
+            
         });
     }
     
@@ -565,6 +603,58 @@ $(document).ready(function(){
 			]
 		});
     };
+    
+    function timer(){
+		var thisdate = new Date();
+		var hours = 16 - thisdate.getHours();
+		var mins = 59 - thisdate.getMinutes();
+		$(".js-hours").text(hours);
+		$(".js-mins").text(mins);
+        if ( hours < 0 ) {
+            $(".vebinar-screen__time-active").remove();
+            $(".vebinar-screen__time-noactive").show();
+        }
+	}
+    
+    timer();
+
+	setInterval( timer, 10000 );
+    
+    if($('.js-professional-list').length) {
+		$('.js-professional-list').slick({
+			slidesToShow: 5,
+            slidesToScroll: 1,
+            asNavFor: '.js-professional-content',
+            arrows: false,
+            dots: false,
+            centerMode: false,
+            focusOnSelect: true,
+            infinite: false,
+            vertical: true,
+            verticalSwiping: true
+		});
+        $('.js-professional-content').slick({
+			slidesToShow: 1,
+            slidesToScroll: 1,
+            asNavFor: '.js-professional-list',
+            arrows: true,
+            prevArrow: '<button class="slick-arrow slick-arrow_prev icon-right-arrow"></button>',
+            nextArrow: '<button class="slick-arrow slick-arrow_next icon-right-arrow"></button>',
+            dots: false
+		});
+	};
+    
+    $(".task-tabs__item").click(function(){
+        var index = $(this).index();
+        if ( $(this).hasClass("task-tabs__item_active") ) {
+            
+        } else {
+            $(".task-tabs__item_active").removeClass("task-tabs__item_active");
+            $(this).addClass("task-tabs__item_active");
+            $(".task-slider__slide:visible").hide();
+            $(".task-slider__slide:eq(" + index + ")").fadeIn(500);
+        }
+    });
     
 });
 
