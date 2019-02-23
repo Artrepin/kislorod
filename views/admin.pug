@@ -7,7 +7,7 @@ html(lang="en")
         title Admin
         if env.NODE_ENV == 'development'
             link(rel="stylesheet", href="/bootstrap/css/bootstrap.min.css")
-            //- link(rel="stylesheet", href="/src/css/app.css")
+            link(rel="stylesheet", href="/src/css/admin.css")
         else
             link(rel="stylesheet", href="/build/app.min.css")
     body
@@ -16,10 +16,11 @@ html(lang="en")
 
         if env.NODE_ENV == 'development'
             script(src='/axios/axios.js')
+            script(src='/vue-picture-input/vue-picture-input.js')
             script(src='/vue/vue.js')
             script(src='/vue-router/vue-router.js')
-            //- script(src='/jquery/jquery.min.js')
-            //- script(src='/bootstrap/js/bootstrap.min.js')
+            script(src='/jquery/jquery.min.js')
+            script(src='/bootstrap/js/bootstrap.min.js')
             script(src='/src/admin/js/main.js')
         else
             script(src='/build/app.min.js')
