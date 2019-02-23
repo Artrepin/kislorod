@@ -53,10 +53,10 @@ gulp.task('js_min', () => {
                 min:'.min.js'
             }
         }))
-        .pipe(gulp.dest('public/'))
+        .pipe(gulp.dest('public/build/'))
         .on('end', () => {
             del.sync([
-                'public/app.js',
+                'public/build/app.js',
             ]);
         })
 })
@@ -69,13 +69,13 @@ gulp.task('css_min', () => {
         ])
         .pipe(concat('app.min.css'))
         .pipe(cleanCSS())
-        .pipe(gulp.dest('public/'))
+        .pipe(gulp.dest('public/build/'))
 })
 
 gulp.task('rev', () => {
-    return gulp.src(['public/app.min.css', 'public/app.min.js'])
+    return gulp.src(['public/build/app.min.css', 'public/build/app.min.js'])
         .pipe(rev())
-        .pipe(gulp.dest('public/'))
+        .pipe(gulp.dest('public/build/'))
         .pipe(rev.manifest())
         .pipe(gulp.dest('public/manifest/'))
 })
@@ -89,7 +89,7 @@ gulp.task('rev_collector', () => {
 })
 
 gulp.task('rev_clean', function() {
-    return gulp.src( ['public/*.*'], {read: false})
+    return gulp.src( ['public/build/*.*'], {read: false})
         .pipe( revOutdated(1) )
         .pipe( cleaner() );
 });
