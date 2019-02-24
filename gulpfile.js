@@ -138,15 +138,15 @@ gulp.task('rev_clean', function() {
         .pipe( cleaner() );
 });
 
-// gulp.task('production', (callback) => {
-//     runSequence(
-//         ['js_min', 'css_min'],
-//         'rev',
-//         'rev_collector',
-//         'rev_clean',
-//         callback
-//     )
-// })
+gulp.task('production', (callback) => {
+    runSequence(
+        ['js_min', 'css_min', 'js_min_admin', 'css_min_admin'],
+        'rev',
+        ['rev_collector', 'rev_collector_admin'],
+        'rev_clean',
+        callback
+    )
+})
 
 
 
