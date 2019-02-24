@@ -13,7 +13,6 @@ const rimraf        = require('rimraf')
 const revOutdated   = require('gulp-rev-outdated')
 const path          = require('path')
 const through       = require('through2')
-// const runSequence   = require('run-sequence')
 const gulpSequence  = require('gulp-sequence')
 const fs            = require('fs')
 
