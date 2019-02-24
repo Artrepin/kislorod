@@ -103,7 +103,7 @@ gulp.task('css_min_admin', () => {
             'node_modules/bootstrap/dist/css/bootstrap.min.css',
             'public/src/admin/css/app.css'
         ])
-        .pipe(concat('app.min.css'))
+        .pipe(concat('admin.min.css'))
         .pipe(cleanCSS())
         .pipe(gulp.dest('public/build/'))
 })
