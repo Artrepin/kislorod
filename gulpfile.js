@@ -67,7 +67,7 @@ gulp.task('js_min_admin', () => {
         'node_modules/axios/dist/axios.js',
         'node_modules/vue-picture-input/umd/vue-picture-input.js',
         'node_modules/vue/dist/vue.min.js',
-        'node_modules/vue-router/dist/vue-router.js',
+        'node_modules/vue-router/dist/vue-router.min.js',
         'node_modules/jquery/dist/jquery.min.js',
         'node_modules/bootstrap/dist/js/bootstrap.min.js',
         'public/src/admin/js/main.js',

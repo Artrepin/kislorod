@@ -55,7 +55,7 @@ var Advantage = connection.define('advantage', {
 })
 sequelizePaginate.paginate(Advantage)
 
-// connection.sync()
+connection.sync()
 
 
 
