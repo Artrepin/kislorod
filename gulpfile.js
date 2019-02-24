@@ -72,6 +72,7 @@ gulp.task('js_min_admin', function (done) {
         'node_modules/jquery/dist/jquery.min.js',
         'node_modules/bootstrap/dist/js/bootstrap.min.js',
 
+        'public/src/admin/js/demo.js',
         'public/src/admin/js/main.js',
     ])
     .pipe(concat('admin.js'))
@@ -103,8 +104,8 @@ gulp.task('css_min', function(done) {
 gulp.task('css_min_admin', function(done) {
     gulp
         .src([
-            'node_modules/bootstrap/dist/css/bootstrap.min.css',
-            'public/src/admin/css/app.css'
+            'public/src/admin/css/theme.css',
+            'public/src/admin/css/theme-dark.css'
         ])
         .pipe(concat('admin.min.css'))
         .pipe(cleanCSS())
