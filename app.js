@@ -247,21 +247,23 @@ app.post('/admin/BuildingUpdate', async (req, res) => {
     }
 
     const advantageUpdate = async () => {
-        const advantages = req.body.building.advantage
-        for (const advantage of advantages) {
-            if (advantage.iAdvantageID) {
-                await Advantage.update({
-                    sAdvantageTitle: advantage.sAdvantageTitle
-                }, {
-                    where: {
-                        iAdvantageID: advantage.iAdvantageID
-                    }                    
-                })
-            } else {
-                await Advantage.create({
-                    iBuildingID: iBuildingID,
-                    sAdvantageTitle: advantage.sAdvantageTitle
-                })
+        if (req.body.building.advantage) {
+            const advantages = req.body.building.advantage
+            for (const advantage of advantages) {
+                if (advantage.iAdvantageID) {
+                    await Advantage.update({
+                        sAdvantageTitle: advantage.sAdvantageTitle
+                    }, {
+                        where: {
+                            iAdvantageID: advantage.iAdvantageID
+                        }                    
+                    })
+                } else {
+                    await Advantage.create({
+                        iBuildingID: iBuildingID,
+                        sAdvantageTitle: advantage.sAdvantageTitle
+                    })
+                }
             }
         }
     }
@@ -274,146 +276,6 @@ app.post('/admin/BuildingUpdate', async (req, res) => {
 
     res.json(building)
 
-    // return sequelize.transaction(function (t) {
-
-    //     return User.create({
-    //       firstName: 'Abraham',
-    //       lastName: 'Lincoln'
-    //     }, {transaction: t}).then(function (user) {
-    //       return user.setShooter({
-    //         firstName: 'John',
-    //         lastName: 'Boothe'
-    //       }, {transaction: t});
-    //     });
-      
-    //   }).then(function (result) {
-    //     // Transaction has been committed
-    //     // result is whatever the result of the promise chain returned to the transaction callback
-    //   }).catch(function (err) {
-    //     // Transaction has been rolled back
-    //     // err is whatever rejected the promise chain returned to the transaction callback
-    //   });
-
-
-    // if (req.body.building.iBuildingID) {
-        // let transaction
-
-        // try {
-        //     transaction = await sequelize.transaction()
-
-        //     await Building.findById(1, {transaction})
-
-        //     await Building.findById(2, {transaction})
-
-        //     await Building.findById(3, {transaction})
-  
-            // await Building.update({
-            //     sBuildingTitle: req.body.building.sBuildingTitle,
-            //     sBuildingAvatar: req.body.building.sBuildingAvatar,
-            //     sBuildingCoverSmall: req.body.building.sBuildingCoverSmall,
-            //     sBuildingCoverBig: req.body.building.sBuildingCoverBig,
-            //     sBuildingDescription: req.body.building.sBuildingDescription,
-            //     fBuildingLocationeX: req.body.building.fBuildingLocationeX,
-            //     fBuildingLocationeY: req.body.building.fBuildingLocationeY,
-            //     sBuildingYoutube: req.body.building.sBuildingYoutube,
-            // }, {
-            //     where: {
-            //         iBuildingID: req.body.building.iBuildingID
-            //     }
-            // }, {transaction})
-  
-            // if ('advantage_destroy' in req.body.building) {
-                // await Advantage.destroy({
-                //     where: {
-                //         iAdvantageID: req.body.building.advantage_destroy
-                //     }
-                // }, {transaction})
-            // }
-
-            // var building = await Building.findById(req.body.building.iBuildingID)
-                // building.dataValues.advantage = await Advantage.findAll({
-                //     where: {
-                //         iBuildingID: req.body.building.iBuildingID
-                //     },
-                //     transaction
-                // })
-
-
-            // res.json(building)
-  
-        //     await transaction.commit()
-        // } catch (err) {
-        //     await transaction.rollback()
-        // }
-
-        // await Building.update({
-        //     sBuildingTitle: req.body.building.sBuildingTitle,
-        //     sBuildingAvatar: req.body.building.sBuildingAvatar,
-        //     sBuildingCoverSmall: req.body.building.sBuildingCoverSmall,
-        //     sBuildingCoverBig: req.body.building.sBuildingCoverBig,
-        //     sBuildingDescription: req.body.building.sBuildingDescription,
-        //     fBuildingLocationeX: req.body.building.fBuildingLocationeX,
-        //     fBuildingLocationeY: req.body.building.fBuildingLocationeY,
-        //     sBuildingYoutube: req.body.building.sBuildingYoutube,
-        // }, {
-        //     where: {
-        //         iBuildingID: req.body.building.iBuildingID
-        //     }        
-        // }).then(async (response) => {
-            // if ('advantage_destroy' in req.body.building) {
-            //     await Advantage.destroy({
-            //         where: {
-            //             iAdvantageID: req.body.building.advantage_destroy
-            //         } 
-            //     })
-            // }
-        //     req.body.building.advantage.forEach(advantage => {
-        //         if (advantage.iAdvantageID) {
-        //             await Advantage.update({
-        //                 sAdvantageTitle: advantage.sAdvantageTitle
-        //             }, {
-        //                 where: {
-        //                     iAdvantageID: advantage.iAdvantageID
-        //                 }
-        //             })
-        //         } else {
-                    // await Advantage.create({
-                    //     iBuildingID: advantage.iBuildingID,
-                    //     sAdvantageTitle: advantage.sAdvantageTitle
-                    // })
-        //         }
-        //     })
-
-            // var building = await Building.findById(req.body.building.iBuildingID)
-            //     building.dataValues.advantage = await Advantage.findAll({
-            //         where: {
-            //             iBuildingID: req.body.building.iBuildingID
-            //         }
-            //     })
-
-
-            // res.json(building)
-        // })
-    // } else {
-        // await Building.create({
-        //     sBuildingTitle: req.body.building.sBuildingTitle,
-        //     sBuildingAvatar: req.body.building.sBuildingAvatar,
-        //     sBuildingCoverSmall: req.body.building.sBuildingCoverSmall,
-        //     sBuildingCoverBig: req.body.building.sBuildingCoverBig,
-        //     sBuildingDescription: req.body.building.sBuildingDescription,
-        //     fBuildingLocationeX: req.body.building.fBuildingLocationeX,
-        //     fBuildingLocationeY: req.body.building.fBuildingLocationeY,
-        //     sBuildingYoutube: req.body.building.sBuildingYoutube,
-        // }).then(async (response) => {
-        //     var building = await Building.findById(response.iBuildingID)
-        //         building.dataValues.advantage = await Advantage.findAll({
-        //             where: {
-        //                 iBuildingID: response.iBuildingID
-        //             }
-        //         })
-        //     res.json(building)
-        // })    
-    // }
 })
 app.post('/admin/BuildingRemove', async (req, res) => {
     Building.destroy({
@@ -424,8 +286,6 @@ app.post('/admin/BuildingRemove', async (req, res) => {
         res.json(response)
     })    
 })
-
-
 app.post('/admin/BuildingUploadAvatar', async (req, res) => {
     var storage = multer.diskStorage({
         destination: function (req, file, cb) {

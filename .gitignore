@@ -2,5 +2,6 @@
 /package-lock.json
 /.env
 /public/src/css
+/public/src/admin/css
 /config/default.json
 /public/images/building
