@@ -5,7 +5,6 @@ function initMap() {
         zoom: 8
     })
 }
-console.log('google maps')
 // function initMap(){function e(e,t){var s=new google.maps.Marker({map:i,icon:"/images/map-marker.png",position:e}),a='<div class="marker"><p class="adress">'+t+"</p></div>",o=new google.maps.InfoWindow({content:a});google.maps.event.addListener(s,"click",function(){o.open(i,s)})}var t=[],s=new google.maps.StyledMapType(t,{name:"Styled Map"}),i=new google.maps.Map(document.getElementById("map"),{scrollwheel:!1,maxZoom:13,mapTypeControlOptions:{mapTypeIds:[google.maps.MapTypeId.ROADMAP,"map_style"]}});i.mapTypes.set("map_style",s),i.setMapTypeId("map_style");var a=new google.maps.LatLngBounds;!function(t){(new google.maps.Geocoder).geocode({address:t},function(s,o){if(o===google.maps.GeocoderStatus.OK){var n=s[0].geometry.location;a.extend(n),e(n,t),i.fitBounds(a),i.panToBounds(a)}else console.log("Адрес не найден по следующим причинам: "+o)})}(mapAdress.innerHTML),google.maps.event.addDomListener(window,"resize",function(){i.fitBounds(a),i.panToBounds(a)}),google.maps.event.trigger(i,"resize")}document.onready=function(){initMap()};
 // initMap();
 // // var locations = [

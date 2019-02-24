@@ -199,13 +199,13 @@ gulp.task('bs', /* ['nodemon'], */ function() {
 });
 
 gulp.task('nodemon', function (cb) {
-	var started = false;
+	var started = false
 	return nodemon({
 		script: 'app.js'
 	}).on('start', function () {
 		if (!started) {
-			cb();
-			started = true; 
+			cb()
+			started = true;
 		} 
-	});
-});
+	})
+})
