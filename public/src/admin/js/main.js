@@ -66,7 +66,7 @@ const BuildingList = {
     },
     template: `
         <div>
-            <h1>BuildingList</h1>
+            <h1>BuildingList!</h1>
             <div class="list-group" style="margin-bottom: 1rem;">
                 <router-link
                     class="list-group-item list-group-item-action"
