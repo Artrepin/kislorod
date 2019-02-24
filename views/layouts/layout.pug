@@ -12,7 +12,6 @@ html(lang="en")
             link(rel="stylesheet", href="/build/app-f9ebb91924.min.css")
     body
         block main
-        script(src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyAhR1VQx4gmrpXL1-W6yQczRC9a0rDkJnc")
         if env.NODE_ENV == 'development'
             script(src='/vue/vue.js')
             script(src='/jquery/jquery.min.js')
@@ -56,3 +55,4 @@ html(lang="en")
                 'https://connect.facebook.net/en_US/fbevents.js');
                 fbq('init', '2182739471989387');
                 fbq('track', 'PageView');
+        script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhR1VQx4gmrpXL1-W6yQczRC9a0rDkJnc&callback=initMap" async defer)
