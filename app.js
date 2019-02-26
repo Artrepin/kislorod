@@ -11,6 +11,8 @@ app.use(bodyParser.json({ limit: '50mb' }))
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }))
 const amocrm = require('./modules/amocrm')
 const multer = require('multer')
+const sharp = require('sharp')
+
 
 const mysql = require('mysql')
 const async = require('async')
@@ -55,6 +57,21 @@ var Advantage = connection.define('advantage', {
 })
 sequelizePaginate.paginate(Advantage)
 
+var Stage = connection.define('stage', {
+    iStageID: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    iBuildingID: Sequelize.INTEGER,
+    tStageDesc: Sequelize.TEXT,
+    dStageDate: Sequelize.DATEONLY,
+    sStageImage: Sequelize.STRING
+}, {
+    timestamps: false
+})
+sequelizePaginate.paginate(Stage)
+
 // connection.sync()
 
 
@@ -91,6 +108,8 @@ app.use('/vue-picture-input', express.static(__dirname + '/node_modules/vue-pict
 app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist'))
 app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist'))
 app.use('/jquery-ui', express.static(__dirname + '/node_modules/jquery-ui/ui'))
+
+app.use('/feather-icons', express.static(__dirname + '/node_modules/feather-icons/dist'))
 
 const data = {}
 
@@ -188,13 +207,18 @@ app.post('/admin/BuildingList', async (req, res) => {
     res.json({
         buildings: await Building.paginate({
             page: (req.body.p) ? req.body.p : 1,
-            paginate: 5
+            paginate: 12
         })
     })
 })
 app.post('/admin/BuildingEdit', async (req, res) => {
     var building = await Building.findById(req.body.iBuildingID)
         building.dataValues.advantage = await Advantage.findAll({
+            where: {
+                iBuildingID: req.body.iBuildingID
+            }
+        })
+        building.dataValues.stage = await Stage.findAll({
             where: {
                 iBuildingID: req.body.iBuildingID
             }
@@ -287,6 +311,7 @@ app.post('/admin/BuildingRemove', async (req, res) => {
     })    
 })
 app.post('/admin/BuildingUploadAvatar', async (req, res) => {
+    console.log('upload start')
     var storage = multer.diskStorage({
         destination: function (req, file, cb) {
             cb(null, './public/images/building')
@@ -297,7 +322,12 @@ app.post('/admin/BuildingUploadAvatar', async (req, res) => {
     })
     var upload = multer({ storage: storage }).single(req.headers.column)
     upload(req, res, function (err) {
-        res.send({ file: req.file, body: req.body })
+        console.log('upload complete')
+        sharp('./public/images/building' + req.file.fieldname)
+        .resize(300, 200)
+        .toFile('output.jpg', function(err) {
+            res.send({ file: req.file, body: req.body })
+        })        
     })
 })
 

@@ -12,10 +12,7 @@ const gutil         = require('gulp-util')
 const rimraf        = require('rimraf')
 const revOutdated   = require('gulp-rev-outdated')
 const path          = require('path')
-const through       = require('through2')
-const gulpSequence  = require('gulp-sequence')
 const fs            = require('fs')
-const browserify    = require('gulp-browserify')
 
 function cleaner() {
     return through.obj(function(file, enc, cb){
@@ -114,16 +111,6 @@ gulp.task('css_min_admin', function(done) {
         .on('end', done)
 })
 
-gulp.task('browserify', function(done) {
-    gulp.src('public/build/admin.min.js')
-        .pipe(browserify({
-            insertGlobals : true,
-            debug : !gulp.env.production
-        }))
-        .pipe(gulp.dest('public/build/'))
-        .on('end', done)
-})
-
 gulp.task('rev', function(done) {
     gulp.src(['public/build/app.min.css', 'public/build/app.min.js', 'public/build/admin.min.css', 'public/build/admin.min.js'])
         .pipe(rev())
@@ -163,7 +150,6 @@ gulp.task('production', gulp.series(
     'js_min_admin',
     'css_min',
     'css_min_admin',
-    'browserify',
     'rev',
     'rev_collector',
     'rev_collector_admin',

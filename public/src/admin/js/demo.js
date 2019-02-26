@@ -5,8 +5,12 @@
 
 'use strict';
 
+
+
 var Demo = (function() {
 
+  feather.replace()
+  
   //
   // Variables
   //

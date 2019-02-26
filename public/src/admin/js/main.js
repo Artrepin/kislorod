@@ -32,21 +32,26 @@ Vue.component('building-edit-advantage', {
         }
     },
     template: `
-        <ul v-if="advantage">
-            <li
+        <div v-if="advantage">
+            <div
+                class="input-group mb-3"
                 v-for="(advantage, index) in advantage"
                 v-bind:key="index">
-                <input type="text" v-model="advantage.sAdvantageTitle">
-                <button type="button" v-on:click="del(index)">del</button>
-            </li>
-        </ul>
+                <input type="text" class="form-control" v-model="advantage.sAdvantageTitle">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" v-on:click="del(index)">
+                        del
+                    </button>
+                </div>
+            </div>        
+        </div>
     `
 })
 
 Vue.component('app-header', {
     props: [
         'button',
-        'title'
+        'title',
     ],
     template: `
         <div class="header">
@@ -142,11 +147,11 @@ const app = new Vue({
         props: {
             menu: [
                 {
-                    title: 'Dashboard',
+                    title: 'Рабочий стол',
                     uri: '/'
                 },
                 {
-                    title: 'Buildings',
+                    title: 'Объекты',
                     uri: '/building'
                 },
                 {

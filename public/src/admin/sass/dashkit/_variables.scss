@@ -155,7 +155,9 @@ $caret-width: .25em !default;
 // Font, line-height, and color for body text, headings, and more.
 
 // stylelint-disable value-keyword-case
-$font-family-sans-serif: 'Cerebri Sans', sans-serif !default;
+// $font-family-sans-serif: 'Cerebri Sans', sans-serif !default;
+$font-family-sans-serif: 'Ubuntu', sans-serif !default;
+
 $font-family-base: $font-family-sans-serif !default;
 // stylelint-enable value-keyword-case
 
@@ -507,7 +509,7 @@ $code-color: $blue !default;
 
 // Type
 
-$font-path: '../fonts/cerebrisans' !default;
+// $font-path: '../fonts/cerebrisans' !default;
 
 $font-size-xs: ($font-size-base * .6666666667) !default; // 10px
 

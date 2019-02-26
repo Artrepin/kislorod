@@ -7,6 +7,26 @@
     margin: 6px 0;
 }
 
+.building-list {
+    .card-img-top {
+        height: 150px;
+        object-fit: cover;
+    }
+    .card-desc {
+        height: 45px;
+        overflow: hidden;
+    }
+}
+.feather {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+  }
+
 // html {
 //     height: 100%;
 // }
