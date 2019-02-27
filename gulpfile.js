@@ -72,7 +72,6 @@ gulp.task('js_min_admin', function (done) {
         'node_modules/bootstrap/dist/js/bootstrap.min.js',
 
         'public/src/admin/js/demo.js',
-        'public/src/admin/js/main.js',
     ])
     .pipe(concat('admin.js'))
     .pipe(minify_js({
