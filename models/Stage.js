@@ -2,7 +2,7 @@
 const sequelizePaginate = require('sequelize-paginate')
 
 module.exports = (sequelize, DataTypes) => {
-  const Stage = sequelize.define('stage', {
+  const Stage = sequelize.define('Stage', {
     iStageID: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -13,7 +13,8 @@ module.exports = (sequelize, DataTypes) => {
     dStageDate: DataTypes.DATEONLY,
     sStageImage: DataTypes.STRING
   }, {
-    timestamps: false
+    timestamps: false,
+    freezeTableName: true,
   });
   Stage.associate = function(models) {
     Stage.belongsTo(models.Building, {
