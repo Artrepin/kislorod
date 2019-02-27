@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('stages', {
+    return queryInterface.createTable('stage', {
       iStageID: {
         allowNull: false,
         autoIncrement: true,
@@ -20,9 +20,13 @@ module.exports = {
       sStageImage: {
         type: Sequelize.STRING
       }
+    }, {
+      timestamps: false,
+      freezeTableName: true,
+      tableName: 'stage'
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('stages');
+    return queryInterface.dropTable('stage');
   }
 };

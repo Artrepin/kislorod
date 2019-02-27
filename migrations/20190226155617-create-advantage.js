@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('advantages', {
+    return queryInterface.createTable('advantage', {
       iAdvantageID: {
         allowNull: false,
         autoIncrement: true,
@@ -14,9 +14,13 @@ module.exports = {
       sAdvantageTitle: {
         type: Sequelize.STRING
       }
+    }, {
+      timestamps: false,
+      freezeTableName: true,
+      tableName: 'advantage'
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('advantages');
+    return queryInterface.dropTable('advantage');
   }
 };
