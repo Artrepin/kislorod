@@ -11,7 +11,7 @@ const revCollector  = require('gulp-rev-collector')
 const gutil         = require('gulp-util')
 const rimraf        = require('rimraf')
 const revOutdated   = require('gulp-rev-outdated')
-const through       = require('through')
+const through       = require('through2')
 const path          = require('path')
 const fs            = require('fs')
 
