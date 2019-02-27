@@ -2,7 +2,7 @@
 const sequelizePaginate = require('sequelize-paginate')
 
 module.exports = (sequelize, DataTypes) => {
-  const Stage = sequelize.define('Stage', {
+  const Stage = sequelize.define('stage', {
     iStageID: {
       type: DataTypes.INTEGER,
       primaryKey: true,
