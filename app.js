@@ -64,20 +64,8 @@ app.get('/', (req, res) => {
 
 app.get('/catalog', (req, res) => {
     data.title = "Каталог недвижимости"
-    
-    let connection = mysql.createConnection(config.get('db'))
-    let query = "SELECT * FROM building t1";
-    connection.query(query, (err, rows, fields) => {
-        if (err) {
-            console.log('Error query: ' + err)
-            res.sendStatus(500)
-            return
-        }
-        data.buildings = rows;
-        res.render('catalog/catalog', data)
-    })
-    connection.end()
-    
+    data.buildings = []
+    res.render('catalog/catalog', data)
 })
 
 app.get('/about', (req, res) => {
