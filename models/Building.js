@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     timestamps: false,
     freezeTableName: true,
+    tableName: 'building'
   });
   Building.associate = function(models) {
     Building.hasMany(models.Advantage, {

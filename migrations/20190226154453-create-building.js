@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('buildings', {
+    return queryInterface.createTable('building', {
       iBuildingID: {
         allowNull: false,
         autoIncrement: true,
@@ -35,9 +35,13 @@ module.exports = {
       dBuildingReady: {
         type: Sequelize.DATEONLY
       }
+    }, {
+      timestamps: false,
+      freezeTableName: true,
+      tableName: 'building'
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('buildings');
+    return queryInterface.dropTable('building');
   }
 };

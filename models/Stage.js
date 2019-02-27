@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     timestamps: false,
     freezeTableName: true,
+    tableName: 'stage'
   });
   Stage.associate = function(models) {
     Stage.belongsTo(models.Building, {
