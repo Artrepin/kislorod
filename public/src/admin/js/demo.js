@@ -141,7 +141,7 @@ var Demo = (function() {
   parseUrl();
 
   // Toggle color scheme
-  toggleColorScheme(config.colorScheme);
+  // toggleColorScheme(config.colorScheme);
 
   // Toggle nav position
   toggleNavPosition(config.navPosition);
