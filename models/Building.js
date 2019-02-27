@@ -2,7 +2,7 @@
 const sequelizePaginate = require('sequelize-paginate')
 
 module.exports = (sequelize, DataTypes) => {
-  const Building = sequelize.define('building', {
+  const Building = sequelize.define('Building', {
     iBuildingID: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -18,7 +18,8 @@ module.exports = (sequelize, DataTypes) => {
     sBuildingYoutube: DataTypes.STRING,
     dBuildingReady: DataTypes.DATEONLY
   }, {
-    timestamps: false
+    timestamps: false,
+    freezeTableName: true,
   });
   Building.associate = function(models) {
     Building.hasMany(models.Advantage, {
