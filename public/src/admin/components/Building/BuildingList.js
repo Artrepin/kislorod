@@ -32,9 +32,10 @@ export default {
     template: `
         <div class="main-content building-list">
             <app-header v-bind:title="'Список объектов'" v-bind:button="{title:'Create',uri:'/building/create'}"></app-header>
+            
             <div class="container-fluid">
 
-                <div class="row">
+                <div class="row" v-if="buildings.docs">
                     <div class="col-xl-3 col-lg-4" v-for="(building, index) in buildings.docs" :key="index">
                         <div class="card">
                             <div class="dropdown card-dropdown">
@@ -108,7 +109,6 @@ export default {
                     </ul>
                 </nav>
 
-                <pre>{{ buildings }}</pre>
             </div>
         </div>
     `

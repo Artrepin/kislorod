@@ -9,8 +9,6 @@
 
 var Demo = (function() {
 
-  feather.replace()
-  
   //
   // Variables
   //

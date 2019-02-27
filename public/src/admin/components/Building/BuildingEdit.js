@@ -9,6 +9,20 @@ export default {
     data: function () {
         return {
             loading: false,
+            menu: [
+                {
+                    title: 'Основные данные',
+                    active: true
+                },
+                {
+                    title: 'Планировки',
+                    active: false
+                },
+                {
+                    title: 'Квартиры',
+                    active: false
+                },
+            ],
             building: {
                 advantage: [],
                 stage: []
@@ -72,12 +86,41 @@ export default {
     },
     template: `
         <div class="main-content">
-            <app-header
-                v-if="Object.keys(building).length && building.sBuildingTitle && building.sBuildingTitle.length !== 0"
-                v-bind:title="building.sBuildingTitle"></app-header>
-            <app-header
-                v-else
-                v-bind:title="'New Building'"></app-header>
+            <div class="container-fluid">
+                <div class="header">
+                    <div class="header-body">
+                        <div class="row align-items-center">
+                            <div class="col-auto">
+                                <div class="avatar avatar-lg avatar-4by3">
+                                    <img src="assets/img/avatars/projects/project-1.jpg" alt="..." class="avatar-img rounded">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <h6 class="header-pretitle">Объект</h6>
+                                <h1 class="header-title">
+                                    <span v-if="Object.keys(building).length && building.sBuildingTitle && building.sBuildingTitle.length !== 0">{{ building.sBuildingTitle }}</span>
+                                    <span v-else>Наименование объекта</span>
+                                </h1>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <ul class="nav nav-tabs nav-overflow header-tabs">
+                                    <li
+                                        class="nav-item"
+                                        v-for="(item, index) in menu">
+                                        <router-link
+                                            to="/"
+                                            class="nav-link"
+                                            v-bind:class="{ active: item.active }">{{ item.title }}</router-link>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="container-fluid">
                 <form>
                     <div class="row">

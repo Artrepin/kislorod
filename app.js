@@ -13,68 +13,9 @@ const amocrm = require('./modules/amocrm')
 const multer = require('multer')
 const sharp = require('sharp')
 
-
-const mysql = require('mysql')
-const async = require('async')
-
-const Sequelize = require('sequelize')
-const sequelizePaginate = require('sequelize-paginate')
-const connection = new Sequelize(process.env.DATABASE_DB, process.env.DATABASE_USER, process.env.DATABASE_PASS, {
-    "dialect": "mysql",
-    "operatorsAliases": false
-})
-
-var Building = connection.define('building', {
-    iBuildingID: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
-    },
-    sBuildingTitle: Sequelize.STRING,
-    sBuildingAvatar: Sequelize.STRING,
-    sBuildingCoverSmall: Sequelize.STRING,
-    sBuildingCoverBig: Sequelize.STRING,
-    sBuildingDescription: Sequelize.TEXT,
-    fBuildingLocationeX: Sequelize.FLOAT,
-    fBuildingLocationeY: Sequelize.FLOAT,
-    sBuildingYoutube: Sequelize.STRING,
-    dBuildingReady: Sequelize.DATEONLY
-}, {
-    timestamps: false
-})
-sequelizePaginate.paginate(Building)
-
-var Advantage = connection.define('advantage', {
-    iAdvantageID: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
-    },
-    iBuildingID: Sequelize.INTEGER,
-    sAdvantageTitle: Sequelize.STRING
-}, {
-    timestamps: false
-})
-sequelizePaginate.paginate(Advantage)
-
-var Stage = connection.define('stage', {
-    iStageID: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
-    },
-    iBuildingID: Sequelize.INTEGER,
-    tStageDesc: Sequelize.TEXT,
-    dStageDate: Sequelize.DATEONLY,
-    sStageImage: Sequelize.STRING
-}, {
-    timestamps: false
-})
-sequelizePaginate.paginate(Stage)
-
-// connection.sync()
-
-
+const Building = require('./models').Building
+const Advantage = require('./models').Advantage
+const Stage = require('./models').Stage
 
 function randomString() {
     var text = ""
@@ -202,30 +143,17 @@ app.post('/send', (req, res) => {
 app.get('/admin', (req, res) => {
     res.render('admin', data)
 })
-
 app.post('/admin/BuildingList', async (req, res) => {
     res.json({
         buildings: await Building.paginate({
             page: (req.body.p) ? req.body.p : 1,
-            paginate: 12
+            paginate: 4
         })
     })
 })
 app.post('/admin/BuildingEdit', async (req, res) => {
-    var building = await Building.findById(req.body.iBuildingID)
-        building.dataValues.advantage = await Advantage.findAll({
-            where: {
-                iBuildingID: req.body.iBuildingID
-            }
-        })
-        building.dataValues.stage = await Stage.findAll({
-            where: {
-                iBuildingID: req.body.iBuildingID
-            }
-        })
-
     res.json({
-        building: building
+        building: await Building.getBuildingItem(req.body.iBuildingID)
     })
 })
 app.post('/admin/BuildingUpdate', async (req, res) => {
@@ -294,9 +222,7 @@ app.post('/admin/BuildingUpdate', async (req, res) => {
     
     await advantageUpdate()
 
-
-    var building = await Building.findById(iBuildingID)
-        building.dataValues.advantage = await Advantage.findAll({ where: { iBuildingID: iBuildingID } })
+    var building = await Building.getBuildingItem(iBuildingID)
 
     res.json(building)
 
@@ -330,9 +256,6 @@ app.post('/admin/BuildingUploadAvatar', async (req, res) => {
         })        
     })
 })
-
-
-
 
 
 

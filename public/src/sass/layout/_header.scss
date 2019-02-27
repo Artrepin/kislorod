@@ -406,7 +406,7 @@
     }
     &__logo {
         display: block;
-        width: toem(186);
+        width: toem(200);
         margin-right: toem(62);
     }
     &__desc {
@@ -789,6 +789,10 @@
     .header {
         &__menu {
             position: static;
+            span {
+                display: none;
+
+            }
         }
         &__call-text {
             display: none;
