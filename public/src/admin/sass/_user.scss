@@ -7,6 +7,17 @@
     margin: 6px 0;
 }
 
+.building-list {
+    .card-img-top {
+        height: 150px;
+        object-fit: cover;
+    }
+    .card-desc {
+        height: 45px;
+        overflow: hidden;
+    }
+}
+
 // html {
 //     height: 100%;
 // }
