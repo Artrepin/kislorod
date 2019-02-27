@@ -5,24 +5,16 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
         title Административная панель Кислород
-        <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700&amp;subset=cyrillic" rel="stylesheet">
-        if env.NODE_ENV == 'development'
-            link#stylesheetLight(rel="stylesheet", href="/src/admin/css/theme.css")
-            link#stylesheetDark(rel="stylesheet", href="/src/admin/css/theme-dark.css")
-        else
-            link(rel="stylesheet", href="/build/admin.min.css")
+        link#stylesheetLight(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700&amp;subset=cyrillic")
+        link#stylesheetLight(rel="stylesheet", href="/src/admin/css/theme.css")
+        link#stylesheetDark(rel="stylesheet", href="/src/admin/css/theme-dark.css")
     body
         #app
-
-        if env.NODE_ENV == 'development'
-            script(src='/axios/axios.js')
-            script(src='/vue-picture-input/vue-picture-input.js')
-            script(src='/vue/vue.js')
-            script(src='/vue-router/vue-router.js')
-            script(src='/jquery/jquery.js')
-            script(src='/bootstrap/js/bootstrap.js')
-            
-            script(src='/src/admin/js/demo.js')
-            script(src='/src/admin/js/main.js' type='module')
-        else
-            script(src='/build/admin.min.js')
+        script(src='/axios/axios.js')
+        script(src='/vue-picture-input/vue-picture-input.js')
+        script(src='/vue/vue.js')
+        script(src='/vue-router/vue-router.js')
+        script(src='/jquery/jquery.js')
+        script(src='/bootstrap/js/bootstrap.js')
+        script(src='/src/admin/js/demo.js')
+        script(src='/src/admin/js/main.js' type='module')
