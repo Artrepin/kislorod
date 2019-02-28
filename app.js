@@ -119,12 +119,12 @@ app.post('/send', (req, res) => {
         }
     
         mailgun.messages().send(data, function (error, body) {
-            res.send(true)
+            
         })
     })
+
+    res.send(true)
 })
-
-
 
 
 
