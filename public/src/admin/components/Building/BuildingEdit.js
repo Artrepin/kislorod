@@ -109,15 +109,28 @@ export default {
                                     <li
                                         class="nav-item"
                                         v-for="(item, index) in menu">
-                                        <router-link
-                                            to="/"
+                                        <a
                                             class="nav-link"
-                                            v-bind:class="{ active: item.active }">{{ item.title }}</router-link>
+                                            v-bind:class="{active: index === 0}"
+                                            id="home-tab"
+                                            data-toggle="tab"
+                                            v-bind:href="'#tab_'+index"
+                                            role="tab"
+                                            aria-controls="home"
+                                            aria-selected="true">{{ item.title }}</a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div class="container-fluid">
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="tab_0" role="tabpanel" aria-labelledby="tab_0">tab_0</div>
+                    <div class="tab-pane fade" id="tab_1" role="tabpanel" aria-labelledby="tab_1">tab_1</div>
+                    <div class="tab-pane fade" id="tab_2" role="tabpanel" aria-labelledby="tab_2">tab_2</div>
                 </div>
             </div>
 
