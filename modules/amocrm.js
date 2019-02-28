@@ -1,12 +1,6 @@
 const AmoCRM = require('amocrm-js')
-const amo = new AmoCRM({
-    domain: process.env.AMOCRM_DOMAIN,
-    auth: {
-        login: process.env.AMOCRM_LOGIN,
-        hash: process.env.AMOCRM_HASH
-    }
-})
-  
+var amo = false
+
 const getContact = async (req = {}) => {
     if (req.id) {
         var query = { id: req.id }
@@ -72,6 +66,13 @@ const checkContact = async (req = {}) => {
 module.exports.checkContact = checkContact
 
 const addLead = async (req = {}) => {
+    var amo = new AmoCRM({
+        domain: process.env.AMOCRM_DOMAIN,
+        auth: {
+            login: process.env.AMOCRM_LOGIN,
+            hash: process.env.AMOCRM_HASH
+        }
+    })    
     console.log('addLead request: '.req)
     return checkContact(req).then(id => {
         return amo.Lead.insert([
