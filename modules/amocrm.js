@@ -1,7 +1,16 @@
 const AmoCRM = require('amocrm-js')
-var amo = false
 
-const getContact = async (req = {}) => {
+const newAmo = async () => {
+    return amo = new AmoCRM({
+        domain: process.env.AMOCRM_DOMAIN,
+        auth: {
+            login: process.env.AMOCRM_LOGIN,
+            hash: process.env.AMOCRM_HASH
+        }
+    })
+}
+
+const getContact = async (req = {}, amo) => {
     if (req.id) {
         var query = { id: req.id }
     } else if (req.phone) {
@@ -15,7 +24,7 @@ const getContact = async (req = {}) => {
 }
 module.exports.getContact = getContact
 
-const addContact = async (req = {}) => {
+const addContact = async (req = {}, amo) => {
     var query = {}
         query.name = (req.name) ? req.name : 'Без имени'
     if ( req.phone || req.email ) {
@@ -51,13 +60,13 @@ const addContact = async (req = {}) => {
 }
 module.exports.addContact = addContact
 
-const checkContact = async (req = {}) => {
-    return getContact(req).then(contact => {
+const checkContact = async (req = {}, amo) => {
+    return getContact(req, amo).then(contact => {
         console.log(contact)
         if (contact != 'undefined' && Object.entries(contact).length !== 0 && contact.constructor === Object) {
             return contact._embedded.items[0].id
         } else {
-            return addContact(req).then(contact => {
+            return addContact(req, amo).then(contact => {
                 return contact._response._embedded.items[0].id
             })
         }
@@ -66,22 +75,16 @@ const checkContact = async (req = {}) => {
 module.exports.checkContact = checkContact
 
 const addLead = async (req = {}) => {
-    var amo = new AmoCRM({
-        domain: process.env.AMOCRM_DOMAIN,
-        auth: {
-            login: process.env.AMOCRM_LOGIN,
-            hash: process.env.AMOCRM_HASH
-        }
-    })    
-    console.log('addLead request: '.req)
-    return checkContact(req).then(id => {
-        return amo.Lead.insert([
-            {
-                name: req.subj,
-                contacts_id: id,
-                tags: [344723]
-            }
-        ])
+    return newAmo().then(function (amo) {
+        return checkContact(req, amo).then(id => {
+            return amo.Lead.insert([
+                {
+                    name: req.subj,
+                    contacts_id: id,
+                    tags: [344723]
+                }
+            ])
+        })
     })
 }
 module.exports.addLead = addLead
