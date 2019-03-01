@@ -11,16 +11,16 @@ export default {
             loading: false,
             menu: [
                 {
-                    title: 'Основные данные',
-                    active: true
+                    title: 'Параметры',
+                    uri: ''
                 },
                 {
                     title: 'Планировки',
-                    active: false
+                    uri: '/plan'
                 },
                 {
                     title: 'Квартиры',
-                    active: false
+                    uri: '/apartament'
                 },
             ],
             building: {
@@ -86,56 +86,14 @@ export default {
     },
     template: `
         <div class="main-content">
-            <div class="container-fluid">
-                <div class="header">
-                    <div class="header-body">
-                        <div class="row align-items-center">
-                            <div class="col-auto">
-                                <div class="avatar avatar-lg avatar-4by3">
-                                    <img src="assets/img/avatars/projects/project-1.jpg" alt="..." class="avatar-img rounded">
-                                </div>
-                            </div>
-                            <div class="col">
-                                <h6 class="header-pretitle">Объект</h6>
-                                <h1 class="header-title">
-                                    <span v-if="Object.keys(building).length && building.sBuildingTitle && building.sBuildingTitle.length !== 0">{{ building.sBuildingTitle }}</span>
-                                    <span v-else>Наименование объекта</span>
-                                </h1>
-                            </div>
-                        </div>
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <ul class="nav nav-tabs nav-overflow header-tabs">
-                                    <li
-                                        class="nav-item"
-                                        v-for="(item, index) in menu">
-                                        <a
-                                            class="nav-link"
-                                            v-bind:class="{active: index === 0}"
-                                            id="home-tab"
-                                            data-toggle="tab"
-                                            v-bind:href="'#tab_'+index"
-                                            role="tab"
-                                            aria-controls="home"
-                                            aria-selected="true">{{ item.title }}</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="container-fluid">
-                <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="tab_0" role="tabpanel" aria-labelledby="tab_0">tab_0</div>
-                    <div class="tab-pane fade" id="tab_1" role="tabpanel" aria-labelledby="tab_1">tab_1</div>
-                    <div class="tab-pane fade" id="tab_2" role="tabpanel" aria-labelledby="tab_2">tab_2</div>
-                </div>
-            </div>
-
+            <building-edit-header v-bind:building="building"></building-edit-header>
             <div class="container-fluid">
                 <form>
+                    <input type="hidden" v-model="building.iBuildingID">
+                    <input type="hidden" v-model="building.sBuildingAvatar">
+                    <input type="hidden" v-model="building.sBuildingCoverSmall">
+                    <input type="hidden" v-model="building.sBuildingCoverBig">
+                    <div class="tab-pane fade show active" id="tab_0" role="tabpanel" aria-labelledby="tab_0">
                     <div class="row">
                         <div class="col">
                             <div class="card">
@@ -147,10 +105,6 @@ export default {
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <input type="hidden" v-model="building.iBuildingID">
-                                    <input type="hidden" v-model="building.sBuildingAvatar">
-                                    <input type="hidden" v-model="building.sBuildingCoverSmall">
-                                    <input type="hidden" v-model="building.sBuildingCoverBig">
                                     <div class="form-group">
                                         <label for="">Наименование объекта</label>
                                         <input type="text" class="form-control" v-model="building.sBuildingTitle">
@@ -177,7 +131,6 @@ export default {
                                         <label for="">Ссылка на видео YouTube</label>
                                         <input type="text" class="form-control" v-model="building.sBuildingYoutube">
                                     </div>
-                                    <button v-bind:disabled="loading" class="btn btn-success" type="submit" v-on:click.prevent="update">Сохранить</button>
                                 </div>
                             </div>
                         </div>
@@ -200,7 +153,7 @@ export default {
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col">
                             <div class="card">
                                 <div class="card-header">
                                     <div class="row align-items-center">
@@ -211,7 +164,7 @@ export default {
                                 </div>
                                 <div class="card-body">
                                     <div class=row>
-                                        <div class="col">
+                                        <div class="col-12">
                                             <picture-input
                                                 ref="sBuildingAvatar"
                                                 @change="uploadAvatar('sBuildingAvatar')"
@@ -228,7 +181,7 @@ export default {
                                                     change: 'Change img'
                                                 }"></picture-input>
                                         </div>
-                                        <div class="col">
+                                        <div class="col-12">
                                             <picture-input
                                                 ref="sBuildingCoverSmall"
                                                 @change="uploadAvatar('sBuildingCoverSmall')"
@@ -245,7 +198,7 @@ export default {
                                                     change: 'Change img'
                                                 }"></picture-input>
                                         </div>
-                                        <div class="col">
+                                        <div class="col-12">
                                             <picture-input
                                                 ref="sBuildingCoverBig"
                                                 @change="uploadAvatar('sBuildingCoverBig')"
@@ -266,7 +219,7 @@ export default {
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col">
                             <div class="card">
                                 <div class="card-header">
                                     <div class="row align-items-center">
@@ -298,17 +251,15 @@ export default {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-group">
-                                <button v-bind:disabled="loading" v-if="building && building.iBuildingID" class="btn btn-danger" type="button" v-on:click.prevent="remove">remove</button>
-                            </div>
                         </div>
+                        </div>
+                    <div class="form-group">
+                        <button v-bind:disabled="loading" class="btn btn-success" type="submit" v-on:click.prevent="update">Сохранить</button>
+                        <button v-bind:disabled="loading" v-if="building && building.iBuildingID" class="btn btn-danger" type="button" v-on:click.prevent="remove">Удалить</button>
                     </div>
                 </form>
             </div>
-            <pre>{{ building }}</pre>
+
         </div>
     `
 }

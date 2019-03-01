@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
     $('html').mouseleave(function () {
-        $('.js-popup-exit').show()
+        // $('.js-popup-exit').show()
     })
 
 	$("input[name='telephone'], input[type='tel']").mask("+7 (999) 999-99-99").each(function() {
