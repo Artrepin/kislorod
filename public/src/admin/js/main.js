@@ -5,6 +5,9 @@ import Dashboard from '../components/Dashboard/Dashboard.js'
 import Building from '../components/Building/Building.js'
 import BuildingList from '../components/Building/BuildingList.js'
 import BuildingEdit from '../components/Building/BuildingEdit.js'
+import BuildingPlan from '../components/Building/BuildingPlan.js'
+import BuildingApartment from '../components/Building/BuildingApartment.js'
+
 
 import Apartament from '../components/Apartament/Apartament.js'
 import ApartamentList from '../components/Apartament/ApartamentList.js'
@@ -71,6 +74,66 @@ Vue.component('app-header', {
     `
 })
 
+Vue.component('building-edit-header', {
+    props: [
+        'building',
+    ],
+    data: function () {
+        return {
+            menu: [
+                {
+                    title: 'Параметры',
+                    uri: ''
+                },
+                {
+                    title: 'Планировки',
+                    uri: '/plan'
+                },
+                {
+                    title: 'Квартиры',
+                    uri: '/apartament'
+                },
+            ],
+        }
+    },
+    template: `
+        <div class="container-fluid">
+            <div class="header">
+                <div class="header-body">
+                    <div class="row align-items-center">
+                        <div class="col-auto" v-if="building && building.sBuildingAvatar != null">
+                            <div class="avatar avatar-lg">
+                                <img v-bind:src="'/images/building/'+building.sBuildingAvatar" alt="..." class="avatar-img rounded-circle">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <h6 class="header-pretitle">Объект</h6>
+                            <h1 class="header-title">
+                                <span v-if="Object.keys(building).length && building.sBuildingTitle && building.sBuildingTitle.length !== 0">{{ building.sBuildingTitle }}</span>
+                                <span v-else>Наименование объекта</span>
+                            </h1>
+                        </div>
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <ul class="nav nav-tabs nav-overflow header-tabs">
+                                <li
+                                    class="nav-item"
+                                    v-for="(item, index) in menu">
+                                    <router-link
+                                        class="nav-link"
+                                        v-bind:to="'/building/'+building.iBuildingID+item.uri"
+                                        >{{ item.title }}</router-link>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `
+})
+
 const routes = [
     {
         path: '/',
@@ -89,7 +152,7 @@ const routes = [
             {
                 path: 'p/:p',
                 component: BuildingList,
-                props: true
+                props: true,
             },
             {
                 path: 'create',
@@ -100,7 +163,17 @@ const routes = [
                 component: BuildingEdit,
                 props: true
             },
-        ]
+            {
+                path: ':iBuildingID/plan',
+                component: BuildingPlan,
+                props: true
+            },
+            {
+                path: ':iBuildingID/apartment',
+                component: BuildingApartment,
+                props: true
+            },
+    ]
     },
     {
         path: '/apartament/',
