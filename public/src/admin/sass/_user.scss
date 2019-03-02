@@ -17,6 +17,15 @@
         overflow: hidden;
     }
 }
+.avatar {
+    height: 64px;
+    width: 64px;
+    overflow: hidden;
+    .avatar-img {
+        background: #EEE;
+        
+    }
+}
 
 // html {
 //     height: 100%;
