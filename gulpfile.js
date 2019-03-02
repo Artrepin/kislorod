@@ -66,6 +66,7 @@ gulp.task('js_min_admin', function (done) {
     .src([
         'node_modules/axios/dist/axios.js',
         'node_modules/vue-picture-input/umd/vue-picture-input.js',
+        'node_modules/vuejs-datepicker/dist/vuejs-datepicker.min.js',
         'node_modules/vue/dist/vue.min.js',
         'node_modules/vue-router/dist/vue-router.min.js',
         'node_modules/jquery/dist/jquery.min.js',
