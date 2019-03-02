@@ -5,9 +5,8 @@ import Dashboard from '../components/Dashboard/Dashboard.js'
 import Building from '../components/Building/Building.js'
 import BuildingList from '../components/Building/BuildingList.js'
 import BuildingEdit from '../components/Building/BuildingEdit.js'
-import BuildingPlan from '../components/Building/BuildingPlan.js'
-import BuildingApartment from '../components/Building/BuildingApartment.js'
-
+import BuildingEditPlan from '../components/Building/BuildingEditPlan.js'
+import BuildingEditApartment from '../components/Building/BuildingEditApartment.js'
 
 import Apartament from '../components/Apartament/Apartament.js'
 import ApartamentList from '../components/Apartament/ApartamentList.js'
@@ -77,6 +76,7 @@ Vue.component('app-header', {
 Vue.component('building-edit-header', {
     props: [
         'building',
+        'menuActive'
     ],
     data: function () {
         return {
@@ -91,7 +91,7 @@ Vue.component('building-edit-header', {
                 },
                 {
                     title: 'Квартиры',
-                    uri: '/apartament'
+                    uri: '/apartment'
                 },
             ],
         }
@@ -101,9 +101,10 @@ Vue.component('building-edit-header', {
             <div class="header">
                 <div class="header-body">
                     <div class="row align-items-center">
-                        <div class="col-auto" v-if="building && building.sBuildingAvatar != null">
-                            <div class="avatar avatar-lg">
-                                <img v-bind:src="'/images/building/'+building.sBuildingAvatar" alt="..." class="avatar-img rounded-circle">
+                        <div class="col-auto">
+                            <div class="avatar">
+                                <img v-bind:src="'/images/building/'+building.sBuildingAvatar" alt="..." class="avatar-img rounded-circle" v-if="building && building.sBuildingAvatar != null">
+                                <div v-else class="avatar-img rounded-circle"></div>
                             </div>
                         </div>
                         <div class="col">
@@ -114,7 +115,7 @@ Vue.component('building-edit-header', {
                             </h1>
                         </div>
                     </div>
-                    <div class="row align-items-center">
+                    <div class="row">
                         <div class="col">
                             <ul class="nav nav-tabs nav-overflow header-tabs">
                                 <li
@@ -122,6 +123,7 @@ Vue.component('building-edit-header', {
                                     v-for="(item, index) in menu">
                                     <router-link
                                         class="nav-link"
+                                        v-bind:class="{ active: menuActive == index }"
                                         v-bind:to="'/building/'+building.iBuildingID+item.uri"
                                         >{{ item.title }}</router-link>
                                 </li>
@@ -165,12 +167,12 @@ const routes = [
             },
             {
                 path: ':iBuildingID/plan',
-                component: BuildingPlan,
+                component: BuildingEditPlan,
                 props: true
             },
             {
                 path: ':iBuildingID/apartment',
-                component: BuildingApartment,
+                component: BuildingEditApartment,
                 props: true
             },
     ]

@@ -30,7 +30,8 @@ export default {
         }
     },
     components: {
-        'picture-input': PictureInput
+        'picture-input': PictureInput,
+        'datepicker': vuejsDatepicker
     },
     methods: {
         get: function () {
@@ -74,6 +75,17 @@ export default {
                 Vue.set(this.building, column, response.data.file.filename)
             })
         },
+        uploadStage: function (index) {
+            var formData = new FormData();
+                formData.append('stage', this.$refs.stageImage[index].file);
+            axios.post('/admin/BuildingUploadStage', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }).then( (response) => {
+                Vue.set(this.building.stage[index], 'sStageImage', response.data.file.filename)
+            })
+        },
         advantageAdd: function () {
             this.building.advantage.push({
                 iAdvantageID: null,
@@ -82,11 +94,23 @@ export default {
         },
         stageAdd: function () {
             this.building.stage.push({})
+        },
+        stageDel: function (index) {
+            var iStageID = this.building.stage[index].iStageID
+            if (iStageID) {
+                if ('stage_destroy' in this.building) {
+                    
+                } else {
+                    this.building.stage_destroy = []
+                }
+                this.building.stage_destroy.push(iStageID)
+            }
+            this.building.stage.splice(index, 1)
         }
     },
     template: `
         <div class="main-content">
-            <building-edit-header v-bind:building="building"></building-edit-header>
+            <building-edit-header v-bind:building="building" v-bind:menuActive=0></building-edit-header>
             <div class="container-fluid">
                 <form>
                     <input type="hidden" v-model="building.iBuildingID">
@@ -233,33 +257,50 @@ export default {
                                 </div>
                                 <div class="card-body">
                                     <div class="row" v-for="(stage, index) in building.stage">
-                                        <div class="col-auto">
-                                            <input type="text" v-model="stage.sStageImage">
+                                        <input type="hidden" v-model="stage.iStageID">
+                                        <input type="hidden" v-model="stage.sStageImage">
+                                        <div class="col">
+                                            <picture-input
+                                                ref="stageImage"
+                                                @change="uploadStage(index)"
+                                                width="200"
+                                                height="200"
+                                                margin="16"
+                                                radius="6"
+                                                accept="image/jpeg,image/png"
+                                                size="50"
+                                                v-bind:prefill="(stage.sStageImage) ? '/images/building/stage/'+stage.sStageImage : ''"
+                                                buttonClass="btn btn-primary btn-sm"
+                                                :customStrings="{
+                                                    drag: 'Drag or click',
+                                                    change: 'Change img'
+                                                }"></picture-input>
                                         </div>
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="">Дата съемки</label>
-                                                <input type="text" class="form-control" v-model="stage.dStageDate" data-toggle="flatpickr">
+                                                <datepicker input-class="form-control" :format="'yyyy-MM-dd'" v-model="stage.dStageDate"></datepicker>
                                             </div>
                                             <div class="form-group">
                                                 <label for="">Описание этапа строительства</label>
                                                 <textarea class="form-control" rows="2" v-model="stage.tStageDesc"></textarea>
                                             </div>
+                                            <div class="form-group">
+                                                <button type="button" class="btn btn-sm btn-danger" v-on:click="stageDel(index)">удалить</button>
+                                            </div>
                                         </div>
-                                        <hr>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         </div>
-                        </div>
+                    </div>
                     <div class="form-group">
                         <button v-bind:disabled="loading" class="btn btn-success" type="submit" v-on:click.prevent="update">Сохранить</button>
                         <button v-bind:disabled="loading" v-if="building && building.iBuildingID" class="btn btn-danger" type="button" v-on:click.prevent="remove">Удалить</button>
                     </div>
                 </form>
             </div>
-
         </div>
     `
 }

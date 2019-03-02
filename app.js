@@ -45,6 +45,7 @@ app.use('/vue', express.static(__dirname + '/node_modules/vue/dist'))
 app.use('/axios', express.static(__dirname + '/node_modules/axios/dist'))
 app.use('/vue-router', express.static(__dirname + '/node_modules/vue-router/dist'))
 app.use('/vue-picture-input', express.static(__dirname + '/node_modules/vue-picture-input/umd'))
+app.use('/vuejs-datepicker', express.static(__dirname + '/node_modules/vuejs-datepicker/dist'))
 
 app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist'))
 app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist'))
@@ -185,7 +186,6 @@ app.post('/admin/BuildingUpdate', async (req, res) => {
             }
         })
     }
-
     const advantageUpdate = async () => {
         if (req.body.building.advantage) {
             const advantages = req.body.building.advantage
@@ -207,8 +207,42 @@ app.post('/admin/BuildingUpdate', async (req, res) => {
             }
         }
     }
-    
     await advantageUpdate()
+
+
+    if ('stage_destroy' in req.body.building) {
+        await Stage.destroy({
+            where: {
+                iStageID: req.body.building.stage_destroy
+            }
+        })
+    }
+    const stageUpdate = async () => {
+        if (req.body.building.stage) {
+            const stages = req.body.building.stage
+            for (const stage of stages) {
+                if (stage.iStageID) {
+                    await Stage.update({
+                        sStageImage: stage.sStageImage,
+                        tStageDesc: stage.tStageDesc,
+                        dStageDate: stage.dStageDate
+                    }, {
+                        where: {
+                            iStageID: stage.iStageID
+                        }                    
+                    })
+                } else {
+                    await Stage.create({
+                        iBuildingID: iBuildingID,
+                        sStageImage: stage.sStageImage,
+                        tStageDesc: stage.tStageDesc,
+                        dStageDate: stage.dStageDate
+                    })
+                }
+            }
+        }
+    }
+    await stageUpdate()
 
     var building = await Building.getBuildingItem(iBuildingID)
 
@@ -244,6 +278,32 @@ app.post('/admin/BuildingUploadAvatar', async (req, res) => {
         })        
     })
 })
+app.post('/admin/BuildingUploadStage', async (req, res) => {
+    console.log('upload start')
+    var storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, './public/images/building/stage')
+        },
+        filename: function (req, file, cb) {
+            cb(null, randomString() + '.jpg')
+        }
+    })
+    var upload = multer({ storage: storage }).single('stage')
+    upload(req, res, function (err) {
+        res.send({ file: req.file, body: req.body })
+    })
+})
+app.post('/admin/BuildingEditPlan', async (req, res) => {
+    res.json({
+        building: await Building.getBuildingItem(req.body.iBuildingID)
+    })
+})
+app.post('/admin/BuildingEditApartament', async (req, res) => {
+    res.json({
+        building: await Building.getBuildingItem(req.body.iBuildingID)
+    })
+})
+
 
 
 
