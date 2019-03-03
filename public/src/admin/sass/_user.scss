@@ -26,6 +26,31 @@
         
     }
 }
+.building-edit-plan {
+    .carousel {
+        border-top-left-radius: calc(0.5rem - 1px);
+        border-top-right-radius: calc(0.5rem - 1px);
+        overflow: hidden;
+        .carousel-item {
+            img {
+                height: 10vw;
+                width: auto;
+                object-fit: cover;
+            }
+        }
+        .empty {
+            height: 10vw;
+            background: #EEEEEE;
+        }
+    }
+    .card {
+        .card-title, .card-text {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+}
 
 // html {
 //     height: 100%;

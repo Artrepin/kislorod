@@ -16,6 +16,10 @@ const sharp = require('sharp')
 const Building = require('./models').Building
 const Advantage = require('./models').Advantage
 const Stage = require('./models').Stage
+const Type = require('./models').type
+const Plan = require('./models').plan
+const plan_image = require('./models').plan_image
+const Apartament = require('./models').apartament
 
 function randomString() {
     var text = ""
@@ -132,6 +136,7 @@ app.post('/send', (req, res) => {
 app.get('/admin', (req, res) => {
     res.render('admin', data)
 })
+
 app.post('/admin/BuildingList', async (req, res) => {
     res.json({
         buildings: await Building.paginate({
@@ -293,16 +298,169 @@ app.post('/admin/BuildingUploadStage', async (req, res) => {
         res.send({ file: req.file, body: req.body })
     })
 })
+
 app.post('/admin/BuildingEditPlan', async (req, res) => {
-    res.json({
-        building: await Building.getBuildingItem(req.body.iBuildingID)
+    var data = {}
+        data.building = await Building.getBuildingItem(req.body.iBuildingID)
+        data.plan = await Plan.findAll(
+            {
+                where: {
+                    iBuildingID: req.body.iBuildingID
+                },
+                include: [plan_image]
+            }
+        )
+        data.type = await Type.findAll()
+    res.json(data)
+})
+app.post('/admin/BuildingUploadPlan', async (req, res) => {
+    var storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, './public/images/building/plan')
+        },
+        filename: function (req, file, cb) {
+            cb(null, randomString() + '.jpg')
+        }
+    })
+    var upload = multer({ storage: storage }).single('plan')
+    upload(req, res, function (err) {
+        res.send({ file: req.file, body: req.body })
     })
 })
+app.post('/admin/BuildingUpdatePlan', async (req, res) => {
+
+    var iPlanID = (req.body.plan.iPlanID) ? req.body.plan.iPlanID : false
+
+    if (iPlanID) {
+        await Plan.update({
+            iRoomCount: req.body.plan.iRoomCount,
+            iTypeID: req.body.plan.iTypeID,
+            sPlanName: req.body.plan.sPlanName,
+        }, {
+            where: {
+                iPlanID: req.body.plan.iPlanID
+            }
+        })
+    } else {
+        plan = await Plan.create({
+            iBuildingID: req.body.iBuildingID,
+            iRoomCount: req.body.plan.iRoomCount,
+            iTypeID: req.body.plan.iTypeID,
+            sPlanName: req.body.plan.sPlanName,
+        })
+        iPlanID = plan.iPlanID
+    }
+
+
+    if ('plan_images_destroy' in req.body.plan) {
+        await plan_image.destroy({
+            where: {
+                iPlanImageID: req.body.plan.plan_images_destroy
+            }
+        })
+    }
+    const planImageUpdate = async () => {
+        if (req.body.plan.plan_images) {
+            const images = req.body.plan.plan_images
+            for (const image of images) {
+                if (image.iPlanImageID) {
+                    await plan_image.update({
+                        sPlanImage: image.sPlanImage
+                    }, {
+                        where: {
+                            iPlanImageID: image.iPlanImageID
+                        }                    
+                    })
+                } else {
+                    await plan_image.create({
+                        iPlanID: iPlanID,
+                        sPlanImage: image.sPlanImage
+                    })
+                }
+            }
+        }
+    }
+    await planImageUpdate()
+
+    var data = {}
+    data.plan = await Plan.findById(iPlanID,
+        {
+            include: [plan_image]
+        }
+    )
+
+    res.json(data)
+})
+app.post('/admin/BuildingDelPlan', (req, res) => {
+    Plan.destroy({
+        where: {
+            iPlanID: req.body.iPlanID,
+        }
+    }).then((response) => {
+        res.json(response)
+    })    
+})
+
+
 app.post('/admin/BuildingEditApartament', async (req, res) => {
-    res.json({
-        building: await Building.getBuildingItem(req.body.iBuildingID)
-    })
+    var data = {}
+        data.building = await Building.getBuildingItem(req.body.iBuildingID)
+        data.apartament = await Apartament.findAll({
+            where: {
+                iBuildingID: req.body.iBuildingID
+            },
+            include: [Plan]
+        })
+        data.plan = await Plan.findAll({
+            where: {
+                iBuildingID: req.body.iBuildingID
+            },
+        })
+    res.json(data)
 })
+app.post('/admin/BuildingUpdateApartament', async (req, res) => {
+    var iApartamentID = (req.body.apartament.iApartamentID) ? req.body.apartament.iApartamentID : false
+
+    if (iApartamentID) {
+        await Apartament.update({
+            iApartamentNum: req.body.apartament.iApartamentNum,
+            iApartamentFloor: req.body.apartament.iApartamentFloor,
+            iApartamentPrice: req.body.apartament.iApartamentPrice,
+            iPlanID: req.body.apartament.iPlanID
+        }, {
+            where: {
+                iApartamentID: iApartamentID
+            }
+        })
+    } else {
+        var apartament = await Apartament.create({
+            iBuildingID: req.body.iBuildingID,
+            iApartamentNum: req.body.apartament.iApartamentNum,
+            iApartamentFloor: req.body.apartament.iApartamentFloor,
+            iApartamentPrice: req.body.apartament.iApartamentPrice,
+            iPlanID: req.body.apartament.iPlanID
+        })
+        iApartamentID = apartament.iApartamentID
+    }
+
+    var apartament = await Apartament.findById(iApartamentID, {
+        include: [Plan]
+    })
+    res.json(apartament)
+})
+app.post('/admin/BuildingDelApartament', async (req, res) => {
+    // var iApartamentID = (req.body.apartament.iApartamentID) ? req.body.apartament.iApartamentID : false
+    Apartament.destroy({
+        where: {
+            iApartamentID: req.body.iApartamentID
+        }
+    }).then((response) => {
+        res.json(response)
+    })    
+})
+
+
+
 
 
 
