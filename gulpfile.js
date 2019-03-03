@@ -104,7 +104,6 @@ gulp.task('css_min_admin', function(done) {
     gulp
         .src([
             'public/src/admin/css/theme.css',
-            'public/src/admin/css/theme-dark.css'
         ])
         .pipe(concat('admin.min.css'))
         .pipe(cleanCSS())

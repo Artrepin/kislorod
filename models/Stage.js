@@ -17,6 +17,9 @@ module.exports = (sequelize, DataTypes) => {
     freezeTableName: true,
     tableName: 'stage'
   });
+
+  sequelizePaginate.paginate(Stage)
+
   Stage.associate = function(models) {
     Stage.belongsTo(models.Building, {
       foreignKey: 'iStageID'
