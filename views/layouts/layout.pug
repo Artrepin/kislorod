@@ -17,7 +17,10 @@ html(lang="en")
         else
             link(rel="stylesheet", href="/build/app-f9ebb91924.min.css")
     body
+
         block main
+
+        script(src='https://www.google.com/recaptcha/api.js')
         if env.NODE_ENV == 'development'
             script(src='/vue/vue.js')
             script(src='/jquery/jquery.min.js')

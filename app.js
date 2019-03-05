@@ -76,6 +76,10 @@ app.get('/catalog', (req, res) => {
     res.render('catalog/catalog', data)
 })
 
+app.post('/catalog', (req, res) => {
+    res.json(req.body)
+})
+
 app.get('/about', (req, res) => {
     data.title = "О центре недвижимости «Кислород»"
     res.render('about/about', data)
