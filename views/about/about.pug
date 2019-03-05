@@ -5,37 +5,7 @@ block main
         .main-screen.main-screen_about.bg_dark-blue.color_white
             .main
               img.main-screen__about-dots(src='/images/about/dots.png', alt='')
-              header.header
-                 .header__left
-                    .header__menu.color_yelow.js-popup-show(data-popup-name='js-popup-menu')
-                       i.icon-menu.header__menu-icon
-                       | Меню
-                    a.header__logo(href='/index.html')
-                       img(src='/images/logo.svg', alt='')
-                    .header__desc
-                       .font_size12.fade05
-                          | Агентство элитной недвижимости 
-                          br
-                          | в городе Сочи
-                 .header__right
-                    .header__contacts
-                       .header__phone
-                          span.header__phone-icon.icon-telephone
-                          |  +7 
-                          span (
-                          |  862 
-                          span )
-                          |  225 65 05
-                       .social
-                          a.social__item.social__item_vk.icon-vk(href='#')
-                          a.social__item.social__item_youtube.icon-youtube(href='#')
-                          a.social__item.social__item_instagram.icon-instagram(href='#')
-                          a.social__item.social__item_facebook.icon-facebook(href='#')
-                    button.button.button_yelow.button_medium.js-popup-show(data-popup-name='js-popup-call', data-popup-subj='Заявка на обратный звонок с шапки') Обратный звонок
-                    .header__call-text.font_size12.fade05
-                       | Перезвоним 
-                       br
-                       | за 3 минуты
+              include ../include/header.pug
               .main-screen__content
                  .col-sm-12
                     .desc-screen.fw_medium Центр недвижимости

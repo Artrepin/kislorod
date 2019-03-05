@@ -309,6 +309,27 @@ $(document).ready(function(){
         });
     }
     
+    var thousandSeparator = function(str) {
+        var parts = (str + '').split('.'),
+            main = parts[0],
+            len = main.length,
+            output = '',
+            i = len - 1;
+
+        while(i >= 0) {
+            output = main.charAt(i) + output;
+            if ((len - i) % 3 === 0 && i > 0) {
+                output = ' ' + output;
+            }
+            --i;
+        }
+
+        if (parts.length > 1) {
+            output += '.' + parts[1];
+        }
+        return output;
+    };
+    
     if ( $(".js-slider-result").length ) {
         
         $(".js-slider-wrapper").each(function(){
@@ -320,13 +341,7 @@ $(document).ready(function(){
                 slider_max = slider_options.data("max"),
                 slider_step = slider_options.data("step"),
                 slider_meas = slider_options.data("meas"),
-                slider_mask = $(this).find(".js-slider-mask"),
-                price = $("#price").val(),
-                customers = $("#customers").val(),
-                conversion = $("#conversion").val(),
-                conversion = 1 + ( conversion/100 ),
-                result = price * customers * conversion,
-                result2 = result/10000000;
+                slider_mask = $(this).find(".js-slider-mask");
             
             $(this).find(".js-slider-result").slider({
                 range: "min",
@@ -337,8 +352,22 @@ $(document).ready(function(){
                 slide: function( event, ui ) {
                     slider_options.val( ui.value + " " + slider_meas );
                     slider_mask.val( ui.value );
-                    $(".result-box__circle").css("transform","scale(1)");
-                    $(".js-result-profit").text(result);
+                    
+                    var price = $("#price").val(),
+                        customers = $("#customers").val(),
+                        conversion = $("#conversion").val(),
+                        conversion = 1 + ( conversion/100 ),
+                        result = price * customers * conversion,
+                        result = result.toFixed();
+                        result2 = result/1000000;
+
+                    if ( result < 1500000 ) {
+                        $(".result-box__circle").css("transform","scale(" + result2 + ")");
+                    } else {
+                        $(".result-box__circle").css("transform","scale(1.7)");
+                    }
+
+                    $(".js-result-profit").text(thousandSeparator(result));
                 }
             });
             
@@ -648,7 +677,17 @@ $(document).ready(function(){
             focusOnSelect: true,
             infinite: false,
             vertical: true,
-            verticalSwiping: true
+            verticalSwiping: true,
+            responsive: [
+                {
+				  breakpoint: 769,
+				  settings: {
+					slidesToShow: 1,
+                      slidesToScroll: 1,
+                      vertical: false
+				  }
+				}
+			]
 		});
         $('.js-professional-content').slick({
 			slidesToShow: 1,
