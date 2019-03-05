@@ -41,7 +41,6 @@
     "pug": "^2.0.3",
     "sequelize": "^4.42.0",
     "sequelize-paginate": "^1.1.4",
-    "sharp": "^0.21.3",
     "through2": "^3.0.0",
     "vue": "^2.5.22",
     "vue-picture-input": "^2.1.6",
