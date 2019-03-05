@@ -11,7 +11,6 @@ app.use(bodyParser.json({ limit: '50mb' }))
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }))
 const amocrm = require('./modules/amocrm')
 const multer = require('multer')
-const sharp = require('sharp')
 
 const Building = require('./models').Building
 const Advantage = require('./models').Advantage

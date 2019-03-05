@@ -306,6 +306,7 @@
 }
 
 .cases-screen {
+    display: none;
     padding: toem(180) 0 toem(120) 0;
     background: url(/images/cases/house_foto.jpg) top no-repeat;
     background-size: auto toem(360);
@@ -2723,7 +2724,7 @@ input::-webkit-inner-spin-button {
     &__circle {
         position: absolute;
         border-radius: 100%;
-        transform: scale(0.8);
+        transform: scale(0.5);
         @include transition(0.2);
         &_yelow {
             width: 570/437*100%;
@@ -2889,12 +2890,11 @@ input::-webkit-inner-spin-button {
 }
 
 .professional-content {
-    padding: toem(40) toem(25) toem(45) toem(60);
+    padding: toem(35) toem(25) toem(60) toem(60);
     position: relative;
     &__title {
         font-size: toem(36);
         line-height: toem(50,36);
-        width: 65%;
     }
     &__list {
         &-icon {
@@ -2918,10 +2918,13 @@ input::-webkit-inner-spin-button {
     }
     .slick-arrow {
         position: absolute;
-        top: toem(30);
-        right: toem(30);
+        bottom: toem(10,50);
+        left: 50%;
         &_prev {
-            margin-right: toem(80,50);
+            margin-left: toem(-80,50);
+        }
+        &_next {
+            margin-left: toem(15,50);
         }
     }
 }
@@ -3418,7 +3421,7 @@ input::-webkit-inner-spin-button {
     .professional-slider {
         flex-wrap: wrap;
         &__left {
-            display: none;
+            width: 100%;
         }
         &__right {
             width: 100%;
@@ -3514,11 +3517,7 @@ input::-webkit-inner-spin-button {
     }
     .director-screen {
         &__director {
-            // display: none;
-            z-index: 10;
-            bottom: toem(0);
-            right: toem(-120);
-            width: toem(300);
+            display: none;
         }
     }
     .contact-screen {
@@ -3631,7 +3630,7 @@ input::-webkit-inner-spin-button {
         }
     }
     .catalog-screen {
-        margin-top: 20px;
+        margin-top: 0;
         padding-bottom: 70px;
         &_b0 {
             padding-bottom: 0;
@@ -4310,39 +4309,3 @@ input::-webkit-inner-spin-button {
         margin-bottom: 0;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
