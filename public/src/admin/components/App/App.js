@@ -17,7 +17,7 @@ export default {
 
                     <!-- Brand -->
                     <router-link to="/" class="navbar-brand">
-                        <img src="/images/admin/logo.svg" class="navbar-brand-img mx-auto" alt="">
+                        <img src="/images/logo.svg" class="navbar-brand-img mx-auto" alt="">
                     </router-link>
 
                     <!-- User (xs) -->
@@ -46,7 +46,7 @@ export default {
                         <ul class="navbar-nav">
                             <li class="nav-item" v-for="(menu, index) in menu">
                                 <router-link class="nav-link" v-bind:to="menu.uri">
-                                    <i class="fe fe-clipboard"></i>
+                                    <!-- <i class="fe fe-clipboard"></i> -->
                                     {{ menu.title }}
                                 </router-link>
                             </li>

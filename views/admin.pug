@@ -7,6 +7,7 @@ html(lang="en")
         title Административная панель Кислород
         <link href="https://fonts.googleapis.com/css?family=Comfortaa:300,400,700&amp;subset=cyrillic" rel="stylesheet">
         if env.NODE_ENV == 'development'
+            //- link(rel="stylesheet", href="/bootstrap-vue/bootstrap-vue.css")
             link(rel="stylesheet", href="/src/admin/css/theme.css")
             //- link#stylesheetDark(rel="stylesheet", href="/src/admin/css/theme-dark.css")
         else
@@ -22,6 +23,8 @@ html(lang="en")
             script(src='/vue-router/vue-router.js')
             script(src='/jquery/jquery.js')
             script(src='/bootstrap/js/bootstrap.js')
+            //- script(src='/bootstrap-vue/bootstrap-vue.js')
+            
             
             script(src='/src/admin/js/demo.js')        
         else
