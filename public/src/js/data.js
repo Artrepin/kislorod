@@ -1,5 +1,9 @@
 $(document).ready(function(){
 
+    $('html').mouseleave(function () {
+        // $('.js-popup-exit').show()
+    })
+
 	$("input[name='telephone'], input[type='tel']").mask("+7 (999) 999-99-99").each(function() {
 
 		var title = $(this).attr("title");
@@ -143,6 +147,19 @@ $(document).ready(function(){
         var svg_src = $(this).data("svg-src");
         $(this).load(svg_src);
     });
+
+    function js_next_step_click(el) {
+        $(el).click()
+        // setTimeout(, 1000)
+    }
+      
+      
+    $('.js-next-step-click').click(function () {
+        var el = $(this).parents('.quiz__answers').find('button.js-next-step')
+        setTimeout(function () {
+            js_next_step_click(el)
+        }, 500);
+    })
     
     $(".js-next-step, .js-skip-step").click(function(){
         var step_length = $(".quiz__step").length;

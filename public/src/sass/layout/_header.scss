@@ -406,7 +406,7 @@
     }
     &__logo {
         display: block;
-        width: toem(186);
+        width: toem(200);
         margin-right: toem(62);
     }
     &__desc {
@@ -463,7 +463,7 @@
 
 .social {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     &__item {
         opacity: 0.3;
@@ -789,6 +789,10 @@
     .header {
         &__menu {
             position: static;
+            span {
+                display: none;
+
+            }
         }
         &__call-text {
             display: none;
@@ -824,6 +828,7 @@
         }
         .social {
             width: 100%;
+            justify-content: center;
         }
     }
     .main-screen {

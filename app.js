@@ -1,21 +1,36 @@
 const express = require('express')
 const app = express()
 const pug = require('pug')
+const config = require('config')
+require('dotenv').config()
 app.set('view engine', 'pug')
 app.use(express.static('public'))
-require('dotenv').config()
 app.locals.env = process.env;
 const bodyParser = require('body-parser')
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
-const AmoCRM = require('amocrm-js')
-const crm = new AmoCRM({
-    domain: process.env.AMOCRM_DOMAIN,
-    auth: {
-        login: process.env.AMOCRM_LOGIN,
-        hash: process.env.AMOCRM_HASH
+app.use(bodyParser.json({ limit: '50mb' }))
+app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }))
+const amocrm = require('./modules/amocrm')
+const multer = require('multer')
+const sharp = require('sharp')
+
+const Building = require('./models').Building
+const Advantage = require('./models').Advantage
+const Stage = require('./models').Stage
+const Type = require('./models').type
+const Plan = require('./models').plan
+const plan_image = require('./models').plan_image
+const Apartament = require('./models').apartament
+const People = require('./models').people
+const Department = require('./models').department
+
+function randomString() {
+    var text = ""
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+    for (var i = 0; i < 32; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length))
     }
-})
+    return text
+}
 
 var month_rus = [
     ['январь'],
@@ -32,18 +47,19 @@ var month_rus = [
     ['декабрь'],
 ]
 
-
-
-
-
-
-
-
-
-
 app.use('/vue', express.static(__dirname + '/node_modules/vue/dist'))
+app.use('/axios', express.static(__dirname + '/node_modules/axios/dist'))
+app.use('/vue-router', express.static(__dirname + '/node_modules/vue-router/dist'))
+app.use('/vue-picture-input', express.static(__dirname + '/node_modules/vue-picture-input/umd'))
+app.use('/vuejs-datepicker', express.static(__dirname + '/node_modules/vuejs-datepicker/dist'))
+app.use('/iconfont', express.static(__dirname + '/node_modules/material-design-icons/iconfont/'))
+
+app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist'))
+// app.use('/bootstrap-vue', express.static(__dirname + '/node_modules/bootstrap-vue/dist'))
 app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist'))
 app.use('/jquery-ui', express.static(__dirname + '/node_modules/jquery-ui/ui'))
+
+app.use('/feather-icons', express.static(__dirname + '/node_modules/feather-icons/dist'))
 
 const data = {}
 
@@ -51,11 +67,13 @@ app.get('/', (req, res) => {
     data.title = "Центр недвижимости «Кислород»"
     data.current_month = month_rus[new Date().getMonth()][0]
     data.current_year = new Date().getFullYear()
+    data.buildings = []
     res.render('welcome/welcome', data)
 })
 
 app.get('/catalog', (req, res) => {
     data.title = "Каталог недвижимости"
+    data.buildings = []
     res.render('catalog/catalog', data)
 })
 
@@ -89,259 +107,431 @@ app.post('/send', (req, res) => {
     if (req.body.budget) output+= "<p>На какой бюджет рассчитываете?: " + req.body.budget + "</p>"
     if (req.body.kredit) output+= "<p>Нужна ли рассрочка или ипотека?: " + req.body.kredit + "</p>"
 
+    var amoData = {}
+    if (req.body.subj) { amoData.subj = req.body.subj }
+    if (req.body.name) { amoData.name = req.body.name }
+    if (req.body.phone) { amoData.phone = req.body.phone }
+    if (req.body.email) { amoData.email = req.body.email }
 
-
-    // amocrm send
-    var phone = Number(req.body.phone.replace(/\D+/g,""))
-    var name = (req.body.name) ? req.body.name : 'Без имени'
-    var email = (req.body.email) ? req.body.email : false
-    var insert_contact_data = {}
-        insert_contact_data.name = name
-        insert_contact_data.custom_fields = []
-        insert_contact_data.custom_fields.push( { id: 74913, values: [{ value: phone, enum: 154761 }] } )
-        if (email) {
-            insert_contact_data.custom_fields.push( { id: 74915, values: [ { value: req.body.email, enum: 154773 } ] } )
+    amocrm.addLead(amoData).then((status) => {
+        var mailgun = require('mailgun-js')({
+            apiKey: process.env.MAILGUN_APIKEY,
+            domain: process.env.MAILGUN_DOMAIN
+        })
+    
+        var data = {
+            from: process.env.MAILGUN_MAILFROM,
+            to: process.env.MAILGUN_MAILTO,
+            subject: 'Обращение с сайта kislorod123.ru',
+            text: 'Обращение с сайта kislorod123.ru',
+            html: output
         }
-
-    // console.log(req.body.email)
-    // console.log(insert_contact_data)
-
-    crm.connect().then((data) => {
-        var contacts_id = false
-        crm.request.get( '/api/v2/contacts', {
-            query: phone
-        }).then( data => {
-            if (Object.keys(data).length == 0) {
-                crm.Contact.insert([ insert_contact_data ]).then( data => {
-                    contacts_id = data._response._embedded.items[0].id
-
-                    crm.Lead.insert([
-                        {
-                            name: "ТЕСТ",
-                            contacts_id: contacts_id
-                        }
-                    ]).then( data => {
-
-                        var mailgun = require('mailgun-js')({
-                            apiKey: process.env.MAILGUN_APIKEY,
-                            domain: process.env.MAILGUN_DOMAIN
-                        })
-                    
-                        var data = {
-                            from: process.env.MAILGUN_MAILFROM,
-                            to: process.env.MAILGUN_MAILTO,
-                            subject: 'Обращение с сайта kislorod123.ru',
-                            text: 'Обращение с сайта kislorod123.ru',
-                            html: output
-                        }
-                        
-                    
-                        mailgun.messages().send(data, function (error, body) {
-                            console.log(body)
-                            res.send(true)
-                        })
-
-                    })
-                })                    
-            } else {
-                contacts_id = data._embedded.items[0].id
-
-                crm.Lead.insert([
-                    {
-                        name: "ТЕСТ",
-                        contacts_id: contacts_id
-                    }
-                ]).then( data => {
-
-                    var mailgun = require('mailgun-js')({
-                        apiKey: process.env.MAILGUN_APIKEY,
-                        domain: process.env.MAILGUN_DOMAIN
-                    })
-                
-                    var data = {
-                        from: process.env.MAILGUN_MAILFROM,
-                        to: process.env.MAILGUN_MAILTO,
-                        subject: 'Обращение с сайта kislorod123.ru',
-                        text: 'Обращение с сайта kislorod123.ru',
-                        html: output
-                    }
-                    
-                
-                    mailgun.messages().send(data, function (error, body) {
-                        console.log(body)
-                        res.send(true)
-                    })
-                
-
-                })
-
-            }
-        })
-    })
-
-
-})
-
-
-app.get('/amocrm', (req, res, next) => {
-
-    // crm.connect().then((data) => {
-    //     // crm.request.get( '/api/v2/account' ).then( data => {
-    //     //     console.log( 'Полученные данные', data )
-    //     // }).catch( e => {
-    //     //     console.log( 'Произошла ошибка', e )
-    //     // })
     
-    //     crm.request.get( '/api/v2/contacts', {
-    //         id: '8144077',
-    //         // 'custom_fields': '79876523070'
-    //         // 74913: '79876523070'
-    //     }).then( data => {
-    //         data._embedded['items'].forEach(element => {
-    //             res.json(element)
-    //             // console.log(element.custom_fields)
-    //         })
+        mailgun.messages().send(data, function (error, body) {
             
-    //         // console.log(data._links)
-    //         // console.log(data._embedded['items'])
-    //         // return false
-    //         // console.log( 'Полученные данные', data )
-    //     }).catch( e => {
-    //         console.log( 'Произошла ошибка', e )
-    //     })
-    
-    
-    //     // crm.request.get( '/api/v2/contacts', { id: 8144077 } ).then( data => {
-    //     //     console.log(data._links)
-    //     //     data._embedded['items'].forEach(element => {
-    //     //         console.log(element.custom_fields)
-    //     //     })
-    //     //     // console.log(data._embedded['items'])
-    //     //     // return false
-    //     //     // console.log( 'Полученные данные', data )
-    //     // }).catch( e => {
-    //     //     console.log( 'Произошла ошибка', e )
-    //     // })
-    
-        
-    // })
-    
-    
+        })
+    })
 
-
-
-    // res.send(200)
-
-    // console.log(crm)
-
-    // crm.connect().catch(next)
-
-    // crm.request.get( '/api/v2/account' ).then( data => {
-    //     console.log( 'Полученные данные', data );
-    // }).catch( e => {
-    //     console.log( 'Произошла ошибка', e );
-    // })
-
-    // res.json(111)
-     
-    // crm.connect().catch(next)
-    
-    // amoClient.auth(process.env.AMOCRM_DOMAIN, process.env.AMOCRM_LOGIN, process.env.AMOCRM_HASH).then(function (data) {
-        // console.log(data)
-        // res.send(true)
-        // if (res.auth === true) {
-        //     amoClient.addLeads([{name: 'Test'}]).then(function (leadsIds) {
-        //         console.log('leadsIds: ', leadsIds)
-        //         if (leadsIds[0] && leadsIds[0].id) {
-        //             amoClient.listLeads({id: leadsIds[0].id}).then(function (leads) {
-        //                 console.log('lead: ', leads[0])
-        //             })
-        //         }
-        //     })
-        // }
-    // }).catch(next)
-
-    
-    
-    // amoClient.auth(process.env.AMOCRM_DOMAIN, process.env.AMOCRM_LOGIN, process.env.AMOCRM_HASH).then(function (res) {
-        // res.send(res)
-        // console.log('auth res: ', res)
-        // if (res.auth === true) {
-        //     amoClient.addLeads([{name: 'Test'}]).then(function (leadsIds) {
-        //         console.log('leadsIds: ', leadsIds)
-        //         if (leadsIds[0] && leadsIds[0].id) {
-        //             amoClient.listLeads({id: leadsIds[0].id}).then(function (leads) {
-        //                 console.log('lead: ', leads[0])
-        //             })
-        //         }
-        //     })
-        // }
-    // })
-    
-
-    
-
+    res.send(true)
 })
 
-app.get('/amocrm/contact/add', (req, res) => {
-    crm.connect().then((data) => {
-        crm.Contact.insert([
-            {
-                name: "Тестовый контакт",
-                custom_fields: [
-                    {
-                        id: "74913",
-                        values: [
-                            {
-                                value: "79037876601",
-                                enum: "154761"
-                            }                        
-                        ]
-                    }
-                ]
+
+
+app.get('/admin', (req, res) => {
+    res.render('admin', data)
+})
+
+app.post('/admin/BuildingList', async (req, res) => {
+    res.json({
+        buildings: await Building.paginate({
+            page: (req.body.p) ? req.body.p : 1,
+            paginate: 4
+        })
+    })
+})
+app.post('/admin/BuildingEdit', async (req, res) => {
+    res.json({
+        building: await Building.getBuildingItem(req.body.iBuildingID)
+    })
+})
+app.post('/admin/BuildingUpdate', async (req, res) => {
+    var iBuildingID = (req.body.building.iBuildingID) ? req.body.building.iBuildingID : false
+
+    if (iBuildingID) {
+        await Building.update({
+            sBuildingTitle: req.body.building.sBuildingTitle,
+            sBuildingAvatar: req.body.building.sBuildingAvatar,
+            sBuildingCoverSmall: req.body.building.sBuildingCoverSmall,
+            sBuildingCoverBig: req.body.building.sBuildingCoverBig,
+            sBuildingDescription: req.body.building.sBuildingDescription,
+            fBuildingLocationeX: req.body.building.fBuildingLocationeX,
+            fBuildingLocationeY: req.body.building.fBuildingLocationeY,
+            sBuildingYoutube: req.body.building.sBuildingYoutube,
+        }, {
+            where: {
+                iBuildingID: iBuildingID
             }
-        ]).then( data => {
-            res.json(data)
         })
-    })
-})
+    } else {
+        await Building.create({
+            sBuildingTitle: req.body.building.sBuildingTitle,
+            sBuildingAvatar: req.body.building.sBuildingAvatar,
+            sBuildingCoverSmall: req.body.building.sBuildingCoverSmall,
+            sBuildingCoverBig: req.body.building.sBuildingCoverBig,
+            sBuildingDescription: req.body.building.sBuildingDescription,
+            fBuildingLocationeX: req.body.building.fBuildingLocationeX,
+            fBuildingLocationeY: req.body.building.fBuildingLocationeY,
+            sBuildingYoutube: req.body.building.sBuildingYoutube,
+        }).then((response) => {
+            iBuildingID = response.iBuildingID
+        })        
+    }
 
-app.get('/amocrm/contact/:id', (req, res) => {
-    crm.connect().then((data) => {
-        crm.request.get( '/api/v2/contacts', {
-            id: Number(req.params.id)
-        }).then( data => {
-            res.json(data)
-        }).catch( e => {
-            console.log( 'Произошла ошибка', e )
-        })
-    })
-})
 
-app.get('/amocrm/contact/find/:phone', (req, res) => {
-    // Тестовый телефон имеющийся в базе 79876523070
-    crm.connect().then((data) => {
-        crm.request.get( '/api/v2/contacts', {
-            query: req.params.phone
-        }).then( data => {
-            res.json(data)
-        }).catch( e => {
-            console.log( 'Произошла ошибка', e )
-        })
-    })
-})
-
-app.get('/amocrm/lead/add', (req, res) => {
-    crm.connect().then((data) => {
-        crm.Lead.insert([
-            {
-                name: "ТЕСТ"
+    if ('advantage_destroy' in req.body.building) {
+        await Advantage.destroy({
+            where: {
+                iAdvantageID: req.body.building.advantage_destroy
             }
-        ]).then( data => {
-            res.json(data)
         })
+    }
+    const advantageUpdate = async () => {
+        if (req.body.building.advantage) {
+            const advantages = req.body.building.advantage
+            for (const advantage of advantages) {
+                if (advantage.iAdvantageID) {
+                    await Advantage.update({
+                        sAdvantageTitle: advantage.sAdvantageTitle
+                    }, {
+                        where: {
+                            iAdvantageID: advantage.iAdvantageID
+                        }                    
+                    })
+                } else {
+                    await Advantage.create({
+                        iBuildingID: iBuildingID,
+                        sAdvantageTitle: advantage.sAdvantageTitle
+                    })
+                }
+            }
+        }
+    }
+    await advantageUpdate()
+
+
+    if ('stage_destroy' in req.body.building) {
+        await Stage.destroy({
+            where: {
+                iStageID: req.body.building.stage_destroy
+            }
+        })
+    }
+    const stageUpdate = async () => {
+        if (req.body.building.stage) {
+            const stages = req.body.building.stage
+            for (const stage of stages) {
+                if (stage.iStageID) {
+                    await Stage.update({
+                        sStageImage: stage.sStageImage,
+                        tStageDesc: stage.tStageDesc,
+                        dStageDate: stage.dStageDate
+                    }, {
+                        where: {
+                            iStageID: stage.iStageID
+                        }                    
+                    })
+                } else {
+                    await Stage.create({
+                        iBuildingID: iBuildingID,
+                        sStageImage: stage.sStageImage,
+                        tStageDesc: stage.tStageDesc,
+                        dStageDate: stage.dStageDate
+                    })
+                }
+            }
+        }
+    }
+    await stageUpdate()
+
+    var building = await Building.getBuildingItem(iBuildingID)
+
+    res.json(building)
+
+})
+app.post('/admin/BuildingRemove', async (req, res) => {
+    Building.destroy({
+        where: {
+            iBuildingID: req.body.building.iBuildingID,
+        }
+    }).then((response) => {
+        res.json(response)
+    })    
+})
+app.post('/admin/BuildingUploadAvatar', async (req, res) => {
+    console.log('upload start')
+    var storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, './public/images/building')
+        },
+        filename: function (req, file, cb) {
+            cb(null, randomString() + '.jpg')
+        }
+    })
+    var upload = multer({ storage: storage }).single(req.headers.column)
+    upload(req, res, function (err) {
+        console.log('upload complete')
+        sharp('./public/images/building' + req.file.fieldname)
+        .resize(300, 200)
+        .toFile('output.jpg', function(err) {
+            res.send({ file: req.file, body: req.body })
+        })        
     })
 })
+app.post('/admin/BuildingUploadStage', async (req, res) => {
+    console.log('upload start')
+    var storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, './public/images/building/stage')
+        },
+        filename: function (req, file, cb) {
+            cb(null, randomString() + '.jpg')
+        }
+    })
+    var upload = multer({ storage: storage }).single('stage')
+    upload(req, res, function (err) {
+        res.send({ file: req.file, body: req.body })
+    })
+})
+
+app.post('/admin/BuildingEditPlan', async (req, res) => {
+    var data = {}
+        data.building = await Building.getBuildingItem(req.body.iBuildingID)
+        data.plan = await Plan.findAll(
+            {
+                where: {
+                    iBuildingID: req.body.iBuildingID
+                },
+                include: [plan_image]
+            }
+        )
+        data.type = await Type.findAll()
+    res.json(data)
+})
+app.post('/admin/BuildingUploadPlan', async (req, res) => {
+    var storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, './public/images/building/plan')
+        },
+        filename: function (req, file, cb) {
+            cb(null, randomString() + '.jpg')
+        }
+    })
+    var upload = multer({ storage: storage }).single('plan')
+    upload(req, res, function (err) {
+        res.send({ file: req.file, body: req.body })
+    })
+})
+app.post('/admin/BuildingUpdatePlan', async (req, res) => {
+
+    var iPlanID = (req.body.plan.iPlanID) ? req.body.plan.iPlanID : false
+
+    if (iPlanID) {
+        await Plan.update({
+            iRoomCount: req.body.plan.iRoomCount,
+            iTypeID: req.body.plan.iTypeID,
+            sPlanName: req.body.plan.sPlanName,
+        }, {
+            where: {
+                iPlanID: req.body.plan.iPlanID
+            }
+        })
+    } else {
+        plan = await Plan.create({
+            iBuildingID: req.body.iBuildingID,
+            iRoomCount: req.body.plan.iRoomCount,
+            iTypeID: req.body.plan.iTypeID,
+            sPlanName: req.body.plan.sPlanName,
+        })
+        iPlanID = plan.iPlanID
+    }
+
+
+    if ('plan_images_destroy' in req.body.plan) {
+        await plan_image.destroy({
+            where: {
+                iPlanImageID: req.body.plan.plan_images_destroy
+            }
+        })
+    }
+    const planImageUpdate = async () => {
+        if (req.body.plan.plan_images) {
+            const images = req.body.plan.plan_images
+            for (const image of images) {
+                if (image.iPlanImageID) {
+                    await plan_image.update({
+                        sPlanImage: image.sPlanImage
+                    }, {
+                        where: {
+                            iPlanImageID: image.iPlanImageID
+                        }                    
+                    })
+                } else {
+                    await plan_image.create({
+                        iPlanID: iPlanID,
+                        sPlanImage: image.sPlanImage
+                    })
+                }
+            }
+        }
+    }
+    await planImageUpdate()
+
+    var data = {}
+    data.plan = await Plan.findById(iPlanID,
+        {
+            include: [plan_image]
+        }
+    )
+
+    res.json(data)
+})
+app.post('/admin/BuildingDelPlan', (req, res) => {
+    Plan.destroy({
+        where: {
+            iPlanID: req.body.iPlanID,
+        }
+    }).then((response) => {
+        res.json(response)
+    })    
+})
+
+
+app.post('/admin/BuildingEditApartament', async (req, res) => {
+    var data = {}
+        data.building = await Building.getBuildingItem(req.body.iBuildingID)
+        data.apartament = await Apartament.findAll({
+            where: {
+                iBuildingID: req.body.iBuildingID
+            },
+            include: [Plan]
+        })
+        data.plan = await Plan.findAll({
+            where: {
+                iBuildingID: req.body.iBuildingID
+            },
+        })
+    res.json(data)
+})
+app.post('/admin/BuildingUpdateApartament', async (req, res) => {
+    var iApartamentID = (req.body.apartament.iApartamentID) ? req.body.apartament.iApartamentID : false
+
+    if (iApartamentID) {
+        await Apartament.update({
+            iApartamentNum: req.body.apartament.iApartamentNum,
+            iApartamentFloor: req.body.apartament.iApartamentFloor,
+            iApartamentPrice: req.body.apartament.iApartamentPrice,
+            iPlanID: req.body.apartament.iPlanID
+        }, {
+            where: {
+                iApartamentID: iApartamentID
+            }
+        })
+    } else {
+        var apartament = await Apartament.create({
+            iBuildingID: req.body.iBuildingID,
+            iApartamentNum: req.body.apartament.iApartamentNum,
+            iApartamentFloor: req.body.apartament.iApartamentFloor,
+            iApartamentPrice: req.body.apartament.iApartamentPrice,
+            iPlanID: req.body.apartament.iPlanID
+        })
+        iApartamentID = apartament.iApartamentID
+    }
+
+    var apartament = await Apartament.findById(iApartamentID, {
+        include: [Plan]
+    })
+    res.json(apartament)
+})
+app.post('/admin/BuildingDelApartament', async (req, res) => {
+    // var iApartamentID = (req.body.apartament.iApartamentID) ? req.body.apartament.iApartamentID : false
+    Apartament.destroy({
+        where: {
+            iApartamentID: req.body.iApartamentID
+        }
+    }).then((response) => {
+        res.json(response)
+    })    
+})
+
+
+app.post('/admin/PeopleList', async (req, res) => {
+    var data = {}
+        data.people = await People.findAll({
+            include: [Department]
+        })
+        data.department = await Department.findAll()
+    res.json(data)
+})
+app.post('/admin/PeopleUpdate', async (req, res) => {
+    var data = {}
+    var iPeopleID = (req.body.people.iPeopleID) ? req.body.people.iPeopleID : false
+    if (iPeopleID) {
+        await People.update({
+            iDepartmentID: req.body.people.iDepartmentID,
+            sPeopleLastname: req.body.people.sPeopleLastname,
+            sPeopleName: req.body.people.sPeopleName,
+            sPeoplePosition: req.body.people.sPeoplePosition,
+            sPeopleImage: req.body.people.sPeopleImage,
+        }, {
+            where: {
+                iPeopleID: iPeopleID
+            }
+        })
+    } else {
+        await People.create({
+            iDepartmentID: req.body.people.iDepartmentID,
+            sPeopleLastname: req.body.people.sPeopleLastname,
+            sPeopleName: req.body.people.sPeopleName,
+            sPeoplePosition: req.body.people.sPeoplePosition,
+            sPeopleImage: req.body.people.sPeopleImage,
+        }).then((people) => {
+            iPeopleID = people.iPeopleID
+        })
+    }
+    data.people = await People.findById(iPeopleID, {
+        include: [Department]
+    })
+
+    res.json(data)
+})
+app.post('/admin/PeopleUpload', async (req, res) => {
+    var storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, './public/images/people')
+        },
+        filename: function (req, file, cb) {
+            cb(null, randomString() + '.jpg')
+        }
+    })
+    var upload = multer({ storage: storage }).single('sPeopleImage')
+    upload(req, res, function (err) {
+        res.send({ file: req.file, body: req.body })
+    })
+})
+app.post('/admin/PeopleDelete', async (req, res) => {
+    People.destroy({
+        where: {
+            iPeopleID: req.body.iPeopleID
+        }
+    }).then((response) => {
+        res.json(response)
+    })
+})
+
+
+
+
+
 
 
 
