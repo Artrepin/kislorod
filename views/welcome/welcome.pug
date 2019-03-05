@@ -8,8 +8,8 @@ block main
                     .header__left
                         .header__menu.color_yelow.js-popup-show(data-popup-name='js-popup-menu')
                             i.icon-menu.header__menu-icon
-                            | Меню
-                        a.header__logo(href='/index.html')
+                            span Меню
+                        a.header__logo(href='/')
                             img(src='/images/logo.svg', alt='')
                         .header__desc
                             .font_size12.fade05
@@ -60,7 +60,7 @@ block main
                                 .play__arrow.icon-play.js-play
                                 .play__video
                                     .play__iframe
-                                        iframe(src='https://www.youtube.com/embed/AGIZEZJ8NqE?autoplay=1&loop=1&rel=0&mute=1&playlist=AGIZEZJ8NqE', allow='autoplay; encrypted-media;', allowfullscreen='')
+                                        iframe(src='https://www.youtube.com/embed/gd1RtXXg2ag?autoplay=1&loop=1&rel=0&mute=1&playlist=gd1RtXXg2ag', allow='autoplay; encrypted-media;', allowfullscreen='')
                             .fw_medium.font_size14.fade05
                                 | Посмотрите короткую 
                                 br
@@ -144,19 +144,19 @@ block main
                                             .quiz__column
                                                 label.quiz-radio
                                                     input.quiz-radio__input(type='radio', name='type', value='Квартира')
-                                                    span.quiz-radio__btn Квартира
+                                                    span.quiz-radio__btn.js-next-step-click Квартира
                                             .quiz__column
                                                 label.quiz-radio
                                                     input.quiz-radio__input(type='radio', name='type', value='Пентхаус')
-                                                    span.quiz-radio__btn Пентхаус
+                                                    span.quiz-radio__btn.js-next-step-click Пентхаус
                                             .quiz__column
                                                 label.quiz-radio
                                                     input.quiz-radio__input(type='radio', name='type', value='Дом')
-                                                    span.quiz-radio__btn Дом
+                                                    span.quiz-radio__btn.js-next-step-click Дом
                                             .quiz__column
                                                 label.quiz-radio
                                                     input.quiz-radio__input(type='radio', name='type', value='Аппартаменты')
-                                                    span.quiz-radio__btn Аппартаменты
+                                                    span.quiz-radio__btn.js-next-step-click Аппартаменты
                                             .quiz__column
                                                 button.button.button_big.button_blue.button_blue1.js-next-step(disabled='')
                                                     | Следующий вопрос
@@ -172,15 +172,15 @@ block main
                                             .quiz__column
                                                 label.quiz-radio
                                                     input.quiz-radio__input(type='radio', name='target', value='Для проживания')
-                                                    span.quiz-radio__btn Для проживания
+                                                    span.quiz-radio__btn.js-next-step-click Для проживания
                                             .quiz__column
                                                 label.quiz-radio
                                                     input.quiz-radio__input(type='radio', name='target', value='Для инвестиций')
-                                                    span.quiz-radio__btn Для инвестиций
+                                                    span.quiz-radio__btn.js-next-step-click Для инвестиций
                                             .quiz__column
                                                 label.quiz-radio
                                                     input.quiz-radio__input(type='radio', name='target', value='Для сдачи в аренду')
-                                                    span.quiz-radio__btn Для сдачи в аренду
+                                                    span.quiz-radio__btn.js-next-step-click Для сдачи в аренду
                                             .quiz__column
                                                 .quiz-radio
                                             .quiz__column
@@ -197,12 +197,12 @@ block main
                                         .quiz__answers
                                             .quiz__column
                                                 label.quiz-radio
-                                                    input.quiz-radio__input(type='radio', name='location', value='По ближе к морю')
-                                                    span.quiz-radio__btn По ближе к морю
+                                                    input.quiz-radio__input(type='radio', name='location', value='Ближе к морю')
+                                                    span.quiz-radio__btn.js-next-step-click Ближе к морю
                                             .quiz__column
                                                 label.quiz-radio
                                                     input.quiz-radio__input(type='radio', name='location', value='Ближе к центру города')
-                                                    span.quiz-radio__btn Ближе к центру города
+                                                    span.quiz-radio__btn.js-next-step-click Ближе к центру города
                                             .quiz__column
                                                 .quiz-radio
                                             .quiz__column
@@ -222,15 +222,15 @@ block main
                                             .quiz__column
                                                 label.quiz-radio
                                                     input.quiz-radio__input(type='radio', name='budget', value='До 5 млн')
-                                                    span.quiz-radio__btn До 5 млн
+                                                    span.quiz-radio__btn.js-next-step-click До 5 млн
                                             .quiz__column
                                                 label.quiz-radio
                                                     input.quiz-radio__input(type='radio', name='budget', value='До 10 млн')
-                                                    span.quiz-radio__btn До 10 млн
+                                                    span.quiz-radio__btn.js-next-step-click До 10 млн
                                             .quiz__column
                                                 label.quiz-radio
                                                     input.quiz-radio__input(type='radio', name='budget', value='От 10 млн')
-                                                    span.quiz-radio__btn От 10 млн
+                                                    span.quiz-radio__btn.js-next-step-click От 10 млн
                                             .quiz__column
                                                 .quiz-radio
                                             .quiz__column
@@ -248,15 +248,15 @@ block main
                                             .quiz__column
                                                 label.quiz-radio
                                                     input.quiz-radio__input(type='radio', name='kredit', value='Нужна рассрочка')
-                                                    span.quiz-radio__btn Нужна рассрочка
+                                                    span.quiz-radio__btn.js-next-step-click Нужна рассрочка
                                             .quiz__column
                                                 label.quiz-radio
                                                     input.quiz-radio__input(type='radio', name='kredit', value='Нужна ипотека')
-                                                    span.quiz-radio__btn Нужна ипотека
+                                                    span.quiz-radio__btn.js-next-step-click Нужна ипотека
                                             .quiz__column
                                                 label.quiz-radio
                                                     input.quiz-radio__input(type='radio', name='kredit', value='Не нужно')
-                                                    span.quiz-radio__btn Не нужно
+                                                    span.quiz-radio__btn.js-next-step-click Не нужно
                                             .quiz__column
                                                 .quiz-radio
                                             .quiz__column
@@ -295,7 +295,7 @@ block main
                                             input(type='hidden', name='subj', value='Заявка с квиза')
                                             input(type='hidden', name='type', value='Квартира')
                                             input(type='hidden', name='target', value='Для проживания')
-                                            input(type='hidden', name='location', value='По ближе к морю')
+                                            input(type='hidden', name='location', value='Ближе к морю')
                                             input(type='hidden', name='budget', value='До 5 млн')
                                             input(type='hidden', name='kredit', value='Нужна рассрочка')
                                             .quiz-form__inputs
@@ -384,155 +384,37 @@ block main
                                         | коттеджных 
                                         br
                                         | поселка
-                                .number-text.color_yelow
+                                //- .number-text.color_yelow
                                     .font_size120.number-text__number 4
                                     .font_size22.ff_trajan.fw_medium
                                         | точечные застройки 
                                         br
                                         | на берегу моря
-        .cases-screen
+        //- .cases-screen
             .main
                 img.cases-screen__dots(src='/images/cases/dots1.png', alt='')
                 .cases-screen__row
                     .cases-screen__left
                         .cases-list-container
                             .cases-list
-                                .cases-list__item
-                                    .cases-list__head1.js-case-show
-                                        .cases-list__title.ff_trajan.font_size22 ЖК «Столичный» 
-                                        .cases-list__arrow.icon-arrow.icon-arrow_rotate
-                                    .cases-list__hide
-                                        .cases-list__row
-                                            .cases-list__img
-                                                img(src='/images/cases/gk1.jpg', alt='')
-                                            .cases-list__content
-                                                .cases-list__title.ff_trajan.font_size22 ЖК «Столичный» 
-                                                .cases-list__options
-                                                    .cases-list__option
-                                                        .font_size14.fade05.fw_medium 18 квартир
-                                                    .cases-list__option
-                                                        .font_size14.fade05.fw_medium Площадь: от 59 м2
-                                                .cases-list__price.color_yelow
-                                                    .font_size22.fw_medium.ff_trajan от 6 700 000 ₽
-                                .cases-list__item
-                                    .cases-list__head1.js-case-show
-                                        .cases-list__title.ff_trajan.font_size22 ЖК «Столичный» 
-                                        .cases-list__arrow.icon-arrow.icon-arrow_rotate
-                                    .cases-list__hide
-                                        .cases-list__row
-                                            .cases-list__img
-                                                img(src='/images/cases/gk1.jpg', alt='')
-                                            .cases-list__content
-                                                .cases-list__title.ff_trajan.font_size22 ЖК «Столичный» 
-                                                .cases-list__options
-                                                    .cases-list__option
-                                                        .font_size14.fade05.fw_medium 18 квартир
-                                                    .cases-list__option
-                                                        .font_size14.fade05.fw_medium Площадь: от 59 м2
-                                                .cases-list__price.color_yelow
-                                                    .font_size22.fw_medium.ff_trajan от 6 700 000 ₽
-                                .cases-list__item
-                                    .cases-list__head1.js-case-show
-                                        .cases-list__title.ff_trajan.font_size22 ЖК «Столичный» 
-                                        .cases-list__arrow.icon-arrow.icon-arrow_rotate
-                                    .cases-list__hide
-                                        .cases-list__row
-                                            .cases-list__img
-                                                img(src='/images/cases/gk1.jpg', alt='')
-                                            .cases-list__content
-                                                .cases-list__title.ff_trajan.font_size22 ЖК «Столичный» 
-                                                .cases-list__options
-                                                    .cases-list__option
-                                                        .font_size14.fade05.fw_medium 18 квартир
-                                                    .cases-list__option
-                                                        .font_size14.fade05.fw_medium Площадь: от 59 м2
-                                                .cases-list__price.color_yelow
-                                                    .font_size22.fw_medium.ff_trajan от 6 700 000 ₽
-                                .cases-list__item
-                                    .cases-list__head1.js-case-show
-                                        .cases-list__title.ff_trajan.font_size22 ЖК «Столичный» 
-                                        .cases-list__arrow.icon-arrow.icon-arrow_rotate
-                                    .cases-list__hide
-                                        .cases-list__row
-                                            .cases-list__img
-                                                img(src='/images/cases/gk1.jpg', alt='')
-                                            .cases-list__content
-                                                .cases-list__title.ff_trajan.font_size22 ЖК «Столичный» 
-                                                .cases-list__options
-                                                    .cases-list__option
-                                                        .font_size14.fade05.fw_medium 18 квартир
-                                                    .cases-list__option
-                                                        .font_size14.fade05.fw_medium Площадь: от 59 м2
-                                                .cases-list__price.color_yelow
-                                                    .font_size22.fw_medium.ff_trajan от 6 700 000 ₽
-                                .cases-list__item
-                                    .cases-list__head1.js-case-show
-                                        .cases-list__title.ff_trajan.font_size22 ЖК «Столичный» 
-                                        .cases-list__arrow.icon-arrow.icon-arrow_rotate
-                                    .cases-list__hide
-                                        .cases-list__row
-                                            .cases-list__img
-                                                img(src='/images/cases/gk1.jpg', alt='')
-                                            .cases-list__content
-                                                .cases-list__title.ff_trajan.font_size22 ЖК «Столичный» 
-                                                .cases-list__options
-                                                    .cases-list__option
-                                                        .font_size14.fade05.fw_medium 18 квартир
-                                                    .cases-list__option
-                                                        .font_size14.fade05.fw_medium Площадь: от 59 м2
-                                                .cases-list__price.color_yelow
-                                                    .font_size22.fw_medium.ff_trajan от 6 700 000 ₽
-                                .cases-list__item
-                                    .cases-list__head1.js-case-show
-                                        .cases-list__title.ff_trajan.font_size22 ЖК «Столичный» 
-                                        .cases-list__arrow.icon-arrow.icon-arrow_rotate
-                                    .cases-list__hide
-                                        .cases-list__row
-                                            .cases-list__img
-                                                img(src='/images/cases/gk1.jpg', alt='')
-                                            .cases-list__content
-                                                .cases-list__title.ff_trajan.font_size22 ЖК «Столичный» 
-                                                .cases-list__options
-                                                    .cases-list__option
-                                                        .font_size14.fade05.fw_medium 18 квартир
-                                                    .cases-list__option
-                                                        .font_size14.fade05.fw_medium Площадь: от 59 м2
-                                                .cases-list__price.color_yelow
-                                                    .font_size22.fw_medium.ff_trajan от 6 700 000 ₽
-                                .cases-list__item
-                                    .cases-list__head1.js-case-show
-                                        .cases-list__title.ff_trajan.font_size22 ЖК «Столичный» 
-                                        .cases-list__arrow.icon-arrow.icon-arrow_rotate
-                                    .cases-list__hide
-                                        .cases-list__row
-                                            .cases-list__img
-                                                img(src='/images/cases/gk1.jpg', alt='')
-                                            .cases-list__content
-                                                .cases-list__title.ff_trajan.font_size22 ЖК «Столичный» 
-                                                .cases-list__options
-                                                    .cases-list__option
-                                                        .font_size14.fade05.fw_medium 18 квартир
-                                                    .cases-list__option
-                                                        .font_size14.fade05.fw_medium Площадь: от 59 м2
-                                                .cases-list__price.color_yelow
-                                                    .font_size22.fw_medium.ff_trajan от 6 700 000 ₽
-                                .cases-list__item
-                                    .cases-list__head1.js-case-show
-                                        .cases-list__title.ff_trajan.font_size22 ЖК «Столичный» 
-                                        .cases-list__arrow.icon-arrow.icon-arrow_rotate
-                                    .cases-list__hide
-                                        .cases-list__row
-                                            .cases-list__img
-                                                img(src='/images/cases/gk1.jpg', alt='')
-                                            .cases-list__content
-                                                .cases-list__title.ff_trajan.font_size22 ЖК «Столичный» 
-                                                .cases-list__options
-                                                    .cases-list__option
-                                                        .font_size14.fade05.fw_medium 18 квартир
-                                                    .cases-list__option
-                                                        .font_size14.fade05.fw_medium Площадь: от 59 м2
-                                                .cases-list__price.color_yelow
-                                                    .font_size22.fw_medium.ff_trajan от 6 700 000 ₽
+                                each building in buildings
+                                    .cases-list__item
+                                        .cases-list__head1.js-case-show
+                                            .cases-list__title.ff_trajan.font_size22= building.sBuildingTitle
+                                            .cases-list__arrow.icon-arrow.icon-arrow_rotate
+                                        .cases-list__hide
+                                            .cases-list__row
+                                                .cases-list__img
+                                                    img(src='/images/cases/gk1.jpg', alt='')
+                                                .cases-list__content
+                                                    .cases-list__title.ff_trajan.font_size22= building.sBuildingTitle
+                                                    .cases-list__options
+                                                        .cases-list__option
+                                                            .font_size14.fade05.fw_medium 18 квартир
+                                                        .cases-list__option
+                                                            .font_size14.fade05.fw_medium Площадь: от 59 м2
+                                                    .cases-list__price.color_yelow
+                                                        .font_size22.fw_medium.ff_trajan от 6 700 000 ₽
                     .cases-screen__right
                         .cases-slider
                             .cases-slider__slide
@@ -1227,17 +1109,17 @@ block main
                 .certification-slider.mt70
                     .certification-slider__slide
                         .certificat
-                            img.certificat__img(src='/images/certification/scan1.jpg', alt='')
-                            .certificat__caption
-                                .font_size14.fw_medium Сертификат официального партнера ПАО "Сбербанк"
-                            a.fancybox.certificat__zoom(href='/images/certification/scan1_big.jpg', rel='certification')
-                                span.certificat__zoom-icon
-                    .certification-slider__slide
-                        .certificat
                             img.certificat__img(src='/images/certification/scan2.jpg', alt='')
                             .certificat__caption
                                 .font_size14.fw_medium Сертификат "Система обучения сотрудников Профессионал". Технология Евгения Котова
                             a.fancybox.certificat__zoom(href='/images/certification/scan2_big.jpg', rel='certification')
+                                span.certificat__zoom-icon
+                    .certification-slider__slide
+                        .certificat
+                            img.certificat__img(src='/images/certification/scan1.jpg', alt='')
+                            .certificat__caption
+                                .font_size14.fw_medium Сертификат официального партнера ПАО "Сбербанк"
+                            a.fancybox.certificat__zoom(href='/images/certification/scan1_big.jpg', rel='certification')
                                 span.certificat__zoom-icon
                     .certification-slider__slide
                         .certificat

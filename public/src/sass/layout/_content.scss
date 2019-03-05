@@ -306,7 +306,6 @@
 }
 
 .cases-screen {
-    display: none;
     padding: toem(180) 0 toem(120) 0;
     background: url(/images/cases/house_foto.jpg) top no-repeat;
     background-size: auto toem(360);
@@ -3515,7 +3514,11 @@ input::-webkit-inner-spin-button {
     }
     .director-screen {
         &__director {
-            display: none;
+            // display: none;
+            z-index: 10;
+            bottom: toem(0);
+            right: toem(-120);
+            width: toem(300);
         }
     }
     .contact-screen {
@@ -3628,7 +3631,7 @@ input::-webkit-inner-spin-button {
         }
     }
     .catalog-screen {
-        margin-top: 0;
+        margin-top: 20px;
         padding-bottom: 70px;
         &_b0 {
             padding-bottom: 0;
