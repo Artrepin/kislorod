@@ -1,4 +1,4 @@
-import App from '../components/App/App.js';
+import App from '../components/App/App.js'
 
 import Dashboard from '../components/Dashboard/Dashboard.js'
 
@@ -8,13 +8,7 @@ import BuildingEdit from '../components/Building/BuildingEdit.js'
 import BuildingEditPlan from '../components/Building/BuildingEditPlan.js'
 import BuildingEditApartment from '../components/Building/BuildingEditApartment.js'
 
-import Apartament from '../components/Apartament/Apartament.js'
-import ApartamentList from '../components/Apartament/ApartamentList.js'
-import ApartamentView from '../components/Apartament/ApartamentView.js'
-
-import Plan from '../components/Plan/Plan.js'
-import PlanList from '../components/Plan/PlanList.js'
-import PlanView from '../components/Plan/PlanView.js'
+import People from '../components/People/People.js'
 
 Vue.component('building-edit-advantage', {
     props: [
@@ -64,7 +58,15 @@ Vue.component('app-header', {
                             <h1 class="header-title">{{ title }}</h1>
                         </div>
                         <div class="col-auto" v-if="button">
-                            <router-link class="btn btn-primary" v-bind:to="button.uri">{{ button.title }}</router-link>
+                            <template v-if="button.uri">
+                                <router-link class="btn btn-primary" v-bind:to="button.uri">{{ button.title }}</router-link>
+                            </template>
+                            <template v-if="button.method">
+                                <template v-if="button.method == 'add'">
+                                    <button class="btn btn-primary" v-on:click="this.$parent.add">{{ button.title }}</button>
+                                </template>                                
+                            </template>
+                            
                         </div>
                     </div>
                 </div>
@@ -178,34 +180,8 @@ const routes = [
     ]
     },
     {
-        path: '/apartament/',
-        component: Apartament,
-        children: [
-            {
-                path: '',
-                component: ApartamentList
-            },
-            {
-                path: ':id',
-                component: ApartamentView,
-                props: true
-            }
-        ]
-    },
-    {
-        path: '/plan/',
-        component: Plan,
-        children: [
-            {
-                path: '',
-                component: PlanList
-            },
-            {
-                path: ':id',
-                component: PlanView,
-                props: true
-            }
-        ]
+        path: '/people/',
+        component: People
     },
 ]
 
@@ -230,12 +206,8 @@ const app = new Vue({
                     uri: '/building'
                 },
                 {
-                    title: 'Apartaments',
-                    uri: '/apartament'
-                },
-                {
-                    title: 'Floor plans',
-                    uri: '/plan'
+                    title: 'Сотрудники',
+                    uri: '/people'
                 },
             ]
         },

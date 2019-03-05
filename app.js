@@ -20,6 +20,8 @@ const Type = require('./models').type
 const Plan = require('./models').plan
 const plan_image = require('./models').plan_image
 const Apartament = require('./models').apartament
+const People = require('./models').people
+const Department = require('./models').department
 
 function randomString() {
     var text = ""
@@ -50,8 +52,10 @@ app.use('/axios', express.static(__dirname + '/node_modules/axios/dist'))
 app.use('/vue-router', express.static(__dirname + '/node_modules/vue-router/dist'))
 app.use('/vue-picture-input', express.static(__dirname + '/node_modules/vue-picture-input/umd'))
 app.use('/vuejs-datepicker', express.static(__dirname + '/node_modules/vuejs-datepicker/dist'))
+app.use('/iconfont', express.static(__dirname + '/node_modules/material-design-icons/iconfont/'))
 
 app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist'))
+// app.use('/bootstrap-vue', express.static(__dirname + '/node_modules/bootstrap-vue/dist'))
 app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist'))
 app.use('/jquery-ui', express.static(__dirname + '/node_modules/jquery-ui/ui'))
 
@@ -457,6 +461,71 @@ app.post('/admin/BuildingDelApartament', async (req, res) => {
     }).then((response) => {
         res.json(response)
     })    
+})
+
+
+app.post('/admin/PeopleList', async (req, res) => {
+    var data = {}
+        data.people = await People.findAll({
+            include: [Department]
+        })
+        data.department = await Department.findAll()
+    res.json(data)
+})
+app.post('/admin/PeopleUpdate', async (req, res) => {
+    var data = {}
+    var iPeopleID = (req.body.people.iPeopleID) ? req.body.people.iPeopleID : false
+    if (iPeopleID) {
+        await People.update({
+            iDepartmentID: req.body.people.iDepartmentID,
+            sPeopleLastname: req.body.people.sPeopleLastname,
+            sPeopleName: req.body.people.sPeopleName,
+            sPeoplePosition: req.body.people.sPeoplePosition,
+            sPeopleImage: req.body.people.sPeopleImage,
+        }, {
+            where: {
+                iPeopleID: iPeopleID
+            }
+        })
+    } else {
+        await People.create({
+            iDepartmentID: req.body.people.iDepartmentID,
+            sPeopleLastname: req.body.people.sPeopleLastname,
+            sPeopleName: req.body.people.sPeopleName,
+            sPeoplePosition: req.body.people.sPeoplePosition,
+            sPeopleImage: req.body.people.sPeopleImage,
+        }).then((people) => {
+            iPeopleID = people.iPeopleID
+        })
+    }
+    data.people = await People.findById(iPeopleID, {
+        include: [Department]
+    })
+
+    res.json(data)
+})
+app.post('/admin/PeopleUpload', async (req, res) => {
+    var storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, './public/images/people')
+        },
+        filename: function (req, file, cb) {
+            cb(null, randomString() + '.jpg')
+        }
+    })
+    var upload = multer({ storage: storage }).single('sPeopleImage')
+    upload(req, res, function (err) {
+        res.send({ file: req.file, body: req.body })
+    })
+})
+app.post('/admin/PeopleDelete', async (req, res) => {
+    People.destroy({
+        where: {
+            iPeopleID: req.body.iPeopleID
+        }
+    }).then((response) => {
+        res.json(response)
+    })
 })
 
 

@@ -5,7 +5,7 @@ export default {
     },
     template: `
         <div class="main-content">
-            <app-header v-bind:title="'Dashboard'"></app-header>
+            <app-header v-bind:title="'Рабочий стол'"></app-header>
         </div>
     `,
 }
