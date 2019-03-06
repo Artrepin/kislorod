@@ -3,6 +3,10 @@ extends ../layouts/layout.pug
 block main
     .main-wrapper
         .main-screen.bg_dark-blue.color_white
+            .fullscreen-bg
+               video.fullscreen-bg__video(loop='', muted='', autoplay='', poster='')
+                  source(src='video/video.mp4', type='video/mp4')
+                  source(src='video/video.webm', type='video/webm')
             .main
                 include ../include/header.pug
                 .main-screen__content
