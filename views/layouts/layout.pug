@@ -27,7 +27,7 @@ html(lang="en" prefix="og: http://ogp.me/ns#")
 
         block main
 
-        script(src='https://www.google.com/recaptcha/api.js')
+        script(src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyBN9VqzHdRedeGxyP-1owKg4aDwNjnmW_E")
         if env.NODE_ENV == 'development'
             script(src='/vue/vue.js')
             script(src='/jquery/jquery.min.js')
@@ -41,6 +41,7 @@ html(lang="en" prefix="og: http://ogp.me/ns#")
             script(src="/src/js/components/jquery.form.js")
             script(src="/src/js/components/slick.js")
             script(src="/src/js/components/parsley.min.js")
+            script(src='/src/js/google_map.js')
             script(src="/src/js/data.js")
             script(src='/src/js/welcome.js')
         else
@@ -72,7 +73,4 @@ html(lang="en" prefix="og: http://ogp.me/ns#")
                 fbq('track', 'PageView');
 
         noscript
-            img(height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2182739471989387&ev=PageView&noscript=1") 
-                
-        script(src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyBN9VqzHdRedeGxyP-1owKg4aDwNjnmW_E")
-        script(src='/src/js/google_map.js')
+            img(height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2182739471989387&ev=PageView&noscript=1")
