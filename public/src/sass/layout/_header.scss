@@ -495,7 +495,6 @@
 }
 
 .main-screen {
-    //background-image: url(/images/main/main_bg.jpg);
     background-position: top;
     background-repeat: no-repeat;
     min-height: 100vh;
@@ -985,6 +984,12 @@
     }
     .main-screen__about-dots {
         display: none;
+    }
+    .main-screen {
+        background-image: url(/images/main/main_bg.jpg);
+        .fullscreen-bg {
+            display: none;
+        }
     }
 }
 
