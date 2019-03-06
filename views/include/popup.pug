@@ -269,7 +269,7 @@
                   .modal-exit__zhurnal-line
                   .modal-exit__zhurnal-ellipse
                      img.modal-exit__zhurnal-img(src='/images/exit_zhurnal.png', alt='')
-               form.modal-exit__form.ajax-form(action='send.php', method='post', data-parsley-validate='', enctype='multipart/form-data')
+               form.modal-exit__form.ajax-form(action='/send', method='post', data-parsley-validate='', enctype='multipart/form-data')
                   .font_size18.ff_trajan.modal-exit__form-desc
                      | Скачайте презентацию и узнайте, как нужно 
                      br
@@ -285,7 +285,7 @@
                      button.button.button_big.button_blue.button_blue2.modal-exit__yes.js-yes-price(type='submit', name='price')
                         | Забрать подарок
                         span.button__arrow.icon-arrow.icon-arrow_rotate
-                     a.modal-exit__no.font_size14.fw_medium.color_white.fade05.js-no-price(href='#') Отказаться от подарка
+                     a.modal-exit__no.font_size14.fw_medium.color_white.fade05.js-no-price.js-popup-close(href='#' onclick="return false;") Отказаться от подарка
                   .polity-box.mt35
                      .polity-box__dot
                      .font_size12.fw_medium.fade05
