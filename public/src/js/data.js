@@ -13,23 +13,28 @@ if (checkTimeShowModalExit < secTimeShowModalExit) {
 }
 function setTimeShowModalExit () {
     if (checkTimeShowModalExit >= secTimeShowModalExit) {
-        document.cookie = "showModalExit=1";
+        var d = new Date(new Date().getTime() + 60 * 1000 * 60 * 24);
+        document.cookie = "showModalExit=true; path=/; domain=kislorod123.ru; expires=" + d.toUTCString();
         clearInterval(checkTimeShowModalExitInterval)
     } else {
         checkTimeShowModalExit++
-        document.cookie = "checkTimeShowModalExit=" + checkTimeShowModalExit
+        var d = new Date(new Date().getTime() + 60 * 1000 * 60 * 24);
+        document.cookie = "checkTimeShowModalExit=" + checkTimeShowModalExit + "; path=/; domain=kislorod123.ru; expires=" + d.toUTCString();
     }
 }
 // *** //
 
 $(document).ready(function(){
 
+    // Показ modal exit
     $('html').mouseleave(function () {
-        if (getCookie('showModalExit') === 1 && checkTimeShowModalExit >= secTimeShowModalExit) {
-            document.cookie = "showModalExit=0";
+        if (getCookie('showModalExit') == 'true') {
+            var d = new Date(new Date().getTime() + 60 * 1000 * 60 * 24);
+            document.cookie = "showModalExit=false; path=/; domain=kislorod123.ru; expires=" + d.toUTCString();
             $('.js-popup-exit').show()
         }        
     })
+    // *** //
 
 	$("input[name='telephone'], input[type='tel']").mask("+7 (999) 999-99-99").each(function() {
 
