@@ -64,6 +64,7 @@ const data = {}
 
 app.get('/', (req, res) => {
     data.title = "Центр недвижимости «Кислород»"
+    data.description = "Агентство элитной недвижимости в городе Сочи"
     data.current_month = month_rus[new Date().getMonth()][0]
     data.current_year = new Date().getFullYear()
     data.buildings = []
@@ -72,17 +73,24 @@ app.get('/', (req, res) => {
 
 app.get('/catalog', (req, res) => {
     data.title = "Каталог недвижимости"
+    data.description = "Агентство элитной недвижимости в городе Сочи"
     data.buildings = []
     res.render('catalog/catalog', data)
 })
 
+app.post('/catalog', (req, res) => {
+    res.json(req.body)
+})
+
 app.get('/about', (req, res) => {
     data.title = "О центре недвижимости «Кислород»"
+    data.description = "Агентство элитной недвижимости в городе Сочи"
     res.render('about/about', data)
 })
 
 app.get('/partner', (req, res) => {
     data.title = "Наши партнеры"
+    data.description = "Агентство элитной недвижимости в городе Сочи"
     res.render('partner/partner', data)
 })
 
