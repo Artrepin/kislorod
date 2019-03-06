@@ -4,13 +4,20 @@ html(lang="en" prefix="og: http://ogp.me/ns#")
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1")
         title= title
-        meta(name="description" content="Агентство элитной недвижимости в городе Сочи")
+        meta(name="description" content= description)
+
+        meta(itemprop="name" content="Центр недвижимости «Кислород»")
+        meta(itemprop="description" content= description)
+        meta(itemprop="image" content="http://kislorod123.ru/images/avatar2.png")
+
+        meta(property="og:url" content="http://kislorod123.ru")
+        meta(property="og:type" content="website")
         meta(property="og:title" content= title)
-        meta(property="og:url" content="http://kislorod123.ru/")
-        meta(property="og:description" content="Агентство элитной недвижимости в городе Сочи")
-        meta(property="og:image" content="http://kislorod123.ru/images/avatar.png")
-        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        meta(property="og:description" content= description)
+        meta(property="og:image" content="http://kislorod123.ru/images/avatar2.png")
+
         link(rel="shortcut icon" href="/images/favicon.png" type="image/x-icon")
+
         if env.NODE_ENV == 'development'
             link(rel="stylesheet", href="/src/css_static/jquery.arcticmodal-0.3.css")
             link(rel="stylesheet", href="/src/css/app.css")            
