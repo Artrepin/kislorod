@@ -1,7 +1,33 @@
+// получить куки
+function getCookie(name) {
+    var matches = document.cookie.match(new RegExp(
+      "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+    ));
+    return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+// колхоз для показа modal exit
+var secTimeShowModalExit = 30
+var checkTimeShowModalExit = (getCookie('checkTimeShowModalExit')) ? getCookie('checkTimeShowModalExit') : 0
+if (checkTimeShowModalExit < secTimeShowModalExit) {
+    var checkTimeShowModalExitInterval = setInterval(setTimeShowModalExit, 100)
+}
+function setTimeShowModalExit () {
+    if (checkTimeShowModalExit >= secTimeShowModalExit) {
+        clearInterval(checkTimeShowModalExitInterval)
+    } else {
+        checkTimeShowModalExit++
+        document.cookie = "checkTimeShowModalExit=" + checkTimeShowModalExit
+    }
+}
+// *** //
+
 $(document).ready(function(){
 
     $('html').mouseleave(function () {
-        // $('.js-popup-exit').show()
+        if (!getCookie('showModalExit') && checkTimeShowModalExit >= secTimeShowModalExit) {
+            document.cookie = "showModalExit=1";
+            $('.js-popup-exit').show()
+        }        
     })
 
 	$("input[name='telephone'], input[type='tel']").mask("+7 (999) 999-99-99").each(function() {
