@@ -245,49 +245,52 @@
               br
               | Мы не передаем данные 3-м лицам
 .popup-wrap.js-popup-exit
-  .popup-wrap__inside-wrap
-    .popup-overlay.js-popup-close
-    .popup
-      .popup__close.js-popup-close.js-svg(data-svg-src='/images/icons/close.svg')
-      .popup__inside-wrap
-        .modal-exit
-          .font_size44.ff_trajan
-            | Подождите. Не уходите 
-            br
-            | с пустыми руками
-          .mt20
-            .font_size22.ff_trajan Мы подготовили для вас подарок 
-          .desc.mt30
-            img.desc__icon(src='/images/icons/ribbon.png', alt='')
-            p.font_size14.fade05.fw_medium
-              | «10 советов, как подобрать квартиру и не 
-              br
-              | «слить» несколько миллионов рублей 
-              br
-              | и годы жизни на разбирательства»
-          .modal-exit__zhurnal.mt40
-            .modal-exit__zhurnal-line
-            .modal-exit__zhurnal-ellipse
-              img.modal-exit__zhurnal-img(src='/images/exit_zhurnal.png', alt='')
-          .modal-exit__form
-            .font_size18.ff_trajan.modal-exit__form-desc
-              | Скачайте презентацию и узнайте, как нужно 
-              br
-              | подойти к процессу подбора квартиры 
-              br
-              | и застройщика, на что обратить внимание 
-              br
-              | и как избежать основных ошибок
-            .modal-exit__buttons
-              button.button.button_big.button_blue.button_blue2.modal-exit__yes.js-yes-price
-                | Забрать подарок
-                span.button__arrow.icon-arrow.icon-arrow_rotate
-              a.modal-exit__no.font_size14.fw_medium.color_white.fade05.js-no-price(href='#') Отказаться от подарка
-            .polity-box.mt35
-              .polity-box__dot
-              .font_size12.fw_medium.fade05
-                | Вы соглашаетесь с условиями 
-                br
-                | обработки персональных данных 
-                br
-                a(href='#') ознакомиться                
+   .popup-wrap__inside-wrap
+      .popup-overlay.js-popup-close
+      .popup
+         .popup__close.js-popup-close.js-svg(data-svg-src='/images/icons/close.svg')
+         .popup__inside-wrap
+            .modal-exit
+               .font_size44.ff_trajan
+                  | Подождите. Не уходите 
+                  br
+                  | с пустыми руками
+               .mt20
+                  .font_size22.ff_trajan Мы подготовили для вас подарок 
+               .desc.mt30
+                  img.desc__icon(src='/images/icons/ribbon.png', alt='')
+                  p.font_size14.fade05.fw_medium
+                     | «10 советов, как подобрать квартиру и не 
+                     br
+                     | «слить» несколько миллионов рублей 
+                     br
+                     | и годы жизни на разбирательства»
+               .modal-exit__zhurnal.mt40
+                  .modal-exit__zhurnal-line
+                  .modal-exit__zhurnal-ellipse
+                     img.modal-exit__zhurnal-img(src='/images/exit_zhurnal.png', alt='')
+               form.modal-exit__form.ajax-form(action='send.php', method='post', data-parsley-validate='', enctype='multipart/form-data')
+                  .font_size18.ff_trajan.modal-exit__form-desc
+                     | Скачайте презентацию и узнайте, как нужно 
+                     br
+                     | подойти к процессу подбора квартиры 
+                     br
+                     | и застройщика, на что обратить внимание 
+                     br
+                     | и как избежать основных ошибок
+                  .input-box.mt20
+                     input.input-text.input-text_border(type='tel', name='phone', required='', data-parsley-errors-messages-disabled='', placeholder='+7 (___) ___-__-__')
+                     label.input-box__icon.icon-telephone
+                  .modal-exit__buttons
+                     button.button.button_big.button_blue.button_blue2.modal-exit__yes.js-yes-price(type='submit', name='price')
+                        | Забрать подарок
+                        span.button__arrow.icon-arrow.icon-arrow_rotate
+                     a.modal-exit__no.font_size14.fw_medium.color_white.fade05.js-no-price(href='#') Отказаться от подарка
+                  .polity-box.mt35
+                     .polity-box__dot
+                     .font_size12.fw_medium.fade05
+                        | Вы соглашаетесь с условиями 
+                        br
+                        | обработки персональных данных 
+                        br
+                        a(href='#') ознакомиться

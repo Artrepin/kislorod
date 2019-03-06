@@ -300,6 +300,9 @@
             }
         }
     }
+    .input-box {
+        max-width: toem(370);
+    }
     &__trafik-img {
         width: toem(279);
     }
@@ -314,10 +317,10 @@
     &__no {
         display: inline-block;
         text-decoration: underline;
-        margin-top: toem(40,14);
+        margin-top: toem(20,14);
     }
     &__yes {
-        margin-top: toem(40);
+        margin-top: toem(20);
         width: toem(370);
         margin-right: toem(40);
     }

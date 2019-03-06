@@ -1426,6 +1426,9 @@
     &__item {
         max-width: toem(300);
         margin-left: toem(30);
+        .social {
+            justify-content: center;
+        }
     }
     .button {
         padding-left: toem(30);
@@ -1487,7 +1490,7 @@
 
 .contact-screen__item .social {
     padding-top: 15px;
-    justify-content: left;
+    width: toem(200);
     a {
         color: black;
     }
@@ -3517,7 +3520,23 @@ input::-webkit-inner-spin-button {
     }
     .director-screen {
         &__director {
-            display: none;
+            z-index: 5;
+            width: 280px;
+            bottom: 0;
+            right: -100px;
+        }
+        .number-text {
+            flex-wrap: wrap;
+            &__number {
+                width: 100%;
+            }
+            .font_size22 {
+                margin-top: -10px;
+                margin-left: 5px;
+            }
+            br {
+                display: none;
+            }
         }
     }
     .contact-screen {
@@ -3630,7 +3649,6 @@ input::-webkit-inner-spin-button {
         }
     }
     .catalog-screen {
-        margin-top: 0;
         padding-bottom: 70px;
         &_b0 {
             padding-bottom: 0;
@@ -3642,7 +3660,9 @@ input::-webkit-inner-spin-button {
             width: 100%;
         }
         &__sokol {
-            display: none;
+            font-size: 6px;
+            margin-left: -550px;
+            bottom: toem(190);
         }
         &__catalog-column {
             .color_white {
