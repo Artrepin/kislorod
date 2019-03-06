@@ -13,7 +13,7 @@ if (checkTimeShowModalExit < secTimeShowModalExit) {
 }
 function setTimeShowModalExit () {
     if (checkTimeShowModalExit >= secTimeShowModalExit) {
-        document.cookie = "showModalExit=1";
+        document.cookie = "showModalExit=true";
         clearInterval(checkTimeShowModalExitInterval)
     } else {
         checkTimeShowModalExit++
@@ -25,8 +25,10 @@ function setTimeShowModalExit () {
 $(document).ready(function(){
 
     $('html').mouseleave(function () {
-        if (getCookie('showModalExit') === 1 && checkTimeShowModalExit >= secTimeShowModalExit) {
-            document.cookie = "showModalExit=0";
+        console.log(getCookie('showModalExit'))
+        if (getCookie('showModalExit') == 'true') {
+            console.log('show modal exit')
+            document.cookie = "showModalExit=false";
             $('.js-popup-exit').show()
         }        
     })
