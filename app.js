@@ -144,6 +144,50 @@ app.post('/send', (req, res) => {
 
 
 
+var Recaptcha = require('express-recaptcha').Recaptcha;
+//import Recaptcha from 'express-recaptcha'
+var recaptcha = new Recaptcha(process.env.RECAPTCHA_PUBLIC, process.env.RECAPTCHA_SECRET);
+//or with options
+var options = {'theme':'dark'};
+var recaptcha = new Recaptcha(process.env.RECAPTCHA_PUBLIC, process.env.RECAPTCHA_SECRET, options);
+app.get('/g', recaptcha.middleware.render, function(req, res){
+    res.render('g.pug', { captcha:res.recaptcha });
+});
+app.post('/g', recaptcha.middleware.verify, function(req, res){
+    if (!req.recaptcha.error) {
+      res.json(true)
+    } else {
+        res.json(false)
+    }
+});
+
+
+
+app.get('/amo', async (req, res) => {
+    amocrm.newAmo().then((amo) => {
+        amo.connect().then((status) => {
+            amo.request.post( '/api/v2/incoming_leads/form', {
+                add: [
+                    {
+                        source_name: "TEST",
+                        incoming_entities: {
+                            contacts: [
+                                {
+                                    name: "Тестов Тест Тестовович"
+                                }                                
+                            ]
+                        }
+                    }                    
+                ]
+            }).then((response) => {
+                res.json(response)
+            })
+        })
+    })
+})
+
+
+
 app.get('/admin', (req, res) => {
     res.render('admin', data)
 })

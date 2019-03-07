@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        title Document
+        //- script(src='https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit' async defer)
+        //- script(src='/recaptcha.js')
+    body
+        <script src="//www.google.com/recaptcha/api.js" async defer></script>
+        form(action='/g' method="POST")
+            div(class="g-recaptcha" data-sitekey="6LcWqZUUAAAAADxenZ3vrVtrub9Fgli7jxZdkvLh" data-theme="dark")
+            button send
+        //- #{captcha}
+        //- form(id='demo-form' action='/g' method='POST')
+        //-     textarea(name='feedback' cols='50' rows='5')
+            //- button(class="g-recaptcha" data-sitekey="6LcWqZUUAAAAADxenZ3vrVtrub9Fgli7jxZdkvLh" data-callback="onSubmit") Submit

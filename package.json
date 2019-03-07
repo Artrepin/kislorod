@@ -29,6 +29,7 @@
     "config": "^3.0.1",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
+    "express-recaptcha": "^4.1.1",
     "feather-icons": "^4.17.0",
     "jquery": "^3.3.1",
     "jquery-ui": "^1.12.1",

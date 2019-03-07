@@ -9,6 +9,7 @@ const newAmo = async () => {
         }
     })    
 }
+module.exports.newAmo = newAmo
 
 const getContact = async (req = {}, amo) => {
     if (req.id) {
