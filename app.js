@@ -9,7 +9,7 @@ app.locals.env = process.env;
 const bodyParser = require('body-parser')
 app.use(bodyParser.json({ limit: '50mb' }))
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }))
-const amocrm = require('./modules/amocrm')
+// const amocrm = require('./modules/amocrm')
 const multer = require('multer')
 
 const Building = require('./models').Building
@@ -21,6 +21,15 @@ const plan_image = require('./models').plan_image
 const Apartament = require('./models').apartament
 const People = require('./models').people
 const Department = require('./models').department
+
+var Recaptcha = require('express-recaptcha').Recaptcha;
+var options = {
+    theme: 'light',
+    callback: 'RecaptchaSuccess',
+    hl: 'ru'
+}
+var recaptcha = new Recaptcha(process.env.RECAPTCHA_PUBLIC, process.env.RECAPTCHA_SECRET, options);
+
 
 function randomString() {
     var text = ""
@@ -62,129 +71,136 @@ app.use('/feather-icons', express.static(__dirname + '/node_modules/feather-icon
 
 const data = {}
 
-app.get('/', (req, res) => {
+app.get('/', recaptcha.middleware.render, (req, res) => {
     data.title = "Центр недвижимости «Кислород»"
     data.description = "Агентство элитной недвижимости в городе Сочи"
     data.current_month = month_rus[new Date().getMonth()][0]
     data.current_year = new Date().getFullYear()
     data.buildings = []
+    data.captcha = res.recaptcha
     res.render('welcome/welcome', data)
 })
 
-app.get('/catalog', (req, res) => {
+app.get('/catalog', recaptcha.middleware.render, (req, res) => {
     data.title = "Каталог недвижимости"
     data.description = "Агентство элитной недвижимости в городе Сочи"
     data.buildings = []
+    data.captcha = res.recaptcha
     res.render('catalog/catalog', data)
 })
 
-app.post('/catalog', (req, res) => {
-    res.json(req.body)
-})
-
-app.get('/about', (req, res) => {
+app.get('/about', recaptcha.middleware.render, (req, res) => {
     data.title = "О центре недвижимости «Кислород»"
     data.description = "Агентство элитной недвижимости в городе Сочи"
+    data.captcha = res.recaptcha
     res.render('about/about', data)
 })
 
-app.get('/partner', (req, res) => {
+app.get('/partner', recaptcha.middleware.render, (req, res) => {
     data.title = "Наши партнеры"
     data.description = "Агентство элитной недвижимости в городе Сочи"
+    data.captcha = res.recaptcha
     res.render('partner/partner', data)
 })
 
-app.post('/send', (req, res) => {
+app.post('/send', recaptcha.middleware.verify, (req, res) => {
 
-    var output = "<h3>Данные заявки:</h3>"
-
-    if (req.body.subj) output+= "<p>Тема: " + req.body.subj + "</p>"
-    if (req.body.message) output+= "<p>Сообщение: " + req.body.message + "</p>"
-    if (req.body.name) output+= "<p>Имя: " + req.body.name + "</p>"
-    if (req.body.phone) output+= "<p>Телефон: " + req.body.phone + "</p>"
-    if (req.body.call) output+= "<p>call: " + req.body.call + "</p>"
-    if (req.body.call2) output+= "<p>call2: " + req.body.call2 + "</p>"
-    if (req.body.email) output+= "<p>Email: " + req.body.email + "</p>"
-    if (req.body.ask) output+= "<p>ask: " + req.body.ask + "</p>"
-    if (req.body.quiz) output+= "<p>quiz: " + req.body.quiz + "</p>"
-
-    if (req.body.type) output+= "<p>Выберите тип недвижимости: " + req.body.type + "</p>"
-    if (req.body.target) output+= "<p>Для каких целей планируете покупку?: " + req.body.target + "</p>"
-    if (req.body.location) output+= "<p>Какое расположение ЖК рассматриваете?: " + req.body.location + "</p>"
-    if (req.body.budget) output+= "<p>На какой бюджет рассчитываете?: " + req.body.budget + "</p>"
-    if (req.body.kredit) output+= "<p>Нужна ли рассрочка или ипотека?: " + req.body.kredit + "</p>"
-
-    var amoData = {}
-    if (req.body.subj) { amoData.subj = req.body.subj }
-    if (req.body.name) { amoData.name = req.body.name }
-    if (req.body.phone) { amoData.phone = req.body.phone }
-    if (req.body.email) { amoData.email = req.body.email }
-
-    amocrm.addLead(amoData).then((status) => {
-        var mailgun = require('mailgun-js')({
-            apiKey: process.env.MAILGUN_APIKEY,
-            domain: process.env.MAILGUN_DOMAIN
-        })
-    
-        var data = {
-            from: process.env.MAILGUN_MAILFROM,
-            to: process.env.MAILGUN_MAILTO,
-            subject: 'Обращение с сайта kislorod123.ru',
-            text: 'Обращение с сайта kislorod123.ru',
-            html: output
-        }
-    
-        mailgun.messages().send(data, function (error, body) {
-            
-        })
-    })
-
-    res.send(true)
-})
-
-
-
-var Recaptcha = require('express-recaptcha').Recaptcha;
-//import Recaptcha from 'express-recaptcha'
-var recaptcha = new Recaptcha(process.env.RECAPTCHA_PUBLIC, process.env.RECAPTCHA_SECRET);
-//or with options
-var options = {'theme':'dark'};
-var recaptcha = new Recaptcha(process.env.RECAPTCHA_PUBLIC, process.env.RECAPTCHA_SECRET, options);
-app.get('/g', recaptcha.middleware.render, function(req, res){
-    res.render('g.pug', { captcha:res.recaptcha });
-});
-app.post('/g', recaptcha.middleware.verify, function(req, res){
     if (!req.recaptcha.error) {
-      res.json(true)
-    } else {
-        res.json(false)
-    }
-});
+        var output = "<h3>Данные заявки:</h3>"
 
+        if (req.body.subj) output+= "<p>Тема: " + req.body.subj + "</p>"
+        if (req.body.message) output+= "<p>Сообщение: " + req.body.message + "</p>"
+        if (req.body.name) output+= "<p>Имя: " + req.body.name + "</p>"
+        if (req.body.phone) output+= "<p>Телефон: " + req.body.phone + "</p>"
+        if (req.body.call) output+= "<p>call: " + req.body.call + "</p>"
+        if (req.body.call2) output+= "<p>call2: " + req.body.call2 + "</p>"
+        if (req.body.email) output+= "<p>Email: " + req.body.email + "</p>"
+        if (req.body.ask) output+= "<p>ask: " + req.body.ask + "</p>"
+        if (req.body.quiz) output+= "<p>quiz: " + req.body.quiz + "</p>"
 
+        if (req.body.type) output+= "<p>Выберите тип недвижимости: " + req.body.type + "</p>"
+        if (req.body.target) output+= "<p>Для каких целей планируете покупку?: " + req.body.target + "</p>"
+        if (req.body.location) output+= "<p>Какое расположение ЖК рассматриваете?: " + req.body.location + "</p>"
+        if (req.body.budget) output+= "<p>На какой бюджет рассчитываете?: " + req.body.budget + "</p>"
+        if (req.body.kredit) output+= "<p>Нужна ли рассрочка или ипотека?: " + req.body.kredit + "</p>"
 
-app.get('/amo', async (req, res) => {
-    amocrm.newAmo().then((amo) => {
-        amo.connect().then((status) => {
-            amo.request.post( '/api/v2/incoming_leads/form', {
+        var request = require('request')
+
+        var custom_fields_phone = {}
+        if (req.body.phone) {
+            custom_fields_phone.id = 74913
+            custom_fields_phone.values = []
+            custom_fields_phone.values.push({
+                value: Number(req.body.phone.replace(/\D+/g,"")),
+                enum: "WORK"
+            })
+        }
+
+        var custom_fields_email = {}
+        if (req.body.email) {
+            custom_fields_email.id = 74915
+            custom_fields_email.values = []
+            custom_fields_email.values.push({
+                value: req.body.email,
+                enum: "WORK"
+            })
+        }
+
+        var amoDataJson = {
+            json: {
                 add: [
                     {
-                        source_name: "TEST",
+                        source_name: (req.body.subj) ? req.body.subj : "Тема обращения отсутсвует",
+                        created_at: new Date().getTime(),
                         incoming_entities: {
+                            leads: [
+                                {
+                                    name: (req.body.subj) ? req.body.subj : "Тема обращения отсутсвует",
+                                }
+                            ],
                             contacts: [
                                 {
-                                    name: "Тестов Тест Тестовович"
-                                }                                
+                                    name: (req.body.name) ? req.body.name : "Имя не указано",
+                                    custom_fields: [ custom_fields_phone, custom_fields_email ]
+                                }
                             ]
+                        },
+                        incoming_lead_info: {
+                            form_id: "1",
+                            form_page: "http://kislorod123.ru",
                         }
-                    }                    
+                    }
                 ]
-            }).then((response) => {
-                res.json(response)
+            }
+        }
+
+        request.post('https://' + process.env.AMOCRM_DOMAIN + '.amocrm.ru/api/v2/incoming_leads/form?login=' + process.env.AMOCRM_LOGIN + '&api_key=' + process.env.AMOCRM_HASH + '&', amoDataJson, function (error, response, body) {
+            var mailgun = require('mailgun-js')({
+                apiKey: process.env.MAILGUN_APIKEY,
+                domain: process.env.MAILGUN_DOMAIN
+            })
+            var data = {
+                from: process.env.MAILGUN_MAILFROM,
+                to: process.env.MAILGUN_MAILTO,
+                subject: 'Обращение с сайта kislorod123.ru',
+                text: 'Обращение с сайта kislorod123.ru',
+                html: output
+            }
+            mailgun.messages().send(data, function (error, body) {
+
             })
         })
-    })
+
+    }
+    res.json(true)
 })
+
+
+
+
+
+
+
 
 
 
