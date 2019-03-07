@@ -81,12 +81,16 @@ app.get('/', recaptcha.middleware.render, (req, res) => {
     res.render('welcome/welcome', data)
 })
 
-app.get('/catalog', recaptcha.middleware.render, (req, res) => {
+app.get('/catalog', recaptcha.middleware.render, async (req, res) => {
     data.title = "Каталог недвижимости"
     data.description = "Агентство элитной недвижимости в городе Сочи"
-    data.buildings = []
     data.captcha = res.recaptcha
     res.render('catalog/catalog', data)
+})
+app.post('/catalog/getBuildings', async (req, res) => {
+    var data = {}
+        data.buildings = await Building.findAll()
+    res.json(data)
 })
 
 app.get('/about', recaptcha.middleware.render, (req, res) => {
