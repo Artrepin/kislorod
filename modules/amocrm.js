@@ -89,3 +89,28 @@ const addLead = async (req = {}) => {
     })
 }
 module.exports.addLead = addLead
+
+// Пример вызова из файла app.js. Убрали, так как сдедлали добавление в раздел Неразобранное
+// 
+// var amoData = {}
+// if (req.body.subj) { amoData.subj = req.body.subj }
+// if (req.body.name) { amoData.name = req.body.name }
+// if (req.body.phone) { amoData.phone = req.body.phone }
+// if (req.body.email) { amoData.email = req.body.email }
+// 
+// amocrm.addLead(amoData).then((status) => {
+//     var mailgun = require('mailgun-js')({
+//         apiKey: process.env.MAILGUN_APIKEY,
+//         domain: process.env.MAILGUN_DOMAIN
+//     })
+//     var data = {
+//         from: process.env.MAILGUN_MAILFROM,
+//         to: process.env.MAILGUN_MAILTO,
+//         subject: 'Обращение с сайта kislorod123.ru',
+//         text: 'Обращение с сайта kislorod123.ru',
+//         html: output
+//     }
+//     mailgun.messages().send(data, function (error, body) {
+// 
+//     })
+// })

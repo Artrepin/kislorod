@@ -224,9 +224,11 @@
                       input.bank-list__input(type='checkbox')
                       img.bank-list__logo(src='/images/catalog/nvidia.png', alt='')
                   a.fw_medium.bank-list__all.mt15.js-all-banks(href='#') Отправить заявку во все банки-партнеры
+                .col-min-12
+                  <div class="g-recaptcha" data-sitekey= #{env.RECAPTCHA_PUBLIC} data-theme="light" data-callback="RecaptchaSuccess"></div>
                 .col-min-6
                   .button-building.mt60
-                    button.button.button_big.button_blue.button_blue2(type='submit', name='send')
+                    button.button.button_big.button_blue.button_blue2.gcaptcha(type='submit', name='send', disabled)
                       | Отправить заявку на ипотеку
                       span.button__arrow.icon-arrow
                       img.button-building__img(src='/images/catalog/building.png', alt='')

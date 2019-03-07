@@ -24,6 +24,13 @@ function setTimeShowModalExit () {
 }
 // *** //
 
+
+// Google Recaptch
+function RecaptchaSuccess (response) {
+    $('.gcaptcha').prop('disabled', false)
+}
+// *** //
+
 $(document).ready(function(){
 
     // Показ modal exit
