@@ -19,6 +19,9 @@ module.exports = {
       },
       sPlanName: {
         type: Sequelize.STRING
+      },
+      fPlanArea: {
+        type: Sequelize.INTEGER
       }
     }, {
       timestamps: false,
