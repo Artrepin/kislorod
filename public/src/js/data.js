@@ -6,7 +6,7 @@ function getCookie(name) {
     return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 // колхоз для показа modal exit
-var secTimeShowModalExit = 20
+var secTimeShowModalExit = 10
 var checkTimeShowModalExit = (getCookie('checkTimeShowModalExit')) ? getCookie('checkTimeShowModalExit') : 0
 if (checkTimeShowModalExit < secTimeShowModalExit) {
     var checkTimeShowModalExitInterval = setInterval(setTimeShowModalExit, 1000)
