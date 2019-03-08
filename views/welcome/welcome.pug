@@ -802,7 +802,7 @@ block main
                                 .input-box.mt30(style="margin-bottom: 25px;")
                                     input.input-text.input-text_fill(type='email', name='email', required='', data-parsley-errors-messages-disabled='', placeholder='mail@mail.com')
                                     label.input-box__icon.icon-message
-                                <div class="g-recaptcha" data-sitekey= #{env.RECAPTCHA_PUBLIC} data-theme="dark" data-callback="RecaptchaSuccess"></div>
+                                <div class="g-recaptcha" data-sitekey= #{env.RECAPTCHA_PUBLIC} data-theme="light" data-callback="RecaptchaSuccess"></div>
                                 .catalog-screen__button
                                     img.catalog-screen__level(src='/images/cases/level1000.png', alt='')
                                     button.button.button_big.button_blue.button_blue2.mt30.gcaptcha(type='submit', name='call', disabled)
