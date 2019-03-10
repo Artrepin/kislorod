@@ -12,7 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     iBuildingID: DataTypes.INTEGER,
     iTypeID: DataTypes.INTEGER,
     iRoomCount: DataTypes.INTEGER,
-    sPlanName: DataTypes.STRING
+    sPlanName: DataTypes.STRING,
+    fPlanArea: DataTypes.FLOAT
   }, {
     timestamps: false,
     freezeTableName: true,

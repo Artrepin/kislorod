@@ -87,7 +87,59 @@ app.get('/catalog', recaptcha.middleware.render, async (req, res) => {
     data.captcha = res.recaptcha
     res.render('catalog/catalog', data)
 })
-app.post('/catalog/getBuildings', async (req, res) => {
+app.post('/catalog/init', async (req, res) => {
+
+    var nowYear = new Date().getFullYear()
+
+    var data = {
+        filters: {
+            price: {
+                min: Math.floor(await Apartament.min('iApartamentPrice')/1000000),
+                max: Math.ceil(await Apartament.max('iApartamentPrice')/1000000)
+            },
+            area: {
+                min: Math.floor(await Plan.min('fPlanArea')),
+                max: Math.ceil(await Plan.max('fPlanArea'))
+            },
+            floor: {
+                min: Math.floor(await Apartament.min('iApartamentFloor')),
+                max: Math.ceil(await Apartament.max('iApartamentFloor'))
+            },
+            room: {
+                min: Math.floor(await Plan.min('iRoomCount')),
+                max: Math.ceil(await Plan.max('iRoomCount'))
+            },
+            year: [
+                {
+                    title: 'Не важно',
+                    value: 0
+                },
+                {
+                    title: 'Сдача в ' + nowYear + ' году',
+                    value: nowYear
+                },
+                {
+                    title: 'Сдача в ' + ++nowYear + ' году',
+                    value: nowYear
+                },
+                {
+                    title: 'Сдача в ' + ++nowYear + ' году',
+                    value: nowYear
+                },
+            ]
+        }
+    }
+
+    data.selected = {}
+    data.selected.price = data.filters.price.max
+    data.selected.area = data.filters.area.max
+    data.selected.floor = data.filters.floor.max
+    data.selected.room = data.filters.room.max
+    data.selected.year = data.filters.year[0].value
+
+    res.json(data)
+})
+app.post('/catalog/building', async (req, res) => {
     var data = {}
         data.buildings = await Building.findAll()
     res.json(data)
@@ -411,6 +463,7 @@ app.post('/admin/BuildingUpdatePlan', async (req, res) => {
             iRoomCount: req.body.plan.iRoomCount,
             iTypeID: req.body.plan.iTypeID,
             sPlanName: req.body.plan.sPlanName,
+            fPlanArea: req.body.plan.fPlanArea,
         }, {
             where: {
                 iPlanID: req.body.plan.iPlanID
@@ -422,6 +475,7 @@ app.post('/admin/BuildingUpdatePlan', async (req, res) => {
             iRoomCount: req.body.plan.iRoomCount,
             iTypeID: req.body.plan.iTypeID,
             sPlanName: req.body.plan.sPlanName,
+            fPlanArea: req.body.plan.fPlanArea,
         })
         iPlanID = plan.iPlanID
     }
