@@ -78,15 +78,9 @@ block main
                     #catalog.cases-screen__left
                         .cases-list-container
                             .cases-list
-<<<<<<< HEAD
-                                .cases-list__item.js-case-map(v-for="(building, index) in buildings")
-                                    .cases-list__head1.js-case-map
-                                        .cases-list__title.ff_trajan.font_size22 {{ building.sBuildingTitle }}
-=======
                                 .cases-list__item.js-case-map(v-for="(building, index) in buildings" v-on:click="use(index)" v-bind:class="{active: index == useBuilding}")
                                     .cases-list__head1.js-case-map
                                         .cases-list__title.ff_trajan.font_size22 {{ building.sBuildingTitle }} 
->>>>>>> dev
                                         .cases-list__arrow.icon-arrow.icon-arrow_rotate
                                     .cases-list__hide
                                         .cases-list__row
@@ -94,26 +88,6 @@ block main
                                                 img(src='/images/cases/gk1.jpg', alt='')
                                             .cases-list__content
                                                 .cases-list__title.ff_trajan.font_size22 {{ building.sBuildingTitle }}
-<<<<<<< HEAD
-                                                .cases-list__options
-                                                    .cases-list__option
-                                                        .font_size14.fade05.fw_medium 18 квартир
-                                                    .cases-list__option
-                                                        .font_size14.fade05.fw_medium Площадь: от 59 м2
-                                                .cases-list__price.color_yelow
-                                                    .font_size22.fw_medium.ff_trajan от 6 700 000 ₽
-                                //- .cases-list__item.js-case-map
-                                    .cases-list__head1.js-case-map
-                                        .cases-list__title.ff_trajan.font_size22 ЖК «Столичный»1 
-                                        .cases-list__arrow.icon-arrow.icon-arrow_rotate
-                                    .cases-list__hide
-                                        .cases-list__row
-                                            .cases-list__img
-                                                img(src='/images/cases/gk1.jpg', alt='')
-                                            .cases-list__content
-                                                .cases-list__title.ff_trajan.font_size22 ЖК «Столичный»1 
-=======
->>>>>>> dev
                                                 .cases-list__options
                                                     .cases-list__option
                                                         .font_size14.fade05.fw_medium 18 квартир
