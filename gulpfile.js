@@ -30,6 +30,7 @@ function cleaner() {
 gulp.task('js_min', function (done) {
     gulp
     .src([
+        'node_modules/axios/dist/axios.js',
         'node_modules/vue/dist/vue.min.js',
         'node_modules/jquery/dist/jquery.min.js',
         'node_modules/jquery-ui/ui/widget.js',
