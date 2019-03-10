@@ -45,6 +45,7 @@ gulp.task('js_min', function (done) {
         'public/src/js/components/parsley.min.js',
         'public/src/js/data.js',
         'public/src/js/google_map.js',
+        'public/src/js/catalog.js',
         'public/src/js/welcome.js',
     ])
     .pipe(concat('app.js'))
