@@ -110,6 +110,10 @@ export default {
                                 <input type="text" class="form-control" v-model.number="plan[usePlan].iRoomCount">
                             </div>
                             <div class="form-group">
+                                <label for="">Площадь</label>
+                                <input type="text" class="form-control" v-model.number="plan[usePlan].fPlanArea">
+                            </div>
+                            <div class="form-group">
                                 <label for="">Комнатность</label>
                                 <select class="form-control" v-model="plan[usePlan].iTypeID">
                                     <option

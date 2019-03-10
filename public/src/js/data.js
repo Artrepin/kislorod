@@ -168,19 +168,19 @@ $(document).ready(function(){
 		});
 	};
 	
-	$(".js-scroll-to").click(function() {
-        var attr_href = $(this).attr("href");
-        var data_href = $(this).data("href");
-        if ( data_href ) {
-            attr_href = data_href;
-        }
-		$("html, body").animate({
-            scrollTop: $(attr_href).offset().top + "px"
-        }, {
-            duration: 1000
-        });
-        return false;
-    });
+	// $(".js-scroll-to").click(function() {
+    //     var attr_href = $(this).attr("href");
+    //     var data_href = $(this).data("href");
+    //     if ( data_href ) {
+    //         attr_href = data_href;
+    //     }
+	// 	$("html, body").animate({
+    //         scrollTop: $(attr_href).offset().top + "px"
+    //     }, {
+    //         duration: 1000
+    //     });
+    //     return false;
+    // });
 	
 	$(".js-svg").each(function(){
         var svg_src = $(this).data("svg-src");
@@ -264,8 +264,8 @@ $(document).ready(function(){
         });
     }
     
-    $(".cases-list__item:first").addClass("active");
-    $(".cases-list__item:first .cases-list__hide").fadeIn(500);
+    // $(".cases-list__item:first").addClass("active");
+    // $(".cases-list__item:first .cases-list__hide").fadeIn(500);
     
     $(".js-before-after").each(function(){
         $(".js-after-img").width($(".js-before-after").width());
@@ -315,38 +315,38 @@ $(document).ready(function(){
         });
     }
     
-    if ( $(".js-slider-options").length ) {
-        $(".js-slider-wrapper").each(function(){
+    // if ( $(".js-slider-options").length ) {
+    //     $(".js-slider-wrapper").each(function(){
             
-            var slider_options = $(this).find(".js-slider-options"),
-                slider_val = slider_options.data("value"),
-                slider_min = slider_options.data("min"),
-                slider_max = slider_options.data("max"),
-                slider_step = slider_options.data("step"),
-                slider_meas = slider_options.data("meas"),
-                slider_mask = $(this).find(".js-slider-mask");
+    //         var slider_options = $(this).find(".js-slider-options"),
+    //             slider_val = slider_options.data("value"),
+    //             slider_min = slider_options.data("min"),
+    //             slider_max = slider_options.data("max"),
+    //             slider_step = slider_options.data("step"),
+    //             slider_meas = slider_options.data("meas"),
+    //             slider_mask = $(this).find(".js-slider-mask");
             
-            $(this).find(".js-slider").slider({
-                range: "min",
-                min: slider_min,
-                max: slider_max,
-                value: slider_val,
-                step: slider_step,
-                slide: function( event, ui ) {
-                    slider_options.val( ui.value + " " + slider_meas );
-                    slider_mask.val( ui.value );
-                }
-            });
+    //         $(this).find(".js-slider").slider({
+    //             range: "min",
+    //             min: slider_min,
+    //             max: slider_max,
+    //             value: slider_val,
+    //             step: slider_step,
+    //             slide: function( event, ui ) {
+    //                 slider_options.val( ui.value + " " + slider_meas );
+    //                 slider_mask.val( ui.value );
+    //             }
+    //         });
             
-        });
+    //     });
         
-        $(".js-slider-mask").keyup(function(){
-            var slider_mask = $(this).val();
-            var slider_meas = $(this).closest(".js-slider-wrapper").find(".js-slider-options").data("meas");
-            $(this).closest(".js-slider-wrapper").find(".js-slider").slider({value: slider_mask});
-            $(this).closest(".js-slider-wrapper").find(".js-slider-options").val( slider_mask + " " + slider_meas  );
-        });
-    }
+    //     $(".js-slider-mask").keyup(function(){
+    //         var slider_mask = $(this).val();
+    //         var slider_meas = $(this).closest(".js-slider-wrapper").find(".js-slider-options").data("meas");
+    //         $(this).closest(".js-slider-wrapper").find(".js-slider").slider({value: slider_mask});
+    //         $(this).closest(".js-slider-wrapper").find(".js-slider-options").val( slider_mask + " " + slider_meas  );
+    //     });
+    // }
     
     var thousandSeparator = function(str) {
         var parts = (str + '').split('.'),

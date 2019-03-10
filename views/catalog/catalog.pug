@@ -1,86 +1,74 @@
 extends ../layouts/layout.pug
 
 block main
-    #catalog.main-wrapper
+    #catalogvue.main-wrapper
         .main-screen.main-screen_catalog.bg_dark-blue.color_white
             .main
                 include ../include/header.pug
                 .catalog-filter
                     form(action='#')
                         .catalog-filter__row.row
-                            .col-sm-3.col-min-6.mt10.js-slider-wrapper
+                            .col-sm-3.col-min-6.mt10.js-slider-wrapper(v-if="filters.price")
                                 label.ff_trajan.font_size18(for='price') Цена:
                                 .input-box.mt10
-                                    input.catalog-filter__mask.catalog-filter__input.input-text.input-text_border.js-slider-mask(type='number', value='5')
-                                    input#price.catalog-filter__input.input-text.input-text_border.js-slider-options(type='text', value='5 млн', data-value='5', data-min='4', data-max='18', data-step='1', data-meas='млн', disabled='')
+                                    input.catalog-filter__mask.catalog-filter__input.input-text.input-text_border.js-slider-mask(type='number', v-model="selected.price")
+                                    input#price.catalog-filter__input.input-text.input-text_border.js-slider-options(type='text', v-model="selected.price + ' млн'", :data-value='filters.price.max', :data-min='filters.price.min', :data-max='filters.price.max', data-step='1', data-meas='млн', disabled='')
                                     .catalog-filter__slider.js-slider
                                 .catalog-filter__line.mt10
                                     .font_size14.fade05
-                                        span.js-slider-min 4
+                                        span.js-slider-min {{ filters.price.min }}
                                         |  млн
                                     .font_size14.fade05
-                                        span.js-slider-max 18
+                                        span.js-slider-max {{ filters.price.max }}
                                         |  млн
-                            .col-sm-3.col-min-6.mt10.js-slider-wrapper
+                            .col-sm-3.col-min-6.mt10.js-slider-wrapper(v-if="filters.area")
                                 label.ff_trajan.font_size18(for='square') Площадь квартиры:
                                 .input-box.mt10
-                                    input.catalog-filter__mask.catalog-filter__input.input-text.input-text_border.js-slider-mask(type='number', value='')
-                                    input#square.catalog-filter__input.input-text.input-text_border.js-slider-options(type='text', value='62 м2', data-value='70', data-min='30', data-max='300', data-step='1', data-meas='м2', disabled='')
+                                    input.catalog-filter__mask.catalog-filter__input.input-text.input-text_border.js-slider-mask(type='number', v-model="selected.area")
+                                    input#square.catalog-filter__input.input-text.input-text_border.js-slider-options(type='text', v-model="selected.area + ' м2'", :data-value='filters.area.max', :data-min='filters.area.min', :data-max='filters.area.max', data-step='1', data-meas='м2', disabled='')
                                     .catalog-filter__slider.js-slider
                                 .catalog-filter__line.mt10
                                     .font_size14.fade05
-                                        span.js-slider-min 30
+                                        span.js-slider-min {{ filters.area.min }}
                                         |  м2
                                     .font_size14.fade05
-                                        span.js-slider-max 300
+                                        span.js-slider-max {{ filters.area.max }}
                                         |  м2
-                            .col-sm-3.col-min-6.mt10.js-slider-wrapper
+                            .col-sm-3.col-min-6.mt10.js-slider-wrapper(v-if="filters.floor")
                                 label.ff_trajan.font_size18(for='floor') Этажность:
                                 .input-box.mt10
-                                    input.catalog-filter__mask.catalog-filter__input.input-text.input-text_border.js-slider-mask(type='number', value='')
-                                    input#floor.catalog-filter__input.input-text.input-text_border.js-slider-options(type='text', value='17 этаж', data-value='17', data-min='1', data-max='24', data-step='1', data-meas='этаж', disabled='')
+                                    input.catalog-filter__mask.catalog-filter__input.input-text.input-text_border.js-slider-mask(type='number', v-model="selected.floor")
+                                    input#floor.catalog-filter__input.input-text.input-text_border.js-slider-options(type='text', v-model="selected.floor+ ' этаж'", :data-value='filters.floor.max', :data-min='filters.floor.min', :data-max='filters.floor.max', data-step='1', data-meas='этаж', disabled='')
                                     .catalog-filter__slider.js-slider
                                 .catalog-filter__line.mt10
                                     .font_size14.fade05
-                                        span.js-slider-min 1
+                                        span.js-slider-min {{ filters.floor.min }}
                                         |  этаж
                                     .font_size14.fade05
-                                        span.js-slider-max 24
+                                        span.js-slider-max {{ filters.floor.max }}
                                         |  этаж
-                            .col-sm-3.col-min-6.mt10.js-slider-wrapper
+                            .col-sm-3.col-min-6.mt10.js-slider-wrapper(v-if="filters.room")
                                 label.ff_trajan.font_size18(for='rooms') Количество комнат:
                                 .input-box.mt10
-                                    input.catalog-filter__mask.catalog-filter__input.input-text.input-text_border.js-slider-mask(type='number', value='')
-                                    input#rooms.catalog-filter__input.input-text.input-text_border.js-slider-options(type='text', value='3', data-value='3', data-min='1', data-max='5', data-step='1', data-meas='')
+                                    input.catalog-filter__mask.catalog-filter__input.input-text.input-text_border.js-slider-mask(type='number', v-model="selected.room")
+                                    input#rooms.catalog-filter__input.input-text.input-text_border.js-slider-options(type='text', v-model="selected.room", :data-value='filters.room.max', :data-min='filters.room.min', :data-max='filters.room.max', data-step='1', data-meas='')
                                     .catalog-filter__slider.js-slider
                                 .catalog-filter__line.mt10
                                     .font_size14.fade05
-                                        span.js-slider-min 1
+                                        span.js-slider-min {{ filters.room.min }}
                                     .font_size14.fade05
-                                        span.js-slider-max 5
-                        .catalog-filter__deadline.row.mt50
+                                        span.js-slider-max {{ filters.room.max }}
+                        .catalog-filter__deadline.row.mt50(v-if="filters.year")
                             .col-min-12.col-sm-2.mt15
                                 .font_size18.ff_trajan Укажите срок сдачи объекта
                             .col-min-12.col-sm-10
                                 .row
-                                    .col-min-6.col-sm-3.mt15
+                                    .col-min-6.col-sm-3.mt15(v-for="(year, index) in filters.year")
                                         label.quiz-radio
-                                            input.quiz-radio__input(type='radio', name='deadline', value='Сдан')
-                                            span.quiz-radio__btn Не нужно
-                                    .col-min-6.col-sm-3.mt15
-                                        label.quiz-radio
-                                            input.quiz-radio__input(type='radio', name='deadline', value='Сдан')
-                                            span.quiz-radio__btn Сдача в 2018 году
-                                    .col-min-6.col-sm-3.mt15
-                                        label.quiz-radio
-                                            input.quiz-radio__input(type='radio', name='deadline', value='Сдан')
-                                            span.quiz-radio__btn Сдача в 2019 году
-                                    .col-min-6.col-sm-3.mt15
-                                        label.quiz-radio
-                                            input.quiz-radio__input(type='radio', name='deadline', value='Сдан')
-                                            span.quiz-radio__btn Сдача в 2019 году
+                                            input.quiz-radio__input(type='radio', name='deadline', :value='year.value')
+                                            span.quiz-radio__btn {{ year.title }}
                                 .catalog-filter__bottom.mt60
-                                    button.button.button_big.button_blue.button_blue2.js-scroll-to(data-href='#catalog')
+                                    button.button.button_big.button_blue.button_blue2(v-on:click.prevent="search")
                                         | Подобрать
                                         span.button__arrow.icon-arrow.icon-arrow_rotate
                                     .catalog-filter__bottom-line
@@ -90,33 +78,16 @@ block main
                     #catalog.cases-screen__left
                         .cases-list-container
                             .cases-list
-                                .cases-list__item.js-case-map
+                                .cases-list__item.js-case-map(v-for="(building, index) in buildings" v-on:click="use(index)" v-bind:class="{active: index == useBuilding}")
                                     .cases-list__head1.js-case-map
-                                        .cases-list__title.ff_trajan.font_size22 ЖК «Столичный»1 
+                                        .cases-list__title.ff_trajan.font_size22 {{ building.sBuildingTitle }} 
                                         .cases-list__arrow.icon-arrow.icon-arrow_rotate
                                     .cases-list__hide
                                         .cases-list__row
                                             .cases-list__img
                                                 img(src='/images/cases/gk1.jpg', alt='')
                                             .cases-list__content
-                                                .cases-list__title.ff_trajan.font_size22 ЖК «Столичный»1 
-                                                .cases-list__options
-                                                    .cases-list__option
-                                                        .font_size14.fade05.fw_medium 18 квартир
-                                                    .cases-list__option
-                                                        .font_size14.fade05.fw_medium Площадь: от 59 м2
-                                                .cases-list__price.color_yelow
-                                                    .font_size22.fw_medium.ff_trajan от 6 700 000 ₽
-                                .cases-list__item.js-case-map
-                                    .cases-list__head1.js-case-map
-                                        .cases-list__title.ff_trajan.font_size22 ЖК «Столичный»1 
-                                        .cases-list__arrow.icon-arrow.icon-arrow_rotate
-                                    .cases-list__hide
-                                        .cases-list__row
-                                            .cases-list__img
-                                                img(src='/images/cases/gk1.jpg', alt='')
-                                            .cases-list__content
-                                                .cases-list__title.ff_trajan.font_size22 ЖК «Столичный»1 
+                                                .cases-list__title.ff_trajan.font_size22 {{ building.sBuildingTitle }}
                                                 .cases-list__options
                                                     .cases-list__option
                                                         .font_size14.fade05.fw_medium 18 квартир
@@ -128,12 +99,13 @@ block main
                         .cases-slider
                             .cases-slider__slide
                                 #map-object.cases-map
+                pre(v-if="useBuilding >= 0") {{ buildings[useBuilding] }}
                 .catalog-tabs
                     a.catalog-tabs__item.catalog-tabs__item_active(href='#all') Общая информация
                     a.catalog-tabs__item(href='#apartments') Квартиры
                     a.catalog-tabs__item(href='#kredit') Ипотека
                     a.catalog-tabs__item(href='#progress') Ход строительства
-                .tabs-slider.mt30
+                .tabs-slider.mt30(v-if="useBuilding >= 0")
                     .tabs-slider__slide
                         .catalog-slider
                             .catalog-slider__slide
@@ -149,7 +121,7 @@ block main
                                             | о жилом комплексе
                                 .catalog-slider__center.row
                                     .catalog-slider__content.mt35.col-sm-6.col-min-7
-                                        .catalog-slider__title.font_size44.ff_trajan ЖК «Черноморский»
+                                        .catalog-slider__title.font_size44.ff_trajan {{ buildings[useBuilding].sBuildingTitle }}
                                         .desc.mt5
                                             img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
                                             p.font_size14.fw_medium
@@ -188,7 +160,7 @@ block main
                                             | 7 торговых центров 
                                             br
                                             | и детский аквапарк
-                            .catalog-slider__slide
+                            //- .catalog-slider__slide
                                 a.catalog-slider__pic(href='#')
                                     img(src='/images/gk_slide.jpg', alt='')
                                     span.catalog-slider__icon.icon-play
