@@ -44,6 +44,15 @@
 // .material-icons.md-36 { font-size: 36px; }
 // .material-icons.md-48 { font-size: 48px; }
 
+
+@media (max-width: 767px) {
+    .navbar-brand {
+        padding: 0;
+    }
+}
+
+
+
 button .material-icons {
     display: block;
     margin: -1px 0;
@@ -54,8 +63,19 @@ button .material-icons {
     font-family: 'Trajan Pro 3';
     font-weight: normal;
 }
+.card-header h4, .modal-title {
+    font-family: 'Trajan Pro 3';
+    font-weight: normal;
+}
 
 .building-list {
+    .card {
+        cursor: pointer;
+    }
+    .card-title {
+        height: 25px;
+        overflow: hidden;
+    }
     .card-img-top {
         height: 150px;
         object-fit: cover;
@@ -76,8 +96,8 @@ button .material-icons {
     }
 }
 .avatar {
-    height: 64px;
-    width: 64px;
+    // height: 64px;
+    // width: 64px;
     overflow: hidden;
     .avatar-img {
         background: #EEE;
@@ -89,6 +109,7 @@ button .material-icons {
         border-radius: 4px !important;
         background: none !important;
         object-fit: cover !important;
+        z-index: 0 !important;
     }
     .preview-container {
         position: relative !important;
@@ -169,6 +190,52 @@ button .material-icons {
         
     }
 }
+
+.btn.btn-primary {
+    background: linear-gradient(to right, #4384c0, #3c98ed);
+    box-shadow: inset 0 0 1em rgba(255, 255, 255, 0.53);
+    border: none;
+}
+
+
+
+
+
+.building-edit-header {
+    .picture-input {
+        canvas {
+            border-radius: 0 !important;
+        }
+        .picture-inner {
+            border-radius: 0 !important;
+            border: none !important;
+        }
+    }
+    .avatar {
+        canvas {
+            border-radius: 50% !important;
+            border: 4px solid #F9FBFD;
+        }
+        .picture-inner {
+            border-radius: 50% !important;
+            border: 4px solid #F9FBFD !important;
+        }
+    }
+    img.header-img-top {
+        height: 450px;
+        object-fit: cover;
+    }
+}
+
+.card-stage {
+    .card-body {
+        .row {
+            border-bottom: 1px solid #EDF2F9;
+            margin-bottom: 1.375rem;
+        }
+    }
+}
+
 // html {
 //     height: 100%;
 // }

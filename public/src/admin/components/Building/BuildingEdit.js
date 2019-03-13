@@ -109,8 +109,13 @@ export default {
         }
     },
     template: `
-        <div class="main-content">
-            <building-edit-header v-bind:building="building" v-bind:menuActive=0></building-edit-header>
+        <div class="main-content building-edit">
+
+
+
+
+
+            <building-edit-header v-bind:building="building" v-bind:loading="loading" v-bind:menuActive=0></building-edit-header>
             <div class="container-fluid">
                 <form>
                     <input type="hidden" v-model="building.iBuildingID">
@@ -119,7 +124,7 @@ export default {
                     <input type="hidden" v-model="building.sBuildingCoverBig">
                     <div class="tab-pane fade show active" id="tab_0" role="tabpanel" aria-labelledby="tab_0">
                     <div class="row">
-                        <div class="col">
+                        <div class="col-md">
                             <div class="card">
                                 <div class="card-header">
                                     <div class="row align-items-center">
@@ -155,10 +160,32 @@ export default {
                                         <label for="">Ссылка на видео YouTube</label>
                                         <input type="text" class="form-control" v-model="building.sBuildingYoutube">
                                     </div>
+                                    <div class="form-group">
+                                        <label>Превью для видео YouTube</label>
+                                        <picture-input
+                                            ref="sBuildingCoverBig"
+                                            @change="uploadAvatar('sBuildingCoverBig')"
+                                            width="1170"
+                                            height="450"
+                                            margin="0"
+                                            radius="0"
+                                            accept="image/jpeg,image/png"
+                                            size="50"
+                                            v-bind:prefill="Object.keys(building).length !== 0 && building.sBuildingCoverBig != null ? '/images/building/'+building.sBuildingCoverBig : ''"
+                                            buttonClass="btn btn-primary btn-sm"
+                                            :hideChangeButton='true'
+                                            :customStrings="{
+                                                drag: 'Перетащите изображение<br>или<br>нажмите для выбора файла<br>(1170px / 450px)'
+                                            }"></picture-input>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Срок сдачи проекта</label>
+                                        <datepicker input-class="form-control" :format="'yyyy-MM-dd'" v-model="building.dBuildingReady"></datepicker>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col-md">
                             <div class="card">
                                 <div class="card-header">
                                     <div class="row align-items-center">
@@ -178,73 +205,7 @@ export default {
                     </div>
                     <div class="row">
                         <div class="col">
-                            <div class="card">
-                                <div class="card-header">
-                                    <div class="row align-items-center">
-                                        <div class="col">
-                                            <h4 class="card-header-title">Изображения</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class=row>
-                                        <div class="col-12">
-                                            <picture-input
-                                                ref="sBuildingAvatar"
-                                                @change="uploadAvatar('sBuildingAvatar')"
-                                                width="200"
-                                                height="200"
-                                                margin="16"
-                                                radius="6"
-                                                accept="image/jpeg,image/png"
-                                                size="50"
-                                                v-bind:prefill="Object.keys(building).length !== 0 && building.sBuildingAvatar != null ? '/images/building/'+building.sBuildingAvatar : ''"
-                                                buttonClass="btn btn-primary btn-sm"
-                                                :customStrings="{
-                                                    drag: 'Drag or click',
-                                                    change: 'Change img'
-                                                }"></picture-input>
-                                        </div>
-                                        <div class="col-12">
-                                            <picture-input
-                                                ref="sBuildingCoverSmall"
-                                                @change="uploadAvatar('sBuildingCoverSmall')"
-                                                width="200"
-                                                height="200"
-                                                margin="16"
-                                                radius="6"
-                                                accept="image/jpeg,image/png"
-                                                size="50"
-                                                v-bind:prefill="Object.keys(building).length !== 0 && building.sBuildingCoverSmall != null ? '/images/building/'+building.sBuildingCoverSmall : ''"
-                                                buttonClass="btn btn-primary btn-sm"
-                                                :customStrings="{
-                                                    drag: 'Drag or click',
-                                                    change: 'Change img'
-                                                }"></picture-input>
-                                        </div>
-                                        <div class="col-12">
-                                            <picture-input
-                                                ref="sBuildingCoverBig"
-                                                @change="uploadAvatar('sBuildingCoverBig')"
-                                                width="200"
-                                                height="200"
-                                                margin="16"
-                                                radius="6"
-                                                accept="image/jpeg,image/png"
-                                                size="50"
-                                                v-bind:prefill="Object.keys(building).length !== 0 && building.sBuildingCoverBig != null ? '/images/building/'+building.sBuildingCoverBig : ''"
-                                                buttonClass="btn btn-primary btn-sm"
-                                                :customStrings="{
-                                                    drag: 'Drag or click',
-                                                    change: 'Change img'
-                                                }"></picture-input>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card">
+                            <div class="card card-stage">
                                 <div class="card-header">
                                     <div class="row align-items-center">
                                         <div class="col">
@@ -259,22 +220,25 @@ export default {
                                     <div class="row" v-for="(stage, index) in building.stage">
                                         <input type="hidden" v-model="stage.iStageID">
                                         <input type="hidden" v-model="stage.sStageImage">
-                                        <div class="col">
-                                            <picture-input
-                                                ref="stageImage"
-                                                @change="uploadStage(index)"
-                                                width="200"
-                                                height="200"
-                                                margin="16"
-                                                radius="6"
-                                                accept="image/jpeg,image/png"
-                                                size="50"
-                                                v-bind:prefill="(stage.sStageImage) ? '/images/building/stage/'+stage.sStageImage : ''"
-                                                buttonClass="btn btn-primary btn-sm"
-                                                :customStrings="{
-                                                    drag: 'Drag or click',
-                                                    change: 'Change img'
-                                                }"></picture-input>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="">Изображение</label>
+                                                <picture-input
+                                                    ref="stageImage"
+                                                    @change="uploadStage(index)"
+                                                    width="1170"
+                                                    height="450"
+                                                    margin="0"
+                                                    radius="0"
+                                                    accept="image/jpeg,image/png"
+                                                    size="50"
+                                                    v-bind:prefill="(stage.sStageImage) ? '/images/building/stage/'+stage.sStageImage : ''"
+                                                    buttonClass="btn btn-primary btn-sm"
+                                                    :hideChangeButton='true'
+                                                    :customStrings="{
+                                                        drag: 'Перетащите изображение<br>или<br>нажмите для выбора файла'
+                                                    }"></picture-input>
+                                            </div>
                                         </div>
                                         <div class="col">
                                             <div class="form-group">
@@ -285,9 +249,9 @@ export default {
                                                 <label for="">Описание этапа строительства</label>
                                                 <textarea class="form-control" rows="2" v-model="stage.tStageDesc"></textarea>
                                             </div>
-                                            <div class="form-group">
-                                                <button type="button" class="btn btn-sm btn-danger" v-on:click="stageDel(index)">удалить</button>
-                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <button type="button" class="btn btn-sm btn-danger" v-on:click="stageDel(index)"><i class="material-icons" style="font-size:16px">delete</i></button>
                                         </div>
                                     </div>
                                 </div>
@@ -296,7 +260,7 @@ export default {
                         </div>
                     </div>
                     <div class="form-group">
-                        <button v-bind:disabled="loading" class="btn btn-success" type="submit" v-on:click.prevent="update">Сохранить</button>
+                        <button v-bind:disabled="loading" class="btn btn-primary" type="submit" v-on:click.prevent="update">Сохранить</button>
                         <button v-bind:disabled="loading" v-if="building && building.iBuildingID" class="btn btn-danger" type="button" v-on:click.prevent="remove">Удалить</button>
                     </div>
                 </form>
