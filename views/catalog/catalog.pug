@@ -65,7 +65,7 @@ block main
                                 .row
                                     .col-min-6.col-sm-3.mt15(v-for="(year, index) in filters.year")
                                         label.quiz-radio
-                                            input.quiz-radio__input(type='radio', name='deadline', :value='year.value')
+                                            input.quiz-radio__input(type='radio', name='deadline', :value='year.value' :checked="index == 0")
                                             span.quiz-radio__btn {{ year.title }}
                                 .catalog-filter__bottom.mt60
                                     button.button.button_big.button_blue.button_blue2(v-on:click.prevent="search")
@@ -85,32 +85,32 @@ block main
                                     .cases-list__hide
                                         .cases-list__row
                                             .cases-list__img
-                                                img(src='/images/cases/gk1.jpg', alt='')
+                                                img(v-if="building.sBuildingAvatar != null" :src="'/images/building/' + building.sBuildingAvatar", alt='')
                                             .cases-list__content
                                                 .cases-list__title.ff_trajan.font_size22 {{ building.sBuildingTitle }}
                                                 .cases-list__options
                                                     .cases-list__option
-                                                        .font_size14.fade05.fw_medium 18 квартир
+                                                        .font_size14.fade05.fw_medium 0 квартир
                                                     .cases-list__option
-                                                        .font_size14.fade05.fw_medium Площадь: от 59 м2
+                                                        .font_size14.fade05.fw_medium Площадь: от 0 м2
                                                 .cases-list__price.color_yelow
-                                                    .font_size22.fw_medium.ff_trajan от 6 700 000 ₽
+                                                    .font_size22.fw_medium.ff_trajan от 0 ₽
                     .cases-screen__right
                         .cases-slider
                             .cases-slider__slide
                                 #map-object.cases-map
                 pre(v-if="useBuilding >= 0") {{ buildings[useBuilding] }}
                 .catalog-tabs
-                    a.catalog-tabs__item.catalog-tabs__item_active(href='#all') Общая информация
-                    a.catalog-tabs__item(href='#apartments') Квартиры
-                    a.catalog-tabs__item(href='#kredit') Ипотека
-                    a.catalog-tabs__item(href='#progress') Ход строительства
-                .tabs-slider.mt30(v-if="useBuilding >= 0")
+                    a.catalog-tabs__item.catalog-tabs__item_active(href='#', onclick="return false") Общая информация
+                    a.catalog-tabs__item(href='#', onclick="return false") Квартиры
+                    a.catalog-tabs__item(href='#', onclick="return false") Ипотека
+                    a.catalog-tabs__item(href='#', onclick="return false") Ход строительства
+                .tabs-slider.mt30(v-if="useBuilding >= 0 && buildings[useBuilding]")
                     .tabs-slider__slide
                         .catalog-slider
                             .catalog-slider__slide
-                                a.catalog-slider__pic(href='#')
-                                    img(src='/images/gk_slide.jpg', alt='')
+                                a.catalog-slider__pic.open_catalog_modal(href='#' :data-yt="buildings[useBuilding].sBuildingYoutube")
+                                    img(:src="'/images/building/' + buildings[useBuilding].sBuildingCoverSmall", alt='')
                                     span.catalog-slider__icon.icon-play
                                     span.catalog-slider__caption
                                         span.font_size14.fw_medium.fade05
@@ -124,42 +124,23 @@ block main
                                         .catalog-slider__title.font_size44.ff_trajan {{ buildings[useBuilding].sBuildingTitle }}
                                         .desc.mt5
                                             img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
-                                            p.font_size14.fw_medium
-                                                | Расположен в центре г. Сочи, на улице Ленина. 
-                                                br
-                                                | До моря 6 км, до центральной площади 2.5 км. 
-                                                br
-                                                | Дом сдан в январе 2018 года
+                                            p.font_size14.fw_medium {{ buildings[useBuilding].sBuildingDescription }}
                                     .catalog-slider__info.mt40.col-sm-6.col-min-5
                                         .catalog-slider__options
                                             .catalog-slider__option
                                                 .font_size14.fw_medium
                                                     | Квартир в продаже: 
                                                     br
-                                                    | 18 квартир
+                                                    | 0 квартир
                                             .catalog-slider__option
                                                 .font_size14.fw_medium
                                                     | Площадь: 
                                                     br
-                                                    | от 59 м2
-                                        .catalog-slider__price.ff_trajan.color_yelow 6 700 000 ₽
+                                                    | от 0 м2
+                                        .catalog-slider__price.ff_trajan.color_yelow 0 ₽
                                 ul.catalog-slider__bottom.mt35
-                                    li.catalog-slider__bottom-item
-                                        .font_size14.fw_medium Премиальный консьерж сервис
-                                    li.catalog-slider__bottom-item
-                                        .font_size14.fw_medium Подземная парковка на 214 машин
-                                    li.catalog-slider__bottom-item
-                                        .font_size14.fw_medium Видеонаблюдение всей территории
-                                    li.catalog-slider__bottom-item
-                                        .font_size14.fw_medium
-                                            | Частный детский сад 
-                                            br
-                                            | на территории ЖК
-                                    li.catalog-slider__bottom-item
-                                        .font_size14.fw_medium
-                                            | 7 торговых центров 
-                                            br
-                                            | и детский аквапарк
+                                    li.catalog-slider__bottom-item(v-for="(advantage, index) in buildings[useBuilding].Advantages")
+                                        .font_size14.fw_medium {{ advantage.sAdvantageTitle }}
                             //- .catalog-slider__slide
                                 a.catalog-slider__pic(href='#')
                                     img(src='/images/gk_slide.jpg', alt='')
@@ -219,7 +200,7 @@ block main
                         .object-slide
                             .object-slide__row
                                 .object-slide__title
-                                    .font_size44.ff_trajan 364 квартиры и 27 планировок в ЖК «Черноморский»
+                                    .font_size44.ff_trajan 0 квартиры и 0 планировок в {{ buildings[useBuilding].sBuildingTitle }}
                                 .object-slide__desc.mt10
                                     .desc
                                         img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
@@ -230,15 +211,18 @@ block main
                             .object-container.mt40
                                 .object-container__left
                                     .object-category.ff_trajan
-                                        a.object-category__item.object-category__item_active(href='#') Студии
-                                        a.object-category__item(href='#') Квартиры с одной спальней
-                                        a.object-category__item(href='#') Квартиры с двумя спальнями
-                                        a.object-category__item(href='#') Пентхаусы
+                                        a.object-category__item(
+                                            href='#'
+                                            v-for="(plan, index) in buildings[useBuilding].plans") {{ plan.sPlanName }}
+                                        //- object-category__item_active
+                                        //- a.object-category__item(href='#') Квартиры с одной спальней
+                                        //- a.object-category__item(href='#') Квартиры с двумя спальнями
+                                        //- a.object-category__item(href='#') Пентхаусы
                                 .object-container__right
                                     .object-slider
                                         .object-slider__slide
                                             .object-list.row
-                                                .object-list__item.col-sm-4.col-min-6
+                                                .object-list__item.col-sm-4.col-min-6(v-for="(apartament, index) in buildings[useBuilding].plans[0].apartaments")
                                                     .object-list__preview.js-object-show
                                                         .object-list__thumb
                                                             img(src='/images/catalog/object.jpg', alt='')
@@ -248,13 +232,13 @@ block main
                                                             .object-list__option
                                                                 | Квартира 
                                                                 br
-                                                                | № 85
+                                                                | № {{ apartament.iApartamentNum }}
                                                             .object-list__option
                                                                 | Площадь: 
                                                                 br
-                                                                | 56.1 м
+                                                                | {{ buildings[useBuilding].plans[0].fPlanArea }} м
                                                                 sup 2
-                                                        .object-list__price.color_yelow.ff_trajan 6 700 000 ₽
+                                                        .object-list__price.color_yelow.ff_trajan {{ apartament.iApartamentPrice }} ₽
                                                     .object-popup
                                                         .object-popup__close.icon-close
                                                         .object-popup__row
@@ -289,363 +273,363 @@ block main
                                                                             | обработки персональных данных 
                                                                             br
                                                                             a(href='#') ознакомиться
-                                                .object-list__item.col-sm-4.col-min-6
-                                                    .object-list__preview.js-object-show
-                                                        .object-list__thumb
-                                                            img(src='/images/catalog/object.jpg', alt='')
-                                                            .object-list__zoom.browse-button
-                                                                .icon-search
-                                                        .object-list__options.mt20
-                                                            .object-list__option
-                                                                | Квартира 
-                                                                br
-                                                                | № 85
-                                                            .object-list__option
-                                                                | Площадь: 
-                                                                br
-                                                                | 56.1 м
-                                                                sup 2
-                                                        .object-list__price.color_yelow.ff_trajan 6 700 000 ₽
-                                                    .object-popup
-                                                        .object-popup__close.icon-close
-                                                        .object-popup__row
-                                                            .object-popup__left
-                                                                a.object-popup__img-big.fancybox(href='/images/catalog/object.jpg', rel='object85')
-                                                                    img(src='/images/catalog/object.jpg', alt='')
-                                                                .object-popup__gallery.mt20
-                                                                    a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
-                                                                        img(src='/images/catalog/object.jpg', alt='')
-                                                                    a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
-                                                                        img(src='/images/catalog/object.jpg', alt='')
-                                                                    a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
-                                                                        img(src='/images/catalog/object.jpg', alt='')
-                                                            .object-popup__right
-                                                                .object-popup__title.ff_trajan Запишитесь на просмотр квартиры № 84
-                                                                .mt10
-                                                                    .font_size14.fw_medium Площадь: 54.1 кв.м
-                                                                .object-popup__price.color_yelow.ff_trajan 6 700 000 ₽
-                                                                form.ajax-form(action='send.php', method='post', data-parsley-validate='', enctype='multipart/form-data')
-                                                                    input(type='hidden', name='subj', value='Записаться на просмотр квартиры № 84')
-                                                                    .input-box
-                                                                        input.input-text.input-text_fill(type='tel', name='phone', required='', data-parsley-errors-messages-disabled='', placeholder='+7 (___) ___-__-__')
-                                                                        label.input-box__icon.icon-telephone
-                                                                    button.button.button_big.button_blue.button_blue2.mt30(type='submit', name='call')
-                                                                        | Записаться на просмотр
-                                                                        span.button__arrow.icon-arrow
-                                                                    .polity-box.mt20
-                                                                        .polity-box__dot
-                                                                        .font_size12.fw_medium.fade05
-                                                                            | Вы соглашаетесь с условиями 
-                                                                            br
-                                                                            | обработки персональных данных 
-                                                                            br
-                                                                            a(href='#') ознакомиться
-                                                .object-list__item.col-sm-4.col-min-6
-                                                    .object-list__preview.js-object-show
-                                                        .object-list__thumb
-                                                            img(src='/images/catalog/object.jpg', alt='')
-                                                            .object-list__zoom.browse-button
-                                                                .icon-search
-                                                        .object-list__options.mt20
-                                                            .object-list__option
-                                                                | Квартира 
-                                                                br
-                                                                | № 85
-                                                            .object-list__option
-                                                                | Площадь: 
-                                                                br
-                                                                | 56.1 м
-                                                                sup 2
-                                                        .object-list__price.color_yelow.ff_trajan 26 700 000 ₽
-                                                    .object-popup
-                                                        .object-popup__close.icon-close
-                                                        .object-popup__row
-                                                            .object-popup__left
-                                                                a.object-popup__img-big.fancybox(href='/images/catalog/object.jpg', rel='object85')
-                                                                    img(src='/images/catalog/object.jpg', alt='')
-                                                                .object-popup__gallery.mt20
-                                                                    a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
-                                                                        img(src='/images/catalog/object.jpg', alt='')
-                                                                    a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
-                                                                        img(src='/images/catalog/object.jpg', alt='')
-                                                                    a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
-                                                                        img(src='/images/catalog/object.jpg', alt='')
-                                                            .object-popup__right
-                                                                .object-popup__title.ff_trajan Запишитесь на просмотр квартиры № 84
-                                                                .mt10
-                                                                    .font_size14.fw_medium Площадь: 54.1 кв.м
-                                                                .object-popup__price.color_yelow.ff_trajan 6 700 000 ₽
-                                                                form.ajax-form(action='send.php', method='post', data-parsley-validate='', enctype='multipart/form-data')
-                                                                    input(type='hidden', name='subj', value='Записаться на просмотр квартиры № 84')
-                                                                    .input-box
-                                                                        input.input-text.input-text_fill(type='tel', name='phone', required='', data-parsley-errors-messages-disabled='', placeholder='+7 (___) ___-__-__')
-                                                                        label.input-box__icon.icon-telephone
-                                                                    button.button.button_big.button_blue.button_blue2.mt30(type='submit', name='call')
-                                                                        | Записаться на просмотр
-                                                                        span.button__arrow.icon-arrow
-                                                                    .polity-box.mt20
-                                                                        .polity-box__dot
-                                                                        .font_size12.fw_medium.fade05
-                                                                            | Вы соглашаетесь с условиями 
-                                                                            br
-                                                                            | обработки персональных данных 
-                                                                            br
-                                                                            a(href='#') ознакомиться
-                                                .object-list__item.col-sm-4.col-min-6
-                                                    .object-list__preview.js-object-show
-                                                        .object-list__thumb
-                                                            img(src='/images/catalog/object.jpg', alt='')
-                                                            .object-list__zoom.browse-button
-                                                                .icon-search
-                                                        .object-list__options.mt20
-                                                            .object-list__option
-                                                                | Квартира 
-                                                                br
-                                                                | № 85
-                                                            .object-list__option
-                                                                | Площадь: 
-                                                                br
-                                                                | 56.1 м
-                                                                sup 2
-                                                        .object-list__price.color_yelow.ff_trajan 26 700 000 ₽
-                                                    .object-popup
-                                                        .object-popup__close.icon-close
-                                                        .object-popup__row
-                                                            .object-popup__left
-                                                                a.object-popup__img-big.fancybox(href='/images/catalog/object.jpg', rel='object85')
-                                                                    img(src='/images/catalog/object.jpg', alt='')
-                                                                .object-popup__gallery.mt20
-                                                                    a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
-                                                                        img(src='/images/catalog/object.jpg', alt='')
-                                                                    a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
-                                                                        img(src='/images/catalog/object.jpg', alt='')
-                                                                    a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
-                                                                        img(src='/images/catalog/object.jpg', alt='')
-                                                            .object-popup__right
-                                                                .object-popup__title.ff_trajan Запишитесь на просмотр квартиры № 84
-                                                                .mt10
-                                                                    .font_size14.fw_medium Площадь: 54.1 кв.м
-                                                                .object-popup__price.color_yelow.ff_trajan 6 700 000 ₽
-                                                                form.ajax-form(action='send.php', method='post', data-parsley-validate='', enctype='multipart/form-data')
-                                                                    input(type='hidden', name='subj', value='Записаться на просмотр квартиры № 84')
-                                                                    .input-box
-                                                                        input.input-text.input-text_fill(type='tel', name='phone', required='', data-parsley-errors-messages-disabled='', placeholder='+7 (___) ___-__-__')
-                                                                        label.input-box__icon.icon-telephone
-                                                                    button.button.button_big.button_blue.button_blue2.mt30(type='submit', name='call')
-                                                                        | Записаться на просмотр
-                                                                        span.button__arrow.icon-arrow
-                                                                    .polity-box.mt20
-                                                                        .polity-box__dot
-                                                                        .font_size12.fw_medium.fade05
-                                                                            | Вы соглашаетесь с условиями 
-                                                                            br
-                                                                            | обработки персональных данных 
-                                                                            br
-                                                                            a(href='#') ознакомиться
-                                                .object-list__item.col-sm-4.col-min-6
-                                                    .object-list__preview.js-object-show
-                                                        .object-list__thumb
-                                                            img(src='/images/catalog/object.jpg', alt='')
-                                                            .object-list__zoom.browse-button
-                                                                .icon-search
-                                                        .object-list__options.mt20
-                                                            .object-list__option
-                                                                | Квартира 
-                                                                br
-                                                                | № 85
-                                                            .object-list__option
-                                                                | Площадь: 
-                                                                br
-                                                                | 56.1 м
-                                                                sup 2
-                                                        .object-list__price.color_yelow.ff_trajan 26 700 000 ₽
-                                                    .object-popup
-                                                        .object-popup__close.icon-close
-                                                        .object-popup__row
-                                                            .object-popup__left
-                                                                a.object-popup__img-big.fancybox(href='/images/catalog/object.jpg', rel='object85')
-                                                                    img(src='/images/catalog/object.jpg', alt='')
-                                                                .object-popup__gallery.mt20
-                                                                    a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
-                                                                        img(src='/images/catalog/object.jpg', alt='')
-                                                                    a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
-                                                                        img(src='/images/catalog/object.jpg', alt='')
-                                                                    a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
-                                                                        img(src='/images/catalog/object.jpg', alt='')
-                                                            .object-popup__right
-                                                                .object-popup__title.ff_trajan Запишитесь на просмотр квартиры № 84
-                                                                .mt10
-                                                                    .font_size14.fw_medium Площадь: 54.1 кв.м
-                                                                .object-popup__price.color_yelow.ff_trajan 6 700 000 ₽
-                                                                form.ajax-form(action='send.php', method='post', data-parsley-validate='', enctype='multipart/form-data')
-                                                                    input(type='hidden', name='subj', value='Записаться на просмотр квартиры № 84')
-                                                                    .input-box
-                                                                        input.input-text.input-text_fill(type='tel', name='phone', required='', data-parsley-errors-messages-disabled='', placeholder='+7 (___) ___-__-__')
-                                                                        label.input-box__icon.icon-telephone
-                                                                    button.button.button_big.button_blue.button_blue2.mt30(type='submit', name='call')
-                                                                        | Записаться на просмотр
-                                                                        span.button__arrow.icon-arrow
-                                                                    .polity-box.mt20
-                                                                        .polity-box__dot
-                                                                        .font_size12.fw_medium.fade05
-                                                                            | Вы соглашаетесь с условиями 
-                                                                            br
-                                                                            | обработки персональных данных 
-                                                                            br
-                                                                            a(href='#') ознакомиться
-                                                .object-list__item.col-sm-4.col-min-6
-                                                    .object-list__preview.js-object-show
-                                                        .object-list__thumb
-                                                            img(src='/images/catalog/object.jpg', alt='')
-                                                            .object-list__zoom.browse-button
-                                                                .icon-search
-                                                        .object-list__options.mt20
-                                                            .object-list__option
-                                                                | Квартира 
-                                                                br
-                                                                | № 85
-                                                            .object-list__option
-                                                                | Площадь: 
-                                                                br
-                                                                | 56.1 м
-                                                                sup 2
-                                                        .object-list__price.color_yelow.ff_trajan 26 700 000 ₽
-                                                    .object-popup
-                                                        .object-popup__close.icon-close
-                                                        .object-popup__row
-                                                            .object-popup__left
-                                                                a.object-popup__img-big.fancybox(href='/images/catalog/object.jpg', rel='object85')
-                                                                    img(src='/images/catalog/object.jpg', alt='')
-                                                                .object-popup__gallery.mt20
-                                                                    a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
-                                                                        img(src='/images/catalog/object.jpg', alt='')
-                                                                    a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
-                                                                        img(src='/images/catalog/object.jpg', alt='')
-                                                                    a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
-                                                                        img(src='/images/catalog/object.jpg', alt='')
-                                                            .object-popup__right
-                                                                .object-popup__title.ff_trajan Запишитесь на просмотр квартиры № 84
-                                                                .mt10
-                                                                    .font_size14.fw_medium Площадь: 54.1 кв.м
-                                                                .object-popup__price.color_yelow.ff_trajan 6 700 000 ₽
-                                                                form.ajax-form(action='send.php', method='post', data-parsley-validate='', enctype='multipart/form-data')
-                                                                    input(type='hidden', name='subj', value='Записаться на просмотр квартиры № 84')
-                                                                    .input-box
-                                                                        input.input-text.input-text_fill(type='tel', name='phone', required='', data-parsley-errors-messages-disabled='', placeholder='+7 (___) ___-__-__')
-                                                                        label.input-box__icon.icon-telephone
-                                                                    button.button.button_big.button_blue.button_blue2.mt30(type='submit', name='call')
-                                                                        | Записаться на просмотр
-                                                                        span.button__arrow.icon-arrow
-                                                                    .polity-box.mt20
-                                                                        .polity-box__dot
-                                                                        .font_size12.fw_medium.fade05
-                                                                            | Вы соглашаетесь с условиями 
-                                                                            br
-                                                                            | обработки персональных данных 
-                                                                            br
-                                                                            a(href='#') ознакомиться
-                                                .object-list__item.col-sm-4.col-min-6
-                                                    .object-list__preview.js-object-show
-                                                        .object-list__thumb
-                                                            img(src='/images/catalog/object.jpg', alt='')
-                                                            .object-list__zoom.browse-button
-                                                                .icon-search
-                                                        .object-list__options.mt20
-                                                            .object-list__option
-                                                                | Квартира 
-                                                                br
-                                                                | № 85
-                                                            .object-list__option
-                                                                | Площадь: 
-                                                                br
-                                                                | 56.1 м
-                                                                sup 2
-                                                        .object-list__price.color_yelow.ff_trajan 26 700 000 ₽
-                                                    .object-popup
-                                                        .object-popup__close.icon-close
-                                                        .object-popup__row
-                                                            .object-popup__left
-                                                                a.object-popup__img-big.fancybox(href='/images/catalog/object.jpg', rel='object85')
-                                                                    img(src='/images/catalog/object.jpg', alt='')
-                                                                .object-popup__gallery.mt20
-                                                                    a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
-                                                                        img(src='/images/catalog/object.jpg', alt='')
-                                                                    a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
-                                                                        img(src='/images/catalog/object.jpg', alt='')
-                                                                    a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
-                                                                        img(src='/images/catalog/object.jpg', alt='')
-                                                            .object-popup__right
-                                                                .object-popup__title.ff_trajan Запишитесь на просмотр квартиры № 84
-                                                                .mt10
-                                                                    .font_size14.fw_medium Площадь: 54.1 кв.м
-                                                                .object-popup__price.color_yelow.ff_trajan 6 700 000 ₽
-                                                                form.ajax-form(action='send.php', method='post', data-parsley-validate='', enctype='multipart/form-data')
-                                                                    input(type='hidden', name='subj', value='Записаться на просмотр квартиры № 84')
-                                                                    .input-box
-                                                                        input.input-text.input-text_fill(type='tel', name='phone', required='', data-parsley-errors-messages-disabled='', placeholder='+7 (___) ___-__-__')
-                                                                        label.input-box__icon.icon-telephone
-                                                                    button.button.button_big.button_blue.button_blue2.mt30(type='submit', name='call')
-                                                                        | Записаться на просмотр
-                                                                        span.button__arrow.icon-arrow
-                                                                    .polity-box.mt20
-                                                                        .polity-box__dot
-                                                                        .font_size12.fw_medium.fade05
-                                                                            | Вы соглашаетесь с условиями 
-                                                                            br
-                                                                            | обработки персональных данных 
-                                                                            br
-                                                                            a(href='#') ознакомиться
-                                                .object-list__item.col-sm-4.col-min-6
-                                                    .object-list__preview.js-object-show
-                                                        .object-list__thumb
-                                                            img(src='/images/catalog/object.jpg', alt='')
-                                                            .object-list__zoom.browse-button
-                                                                .icon-search
-                                                        .object-list__options.mt20
-                                                            .object-list__option
-                                                                | Квартира 
-                                                                br
-                                                                | № 85
-                                                            .object-list__option
-                                                                | Площадь: 
-                                                                br
-                                                                | 56.1 м
-                                                                sup 2
-                                                        .object-list__price.color_yelow.ff_trajan 26 700 000 ₽
-                                                    .object-popup
-                                                        .object-popup__close.icon-close
-                                                        .object-popup__row
-                                                            .object-popup__left
-                                                                a.object-popup__img-big.fancybox(href='/images/catalog/object.jpg', rel='object85')
-                                                                    img(src='/images/catalog/object.jpg', alt='')
-                                                                .object-popup__gallery.mt20
-                                                                    a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
-                                                                        img(src='/images/catalog/object.jpg', alt='')
-                                                                    a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
-                                                                        img(src='/images/catalog/object.jpg', alt='')
-                                                                    a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
-                                                                        img(src='/images/catalog/object.jpg', alt='')
-                                                            .object-popup__right
-                                                                .object-popup__title.ff_trajan Запишитесь на просмотр квартиры № 84
-                                                                .mt10
-                                                                    .font_size14.fw_medium Площадь: 54.1 кв.м
-                                                                .object-popup__price.color_yelow.ff_trajan 6 700 000 ₽
-                                                                form.ajax-form(action='send.php', method='post', data-parsley-validate='', enctype='multipart/form-data')
-                                                                    input(type='hidden', name='subj', value='Записаться на просмотр квартиры № 84')
-                                                                    .input-box
-                                                                        input.input-text.input-text_fill(type='tel', name='phone', required='', data-parsley-errors-messages-disabled='', placeholder='+7 (___) ___-__-__')
-                                                                        label.input-box__icon.icon-telephone
-                                                                    button.button.button_big.button_blue.button_blue2.mt30(type='submit', name='call')
-                                                                        | Записаться на просмотр
-                                                                        span.button__arrow.icon-arrow
-                                                                    .polity-box.mt20
-                                                                        .polity-box__dot
-                                                                        .font_size12.fw_medium.fade05
-                                                                            | Вы соглашаетесь с условиями 
-                                                                            br
-                                                                            | обработки персональных данных 
-                                                                            br
-                                                                            a(href='#') ознакомиться
+                                                //- .object-list__item.col-sm-4.col-min-6
+                                                //-     .object-list__preview.js-object-show
+                                                //-         .object-list__thumb
+                                                //-             img(src='/images/catalog/object.jpg', alt='')
+                                                //-             .object-list__zoom.browse-button
+                                                //-                 .icon-search
+                                                //-         .object-list__options.mt20
+                                                //-             .object-list__option
+                                                //-                 | Квартира 
+                                                //-                 br
+                                                //-                 | № 85
+                                                //-             .object-list__option
+                                                //-                 | Площадь: 
+                                                //-                 br
+                                                //-                 | 56.1 м
+                                                //-                 sup 2
+                                                //-         .object-list__price.color_yelow.ff_trajan 6 700 000 ₽
+                                                //-     .object-popup
+                                                //-         .object-popup__close.icon-close
+                                                //-         .object-popup__row
+                                                //-             .object-popup__left
+                                                //-                 a.object-popup__img-big.fancybox(href='/images/catalog/object.jpg', rel='object85')
+                                                //-                     img(src='/images/catalog/object.jpg', alt='')
+                                                //-                 .object-popup__gallery.mt20
+                                                //-                     a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
+                                                //-                         img(src='/images/catalog/object.jpg', alt='')
+                                                //-                     a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
+                                                //-                         img(src='/images/catalog/object.jpg', alt='')
+                                                //-                     a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
+                                                //-                         img(src='/images/catalog/object.jpg', alt='')
+                                                //-             .object-popup__right
+                                                //-                 .object-popup__title.ff_trajan Запишитесь на просмотр квартиры № 84
+                                                //-                 .mt10
+                                                //-                     .font_size14.fw_medium Площадь: 54.1 кв.м
+                                                //-                 .object-popup__price.color_yelow.ff_trajan 6 700 000 ₽
+                                                //-                 form.ajax-form(action='send.php', method='post', data-parsley-validate='', enctype='multipart/form-data')
+                                                //-                     input(type='hidden', name='subj', value='Записаться на просмотр квартиры № 84')
+                                                //-                     .input-box
+                                                //-                         input.input-text.input-text_fill(type='tel', name='phone', required='', data-parsley-errors-messages-disabled='', placeholder='+7 (___) ___-__-__')
+                                                //-                         label.input-box__icon.icon-telephone
+                                                //-                     button.button.button_big.button_blue.button_blue2.mt30(type='submit', name='call')
+                                                //-                         | Записаться на просмотр
+                                                //-                         span.button__arrow.icon-arrow
+                                                //-                     .polity-box.mt20
+                                                //-                         .polity-box__dot
+                                                //-                         .font_size12.fw_medium.fade05
+                                                //-                             | Вы соглашаетесь с условиями 
+                                                //-                             br
+                                                //-                             | обработки персональных данных 
+                                                //-                             br
+                                                //-                             a(href='#') ознакомиться
+                                                //- .object-list__item.col-sm-4.col-min-6
+                                                //-     .object-list__preview.js-object-show
+                                                //-         .object-list__thumb
+                                                //-             img(src='/images/catalog/object.jpg', alt='')
+                                                //-             .object-list__zoom.browse-button
+                                                //-                 .icon-search
+                                                //-         .object-list__options.mt20
+                                                //-             .object-list__option
+                                                //-                 | Квартира 
+                                                //-                 br
+                                                //-                 | № 85
+                                                //-             .object-list__option
+                                                //-                 | Площадь: 
+                                                //-                 br
+                                                //-                 | 56.1 м
+                                                //-                 sup 2
+                                                //-         .object-list__price.color_yelow.ff_trajan 26 700 000 ₽
+                                                //-     .object-popup
+                                                //-         .object-popup__close.icon-close
+                                                //-         .object-popup__row
+                                                //-             .object-popup__left
+                                                //-                 a.object-popup__img-big.fancybox(href='/images/catalog/object.jpg', rel='object85')
+                                                //-                     img(src='/images/catalog/object.jpg', alt='')
+                                                //-                 .object-popup__gallery.mt20
+                                                //-                     a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
+                                                //-                         img(src='/images/catalog/object.jpg', alt='')
+                                                //-                     a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
+                                                //-                         img(src='/images/catalog/object.jpg', alt='')
+                                                //-                     a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
+                                                //-                         img(src='/images/catalog/object.jpg', alt='')
+                                                //-             .object-popup__right
+                                                //-                 .object-popup__title.ff_trajan Запишитесь на просмотр квартиры № 84
+                                                //-                 .mt10
+                                                //-                     .font_size14.fw_medium Площадь: 54.1 кв.м
+                                                //-                 .object-popup__price.color_yelow.ff_trajan 6 700 000 ₽
+                                                //-                 form.ajax-form(action='send.php', method='post', data-parsley-validate='', enctype='multipart/form-data')
+                                                //-                     input(type='hidden', name='subj', value='Записаться на просмотр квартиры № 84')
+                                                //-                     .input-box
+                                                //-                         input.input-text.input-text_fill(type='tel', name='phone', required='', data-parsley-errors-messages-disabled='', placeholder='+7 (___) ___-__-__')
+                                                //-                         label.input-box__icon.icon-telephone
+                                                //-                     button.button.button_big.button_blue.button_blue2.mt30(type='submit', name='call')
+                                                //-                         | Записаться на просмотр
+                                                //-                         span.button__arrow.icon-arrow
+                                                //-                     .polity-box.mt20
+                                                //-                         .polity-box__dot
+                                                //-                         .font_size12.fw_medium.fade05
+                                                //-                             | Вы соглашаетесь с условиями 
+                                                //-                             br
+                                                //-                             | обработки персональных данных 
+                                                //-                             br
+                                                //-                             a(href='#') ознакомиться
+                                                //- .object-list__item.col-sm-4.col-min-6
+                                                //-     .object-list__preview.js-object-show
+                                                //-         .object-list__thumb
+                                                //-             img(src='/images/catalog/object.jpg', alt='')
+                                                //-             .object-list__zoom.browse-button
+                                                //-                 .icon-search
+                                                //-         .object-list__options.mt20
+                                                //-             .object-list__option
+                                                //-                 | Квартира 
+                                                //-                 br
+                                                //-                 | № 85
+                                                //-             .object-list__option
+                                                //-                 | Площадь: 
+                                                //-                 br
+                                                //-                 | 56.1 м
+                                                //-                 sup 2
+                                                //-         .object-list__price.color_yelow.ff_trajan 26 700 000 ₽
+                                                //-     .object-popup
+                                                //-         .object-popup__close.icon-close
+                                                //-         .object-popup__row
+                                                //-             .object-popup__left
+                                                //-                 a.object-popup__img-big.fancybox(href='/images/catalog/object.jpg', rel='object85')
+                                                //-                     img(src='/images/catalog/object.jpg', alt='')
+                                                //-                 .object-popup__gallery.mt20
+                                                //-                     a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
+                                                //-                         img(src='/images/catalog/object.jpg', alt='')
+                                                //-                     a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
+                                                //-                         img(src='/images/catalog/object.jpg', alt='')
+                                                //-                     a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
+                                                //-                         img(src='/images/catalog/object.jpg', alt='')
+                                                //-             .object-popup__right
+                                                //-                 .object-popup__title.ff_trajan Запишитесь на просмотр квартиры № 84
+                                                //-                 .mt10
+                                                //-                     .font_size14.fw_medium Площадь: 54.1 кв.м
+                                                //-                 .object-popup__price.color_yelow.ff_trajan 6 700 000 ₽
+                                                //-                 form.ajax-form(action='send.php', method='post', data-parsley-validate='', enctype='multipart/form-data')
+                                                //-                     input(type='hidden', name='subj', value='Записаться на просмотр квартиры № 84')
+                                                //-                     .input-box
+                                                //-                         input.input-text.input-text_fill(type='tel', name='phone', required='', data-parsley-errors-messages-disabled='', placeholder='+7 (___) ___-__-__')
+                                                //-                         label.input-box__icon.icon-telephone
+                                                //-                     button.button.button_big.button_blue.button_blue2.mt30(type='submit', name='call')
+                                                //-                         | Записаться на просмотр
+                                                //-                         span.button__arrow.icon-arrow
+                                                //-                     .polity-box.mt20
+                                                //-                         .polity-box__dot
+                                                //-                         .font_size12.fw_medium.fade05
+                                                //-                             | Вы соглашаетесь с условиями 
+                                                //-                             br
+                                                //-                             | обработки персональных данных 
+                                                //-                             br
+                                                //-                             a(href='#') ознакомиться
+                                                //- .object-list__item.col-sm-4.col-min-6
+                                                //-     .object-list__preview.js-object-show
+                                                //-         .object-list__thumb
+                                                //-             img(src='/images/catalog/object.jpg', alt='')
+                                                //-             .object-list__zoom.browse-button
+                                                //-                 .icon-search
+                                                //-         .object-list__options.mt20
+                                                //-             .object-list__option
+                                                //-                 | Квартира 
+                                                //-                 br
+                                                //-                 | № 85
+                                                //-             .object-list__option
+                                                //-                 | Площадь: 
+                                                //-                 br
+                                                //-                 | 56.1 м
+                                                //-                 sup 2
+                                                //-         .object-list__price.color_yelow.ff_trajan 26 700 000 ₽
+                                                //-     .object-popup
+                                                //-         .object-popup__close.icon-close
+                                                //-         .object-popup__row
+                                                //-             .object-popup__left
+                                                //-                 a.object-popup__img-big.fancybox(href='/images/catalog/object.jpg', rel='object85')
+                                                //-                     img(src='/images/catalog/object.jpg', alt='')
+                                                //-                 .object-popup__gallery.mt20
+                                                //-                     a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
+                                                //-                         img(src='/images/catalog/object.jpg', alt='')
+                                                //-                     a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
+                                                //-                         img(src='/images/catalog/object.jpg', alt='')
+                                                //-                     a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
+                                                //-                         img(src='/images/catalog/object.jpg', alt='')
+                                                //-             .object-popup__right
+                                                //-                 .object-popup__title.ff_trajan Запишитесь на просмотр квартиры № 84
+                                                //-                 .mt10
+                                                //-                     .font_size14.fw_medium Площадь: 54.1 кв.м
+                                                //-                 .object-popup__price.color_yelow.ff_trajan 6 700 000 ₽
+                                                //-                 form.ajax-form(action='send.php', method='post', data-parsley-validate='', enctype='multipart/form-data')
+                                                //-                     input(type='hidden', name='subj', value='Записаться на просмотр квартиры № 84')
+                                                //-                     .input-box
+                                                //-                         input.input-text.input-text_fill(type='tel', name='phone', required='', data-parsley-errors-messages-disabled='', placeholder='+7 (___) ___-__-__')
+                                                //-                         label.input-box__icon.icon-telephone
+                                                //-                     button.button.button_big.button_blue.button_blue2.mt30(type='submit', name='call')
+                                                //-                         | Записаться на просмотр
+                                                //-                         span.button__arrow.icon-arrow
+                                                //-                     .polity-box.mt20
+                                                //-                         .polity-box__dot
+                                                //-                         .font_size12.fw_medium.fade05
+                                                //-                             | Вы соглашаетесь с условиями 
+                                                //-                             br
+                                                //-                             | обработки персональных данных 
+                                                //-                             br
+                                                //-                             a(href='#') ознакомиться
+                                                //- .object-list__item.col-sm-4.col-min-6
+                                                //-     .object-list__preview.js-object-show
+                                                //-         .object-list__thumb
+                                                //-             img(src='/images/catalog/object.jpg', alt='')
+                                                //-             .object-list__zoom.browse-button
+                                                //-                 .icon-search
+                                                //-         .object-list__options.mt20
+                                                //-             .object-list__option
+                                                //-                 | Квартира 
+                                                //-                 br
+                                                //-                 | № 85
+                                                //-             .object-list__option
+                                                //-                 | Площадь: 
+                                                //-                 br
+                                                //-                 | 56.1 м
+                                                //-                 sup 2
+                                                //-         .object-list__price.color_yelow.ff_trajan 26 700 000 ₽
+                                                //-     .object-popup
+                                                //-         .object-popup__close.icon-close
+                                                //-         .object-popup__row
+                                                //-             .object-popup__left
+                                                //-                 a.object-popup__img-big.fancybox(href='/images/catalog/object.jpg', rel='object85')
+                                                //-                     img(src='/images/catalog/object.jpg', alt='')
+                                                //-                 .object-popup__gallery.mt20
+                                                //-                     a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
+                                                //-                         img(src='/images/catalog/object.jpg', alt='')
+                                                //-                     a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
+                                                //-                         img(src='/images/catalog/object.jpg', alt='')
+                                                //-                     a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
+                                                //-                         img(src='/images/catalog/object.jpg', alt='')
+                                                //-             .object-popup__right
+                                                //-                 .object-popup__title.ff_trajan Запишитесь на просмотр квартиры № 84
+                                                //-                 .mt10
+                                                //-                     .font_size14.fw_medium Площадь: 54.1 кв.м
+                                                //-                 .object-popup__price.color_yelow.ff_trajan 6 700 000 ₽
+                                                //-                 form.ajax-form(action='send.php', method='post', data-parsley-validate='', enctype='multipart/form-data')
+                                                //-                     input(type='hidden', name='subj', value='Записаться на просмотр квартиры № 84')
+                                                //-                     .input-box
+                                                //-                         input.input-text.input-text_fill(type='tel', name='phone', required='', data-parsley-errors-messages-disabled='', placeholder='+7 (___) ___-__-__')
+                                                //-                         label.input-box__icon.icon-telephone
+                                                //-                     button.button.button_big.button_blue.button_blue2.mt30(type='submit', name='call')
+                                                //-                         | Записаться на просмотр
+                                                //-                         span.button__arrow.icon-arrow
+                                                //-                     .polity-box.mt20
+                                                //-                         .polity-box__dot
+                                                //-                         .font_size12.fw_medium.fade05
+                                                //-                             | Вы соглашаетесь с условиями 
+                                                //-                             br
+                                                //-                             | обработки персональных данных 
+                                                //-                             br
+                                                //-                             a(href='#') ознакомиться
+                                                //- .object-list__item.col-sm-4.col-min-6
+                                                //-     .object-list__preview.js-object-show
+                                                //-         .object-list__thumb
+                                                //-             img(src='/images/catalog/object.jpg', alt='')
+                                                //-             .object-list__zoom.browse-button
+                                                //-                 .icon-search
+                                                //-         .object-list__options.mt20
+                                                //-             .object-list__option
+                                                //-                 | Квартира 
+                                                //-                 br
+                                                //-                 | № 85
+                                                //-             .object-list__option
+                                                //-                 | Площадь: 
+                                                //-                 br
+                                                //-                 | 56.1 м
+                                                //-                 sup 2
+                                                //-         .object-list__price.color_yelow.ff_trajan 26 700 000 ₽
+                                                //-     .object-popup
+                                                //-         .object-popup__close.icon-close
+                                                //-         .object-popup__row
+                                                //-             .object-popup__left
+                                                //-                 a.object-popup__img-big.fancybox(href='/images/catalog/object.jpg', rel='object85')
+                                                //-                     img(src='/images/catalog/object.jpg', alt='')
+                                                //-                 .object-popup__gallery.mt20
+                                                //-                     a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
+                                                //-                         img(src='/images/catalog/object.jpg', alt='')
+                                                //-                     a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
+                                                //-                         img(src='/images/catalog/object.jpg', alt='')
+                                                //-                     a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
+                                                //-                         img(src='/images/catalog/object.jpg', alt='')
+                                                //-             .object-popup__right
+                                                //-                 .object-popup__title.ff_trajan Запишитесь на просмотр квартиры № 84
+                                                //-                 .mt10
+                                                //-                     .font_size14.fw_medium Площадь: 54.1 кв.м
+                                                //-                 .object-popup__price.color_yelow.ff_trajan 6 700 000 ₽
+                                                //-                 form.ajax-form(action='send.php', method='post', data-parsley-validate='', enctype='multipart/form-data')
+                                                //-                     input(type='hidden', name='subj', value='Записаться на просмотр квартиры № 84')
+                                                //-                     .input-box
+                                                //-                         input.input-text.input-text_fill(type='tel', name='phone', required='', data-parsley-errors-messages-disabled='', placeholder='+7 (___) ___-__-__')
+                                                //-                         label.input-box__icon.icon-telephone
+                                                //-                     button.button.button_big.button_blue.button_blue2.mt30(type='submit', name='call')
+                                                //-                         | Записаться на просмотр
+                                                //-                         span.button__arrow.icon-arrow
+                                                //-                     .polity-box.mt20
+                                                //-                         .polity-box__dot
+                                                //-                         .font_size12.fw_medium.fade05
+                                                //-                             | Вы соглашаетесь с условиями 
+                                                //-                             br
+                                                //-                             | обработки персональных данных 
+                                                //-                             br
+                                                //-                             a(href='#') ознакомиться
+                                                //- .object-list__item.col-sm-4.col-min-6
+                                                //-     .object-list__preview.js-object-show
+                                                //-         .object-list__thumb
+                                                //-             img(src='/images/catalog/object.jpg', alt='')
+                                                //-             .object-list__zoom.browse-button
+                                                //-                 .icon-search
+                                                //-         .object-list__options.mt20
+                                                //-             .object-list__option
+                                                //-                 | Квартира 
+                                                //-                 br
+                                                //-                 | № 85
+                                                //-             .object-list__option
+                                                //-                 | Площадь: 
+                                                //-                 br
+                                                //-                 | 56.1 м
+                                                //-                 sup 2
+                                                //-         .object-list__price.color_yelow.ff_trajan 26 700 000 ₽
+                                                //-     .object-popup
+                                                //-         .object-popup__close.icon-close
+                                                //-         .object-popup__row
+                                                //-             .object-popup__left
+                                                //-                 a.object-popup__img-big.fancybox(href='/images/catalog/object.jpg', rel='object85')
+                                                //-                     img(src='/images/catalog/object.jpg', alt='')
+                                                //-                 .object-popup__gallery.mt20
+                                                //-                     a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
+                                                //-                         img(src='/images/catalog/object.jpg', alt='')
+                                                //-                     a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
+                                                //-                         img(src='/images/catalog/object.jpg', alt='')
+                                                //-                     a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
+                                                //-                         img(src='/images/catalog/object.jpg', alt='')
+                                                //-             .object-popup__right
+                                                //-                 .object-popup__title.ff_trajan Запишитесь на просмотр квартиры № 84
+                                                //-                 .mt10
+                                                //-                     .font_size14.fw_medium Площадь: 54.1 кв.м
+                                                //-                 .object-popup__price.color_yelow.ff_trajan 6 700 000 ₽
+                                                //-                 form.ajax-form(action='send.php', method='post', data-parsley-validate='', enctype='multipart/form-data')
+                                                //-                     input(type='hidden', name='subj', value='Записаться на просмотр квартиры № 84')
+                                                //-                     .input-box
+                                                //-                         input.input-text.input-text_fill(type='tel', name='phone', required='', data-parsley-errors-messages-disabled='', placeholder='+7 (___) ___-__-__')
+                                                //-                         label.input-box__icon.icon-telephone
+                                                //-                     button.button.button_big.button_blue.button_blue2.mt30(type='submit', name='call')
+                                                //-                         | Записаться на просмотр
+                                                //-                         span.button__arrow.icon-arrow
+                                                //-                     .polity-box.mt20
+                                                //-                         .polity-box__dot
+                                                //-                         .font_size12.fw_medium.fade05
+                                                //-                             | Вы соглашаетесь с условиями 
+                                                //-                             br
+                                                //-                             | обработки персональных данных 
+                                                //-                             br
+                                                //-                             a(href='#') ознакомиться
                                         .object-slider__slide
                                             .object-list.row
                                                 .object-list__item.col-sm-4.col-min-6
@@ -2123,19 +2107,14 @@ block main
                                                 a(href='#') ознакомиться
                     .tabs-slider__slide
                         .catalog-slider
-                            .catalog-slider__slide
-                                a.catalog-slider__pic.fancybox(href='/images/gk_slide.jpg', rel='gallery-object')
-                                    img(src='/images/gk_slide.jpg', alt='')
+                            .catalog-slider__slide(v-for="(stage, index) in buildings[useBuilding].Stages")
+                                a.catalog-slider__pic.fancybox(:href="'/images/building/stage/' + stage.sStageImage", rel='gallery-object')
+                                    img(:src="'/images/building/stage/' + stage.sStageImage", alt='')
                                     span.catalog-slider__icon
                                         span.icon-search
                                     span.catalog-slider__caption
-                                        span.font_size14.fw_medium.fade05
-                                            | Посмотрите короткую 
-                                            br
-                                            | видео-презентацию 
-                                            br
-                                            | о жилом комплексе
-                            .catalog-slider__slide
+                                        span.font_size14.fw_medium.fade05 {{ stage.dStageDate }} <br> {{ stage.tStageDesc }}
+                            //- .catalog-slider__slide
                                 a.catalog-slider__pic.fancybox(href='/images/gk_slide.jpg', rel='gallery-object')
                                     img(src='/images/gk_slide.jpg', alt='')
                                     span.catalog-slider__icon.icon-search

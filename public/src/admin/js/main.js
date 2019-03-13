@@ -36,7 +36,7 @@ Vue.component('building-edit-advantage', {
                 <input type="text" class="form-control" v-model="advantage.sAdvantageTitle">
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary" type="button" v-on:click="del(index)">
-                        del
+                        <i class="material-icons">delete</i>
                     </button>
                 </div>
             </div>        
@@ -78,8 +78,12 @@ Vue.component('app-header', {
 Vue.component('building-edit-header', {
     props: [
         'building',
-        'menuActive'
+        'menuActive',
+        'loading'
     ],
+    components: {
+        'picture-input': PictureInput,
+    },
     data: function () {
         return {
             menu: [
@@ -98,26 +102,65 @@ Vue.component('building-edit-header', {
             ],
         }
     },
+    methods: {
+        uploadAvatar: function (column) {
+            var formData = new FormData();
+                formData.append(column, this.$refs[column].file);
+            axios.post('/admin/BuildingUploadAvatar', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'column': column
+                }
+            }).then( (response) => {
+                Vue.set(this.building, column, response.data.file.filename)
+            })
+        },
+    },
     template: `
-        <div class="container-fluid">
-            <div class="header">
-                <div class="header-body">
-                    <div class="row align-items-center">
+        <div class="header building-edit-header">
+            <picture-input
+                    ref="sBuildingCoverSmall"
+                    @change="uploadAvatar('sBuildingCoverSmall')"
+                    width="1170"
+                    height="450"
+                    margin="0"
+                    radius="0"
+                    accept="image/jpeg,image/png"
+                    size="50"
+                    v-bind:prefill="Object.keys(building).length !== 0 && building.sBuildingCoverSmall != null ? '/images/building/'+building.sBuildingCoverSmall : ''"
+                    buttonClass="btn btn-primary btn-sm"
+                    :hideChangeButton='true'
+                    :customStrings="{
+                        drag: 'Перетащите изображение<br>или<br>нажмите для выбора файла<br>(1170px / 450px)'
+                    }"></picture-input>
+            <div class="container-fluid" style="z-index:1000000000">
+                <div class="header-body mt-n5 mt-md-n6">
+                    <div class="row align-items-end">
                         <div class="col-auto">
-                            <div class="avatar">
-                                <img v-bind:src="'/images/building/'+building.sBuildingAvatar" alt="..." class="avatar-img rounded-circle" v-if="building && building.sBuildingAvatar != null">
-                                <div v-else class="avatar-img rounded-circle"></div>
+                            <div class="avatar avatar-xxl header-avatar-top">
+                                <picture-input
+                                    ref="sBuildingAvatar"
+                                    @change="uploadAvatar('sBuildingAvatar')"
+                                    width="128"
+                                    height="128"
+                                    margin="0"
+                                    radius="0"
+                                    accept="image/jpeg,image/png"
+                                    size="50"
+                                    v-bind:prefill="Object.keys(building).length !== 0 && building.sBuildingAvatar != null ? '/images/building/'+building.sBuildingAvatar : ''"
+                                    buttonClass="btn btn-primary btn-sm"
+                                    :hideChangeButton='true'
+                                    :customStrings="{
+                                        drag: 'Нажмите для выбора файла<br>(100px / 100px)'
+                                        }"></picture-input>
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col mb-3 ml-n3 ml-md-n2">
                             <h6 class="header-pretitle">Объект</h6>
-                            <h1 class="header-title">
-                                <span v-if="Object.keys(building).length && building.sBuildingTitle && building.sBuildingTitle.length !== 0">{{ building.sBuildingTitle }}</span>
-                                <span v-else>Наименование объекта</span>
-                            </h1>
+                            <h1 class="header-title">{{ building.sBuildingTitle }}</h1>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row align-items-center">
                         <div class="col">
                             <ul class="nav nav-tabs nav-overflow header-tabs">
                                 <li

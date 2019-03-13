@@ -95,61 +95,67 @@ export default {
     template: `
         <div class="main-content building-edit-plan">
 
-            <div class="modal fixed-right" id="modalPlanEdit" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-vertical" role="document">
-                    <form class="modal-content" v-if="usePlan !== false">
-                        <div class="modal-body">
-                            <!-- Close -->
-                            <a class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></a>
-                            <div class="form-group">
-                                <label for="">Наименование плана</label>
-                                <input type="text" class="form-control" v-model="plan[usePlan].sPlanName">
+            <div class="modal" id="modalPlanEdit" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content" v-if="usePlan !== false">
+                        <form>
+                            <div class="modal-header">
+                                <h4 class="modal-title">Карточка плана</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
-                            <div class="form-group">
-                                <label for="">Количество комнат</label>
-                                <input type="text" class="form-control" v-model.number="plan[usePlan].iRoomCount">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="">Наименование плана</label>
+                                    <input type="text" class="form-control" v-model="plan[usePlan].sPlanName">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Количество комнат</label>
+                                    <input type="text" class="form-control" v-model.number="plan[usePlan].iRoomCount">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Площадь</label>
+                                    <input type="text" class="form-control" v-model.number="plan[usePlan].fPlanArea">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Комнатность</label>
+                                    <select class="form-control" v-model="plan[usePlan].iTypeID">
+                                        <option
+                                            v-for="(type, index) in type"
+                                            v-bind:value="type.iTypeID"
+                                            >{{ type.sTypeTitle }}</option>
+                                    </select>
+                                </div>
+                                <template v-for="(image, index) in plan[usePlan].plan_images">
+                                    <input type="hidden" class="form-control" v-model="image.sPlanImage">
+                                    <picture-input
+                                        ref="planImage"
+                                        @change="uploadPlan(index)"
+                                        width="200"
+                                        height="200"
+                                        margin="16"
+                                        radius="6"
+                                        accept="image/jpeg,image/png"
+                                        size="50"
+                                        v-bind:prefill="(image.sPlanImage && image.sPlanImage.length) ? '/images/building/plan/'+image.sPlanImage : ''"
+                                        buttonClass="btn btn-primary btn-sm"
+                                        :customStrings="{
+                                            drag: 'Drag or click',
+                                            change: 'Change img'
+                                        }"></picture-input>
+                                    <button type="button" class="btn btn-sm btn-danger" v-on:click.prevent="delImage(index)">Удалить изображение</button>
+                                </template>
+                                <div class="modal-footer border-0">
+                                    <button type="button" class="btn btn-block btn-sm btn-primary mt-auto" v-on:click.prevent="addImage">Добавить изображение</button>
+                                </div>
+                                <button type="button" class="btn btn-block btn-sm btn-danger mt-auto" v-on:click.prevent="del">Удалить планировку</button>
                             </div>
-                            <div class="form-group">
-                                <label for="">Площадь</label>
-                                <input type="text" class="form-control" v-model.number="plan[usePlan].fPlanArea">
-                            </div>
-                            <div class="form-group">
-                                <label for="">Комнатность</label>
-                                <select class="form-control" v-model="plan[usePlan].iTypeID">
-                                    <option
-                                        v-for="(type, index) in type"
-                                        v-bind:value="type.iTypeID"
-                                        >{{ type.sTypeTitle }}</option>
-                                </select>
-                            </div>
-                            <template v-for="(image, index) in plan[usePlan].plan_images">
-                                <input type="hidden" class="form-control" v-model="image.sPlanImage">
-                                <picture-input
-                                    ref="planImage"
-                                    @change="uploadPlan(index)"
-                                    width="200"
-                                    height="200"
-                                    margin="16"
-                                    radius="6"
-                                    accept="image/jpeg,image/png"
-                                    size="50"
-                                    v-bind:prefill="(image.sPlanImage && image.sPlanImage.length) ? '/images/building/plan/'+image.sPlanImage : ''"
-                                    buttonClass="btn btn-primary btn-sm"
-                                    :customStrings="{
-                                        drag: 'Drag or click',
-                                        change: 'Change img'
-                                    }"></picture-input>
-                                <button type="button" class="btn btn-sm btn-danger" v-on:click.prevent="delImage(index)">Удалить изображение</button>
-                            </template>
                             <div class="modal-footer border-0">
-                                <button type="button" class="btn btn-block btn-sm btn-primary mt-auto" v-on:click.prevent="addImage">Добавить изображение</button>
+                                <button type="button" class="btn btn-block btn-primary mt-auto" v-on:click.prevent="update">Сохранить</button>
                             </div>
-                            <button type="button" class="btn btn-block btn-sm btn-danger mt-auto" v-on:click.prevent="del">Удалить планировку</button>
-                        </div>
-                        <div class="modal-footer border-0">
-                            <button type="button" class="btn btn-block btn-primary mt-auto" v-on:click.prevent="update">Сохранить</button>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
 

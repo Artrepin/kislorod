@@ -166,12 +166,6 @@ export default {
                     </template>
                 </div>
             </div>            
-
-
-            <div class="container-fluid">
-                <pre>{{ people }}</pre>
-                <pre>{{ department }}</pre>
-            </div>
         </div>
     `,
 }

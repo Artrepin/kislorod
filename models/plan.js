@@ -26,9 +26,9 @@ module.exports = (sequelize, DataTypes) => {
     plan.hasMany(models.plan_image, {
       foreignKey: 'iPlanID'
     })
-    // plan.belongsTo(models.apartament, {
-    //   foreignKey: 'iPlanID'
-    // })
+    plan.hasMany(models.apartament, {
+      foreignKey: 'iPlanID'
+    })
   };
   return plan;
 };

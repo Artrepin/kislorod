@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const pug = require('pug')
+const fs = require('fs')
 const config = require('config')
 require('dotenv').config()
 app.set('view engine', 'pug')
@@ -11,6 +12,7 @@ app.use(bodyParser.json({ limit: '50mb' }))
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }))
 // const amocrm = require('./modules/amocrm')
 const multer = require('multer')
+const sharp = require('sharp')
 
 const Building = require('./models').Building
 const Advantage = require('./models').Advantage
@@ -140,8 +142,53 @@ app.post('/catalog/init', async (req, res) => {
     res.json(data)
 })
 app.post('/catalog/building', async (req, res) => {
+    const Sequelize = require('sequelize')
+    const Op = Sequelize.Op
+
+    var dBuildingReady = {}
+    if (req.body.selected.year) {
+        dBuildingReady = {
+            dBuildingReady: {
+                [Op.gte]: req.body.selected.year + '-01-01',
+                [Op.lte]: req.body.selected.year + '-12-31'
+            }
+        }
+    }
+
     var data = {}
-        data.buildings = await Building.findAll()
+        data.buildings = await Building.findAll({
+            where: dBuildingReady,
+            include: [
+                {
+                    model: Advantage
+                },{
+                    model: Stage
+                }, {
+                    model: Plan,
+                    required: true,
+                    where: {
+                        fPlanArea: {
+                            [Op.lte]: req.body.selected.area
+                        },
+                        iRoomCount: {
+                            [Op.lte]: req.body.selected.room
+                        }
+                    },
+                    include: [{
+                        model: Apartament,
+                        required: true,
+                        where: {
+                            iApartamentPrice: {
+                                [Op.lte]: (req.body.selected.price*1000000)
+                            },
+                            iApartamentFloor: {
+                                [Op.lte]: req.body.selected.floor
+                            }
+                        }
+                    }
+                ]
+            }]
+        })
     res.json(data)
 })
 
@@ -290,6 +337,7 @@ app.post('/admin/BuildingUpdate', async (req, res) => {
             fBuildingLocationeX: req.body.building.fBuildingLocationeX,
             fBuildingLocationeY: req.body.building.fBuildingLocationeY,
             sBuildingYoutube: req.body.building.sBuildingYoutube,
+            dBuildingReady: req.body.building.dBuildingReady,
         }, {
             where: {
                 iBuildingID: iBuildingID
@@ -305,6 +353,7 @@ app.post('/admin/BuildingUpdate', async (req, res) => {
             fBuildingLocationeX: req.body.building.fBuildingLocationeX,
             fBuildingLocationeY: req.body.building.fBuildingLocationeY,
             sBuildingYoutube: req.body.building.sBuildingYoutube,
+            dBuildingReady: req.body.building.dBuildingReady,
         }).then((response) => {
             iBuildingID = response.iBuildingID
         })        
@@ -391,38 +440,63 @@ app.post('/admin/BuildingRemove', async (req, res) => {
     })    
 })
 app.post('/admin/BuildingUploadAvatar', async (req, res) => {
-    console.log('upload start')
+    var filename = randomString() + '.jpg'
+    
     var storage = multer.diskStorage({
         destination: function (req, file, cb) {
             cb(null, './public/images/building')
         },
         filename: function (req, file, cb) {
-            cb(null, randomString() + '.jpg')
+            cb(null, 'temp_' + filename)
         }
     })
+
     var upload = multer({ storage: storage }).single(req.headers.column)
+
     upload(req, res, function (err) {
-        console.log('upload complete')
-        sharp('./public/images/building' + req.file.fieldname)
-        .resize(300, 200)
-        .toFile('output.jpg', function(err) {
+        let x = 0
+        let y = 0
+        if (req.headers.column == 'sBuildingAvatar') {
+            x = 100
+            y = 100
+        } else if (req.headers.column == 'sBuildingCoverSmall') {
+            x = 1170
+            y = 450
+        } else if (req.headers.column == 'sBuildingCoverBig') {
+            x = 1170
+            y = 450
+        }
+        sharp('./public/images/building/' + 'temp_' + filename)
+        .resize(x, y)
+        .toFile('./public/images/building/' + filename, function(err, response) {
+            sharp.cache(false)
+            fs.unlink('./public/images/building/' + 'temp_' + filename)
+            req.file.filename = filename
             res.send({ file: req.file, body: req.body })
-        })        
+        })
     })
 })
 app.post('/admin/BuildingUploadStage', async (req, res) => {
-    console.log('upload start')
+    var filename = randomString() + '.jpg'
+
     var storage = multer.diskStorage({
         destination: function (req, file, cb) {
             cb(null, './public/images/building/stage')
         },
         filename: function (req, file, cb) {
-            cb(null, randomString() + '.jpg')
+            cb(null, 'temp_' + filename)
         }
     })
     var upload = multer({ storage: storage }).single('stage')
     upload(req, res, function (err) {
-        res.send({ file: req.file, body: req.body })
+        sharp('./public/images/building/stage/' + 'temp_' + filename)
+        .resize(1170, 450)
+        .toFile('./public/images/building/stage/' + filename, function(err, response) {
+            sharp.cache(false)
+            fs.unlink('./public/images/building/stage/' + 'temp_' + filename)
+            req.file.filename = filename
+            res.send({ file: req.file, body: req.body })
+        })
     })
 })
 

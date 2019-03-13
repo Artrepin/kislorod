@@ -30,6 +30,9 @@ module.exports = (sequelize, DataTypes) => {
     Building.hasMany(models.Stage, {
       foreignKey: 'iBuildingID'
     })
+    Building.hasMany(models.plan, {
+      foreignKey: 'iBuildingID'
+    })
   };
   sequelizePaginate.paginate(Building)
 
