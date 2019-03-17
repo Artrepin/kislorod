@@ -592,20 +592,20 @@ app.post('/admin/BuildingUploadStage', async (req, res) => {
     })
 })
 
-// app.post('/admin/BuildingEditPlan', async (req, res) => {
-//     var data = {}
-//         data.building = await Building.getBuildingItem(req.body.iBuildingID)
-//         data.plan = await Plan.findAll(
-//             {
-//                 where: {
-//                     iBuildingID: req.body.iBuildingID
-//                 },
-//                 include: [plan_image]
-//             }
-//         )
-//         data.type = await Type.findAll()
-//     res.json(data)
-// })
+app.post('/admin/BuildingEditPlan', async (req, res) => {
+    var data = {}
+        data.building = await Building.getBuildingItem(req.body.iBuildingID)
+        data.plan = await Plan.findAll(
+            {
+                where: {
+                    iBuildingID: req.body.iBuildingID
+                },
+                include: [plan_image]
+            }
+        )
+        data.type = await Type.findAll()
+    res.json(data)
+})
 app.post('/admin/BuildingUploadPlan', async (req, res) => {
     var storage = multer.diskStorage({
         destination: function (req, file, cb) {
@@ -696,7 +696,6 @@ app.post('/admin/BuildingDelPlan', (req, res) => {
     })    
 })
 
-
 app.post('/admin/BuildingEditApartament', async (req, res) => {
     var data = {}
         data.building = await Building.getBuildingItem(req.body.iBuildingID)
@@ -753,7 +752,6 @@ app.post('/admin/BuildingDelApartament', async (req, res) => {
         res.json(response)
     })    
 })
-
 
 app.post('/admin/PeopleList', async (req, res) => {
     var data = {}

@@ -1,7 +1,7 @@
 export default {
     name: 'BuildingEditStage',
     created: function () {
-        Vue.set(this.$parent, 'menuActive', 1)
+        Vue.set(this.$parent, 'menuActive', 3)
     },
     components: {
         'picture-input': PictureInput,
@@ -37,7 +37,7 @@ export default {
     template: `
         <div class="container-fluid building-edit-stage">
             <div class="row">
-                <div class="col-4" v-for="(stage, index) in building.Stages" v-if="!stage.del">
+                <div class="col-xl-4 col-lg-6" v-for="(stage, index) in building.Stages" v-if="!stage.del">
                     <div class="card">
                         <picture-input
                             ref="stageImage"

@@ -1,7 +1,7 @@
 export default {
     name: 'BuildingEditApartment',
     created: function () {
-        Vue.set(this.$parent, 'menuActive', 3)
+        Vue.set(this.$parent, 'menuActive', 2)
     },
     props: [
         'building'

@@ -1,7 +1,7 @@
 export default {
     name: 'BuildingEditPlan',
     created: function () {
-        Vue.set(this.$parent, 'menuActive', 2)
+        Vue.set(this.$parent, 'menuActive', 1)
     },
     components: {
         'picture-input': PictureInput,
@@ -48,7 +48,7 @@ export default {
     template: `
         <div class="container-fluid building-edit-plan">
             <div class="row">
-                <div class="col-xl-3" v-for="(plan, index) in building.plans" v-if="!plan.del">
+                <div class="col-xl-3 col-lg-4 col-md-6" v-for="(plan, index) in building.plans" v-if="!plan.del">
                     <div class="card" v-on:click.prevent="openModal(index)">
 
                         <div v-bind:id="'carousel'+index" class="carousel slide">
@@ -109,13 +109,13 @@ export default {
                             </div>
                             <div class="modal-body">
                                 <div class="row">
-                                    <div class="col">
+                                    <div class="col-sm">
                                         <div class="form-group">
                                             <label for="">Наименование планировки</label>
                                             <input type="text" class="form-control" v-model="building.plans[usePlan].sPlanName">
                                         </div>
                                     </div>
-                                    <div class="col">
+                                    <div class="col-sm">
                                         <div class="form-group">
                                             <label for="">Количество комнат</label>
                                             <input type="text" class="form-control" v-model.number="building.plans[usePlan].iRoomCount">
@@ -123,13 +123,13 @@ export default {
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col">
+                                    <div class="col-sm">
                                         <div class="form-group">
                                             <label for="">Площадь</label>
                                             <input type="text" class="form-control" v-model.number="building.plans[usePlan].fPlanArea">
                                         </div>
                                     </div>
-                                    <div class="col">
+                                    <div class="col-sm">
                                         <div class="form-group">
                                             <label for="">Тип планировки</label>
                                             <select class="form-control" v-model="building.plans[usePlan].iTypeID">

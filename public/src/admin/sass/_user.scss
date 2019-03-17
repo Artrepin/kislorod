@@ -47,7 +47,12 @@
 
 @media (max-width: 767px) {
     .navbar-brand {
-        padding: 0;
+        padding: 0 !important;
+        width: 150px;
+        img {
+            margin: 0;
+            max-height: 2rem;
+        }
     }
 }
 
@@ -78,6 +83,11 @@ button .material-icons {
     }
     .card-img-top {
         height: 150px;
+        background: url('/images/empty.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-color: #eee;
+        background-size: contain;
         object-fit: cover;
     }
     .card-desc {
@@ -237,6 +247,11 @@ button .material-icons {
             height: 250px;
             object-fit: cover;
         }
+        h6 {
+            @media (max-width: 767px) {
+                display: none;
+            }
+        }
     }
     .building-edit-stage {
         .card {
@@ -291,6 +306,9 @@ button .material-icons {
                     height: 10vw;
                     width: auto;
                     object-fit: contain;
+                    @media(max-width: 767px) {
+                        height: 25vw;
+                    }
                 }
             }
             .empty {
@@ -298,7 +316,9 @@ button .material-icons {
                 background: url('/images/empty.svg');
                 background-repeat: no-repeat;
                 background-position: center;
-                
+                @media(max-width: 767px) {
+                    height: 25vw;
+                }                
             }
         }
         .card {
