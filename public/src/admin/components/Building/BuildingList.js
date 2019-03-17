@@ -41,16 +41,14 @@ export default {
                             <img
                                 v-if="building.sBuildingCoverSmall !== null"
                                 v-bind:src="'/images/building/' + building.sBuildingCoverSmall"
-                                alt="..."
                                 class="card-img-top">
-                            <div v-else class="card-img-top" style="background: #EEE;"></div>
+                            <div v-else class="card-img-top"></div>
                             <div class="card-body text-center">
                                 <div class="avatar avatar-xl card-avatar card-avatar-top">
                                     <img
                                         v-if="building.sBuildingAvatar !== null"
                                         v-bind:src="'/images/building/' + building.sBuildingAvatar"
-                                        class="avatar-img rounded-circle border border-4 border-card"
-                                        alt="...">
+                                        class="avatar-img rounded-circle border border-4 border-card">
                                     <div v-else class="avatar-img rounded-circle border border-4 border-card" style="background: #EEE;"></div>
                                 </div>
                                 <h2 class="card-title">{{ building.sBuildingTitle }}</h2>

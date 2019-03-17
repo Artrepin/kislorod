@@ -11,16 +11,16 @@ export default {
                     uri: 'basic'
                 },
                 {
-                    title: 'Этапы',
-                    uri: 'stage'
-                },
-                {
                     title: 'Планировки',
                     uri: 'plan'
                 },
                 {
                     title: 'Квартиры',
                     uri: 'apartment'
+                },
+                {
+                    title: 'Этапы',
+                    uri: 'stage'
                 },
             ],
             menuActive: 0,
@@ -138,7 +138,7 @@ export default {
                                     </li>
                                 </ul>
                             </div>
-                            <div class="col-auto">
+                            <div class="col-auto sticky-top">
                                 <button class="btn btn-primary" type="submit" v-on:click.prevent="update" form="form-building">Сохранить</button>
                                 <button class="btn btn-outline-danger ml-1" v-on:click="buildingRemove">Удалить объект</button>
                             </div>
