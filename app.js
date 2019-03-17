@@ -562,7 +562,7 @@ app.post('/admin/BuildingUploadAvatar', async (req, res) => {
         .resize(x, y)
         .toFile('./public/images/building/' + filename, function(err, response) {
             sharp.cache(false)
-            fs.unlink('./public/images/building/' + 'temp_' + filename)
+            // fs.unlink('./public/images/building/' + 'temp_' + filename)
             req.file.filename = filename
             res.send({ file: req.file, body: req.body })
         })
@@ -585,7 +585,7 @@ app.post('/admin/BuildingUploadStage', async (req, res) => {
         .resize(1170, 450)
         .toFile('./public/images/building/stage/' + filename, function(err, response) {
             sharp.cache(false)
-            fs.unlink('./public/images/building/stage/' + 'temp_' + filename)
+            // fs.unlink('./public/images/building/stage/' + 'temp_' + filename)
             req.file.filename = filename
             res.send({ file: req.file, body: req.body })
         })
