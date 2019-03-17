@@ -4,7 +4,10 @@ import Dashboard from '../components/Dashboard/Dashboard.js'
 
 import Building from '../components/Building/Building.js'
 import BuildingList from '../components/Building/BuildingList.js'
+
 import BuildingEdit from '../components/Building/BuildingEdit.js'
+import BuildingEditBasic from '../components/Building/BuildingEditBasic.js'
+import BuildingEditStage from '../components/Building/BuildingEditStage.js'
 import BuildingEditPlan from '../components/Building/BuildingEditPlan.js'
 import BuildingEditApartment from '../components/Building/BuildingEditApartment.js'
 
@@ -184,43 +187,58 @@ Vue.component('building-edit-header', {
 const routes = [
     {
         path: '/',
-        component: Dashboard,
-        title: 'Dashboard'
+        redirect: '/building'
     },
     {
-        path: '/building/',
+        path: '/building',
         component: Building,
         children: [
-            {
-                path: '',
-                component: BuildingList,
-                props: true
-            },
             {
                 path: 'p/:p',
                 component: BuildingList,
                 props: true,
             },
             {
-                path: 'create',
-                component: BuildingEdit
+                path: '',
+                component: BuildingList,
+                props: true
             },
             {
                 path: ':iBuildingID',
                 component: BuildingEdit,
-                props: true
+                props: true,
+                children: [
+                    {
+                        path: '/',
+                        redirect: '/building/:iBuildingID/basic'
+                    },
+                    {
+                        path: 'create',
+                        component: BuildingEdit
+                    },
+                    {
+                        path: 'basic',
+                        component: BuildingEditBasic
+                    },
+                    {
+                        path: 'stage',
+                        component: BuildingEditStage
+                    },
+                    {
+                        path: 'plan',
+                        component: BuildingEditPlan
+                    },
+                    {
+                        path: 'apartment',
+                        component: BuildingEditApartment
+                    },
+                ]
             },
-            {
-                path: ':iBuildingID/plan',
-                component: BuildingEditPlan,
-                props: true
-            },
-            {
-                path: ':iBuildingID/apartment',
-                component: BuildingEditApartment,
-                props: true
-            },
-    ]
+        ]
+    },
+    {
+        path: '/building/:iBuildingID',
+        component: BuildingEdit
     },
     {
         path: '/people/',
@@ -240,10 +258,6 @@ const app = new Vue({
     render: h => h(App, {
         props: {
             menu: [
-                {
-                    title: 'Рабочий стол',
-                    uri: '/'
-                },
                 {
                     title: 'Объекты',
                     uri: '/building'

@@ -105,6 +105,7 @@ button .material-icons {
     }
 }
 .picture-input {
+    z-index: 0;
     canvas {
         border-radius: 4px !important;
         background: none !important;
@@ -158,31 +159,6 @@ button .material-icons {
         display: block;
     }
 }
-.building-edit-plan {
-    .carousel {
-        border-top-left-radius: calc(0.5rem - 1px);
-        border-top-right-radius: calc(0.5rem - 1px);
-        overflow: hidden;
-        .carousel-item {
-            img {
-                height: 10vw;
-                width: auto;
-                object-fit: cover;
-            }
-        }
-        .empty {
-            height: 10vw;
-            background: #EEEEEE;
-        }
-    }
-    .card {
-        .card-title, .card-text {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-    }
-}
 
 .navbar-vertical.navbar-expand-md .navbar-brand {
     padding: .5rem 0 2rem;
@@ -201,31 +177,6 @@ button .material-icons {
 
 
 
-.building-edit-header {
-    .picture-input {
-        canvas {
-            border-radius: 0 !important;
-        }
-        .picture-inner {
-            border-radius: 0 !important;
-            border: none !important;
-        }
-    }
-    .avatar {
-        canvas {
-            border-radius: 50% !important;
-            border: 4px solid #F9FBFD;
-        }
-        .picture-inner {
-            border-radius: 50% !important;
-            border: 4px solid #F9FBFD !important;
-        }
-    }
-    img.header-img-top {
-        height: 450px;
-        object-fit: cover;
-    }
-}
 
 .card-stage {
     .card-body {
@@ -235,6 +186,210 @@ button .material-icons {
         }
     }
 }
+
+
+
+
+.card-header:first-child {
+    border-radius: 4px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.main-content {
+    
+}
+
+.building-edit {
+    position: relative;
+    .building-edit-header {
+        .picture-input {
+            canvas {
+                border-radius: 0 !important;
+            }
+            .picture-inner {
+                border-radius: 0 !important;
+                border: none !important;
+            }
+        }
+        .avatar {
+            canvas {
+                border-radius: 50% !important;
+                border: 4px solid #F9FBFD;
+            }
+            .picture-inner {
+                border-radius: 50% !important;
+                border: 4px solid #F9FBFD !important;
+            }
+        }
+        img.header-img-top {
+            height: 250px;
+            object-fit: cover;
+        }
+    }
+    .building-edit-stage {
+        .card {
+            .picture-input {
+                canvas {
+                    border-radius: 4px 4px 0 0 !important;
+                }
+                .picture-inner {
+                    border-radius: 4px 4px 0 0 !important;
+                    border: none !important;
+                }
+            }
+            .vdp-datepicker__calendar {
+                z-index: 1000000000 !important;
+            }
+            .remove {
+                position: absolute;
+                background: red;
+                top: 0;
+                right: 0;
+                z-index: 1000000000;
+                background: linear-gradient(to right, #4384c0, #3c98ed);
+                box-shadow: inset 0 0 1em rgba(255, 255, 255, 0.53);
+                padding: 10px;
+                border-radius: 0 4px 0 4px;
+                display: none;
+                cursor: pointer;
+                color: white;
+                border-bottom: 1px solid white;
+                border-left: 1px solid white;
+                i {
+                    display: block;
+                }
+            }
+            textarea {
+                resize: none;
+            }
+            &:hover {
+                .remove {
+                    display: block;
+                }
+            }
+        }
+    }
+    .building-edit-plan {
+        .carousel {
+            border-top-left-radius: calc(0.5rem - 1px);
+            border-top-right-radius: calc(0.5rem - 1px);
+            overflow: hidden;
+            .carousel-item {
+                img {
+                    height: 10vw;
+                    width: auto;
+                    object-fit: contain;
+                }
+            }
+            .empty {
+                height: 10vw;
+                background: url('/images/empty.svg');
+                background-repeat: no-repeat;
+                background-position: center;
+                
+            }
+        }
+        .card {
+            cursor: pointer;
+            .card-title, .card-text {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            &:hover {
+                box-shadow: 0 0.75rem 2rem rgba(18, 38, 63, 0.23);
+                .card-title {
+                    text-decoration: underline;
+                }
+                .edit {
+                    display: block;
+                }
+            }
+            .edit {
+                position: absolute;
+                right: 10px;
+                bottom: 0;
+                width: 20px;
+                height: 20px;
+                background: url('/images/edit.svg');
+                display: none;
+            }
+        }
+        #modalPlanEdit {
+            .picture-input {
+                background: #EDF2F9;
+                padding: 6px;
+                border-radius: 4px !important;
+                canvas {
+                    border-radius: 0 !important;
+                    object-fit: contain !important;
+                }
+                .picture-inner {
+                    border-radius: 0 !important;
+                    border: none !important;
+                }
+            }
+            .form-group-image {
+                position: relative;
+                .remove {
+                    position: absolute;
+                    background: red;
+                    top: 0;
+                    right: 0;
+                    z-index: 1000000000;
+                    background: linear-gradient(to right, #4384c0, #3c98ed);
+                    box-shadow: inset 0 0 1em rgba(255, 255, 255, 0.53);
+                    padding: 10px;
+                    border-radius: 0 4px 0 4px;
+                    cursor: pointer;
+                    color: white;
+                    border-bottom: 1px solid white;
+                    border-left: 1px solid white;
+                    i {
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+    .building-edit-apartment {
+        tbody {
+            tr {
+                td {
+                    padding: 5px 0;
+                    button {
+                        display: none; 
+                    }
+                    .material-icons {
+                        
+                    }
+                }
+                &:hover {
+                    button {
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+}
+
+label {
+    color: #95AAC9
+}
+
 
 // html {
 //     height: 100%;

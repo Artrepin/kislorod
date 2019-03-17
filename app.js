@@ -307,6 +307,21 @@ app.post('/send', recaptcha.middleware.verify, (req, res) => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 app.get('/admin', (req, res) => {
     res.render('admin', data)
 })
@@ -321,57 +336,37 @@ app.post('/admin/BuildingList', async (req, res) => {
 })
 app.post('/admin/BuildingEdit', async (req, res) => {
     res.json({
-        building: await Building.getBuildingItem(req.body.iBuildingID)
+        building: await Building.getBuildingItem(req.body.iBuildingID),
+        type: await Type.findAll()
     })
 })
 app.post('/admin/BuildingUpdate', async (req, res) => {
     var iBuildingID = (req.body.building.iBuildingID) ? req.body.building.iBuildingID : false
 
     if (iBuildingID) {
-        await Building.update({
-            sBuildingTitle: req.body.building.sBuildingTitle,
-            sBuildingAvatar: req.body.building.sBuildingAvatar,
-            sBuildingCoverSmall: req.body.building.sBuildingCoverSmall,
-            sBuildingCoverBig: req.body.building.sBuildingCoverBig,
-            sBuildingDescription: req.body.building.sBuildingDescription,
-            fBuildingLocationeX: req.body.building.fBuildingLocationeX,
-            fBuildingLocationeY: req.body.building.fBuildingLocationeY,
-            sBuildingYoutube: req.body.building.sBuildingYoutube,
-            dBuildingReady: req.body.building.dBuildingReady,
-        }, {
+        await Building.update(req.body.building, {
             where: {
                 iBuildingID: iBuildingID
             }
         })
     } else {
-        await Building.create({
-            sBuildingTitle: req.body.building.sBuildingTitle,
-            sBuildingAvatar: req.body.building.sBuildingAvatar,
-            sBuildingCoverSmall: req.body.building.sBuildingCoverSmall,
-            sBuildingCoverBig: req.body.building.sBuildingCoverBig,
-            sBuildingDescription: req.body.building.sBuildingDescription,
-            fBuildingLocationeX: req.body.building.fBuildingLocationeX,
-            fBuildingLocationeY: req.body.building.fBuildingLocationeY,
-            sBuildingYoutube: req.body.building.sBuildingYoutube,
-            dBuildingReady: req.body.building.dBuildingReady,
-        }).then((response) => {
+        await Building.create(req.body.building).then((response) => {
             iBuildingID = response.iBuildingID
-        })        
-    }
-
-
-    if ('advantage_destroy' in req.body.building) {
-        await Advantage.destroy({
-            where: {
-                iAdvantageID: req.body.building.advantage_destroy
-            }
         })
     }
+
+
     const advantageUpdate = async () => {
-        if (req.body.building.advantage) {
-            const advantages = req.body.building.advantage
+        if (req.body.building.Advantages) {
+            const advantages = req.body.building.Advantages
             for (const advantage of advantages) {
-                if (advantage.iAdvantageID) {
+                if (advantage.iAdvantageID && advantage.del === true) {
+                    await Advantage.destroy({
+                        where: {
+                            iAdvantageID: advantage.iAdvantageID
+                        }
+                    })
+                } else if (advantage.iAdvantageID) {
                     await Advantage.update({
                         sAdvantageTitle: advantage.sAdvantageTitle
                     }, {
@@ -379,7 +374,7 @@ app.post('/admin/BuildingUpdate', async (req, res) => {
                             iAdvantageID: advantage.iAdvantageID
                         }                    
                     })
-                } else {
+                } else if (advantage.del !== true) {
                     await Advantage.create({
                         iBuildingID: iBuildingID,
                         sAdvantageTitle: advantage.sAdvantageTitle
@@ -391,18 +386,17 @@ app.post('/admin/BuildingUpdate', async (req, res) => {
     await advantageUpdate()
 
 
-    if ('stage_destroy' in req.body.building) {
-        await Stage.destroy({
-            where: {
-                iStageID: req.body.building.stage_destroy
-            }
-        })
-    }
     const stageUpdate = async () => {
-        if (req.body.building.stage) {
-            const stages = req.body.building.stage
+        if (req.body.building.Stages) {
+            const stages = req.body.building.Stages
             for (const stage of stages) {
-                if (stage.iStageID) {
+                if (stage.iStageID && stage.del === true) {
+                    await Stage.destroy({
+                        where: {
+                            iStageID: stage.iStageID
+                        }
+                    })
+                } else if (stage.iStageID) {
                     await Stage.update({
                         sStageImage: stage.sStageImage,
                         tStageDesc: stage.tStageDesc,
@@ -412,7 +406,7 @@ app.post('/admin/BuildingUpdate', async (req, res) => {
                             iStageID: stage.iStageID
                         }                    
                     })
-                } else {
+                } else if (stage.del !== true) {
                     await Stage.create({
                         iBuildingID: iBuildingID,
                         sStageImage: stage.sStageImage,
@@ -425,10 +419,108 @@ app.post('/admin/BuildingUpdate', async (req, res) => {
     }
     await stageUpdate()
 
-    var building = await Building.getBuildingItem(iBuildingID)
 
-    res.json(building)
+    const planImageUpdate = async (images, iPlanID) => {
+        for (const image of images) {
+            if (image.iPlanImageID && image.del === true) {
+                await plan_image.destroy({
+                    where: {
+                        iPlanImageID: image.iPlanImageID
+                    }
+                })
+            } else if (image.iPlanImageID) {
+                await plan_image.update({
+                    sPlanImage: image.sPlanImage
+                }, {
+                    where: {
+                        iPlanImageID: image.iPlanImageID
+                    }                    
+                })
+            } else if (image.del !== true) {
+                await plan_image.create({
+                    iPlanID: iPlanID,
+                    sPlanImage: image.sPlanImage
+                })
+            }
+        }        
+    }
+    const planUpdate = async () => {
+        if (req.body.building.plans) {
+            const plans = req.body.building.plans
+            for (const plan of plans) {
+                var iPlanID = (plan.iPlanID) ? plan.iPlanID : false
+                if (iPlanID && plan.del === true) {
+                    await Plan.destroy({
+                        where: {
+                            iPlanID: iPlanID
+                        }
+                    })
+                } else if (iPlanID) {
+                    await Plan.update({
+                        iBuildingID: plan.iBuildingID,
+                        iTypeID: plan.iTypeID,
+                        iRoomCount: plan.iRoomCount,
+                        sPlanName: plan.sPlanName,
+                        fPlanArea: plan.fPlanArea,
+                    }, {
+                        where: {
+                            iPlanID: iPlanID
+                        }                    
+                    })
+                } else if (plan.del !== true) {
+                    var newplan = await Plan.create({
+                        iBuildingID: iBuildingID,
+                        iTypeID: plan.iTypeID,
+                        iRoomCount: plan.iRoomCount,
+                        sPlanName: plan.sPlanName,
+                        fPlanArea: plan.fPlanArea,
+                    })
+                    iPlanID = newplan.iPlanID
+                }
+                await planImageUpdate(plan.plan_images, iPlanID)
+            }
+        }
+    }
+    await planUpdate()
 
+
+    const apartamentUpdate = async () => {
+        if (req.body.building.apartaments) {
+            const apartaments = req.body.building.apartaments
+            for (const apartament of apartaments) {
+                if (apartament.iApartamentID && apartament.del === true) {
+                    await Apartament.destroy({
+                        where: {
+                            iApartamentID: apartament.iApartamentID
+                        }
+                    })
+                } else if (apartament.iApartamentID) {
+                    await Apartament.update({
+                        iApartamentNum: apartament.iApartamentNum,
+                        iApartamentFloor: apartament.iApartamentFloor,
+                        iApartamentPrice: apartament.iApartamentPrice,
+                        iPlanID: apartament.iPlanID,
+                    }, {
+                        where: {
+                            iApartamentID: apartament.iApartamentID
+                        }                    
+                    })
+                } else if (apartament.del !== true) {
+                    await Apartament.create({
+                        iBuildingID: iBuildingID,
+                        iApartamentNum: apartament.iApartamentNum,
+                        iApartamentFloor: apartament.iApartamentFloor,
+                        iApartamentPrice: apartament.iApartamentPrice,
+                        iPlanID: apartament.iPlanID,
+                    })
+                }
+            }
+        }
+    }
+    await apartamentUpdate()
+
+
+    res.json(await Building.getBuildingItem(iBuildingID))
 })
 app.post('/admin/BuildingRemove', async (req, res) => {
     Building.destroy({
@@ -500,20 +592,20 @@ app.post('/admin/BuildingUploadStage', async (req, res) => {
     })
 })
 
-app.post('/admin/BuildingEditPlan', async (req, res) => {
-    var data = {}
-        data.building = await Building.getBuildingItem(req.body.iBuildingID)
-        data.plan = await Plan.findAll(
-            {
-                where: {
-                    iBuildingID: req.body.iBuildingID
-                },
-                include: [plan_image]
-            }
-        )
-        data.type = await Type.findAll()
-    res.json(data)
-})
+// app.post('/admin/BuildingEditPlan', async (req, res) => {
+//     var data = {}
+//         data.building = await Building.getBuildingItem(req.body.iBuildingID)
+//         data.plan = await Plan.findAll(
+//             {
+//                 where: {
+//                     iBuildingID: req.body.iBuildingID
+//                 },
+//                 include: [plan_image]
+//             }
+//         )
+//         data.type = await Type.findAll()
+//     res.json(data)
+// })
 app.post('/admin/BuildingUploadPlan', async (req, res) => {
     var storage = multer.diskStorage({
         destination: function (req, file, cb) {
@@ -586,7 +678,7 @@ app.post('/admin/BuildingUpdatePlan', async (req, res) => {
     await planImageUpdate()
 
     var data = {}
-    data.plan = await Plan.findById(iPlanID,
+    data.plan = await Plan.findByPk(iPlanID,
         {
             include: [plan_image]
         }
@@ -646,7 +738,7 @@ app.post('/admin/BuildingUpdateApartament', async (req, res) => {
         iApartamentID = apartament.iApartamentID
     }
 
-    var apartament = await Apartament.findById(iApartamentID, {
+    var apartament = await Apartament.findByPk(iApartamentID, {
         include: [Plan]
     })
     res.json(apartament)
@@ -697,7 +789,7 @@ app.post('/admin/PeopleUpdate', async (req, res) => {
             iPeopleID = people.iPeopleID
         })
     }
-    data.people = await People.findById(iPeopleID, {
+    data.people = await People.findByPk(iPeopleID, {
         include: [Department]
     })
 
@@ -726,6 +818,23 @@ app.post('/admin/PeopleDelete', async (req, res) => {
         res.json(response)
     })
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

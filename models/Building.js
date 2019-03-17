@@ -33,20 +33,33 @@ module.exports = (sequelize, DataTypes) => {
     Building.hasMany(models.plan, {
       foreignKey: 'iBuildingID'
     })
+    Building.hasMany(models.apartament, {
+      foreignKey: 'iBuildingID'
+    })
   };
   sequelizePaginate.paginate(Building)
 
   Building.getBuildingItem = async function (iBuildingID) {
-    var building = await Building.findById(iBuildingID)
-    building.dataValues.advantage = await sequelize.models.Advantage.findAll({
-      where: {
-        iBuildingID: iBuildingID
-      }
-    })
-    building.dataValues.stage = await sequelize.models.Stage.findAll({
-      where: {
-        iBuildingID: iBuildingID
-      }
+    var building = await Building.findByPk(iBuildingID, {
+      include: [
+        {
+          model: sequelize.models.Advantage
+        },
+        {
+          model: sequelize.models.Stage
+        },
+        {
+          model: sequelize.models.plan,
+          include: [
+            {
+              model: sequelize.models.plan_image
+            }
+          ]
+        },
+        {
+          model: sequelize.models.apartament
+        },
+      ]
     })
     return building
   }
