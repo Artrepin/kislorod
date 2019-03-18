@@ -155,18 +155,20 @@ $(document).ready(function(){
 		});
 	};
     
-    if($('.catalog-slider').length) {
-		$('.catalog-slider').slick({
-			arrows: true,
-            prevArrow: '<button class="slick-arrow slick-arrow_prev icon-right-arrow"></button>',
-            nextArrow: '<button class="slick-arrow slick-arrow_next icon-right-arrow"></button>',
-			dots: false,
-			infinite: true,
-			speed: 500,
-			slidesToShow: 1,
-			slidesToScroll: 1
-		});
-	};
+    // $(document).ready(function(){
+    //     if($('.catalog-slider').length) {
+    //         $('.catalog-slider').slick({
+    //             arrows: true,
+    //             prevArrow: '<button class="slick-arrow slick-arrow_prev icon-right-arrow"></button>',
+    //             nextArrow: '<button class="slick-arrow slick-arrow_next icon-right-arrow"></button>',
+    //             dots: false,
+    //             infinite: true,
+    //             speed: 500,
+    //             slidesToShow: 1,
+    //             slidesToScroll: 1
+    //         })
+    //     }
+    // })
 	
 	// $(".js-scroll-to").click(function() {
     //     var attr_href = $(this).attr("href");
@@ -370,6 +372,8 @@ $(document).ready(function(){
     };
     
     if ( $(".js-slider-result").length ) {
+
+        console.log(111)
         
         $(".js-slider-wrapper").each(function(){
             
@@ -424,7 +428,7 @@ $(document).ready(function(){
             $(this).addClass("catalog-tabs__item_active");
             $(".tabs-slider__slide:visible").hide();
             $(".tabs-slider__slide:eq(" + tab_index + ")").fadeIn(500);
-            $(".catalog-slider").slick('refresh');
+            // $(".catalog-slider").slick('refresh');
             $(".catalog-slider .slick-arrow").each(function(){
                 var height_pic = $(".catalog-slider__pic:visible").height();
                 height_pic = height_pic/2;
@@ -444,16 +448,16 @@ $(document).ready(function(){
         });
     }, 1000 );
     
-    $(".js-object-show").click(function(){
-        $(this).parent().find(".object-popup").fadeIn(500); 
-    });
+    // Catalog Открытие/Закрытие попапа на квартире
+    $(document).on("click", ".js-object-show", function () {
+        $(this).parent().find(".object-popup").fadeIn(500)
+    }).on("click", ".object-popup__close", function () {
+        $(this).parent().fadeOut(500);
+    })
     
-    $(".object-popup__close").click(function(){
-        $(this).parent().fadeOut(500); 
-    });
     
-    $(".object-category__item").click(function(){
-        
+    $(document).on("click", ".object-category__item", function () {
+
         var cat_index = $(this).index();
         
          if ( $(this).hasClass("object-category__item_active") ) {
@@ -472,13 +476,14 @@ $(document).ready(function(){
             }
          }
         return false;
-    });
+
+    })
     
-    $(".js-kredit-step").submit(function() {
+    $(document).on("submit", ".js-kredit-step", function () {
         next_step();
         return false;
-    });
-    
+    })
+
     function next_step() {
         $(".kredit-step_active").removeClass("kredit-step_active").hide().next().fadeIn(500).addClass("kredit-step_active");
     }

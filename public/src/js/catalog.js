@@ -68,6 +68,18 @@ if($("#catalogvue").length) {
                 }, {
                     duration: 500
                 });
+
+                $('.catalog-slider').slick({
+                    arrows: true,
+                    prevArrow: '<button class="slick-arrow slick-arrow_prev icon-right-arrow"></button>',
+                    nextArrow: '<button class="slick-arrow slick-arrow_next icon-right-arrow"></button>',
+                    dots: false,
+                    infinite: true,
+                    speed: 500,
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                })
+    
             },
             getBuilding: function () {
                 axios.post('/catalog/building', {
