@@ -126,6 +126,7 @@ button .material-icons {
         position: relative !important;
         width: 100% !important;
         max-width: none !important;
+        z-index: 0 !important;
     }
     .picture-inner {
         position: absolute !important;

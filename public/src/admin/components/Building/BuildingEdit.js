@@ -26,7 +26,9 @@ export default {
             menuActive: 0,
             building: {
                 Advantages: [],
-                Stages: []
+                Stages: [],
+                plans: [],
+                apartaments: []
             }
         }
     },
@@ -54,7 +56,8 @@ export default {
             })
             .then( (response) => {
                 Vue.set(this, 'building', response.data)
-                // this.$router.push('/building')
+                var redirect = '/building/' + response.data.iBuildingID + '/' + this.menu[this.menuActive].uri
+                this.$router.push(redirect)
             })
         },
         buildingRemove: function () {
@@ -133,7 +136,7 @@ export default {
                                         <router-link class="nav-link"
                                             v-bind:class="{ active: menuActive == index }"
                                             v-on:click="useMenu(index)"
-                                            v-bind:to="'/building/' + building.iBuildingID + '/' + item.uri"
+                                            v-bind:to="'/building/' + ((building.iBuildingID) ? building.iBuildingID : 'create') + '/' + item.uri"
                                             >{{ item.title }}</router-link>
                                     </li>
                                 </ul>
