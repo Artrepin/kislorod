@@ -252,6 +252,11 @@ button .material-icons {
                 display: none;
             }
         }
+        .col-button {
+            @media (max-width: 767px) {
+                padding-top: 45px;
+            }
+        }
     }
     .building-edit-stage {
         .card {
@@ -282,6 +287,9 @@ button .material-icons {
                 color: white;
                 border-bottom: 1px solid white;
                 border-left: 1px solid white;
+                @media (max-width: 767px) {
+                    display: block;
+                }
                 i {
                     display: block;
                 }
