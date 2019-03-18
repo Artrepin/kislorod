@@ -74,6 +74,34 @@ if($("#catalogvue").length) {
                     selected: this.selected
                 }).then((json) => {
                     this.buildings = json.data.buildings
+                    this.buildings.forEach(element => {
+                        console.log(element)
+                        
+                        element.plansCount = element.plans.length
+
+                        var fPlanAreaMin = [];
+                        var apartmentCount = [];
+                        
+                        var iApartamentPriceMin = [];
+
+                        element.plans.forEach(element2 => {
+                            fPlanAreaMin.push(element2.fPlanArea)
+                            apartmentCount.push(element2.apartaments.length)
+                            element2.apartaments.forEach(element3 => {
+                                iApartamentPriceMin.push(element3.iApartamentPrice)
+                            });
+                        });
+                        // console.log(apartmentCount)
+                        element.fPlanAreaMin = Math.min.apply(null, fPlanAreaMin)
+
+                        element.iApartamentPriceMin = Math.min.apply(null, iApartamentPriceMin)
+
+                        var apartmentCount = apartmentCount.reduce(function(sum, current) {
+                            return sum + current
+                        });
+                        element.apartmentCount = apartmentCount
+                        // console.log(apartmentCount)
+                    });
                     Vue.nextTick(function () {
                         vm.use(0)
                     })

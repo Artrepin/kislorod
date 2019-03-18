@@ -90,16 +90,16 @@ block main
                                                 .cases-list__title.ff_trajan.font_size22 {{ building.sBuildingTitle }}
                                                 .cases-list__options
                                                     .cases-list__option
-                                                        .font_size14.fade05.fw_medium 0 квартир
+                                                        .font_size14.fade05.fw_medium {{ building.apartmentCount }} квартир
                                                     .cases-list__option
-                                                        .font_size14.fade05.fw_medium Площадь: от 0 м2
+                                                        .font_size14.fade05.fw_medium Площадь: от {{ building.fPlanAreaMin }} м2
                                                 .cases-list__price.color_yelow
-                                                    .font_size22.fw_medium.ff_trajan от 0 ₽
+                                                    .font_size22.fw_medium.ff_trajan от {{ building.iApartamentPriceMin }} ₽
                     .cases-screen__right
                         .cases-slider
                             .cases-slider__slide
                                 #map-object.cases-map
-                pre(v-if="useBuilding >= 0") {{ buildings[useBuilding] }}
+                //- pre(v-if="useBuilding >= 0") {{ buildings[useBuilding] }}
                 .catalog-tabs
                     a.catalog-tabs__item.catalog-tabs__item_active(href='#', onclick="return false") Общая информация
                     a.catalog-tabs__item(href='#', onclick="return false") Квартиры
@@ -110,7 +110,7 @@ block main
                         .catalog-slider
                             .catalog-slider__slide
                                 a.catalog-slider__pic.open_catalog_modal(href='#' :data-yt="buildings[useBuilding].sBuildingYoutube")
-                                    img(:src="'/images/building/' + buildings[useBuilding].sBuildingCoverSmall", alt='')
+                                    img(:src="'/images/building/' + buildings[useBuilding].sBuildingCoverBig", alt='')
                                     span.catalog-slider__icon.icon-play
                                     span.catalog-slider__caption
                                         span.font_size14.fw_medium.fade05
@@ -131,13 +131,13 @@ block main
                                                 .font_size14.fw_medium
                                                     | Квартир в продаже: 
                                                     br
-                                                    | 0 квартир
+                                                    | {{ buildings[useBuilding].apartmentCount }} квартир
                                             .catalog-slider__option
                                                 .font_size14.fw_medium
                                                     | Площадь: 
                                                     br
-                                                    | от 0 м2
-                                        .catalog-slider__price.ff_trajan.color_yelow 0 ₽
+                                                    | от {{ buildings[useBuilding].fPlanAreaMin }} м2
+                                        .catalog-slider__price.ff_trajan.color_yelow от {{ buildings[useBuilding].iApartamentPriceMin }} ₽
                                 ul.catalog-slider__bottom.mt35
                                     li.catalog-slider__bottom-item(v-for="(advantage, index) in buildings[useBuilding].Advantages")
                                         .font_size14.fw_medium {{ advantage.sAdvantageTitle }}
@@ -200,7 +200,7 @@ block main
                         .object-slide
                             .object-slide__row
                                 .object-slide__title
-                                    .font_size44.ff_trajan 0 квартиры и 0 планировок в {{ buildings[useBuilding].sBuildingTitle }}
+                                    .font_size44.ff_trajan {{ buildings[useBuilding].apartmentCount }} квартиры и {{ buildings[useBuilding].plansCount }} планировок в {{ buildings[useBuilding].sBuildingTitle }}
                                 .object-slide__desc.mt10
                                     .desc
                                         img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
@@ -213,7 +213,8 @@ block main
                                     .object-category.ff_trajan
                                         a.object-category__item(
                                             href='#'
-                                            v-for="(plan, index) in buildings[useBuilding].plans") {{ plan.sPlanName }}
+                                            v-for="(plan, index) in buildings[useBuilding].plans"
+                                            v-bind:class="{ 'object-category__item_active': index == 0 }") {{ plan.sPlanName }}
                                         //- object-category__item_active
                                         //- a.object-category__item(href='#') Квартиры с одной спальней
                                         //- a.object-category__item(href='#') Квартиры с двумя спальнями
