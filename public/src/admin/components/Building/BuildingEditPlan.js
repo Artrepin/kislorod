@@ -162,7 +162,7 @@ export default {
                                     <div class="remove" v-on:click.prevent="delImage(index)"><i class="material-icons">delete</i></div>
                                 </div>
                                 <button type="button" class="btn btn-primary" v-on:click.prevent="addImage">Добавить изображение</button>
-                                <button type="button" class="btn btn-outline-danger float-right" v-on:click.prevent="del">Удалить планировку</button>
+                                <button type="button" class="btn btn-outline-danger float-right d-block d-sm-block" v-on:click.prevent="del">Удалить</button>
                             </div>
                         </form>
                     </div>
