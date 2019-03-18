@@ -138,7 +138,7 @@ export default {
                                     </li>
                                 </ul>
                             </div>
-                            <div class="col-auto sticky-top">
+                            <div class="col-auto col-button">
                                 <button class="btn btn-primary" type="submit" v-on:click.prevent="update" form="form-building">Сохранить</button>
                                 <button class="btn btn-outline-danger ml-1" v-on:click="buildingRemove">Удалить объект</button>
                             </div>
