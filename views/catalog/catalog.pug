@@ -225,7 +225,7 @@ block main
                                                 .object-list__item.col-sm-4.col-min-6(v-for="(apartament, index2) in plan.apartaments")
                                                     .object-list__preview.js-object-show
                                                         .object-list__thumb
-                                                            img(src='/images/catalog/object.jpg', alt='')
+                                                            img(:src="'/images/building/plan/' + plan.plan_images[0].sPlanImage", alt='')
                                                             .object-list__zoom.browse-button
                                                                 .icon-search
                                                         .object-list__options.mt20
@@ -1770,7 +1770,7 @@ block main
                                             br
                                             | о жилом комплексе
                     img.tabs-slider__dots(src='/images/catalog/dots.png', alt='')
-                //- pre(v-if="useBuilding >= 0") {{ buildings[useBuilding] }}
+                pre(v-if="useBuilding >= 0") {{ buildings[useBuilding] }}
                 .offers-screen
                     img.offers-screen__dots(src='/images/catalog/offer__dots.svg', alt='')
                     h2.font_size44

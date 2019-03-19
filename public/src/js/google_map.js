@@ -2,7 +2,7 @@ function initMap(){function e(e,t){var s=new google.maps.Marker({map:i,icon:"/im
 
 initMap();
 
-if ( $("#map-object").length ) {
+if ( $("#map-object2").length ) {
     var locations = [
         ["ЖК «Столичный»1", 43.4015339, 39.9794593, "http://localhost:3000/images/cases/gk1.jpg", "18 квартир", "Площадь: от 59 м2", "ОТ 6 700 000 ₽"]
 ];

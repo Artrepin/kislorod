@@ -373,8 +373,6 @@ $(document).ready(function(){
     
     if ( $(".js-slider-result").length ) {
 
-        console.log(111)
-        
         $(".js-slider-wrapper").each(function(){
             
             

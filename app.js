@@ -174,20 +174,26 @@ app.post('/catalog/building', async (req, res) => {
                             [Op.lte]: req.body.selected.room
                         }
                     },
-                    include: [{
-                        model: Apartament,
-                        required: true,
-                        where: {
-                            iApartamentPrice: {
-                                [Op.lte]: (req.body.selected.price*1000000)
-                            },
-                            iApartamentFloor: {
-                                [Op.lte]: req.body.selected.floor
+                    include: [
+                        {
+                            model: Apartament,
+                            required: true,
+                            where: {
+                                iApartamentPrice: {
+                                    [Op.lte]: (req.body.selected.price*1000000)
+                                },
+                                iApartamentFloor: {
+                                    [Op.lte]: req.body.selected.floor
+                                }
                             }
+                        },
+                        {
+                            model: plan_image,
+                            require: true
                         }
-                    }
-                ]
-            }]
+                    ]
+                }
+            ]
         })
     res.json(data)
 })
