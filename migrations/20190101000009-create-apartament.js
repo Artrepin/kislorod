@@ -9,7 +9,13 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       iBuildingID: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'building',
+          key: 'iBuildingID',
+        },
+        onUpdate: 'NO ACTION',
+        onDelete: 'CASCADE',
       },
       iApartamentNum: {
         type: Sequelize.INTEGER
@@ -21,7 +27,13 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       iPlanID: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'plan',
+          key: 'iPlanID',
+        },
+        onUpdate: 'NO ACTION',
+        onDelete: 'CASCADE',
       },
     }, {
       timestamps: false,
