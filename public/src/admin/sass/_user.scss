@@ -103,6 +103,9 @@ button .material-icons {
         height: 15vw;
         object-fit: cover;
         background: #EDF2F9;
+        @media(max-width: 767px) {
+            height: 50vw;
+        }
     }
 }
 .avatar {

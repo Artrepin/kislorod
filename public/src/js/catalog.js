@@ -54,6 +54,10 @@ if($("#catalogvue").length) {
             })
         },
         methods: {
+            declOfNum(number, titles) {  
+                cases = [2, 0, 1, 1, 1, 2];  
+                return titles[ (number%100>4 && number%100<20)? 2 : cases[(number%10<5)?number%10:5] ];  
+            },
             search: function () {
                 Vue.set(this.selected, 'price', Number($("input#price").prev().val()) )
                 Vue.set(this.selected, 'area', Number($("input#square").prev().val()) )
@@ -68,17 +72,6 @@ if($("#catalogvue").length) {
                 }, {
                     duration: 500
                 });
-
-                $('.catalog-slider').slick({
-                    arrows: true,
-                    prevArrow: '<button class="slick-arrow slick-arrow_prev icon-right-arrow"></button>',
-                    nextArrow: '<button class="slick-arrow slick-arrow_next icon-right-arrow"></button>',
-                    dots: false,
-                    infinite: true,
-                    speed: 500,
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                })
     
             },
             getBuilding: function () {
@@ -90,6 +83,7 @@ if($("#catalogvue").length) {
                         console.log(element)
                         
                         element.plansCount = element.plans.length
+                        element.plansCountString = this.declOfNum(element.plansCount, ['планировка', 'планировки', 'планировок'])
 
                         var fPlanAreaMin = [];
                         var apartmentCount = [];
@@ -112,6 +106,7 @@ if($("#catalogvue").length) {
                             return sum + current
                         });
                         element.apartmentCount = apartmentCount
+                        element.apartmentCountString = this.declOfNum(element.apartmentCount, ['квартира', 'квартиры', 'квартир'])
                         // console.log(apartmentCount)
                     });
                     Vue.nextTick(function () {
@@ -121,6 +116,24 @@ if($("#catalogvue").length) {
             },
             use: function (index) {
                 Vue.set(this, 'useBuilding', index)
+                Vue.nextTick(function () {
+                    $('.catalog-slider').slick({
+                        arrows: true,
+                        prevArrow: '<button class="slick-arrow slick-arrow_prev icon-right-arrow"></button>',
+                        nextArrow: '<button class="slick-arrow slick-arrow_next icon-right-arrow"></button>',
+                        dots: false,
+                        infinite: true,
+                        speed: 500,
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    })
+                    // $(".catalog-slider .slick-arrow").each(function(){
+                    //     var height_pic = $(".catalog-slider__pic:visible").height();
+                    //     height_pic = height_pic/2;
+                    //     $(this).css("top",height_pic);
+                    // })
+                })
+
                 // this.useBuilding = i
                 // $(".cases-list__item.active").removeClass("active").find(".cases-list__hide").hide()
                 // $(".cases-list__item").eq(index).addClass("active").find(".cases-list__hide").show()

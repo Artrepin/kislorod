@@ -41,15 +41,15 @@ export default {
                                 <td>
                                     <input type="text" class="form-control form-control-sm border-0 p-0 pl-3" v-model.number="apartament.iApartamentFloor">
                                 </td>
-                                <td class="pl-3">
+                                <td class="pl-3" style="min-width: 200px">
                                     <select v-model="apartament.iPlanID" class="form-control form-control-sm border-0 p-0">
                                         <option v-for="(plan, index) in building.plans" v-if="plan.iPlanID" :value="plan.iPlanID">{{ plan.sPlanName }}</option>
                                     </select>
                                 </td>
-                                <td>
+                                <td style="min-width: 100px">
                                     <input type="text" class="form-control form-control-sm border-0 p-0 pl-3" v-model.number="apartament.iApartamentPrice">
                                 </td>
-                                <td>
+                                <td style="min-width: 70px">
                                     <button type="button" class="btn btn-sm btn-block btn-outline-danger" v-on:click.prevent="del(index)"><i class="material-icons">delete</i></button>
                                 </td>
                             </tr>
