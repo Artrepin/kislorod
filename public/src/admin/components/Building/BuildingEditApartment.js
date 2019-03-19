@@ -26,11 +26,11 @@ export default {
                     <table class="table table-sm table-nowrap card-table">
                         <thead>
                             <tr>
-                                <th width=120>№ квартиры</th>
-                                <th width=120>Этаж</th>
-                                <th>Планировка</th>
-                                <th width=120>Цена</th>
-                                <th width=70></th>
+                                <th width="25%">№ квартиры</th>
+                                <th width="25%">Этаж</th>
+                                <th width="25%">Планировка</th>
+                                <th width="25%">Цена</th>
+                                <th width="70px"></th>
                             </tr>
                         </thead>
                         <tbody>

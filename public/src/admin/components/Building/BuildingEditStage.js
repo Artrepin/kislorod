@@ -67,7 +67,7 @@ export default {
                 </div>
             </div>
             <div class="form-group">
-                <button type="button" class="btn btn-primary" v-on:click="stageAdd">Добавить</button>
+                <button type="button" class="btn btn-primary" v-on:click="stageAdd">Добавить этап</button>
             </div>
         </div>
     `
