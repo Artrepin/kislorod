@@ -90,7 +90,7 @@ block main
                                                 .cases-list__title.ff_trajan.font_size22 {{ building.sBuildingTitle }}
                                                 .cases-list__options
                                                     .cases-list__option
-                                                        .font_size14.fade05.fw_medium {{ building.apartmentCount }} квартир
+                                                        .font_size14.fade05.fw_medium {{ building.apartmentCount }} {{ building.apartmentCountString }}
                                                     .cases-list__option
                                                         .font_size14.fade05.fw_medium Площадь: от {{ building.fPlanAreaMin }} м2
                                                 .cases-list__price.color_yelow
@@ -98,7 +98,7 @@ block main
                     .cases-screen__right
                         .cases-slider
                             .cases-slider__slide
-                                #map-object.cases-map
+                                #map-object.cases-map(style="background:url('/images/map.png'); background-size: cover;")
                 .catalog-tabs
                     a.catalog-tabs__item.catalog-tabs__item_active(href='#', onclick="return false") Общая информация
                     a.catalog-tabs__item(href='#', onclick="return false") Квартиры
@@ -130,7 +130,7 @@ block main
                                                 .font_size14.fw_medium
                                                     | Квартир в продаже: 
                                                     br
-                                                    | {{ buildings[useBuilding].apartmentCount }} квартир
+                                                    | {{ buildings[useBuilding].apartmentCount }} {{ buildings[useBuilding].apartmentCountString }}
                                             .catalog-slider__option
                                                 .font_size14.fw_medium
                                                     | Площадь: 
@@ -199,7 +199,7 @@ block main
                         .object-slide
                             .object-slide__row
                                 .object-slide__title
-                                    .font_size44.ff_trajan {{ buildings[useBuilding].apartmentCount }} квартиры и {{ buildings[useBuilding].plansCount }} планировок в {{ buildings[useBuilding].sBuildingTitle }}
+                                    .font_size44.ff_trajan {{ buildings[useBuilding].apartmentCount }} {{ buildings[useBuilding].apartmentCountString }} и {{ buildings[useBuilding].plansCount }} {{ buildings[useBuilding].plansCountString }} в {{ buildings[useBuilding].sBuildingTitle }}
                                 .object-slide__desc.mt10
                                     .desc
                                         img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
@@ -243,20 +243,20 @@ block main
                                                         .object-popup__close.icon-close
                                                         .object-popup__row
                                                             .object-popup__left
-                                                                a.object-popup__img-big.fancybox(href='/images/catalog/object.jpg', rel='object85')
-                                                                    img(src='/images/catalog/object.jpg', alt='')
+                                                                a.object-popup__img-big.fancybox(href='/images/catalog/object.jpg', :rel="'object_0_' + apartament.iApartamentID")
+                                                                    img(:src="'/images/building/plan/' + plan.plan_images[0].sPlanImage", alt='')
                                                                 .object-popup__gallery.mt20
-                                                                    a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
+                                                                    a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', :rel="'object_' + index + '_' + apartament.iApartamentID" v-for="(image, index3) in plan.plan_images")
+                                                                        img(:src="'/images/building/plan/' + image.sPlanImage", alt='')
+                                                                    //- a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
                                                                         img(src='/images/catalog/object.jpg', alt='')
-                                                                    a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
-                                                                        img(src='/images/catalog/object.jpg', alt='')
-                                                                    a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
+                                                                    //- a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
                                                                         img(src='/images/catalog/object.jpg', alt='')
                                                             .object-popup__right
-                                                                .object-popup__title.ff_trajan Запишитесь на просмотр квартиры № 84
+                                                                .object-popup__title.ff_trajan Запишитесь на просмотр квартиры № {{ apartament.iApartamentNum }}
                                                                 .mt10
-                                                                    .font_size14.fw_medium Площадь: 54.1 кв.м
-                                                                .object-popup__price.color_yelow.ff_trajan 6 700 000 ₽
+                                                                    .font_size14.fw_medium Площадь: {{ plan.fPlanArea }} кв.м
+                                                                .object-popup__price.color_yelow.ff_trajan {{ apartament.iApartamentPrice }} ₽
                                                                 form.ajax-form(action='send.php', method='post', data-parsley-validate='', enctype='multipart/form-data')
                                                                     input(type='hidden', name='subj', value='Записаться на просмотр квартиры № 84')
                                                                     .input-box
@@ -1749,11 +1749,11 @@ block main
                                                 br
                                                 a(href='#') ознакомиться
                     .tabs-slider__slide
-                        .catalog-slider
+                        .catalog-slider.catalog-stage-slider
                             .catalog-slider__slide(v-for="(stage, index) in buildings[useBuilding].Stages")
-                                a.catalog-slider__pic.fancybox(:href="'/images/building/stage/' + stage.sStageImage", rel='gallery-object')
+                                a.catalog-slider__pic.fancybox(:href="'/images/building/stage/' + stage.sStageImage", rel='gallery-object', onclick="return false;")
                                     img(:src="'/images/building/stage/' + stage.sStageImage", alt='')
-                                    span.catalog-slider__icon
+                                    //- span.catalog-slider__icon
                                         span.icon-search
                                     span.catalog-slider__caption
                                         span.font_size14.fw_medium.fade05 {{ stage.dStageDate }} <br> {{ stage.tStageDesc }}

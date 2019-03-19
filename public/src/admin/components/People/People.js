@@ -69,7 +69,7 @@ export default {
         'picture-input': PictureInput,
     },
     template: `
-        <div class="main-content">
+        <div class="main-content content-people">
             <app-header v-bind:title="'Сотрудники'" v-bind:button="{title:'Добавить', method:'add'}"></app-header>
 
             <div class="modal" id="modalPeopleEdit" tabindex="-1" role="dialog">
@@ -85,7 +85,7 @@ export default {
                             <div class="modal-body" v-if="usePeople !== false && people[usePeople]">
                                 <div class="row">
                                     <div class="col-auto">
-                                        <div class="form-group">
+                                        <div class="form-group" style="margin-bottom: 1.375rem;">
                                             <label for="">Изображение</label>
                                             <picture-input
                                                 ref="sPeopleImage"
@@ -127,8 +127,8 @@ export default {
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" v-on:click.prevent="del"><i class="material-icons">delete</i></button>
-                                <button type="submit" class="btn btn-primary float-right" v-on:click.prevent="update">Сохранить</button>
+                                <button type="submit" class="btn btn-primary" v-on:click.prevent="update">Сохранить</button>
+                                <button type="button" class="btn btn-outline-danger float-right" v-on:click.prevent="del"><i class="material-icons">delete</i></button>
                             </div>
                         </form>
                     </div>
