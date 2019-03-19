@@ -108,10 +108,10 @@ block main
                     .tabs-slider__slide
                         .catalog-slider
                             .catalog-slider__slide
-                                a.catalog-slider__pic.open_catalog_modal(href='#' :data-yt="buildings[useBuilding].sBuildingYoutube")
+                                a.catalog-slider__pic(href='#' onclick="return false;")
                                     img(:src="'/images/building/' + buildings[useBuilding].sBuildingCoverBig", alt='')
-                                    span.catalog-slider__icon.icon-play
-                                    span.catalog-slider__caption
+                                    span.catalog-slider__icon.icon-play.open_catalog_modal(:data-yt="buildings[useBuilding].sBuildingYoutube" v-if="buildings[useBuilding].sBuildingYoutube")
+                                    span.catalog-slider__caption(v-if="buildings[useBuilding].sBuildingYoutube")
                                         span.font_size14.fw_medium.fade05
                                             | Посмотрите короткую 
                                             br
@@ -128,7 +128,7 @@ block main
                                         .catalog-slider__options
                                             .catalog-slider__option
                                                 .font_size14.fw_medium
-                                                    | Квартир в продаже: 
+                                                    | В продаже: 
                                                     br
                                                     | {{ buildings[useBuilding].apartmentCount }} {{ buildings[useBuilding].apartmentCountString }}
                                             .catalog-slider__option
@@ -199,7 +199,8 @@ block main
                         .object-slide
                             .object-slide__row
                                 .object-slide__title
-                                    .font_size44.ff_trajan {{ buildings[useBuilding].apartmentCount }} {{ buildings[useBuilding].apartmentCountString }} и {{ buildings[useBuilding].plansCount }} {{ buildings[useBuilding].plansCountString }} в {{ buildings[useBuilding].sBuildingTitle }}
+                                    //- .font_size44.ff_trajan {{ buildings[useBuilding].apartmentCount }} {{ buildings[useBuilding].apartmentCountString }} и {{ buildings[useBuilding].plansCount }} {{ buildings[useBuilding].plansCountString }} в {{ buildings[useBuilding].sBuildingTitle }}
+                                    .font_size44.ff_trajan Квартиры и планировки в {{ buildings[useBuilding].sBuildingTitle }}
                                 .object-slide__desc.mt10
                                     .desc
                                         img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
@@ -245,7 +246,7 @@ block main
                                                             .object-popup__left
                                                                 a.object-popup__img-big.fancybox(href='/images/catalog/object.jpg', :rel="'object_0_' + apartament.iApartamentID")
                                                                     img(:src="'/images/building/plan/' + plan.plan_images[0].sPlanImage", alt='')
-                                                                .object-popup__gallery.mt20
+                                                                .object-popup__gallery.mt20(v-if="plan.plan_images.length > 1")
                                                                     a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', :rel="'object_' + index + '_' + apartament.iApartamentID" v-for="(image, index3) in plan.plan_images")
                                                                         img(:src="'/images/building/plan/' + image.sPlanImage", alt='')
                                                                     //- a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')

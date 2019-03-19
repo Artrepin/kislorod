@@ -56,6 +56,13 @@
     }
 }
 
+.toast  {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    padding: 0 50px;
+    box-shadow: 0 0 10px black;
+}
 
 
 button .material-icons {
@@ -68,9 +75,16 @@ button .material-icons {
     font-family: 'Trajan Pro 3';
     font-weight: normal;
 }
+
+.card {
+    &:hover {
+        box-shadow: 0 0.75rem 2rem rgba(18, 38, 63, 0.23);
+    }
+}
+
 .card-header h4, .modal-title {
     font-family: 'Trajan Pro 3';
-    font-weight: normal;
+    font-weight: 400 !important;
 }
 
 .building-list {
@@ -406,6 +420,12 @@ button .material-icons {
                     }
                     .material-icons {
                         
+                    }
+                    input, select {
+                        background: none;
+                    }
+                    &:hover {
+                        background: #eeeeee;
                     }
                 }
                 &:hover {

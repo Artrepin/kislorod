@@ -58,6 +58,10 @@ export default {
                 Vue.set(this, 'building', response.data)
                 var redirect = '/building/' + response.data.iBuildingID + '/' + this.menu[this.menuActive].uri
                 this.$router.push(redirect)
+                $('.toast').toast({
+                    delay: 750
+                })
+                $('.toast').toast('show')
             })
         },
         buildingRemove: function () {
@@ -83,6 +87,10 @@ export default {
     },
     template: `
         <div class="main-content building-edit">
+
+            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-body">Сохранено</div>
+            </div>
 
             <div class="header building-edit-header">
                 <picture-input

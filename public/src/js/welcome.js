@@ -31,7 +31,7 @@ function openYT (yt) {
             }
         })
 }
-$(document).on("click", "a.open_catalog_modal", function(){
+$(document).on("click", ".open_catalog_modal", function(){
     openYT($(this).attr('data-yt'))
     return false
 })

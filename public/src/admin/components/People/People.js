@@ -84,7 +84,7 @@ export default {
                             </div>
                             <div class="modal-body" v-if="usePeople !== false && people[usePeople]">
                                 <div class="row">
-                                    <div class="col-auto">
+                                    <div class="col-lg-6">
                                         <div class="form-group" style="margin-bottom: 1.375rem;">
                                             <label for="">Изображение</label>
                                             <picture-input
@@ -104,7 +104,7 @@ export default {
                                                 }"></picture-input>
                                         </div>
                                     </div>
-                                    <div class="col">
+                                    <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="">Фамилия сотрудника</label>
                                             <input type="text" class="form-control" v-model="people[usePeople].sPeopleLastname">
