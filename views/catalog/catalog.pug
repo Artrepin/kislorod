@@ -98,7 +98,8 @@ block main
                     .cases-screen__right
                         .cases-slider
                             .cases-slider__slide
-                                #map-object.cases-map(style="background:url('/images/map.png'); background-size: cover;")
+                                //- #map-object.cases-map(style="background:url('/images/map.png'); background-size: cover;")
+                                #map-object.cases-map
                 .catalog-tabs
                     a.catalog-tabs__item.catalog-tabs__item_active(href='#', onclick="return false") Общая информация
                     a.catalog-tabs__item(href='#', onclick="return false") Квартиры
@@ -258,7 +259,7 @@ block main
                                                                 .mt10
                                                                     .font_size14.fw_medium Площадь: {{ plan.fPlanArea }} кв.м
                                                                 .object-popup__price.color_yelow.ff_trajan {{ apartament.iApartamentPrice }} ₽
-                                                                form.ajax-form(action='send.php', method='post', data-parsley-validate='', enctype='multipart/form-data')
+                                                                form.ajax-form(action='/send', method='post', data-parsley-validate='', enctype='multipart/form-data')
                                                                     input(type='hidden', name='subj', value='Записаться на просмотр квартиры № 84')
                                                                     .input-box
                                                                         input.input-text.input-text_fill(type='tel', name='phone', required='', data-parsley-errors-messages-disabled='', placeholder='+7 (___) ___-__-__')
@@ -273,7 +274,7 @@ block main
                                                                             br
                                                                             | обработки персональных данных 
                                                                             br
-                                                                            a(href='#') ознакомиться
+                                                                            | ознакомиться
                                         //- .object-slider__slide
                                             .object-list.row
                                                 .object-list__item.col-sm-4.col-min-6
@@ -1541,7 +1542,7 @@ block main
                                 .mt15.kredit-scale
                                     .kredit-scale__load
                                         .kredit-scale__arrow.icon-play
-                                form.kredit-step__form.row.js-kredit-step(action='#', method='post', data-parsley-validate='', enctype='multipart/form-data')
+                                form.kredit-step__form.row.js-kredit-step.ajax-form(action='#', method='post', data-parsley-validate='', enctype='multipart/form-data')
                                     .col-min-6
                                         .input-box.mt40
                                             input.input-text.input-text_border(type='text', name='name', required='', data-parsley-errors-messages-disabled='', placeholder='Укажите ФИО')
@@ -1590,7 +1591,7 @@ block main
                                 .mt15.kredit-scale
                                     .kredit-scale__load(style='width:25%')
                                         .kredit-scale__arrow.icon-play
-                                form.kredit-step__form.row.js-kredit-step(action='#', method='post', data-parsley-validate='', enctype='multipart/form-data')
+                                form.kredit-step__form.row.js-kredit-step.ajax-form(action='#', method='post', data-parsley-validate='', enctype='multipart/form-data')
                                     .col-min-6
                                         .input-box.mt40
                                             input.input-text.input-text_border(type='text', name='price', required='', data-parsley-errors-messages-disabled='', placeholder='Укажите стоимость квартиры')
@@ -1636,7 +1637,7 @@ block main
                                 .mt15.kredit-scale
                                     .kredit-scale__load(style='width:50%')
                                         .kredit-scale__arrow.icon-play
-                                form.kredit-step__form.row.js-kredit-step(action='#', method='post', data-parsley-validate='', enctype='multipart/form-data')
+                                form.kredit-step__form.row.js-kredit-step.ajax-form(action='#', method='post', data-parsley-validate='', enctype='multipart/form-data')
                                     .col-min-6
                                         .input-box.mt40
                                             input.input-text.input-text_border(type='text', name='coin', required='', data-parsley-errors-messages-disabled='', placeholder='Укажите сумму первого взноса')
@@ -1682,7 +1683,7 @@ block main
                                 .mt15.kredit-scale
                                     .kredit-scale__load(style='width:75%')
                                         .kredit-scale__arrow.icon-play
-                                form.kredit-step__form.row.js-kredit-step(action='#', method='post', data-parsley-validate='', enctype='multipart/form-data')
+                                form.kredit-step__form.row.js-kredit-step.ajax-form(action='#', method='post', data-parsley-validate='', enctype='multipart/form-data')
                                     .col-min-6
                                         .input-box.mt40
                                             input.input-text.input-text_border(type='text', name='calendar', required='', data-parsley-errors-messages-disabled='', placeholder='На какой срок получаете ипотеку')
@@ -1715,7 +1716,7 @@ block main
                                         | Выберите банки-партнеры, 
                                         br
                                         | к которым  необходимо отправить заявку на ипотеку
-                                form.kredit-step__form.row(action='#', method='post', data-parsley-validate='', enctype='multipart/form-data')
+                                form.kredit-step__form.ajax-form.row(action='/send', method='post', data-parsley-validate='', enctype='multipart/form-data')
                                     .col-min-12
                                         .bank-list
                                             label.bank-list__item
