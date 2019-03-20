@@ -27,9 +27,10 @@ html(lang="en" prefix="og: http://ogp.me/ns#")
 
         block main
 
-        script(src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyBN9VqzHdRedeGxyP-1owKg4aDwNjnmW_E")
+        script(src="//www.google.com/recaptcha/api.js?hl=ru" async defer)
         if env.NODE_ENV == 'development'
             script(src='/vue/vue.js')
+            script(src='/axios/axios.js')
             script(src='/jquery/jquery.min.js')
             script(src='/jquery-ui/widget.js')
             script(src='/jquery-ui/widgets/mouse.js')
@@ -37,12 +38,13 @@ html(lang="en" prefix="og: http://ogp.me/ns#")
             script(src='/src/js/jquery.arcticmodal-0.3.min.js')
             script(src="/src/js/components/jquery.ui.touch-punch.min.js")
             script(src="/src/js/components/jquery.fancybox.js")
-            script(src="/src/js/components/jquery.maskedinput.js")
             script(src="/src/js/components/jquery.form.js")
             script(src="/src/js/components/slick.js")
             script(src="/src/js/components/parsley.min.js")
+            script(src="/src/js/components/jquery.maskedinput.js")
             script(src='/src/js/google_map.js')
             script(src="/src/js/data.js")
+            script(src="/src/js/catalog.js")
             script(src='/src/js/welcome.js')
         else
             script(src='/build/app-f25522fbfc.min.js')
@@ -58,9 +60,11 @@ html(lang="en" prefix="og: http://ogp.me/ns#")
                         accurateTrackBounce:true,
                         webvisor:true
                 });
-
-                !function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src="https://vk.com/js/api/openapi.js?160",t.onload=function(){VK.Retargeting.Init("VK-RTRG-334467-fyLza"),VK.Retargeting.Hit()},document.head.appendChild(t)}();</script><noscript><img src="https://vk.com/rtrg?p=VK-RTRG-334467-fyLza" style="position:fixed; left:-999px;" alt=""/>
-
+            script.
+                !function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src="https://vk.com/js/api/openapi.js?160",t.onload=function(){VK.Retargeting.Init("VK-RTRG-334467-fyLza"),VK.Retargeting.Hit()},document.head.appendChild(t)}();
+            noscript
+                img(src="https://vk.com/rtrg?p=VK-RTRG-334467-fyLza" style="position:fixed; left:-999px;" alt="")
+            script.
                 !function(f,b,e,v,n,t,s)
                 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
                 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -71,6 +75,6 @@ html(lang="en" prefix="og: http://ogp.me/ns#")
                 'https://connect.facebook.net/en_US/fbevents.js');
                 fbq('init', '2182739471989387');
                 fbq('track', 'PageView');
-
-        noscript
-            img(height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2182739471989387&ev=PageView&noscript=1")
+            noscript
+                img(height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2182739471989387&ev=PageView&noscript=1")
+        script(src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBN9VqzHdRedeGxyP-1owKg4aDwNjnmW_E")

@@ -69,7 +69,7 @@ export default {
         'picture-input': PictureInput,
     },
     template: `
-        <div class="main-content">
+        <div class="main-content content-people">
             <app-header v-bind:title="'Сотрудники'" v-bind:button="{title:'Добавить', method:'add'}"></app-header>
 
             <div class="modal" id="modalPeopleEdit" tabindex="-1" role="dialog">
@@ -84,8 +84,8 @@ export default {
                             </div>
                             <div class="modal-body" v-if="usePeople !== false && people[usePeople]">
                                 <div class="row">
-                                    <div class="col-auto">
-                                        <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group" style="margin-bottom: 1.375rem;">
                                             <label for="">Изображение</label>
                                             <picture-input
                                                 ref="sPeopleImage"
@@ -104,7 +104,7 @@ export default {
                                                 }"></picture-input>
                                         </div>
                                     </div>
-                                    <div class="col">
+                                    <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="">Фамилия сотрудника</label>
                                             <input type="text" class="form-control" v-model="people[usePeople].sPeopleLastname">
@@ -127,8 +127,8 @@ export default {
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" v-on:click.prevent="del"><i class="material-icons">delete</i></button>
-                                <button type="submit" class="btn btn-primary float-right" v-on:click.prevent="update">Сохранить</button>
+                                <button type="submit" class="btn btn-primary" v-on:click.prevent="update">Сохранить</button>
+                                <button type="button" class="btn btn-outline-danger float-right" v-on:click.prevent="del"><i class="material-icons">delete</i></button>
                             </div>
                         </form>
                     </div>
@@ -166,12 +166,6 @@ export default {
                     </template>
                 </div>
             </div>            
-
-
-            <div class="container-fluid">
-                <pre>{{ people }}</pre>
-                <pre>{{ department }}</pre>
-            </div>
         </div>
     `,
 }

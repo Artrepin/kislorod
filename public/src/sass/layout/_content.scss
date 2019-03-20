@@ -380,6 +380,9 @@
             .cases-list__img {
                 opacity: 1;
             }
+            .cases-list__hide {
+                display: block;
+            }
         }
     }
     &__head1 {
@@ -508,7 +511,7 @@
         position: absolute;
         left: 50%;
         margin-left: toem(-960);
-        bottom: toem(-370);
+        bottom: toem(-270);
         width: toem(1920);
     }
     &__top {
@@ -4328,4 +4331,8 @@ input::-webkit-inner-spin-button {
         margin-top: 80px;
         margin-bottom: 0;
     }
+}
+
+.g-recaptcha {
+    margin-top: 25px;
 }

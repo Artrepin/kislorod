@@ -106,7 +106,8 @@ block main
                                     .input-box
                                         input.input-text.input-text_border(type='tel', name='phone', required='', data-parsley-errors-messages-disabled='', placeholder='+7 (___) ___-__-__')
                                         label.input-box__icon.icon-telephone
-                                    button.button.button_big.button_blue.button_blue2.mt30(type='submit', name='call') Помогите выбрать ответ
+                                    <div class="g-recaptcha" data-sitekey= #{env.RECAPTCHA_PUBLIC} data-theme="dark" data-callback="RecaptchaSuccess"></div>
+                                    button.button.button_big.button_blue.button_blue2.mt30.gcaptcha(type='submit', name='call', disabled) Помогите выбрать ответ
                         .col-sm-8.quiz-screen__right
                             .quiz
                                 .quiz__step
@@ -279,8 +280,9 @@ block main
                                                 .input-box.mt30
                                                     input.input-text.input-text_border(type='tel', name='phone', required='', data-parsley-errors-messages-disabled='', placeholder='+7 (___) ___-__-__')
                                                     label.input-box__icon.icon-telephone
+                                            <div class="g-recaptcha" data-sitekey= #{env.RECAPTCHA_PUBLIC} data-theme="dark" data-callback="RecaptchaSuccess"></div>
                                             .quiz-form__bottom
-                                                button.button.button_big.button_blue.button_blue2.mt30(type='submit', name='quiz')
+                                                button.button.button_big.button_blue.button_blue2.mt30.gcaptcha(type='submit', name='quiz', disabled)
                                                     | Получить подборку
                                                     span.button__arrow.icon-arrow
                                                 .polity-box
@@ -328,7 +330,8 @@ block main
                             .input-box
                                 input.input-text.input-text_border(type='tel', name='phone', required='', data-parsley-errors-messages-disabled='', placeholder='+7 (___) ___-__-__')
                                 label.input-box__icon.icon-telephone
-                            button.button.button_big.button_blue.button_blue2.mt30(type='submit', name='call') Помогите выбрать ответ
+                            <div class="g-recaptcha" data-sitekey= #{env.RECAPTCHA_PUBLIC} data-theme="dark" data-callback="RecaptchaSuccess"></div>
+                            button.button.button_big.button_blue.button_blue2.mt30.gcaptcha(type='submit', name='call', disabled) Помогите выбрать ответ
                     .agency-catalog
                         img.agency-catalog__dots(src='/images/quiz-screen/dots2.png', alt='')
                         .agency-catalog__content
@@ -796,12 +799,13 @@ block main
                                 .input-box.mt30
                                     input.input-text.input-text_fill(type='tel', name='phone', required='', data-parsley-errors-messages-disabled='', placeholder='+7 (___) ___-__-__')
                                     label.input-box__icon.icon-telephone
-                                .input-box.mt30
+                                .input-box.mt30(style="margin-bottom: 25px;")
                                     input.input-text.input-text_fill(type='email', name='email', required='', data-parsley-errors-messages-disabled='', placeholder='mail@mail.com')
                                     label.input-box__icon.icon-message
+                                <div class="g-recaptcha" data-sitekey= #{env.RECAPTCHA_PUBLIC} data-theme="light" data-callback="RecaptchaSuccess"></div>
                                 .catalog-screen__button
                                     img.catalog-screen__level(src='/images/cases/level1000.png', alt='')
-                                    button.button.button_big.button_blue.button_blue2.mt30(type='submit', name='call')
+                                    button.button.button_big.button_blue.button_blue2.mt30.gcaptcha(type='submit', name='call', disabled)
                                         | Скачать презентацию
                                         span.button__arrow.icon-arrow
                                 .polity-box.mt35
@@ -820,7 +824,7 @@ block main
                                         .play__circle
                                         .play__circle
                                         .play__circle
-                                    a.sea-catalog__icon.icon-book(href='#', target='_blank')
+                                    a.sea-catalog__icon.icon-book(href='/catalog', target='_blank')
                                 center.mt20
                                     .font_size14.color_white.fw_medium
                                         | Посмотреть каталог 
@@ -1011,7 +1015,8 @@ block main
                                 .input-box.mt30
                                     input.input-text.input-text_border(type='tel', name='phone', required='', data-parsley-errors-messages-disabled='', placeholder='+7 (___) ___-__-__')
                                     label.input-box__icon.icon-telephone
-                                button.button.button_big.button_blue.button_blue2.mt30(type='submit', name='call')
+                                <div class="g-recaptcha" data-sitekey= #{env.RECAPTCHA_PUBLIC} data-theme="dark" data-callback="RecaptchaSuccess"></div>
+                                button.button.button_big.button_blue.button_blue2.mt30.gcaptcha(type='submit', name='call', disabled)
                                     | Записаться на аудит
                                     span.button__arrow.icon-arrow
                                 .polity-box.mt35
@@ -1291,7 +1296,8 @@ block main
                                     .input-box.mt30
                                         input.input-text.input-text_border(type='email', name='email', required='', data-parsley-errors-messages-disabled='', placeholder='mail@mail.com')
                                         label.input-box__icon.icon-message
-                                    button.button.button_big.button_blue.button_blue2.mt30(type='submit', name='ask')
+                                    <div class="g-recaptcha" data-sitekey= #{env.RECAPTCHA_PUBLIC} data-theme="dark" data-callback="RecaptchaSuccess"></div>
+                                    button.button.button_big.button_blue.button_blue2.mt30.gcaptcha(type='submit', name='ask', disabled)
                                         | Задать вопрос специалисту
                                         span.button__arrow.icon-arrow
                                     .polity-box.mt35

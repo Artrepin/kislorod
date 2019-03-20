@@ -12,7 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     iBuildingID: DataTypes.INTEGER,
     iTypeID: DataTypes.INTEGER,
     iRoomCount: DataTypes.INTEGER,
-    sPlanName: DataTypes.STRING
+    sPlanName: DataTypes.STRING,
+    fPlanArea: DataTypes.FLOAT
   }, {
     timestamps: false,
     freezeTableName: true,
@@ -25,9 +26,9 @@ module.exports = (sequelize, DataTypes) => {
     plan.hasMany(models.plan_image, {
       foreignKey: 'iPlanID'
     })
-    // plan.belongsTo(models.apartament, {
-    //   foreignKey: 'iPlanID'
-    // })
+    plan.hasMany(models.apartament, {
+      foreignKey: 'iPlanID'
+    })
   };
   return plan;
 };

@@ -9,7 +9,13 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       iDepartmentID: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'department',
+          key: 'iDepartmentID',
+        },
+        onUpdate: 'NO ACTION',
+        onDelete: 'CASCADE',
       },
       sPeopleLastname: {
         type: Sequelize.STRING

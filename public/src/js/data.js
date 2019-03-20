@@ -1,16 +1,76 @@
-$(document).ready(function(){
+// получить куки
+function getCookie(name) {
+    var matches = document.cookie.match(new RegExp(
+      "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+    ));
+    return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+// колхоз для показа modal exit
+var secTimeShowModalExit = 10
+var checkTimeShowModalExit = (getCookie('checkTimeShowModalExit')) ? getCookie('checkTimeShowModalExit') : 0
+if (checkTimeShowModalExit < secTimeShowModalExit) {
+    var checkTimeShowModalExitInterval = setInterval(setTimeShowModalExit, 1000)
+}
+function setTimeShowModalExit () {
+    if (checkTimeShowModalExit >= secTimeShowModalExit) {
+        var d = new Date(new Date().getTime() + 60 * 1000 * 60 * 24);
+        document.cookie = "showModalExit=true; path=/; domain=kislorod123.ru; expires=" + d.toUTCString();
+        clearInterval(checkTimeShowModalExitInterval)
+    } else {
+        checkTimeShowModalExit++
+        var d = new Date(new Date().getTime() + 60 * 1000 * 60 * 24);
+        document.cookie = "checkTimeShowModalExit=" + checkTimeShowModalExit + "; path=/; domain=kislorod123.ru; expires=" + d.toUTCString();
+    }
+}
+// *** //
 
-    $('html').mouseleave(function () {
-        // $('.js-popup-exit').show()
-    })
 
-	$("input[name='telephone'], input[type='tel']").mask("+7 (999) 999-99-99").each(function() {
+// Google Recaptch
+function RecaptchaSuccess (response) {
+    $('.gcaptcha').prop('disabled', false)
+}
+// *** //
 
-		var title = $(this).attr("title");
+function thanck() {
+    $(".popup-wrap").fadeOut(500);
+    $(".popup").removeClass("popup_active");
+    $(".js-popup-thanck").fadeIn(500);
+    $(".js-popup-thanck .popup").addClass("popup_active");
+}
+
+function maskForInput () {
+    $("input[type='tel']").mask("+7 (999) 999-99-99").each(function() {
+
+        var title = $(this).attr("title");
 
 		$(this).val(title);
 
 	});
+}
+
+function validateAndSendForm () {
+    $(".ajax-form").ajaxForm({
+        success: function(){
+            thanck();
+        }
+    })
+}
+
+$(document).ready(function(){
+
+    // Показ modal exit
+    $('html').mouseleave(function () {
+        if (getCookie('showModalExit') == 'true') {
+            var d = new Date(new Date().getTime() + 60 * 1000 * 60 * 24);
+            document.cookie = "showModalExit=false; path=/; domain=kislorod123.ru; expires=" + d.toUTCString();
+            $('.js-popup-exit').show()
+        }        
+    })
+    // *** //
+
+    maskForInput()
+    validateAndSendForm()
+	
 	
 	$("input[type='text'], input[type='tel'], textarea").focus(function(){
 		if($(this).hasClass("error")) {
@@ -60,22 +120,8 @@ $(document).ready(function(){
         $("body").css("overflow","auto");
     });
     
-    function thanck() {
-        $(".popup-wrap").fadeOut(500);
-        $(".popup").removeClass("popup_active");
-        $(".js-popup-thanck").fadeIn(500);
-        $(".js-popup-thanck .popup").addClass("popup_active");
-    }
     
-    $(".ajax-form").ajaxForm({
-        beforeSubmit: function(){
-            $(this).parsley({
-            });
-        },
-        success: function(){
-            thanck();
-        }
-    });
+    
 	
 	/* components */
 	
@@ -116,18 +162,20 @@ $(document).ready(function(){
 		});
 	};
     
-    if($('.catalog-slider').length) {
-		$('.catalog-slider').slick({
-			arrows: true,
-            prevArrow: '<button class="slick-arrow slick-arrow_prev icon-right-arrow"></button>',
-            nextArrow: '<button class="slick-arrow slick-arrow_next icon-right-arrow"></button>',
-			dots: false,
-			infinite: true,
-			speed: 500,
-			slidesToShow: 1,
-			slidesToScroll: 1
-		});
-	};
+    // $(document).ready(function(){
+    //     if($('.catalog-slider').length) {
+    //         $('.catalog-slider').slick({
+    //             arrows: true,
+    //             prevArrow: '<button class="slick-arrow slick-arrow_prev icon-right-arrow"></button>',
+    //             nextArrow: '<button class="slick-arrow slick-arrow_next icon-right-arrow"></button>',
+    //             dots: false,
+    //             infinite: true,
+    //             speed: 500,
+    //             slidesToShow: 1,
+    //             slidesToScroll: 1
+    //         })
+    //     }
+    // })
 	
 	$(".js-scroll-to").click(function() {
         var attr_href = $(this).attr("href");
@@ -225,8 +273,8 @@ $(document).ready(function(){
         });
     }
     
-    $(".cases-list__item:first").addClass("active");
-    $(".cases-list__item:first .cases-list__hide").fadeIn(500);
+    // $(".cases-list__item:first").addClass("active");
+    // $(".cases-list__item:first .cases-list__hide").fadeIn(500);
     
     $(".js-before-after").each(function(){
         $(".js-after-img").width($(".js-before-after").width());
@@ -276,38 +324,38 @@ $(document).ready(function(){
         });
     }
     
-    if ( $(".js-slider-options").length ) {
-        $(".js-slider-wrapper").each(function(){
+    // if ( $(".js-slider-options").length ) {
+    //     $(".js-slider-wrapper").each(function(){
             
-            var slider_options = $(this).find(".js-slider-options"),
-                slider_val = slider_options.data("value"),
-                slider_min = slider_options.data("min"),
-                slider_max = slider_options.data("max"),
-                slider_step = slider_options.data("step"),
-                slider_meas = slider_options.data("meas"),
-                slider_mask = $(this).find(".js-slider-mask");
+    //         var slider_options = $(this).find(".js-slider-options"),
+    //             slider_val = slider_options.data("value"),
+    //             slider_min = slider_options.data("min"),
+    //             slider_max = slider_options.data("max"),
+    //             slider_step = slider_options.data("step"),
+    //             slider_meas = slider_options.data("meas"),
+    //             slider_mask = $(this).find(".js-slider-mask");
             
-            $(this).find(".js-slider").slider({
-                range: "min",
-                min: slider_min,
-                max: slider_max,
-                value: slider_val,
-                step: slider_step,
-                slide: function( event, ui ) {
-                    slider_options.val( ui.value + " " + slider_meas );
-                    slider_mask.val( ui.value );
-                }
-            });
+    //         $(this).find(".js-slider").slider({
+    //             range: "min",
+    //             min: slider_min,
+    //             max: slider_max,
+    //             value: slider_val,
+    //             step: slider_step,
+    //             slide: function( event, ui ) {
+    //                 slider_options.val( ui.value + " " + slider_meas );
+    //                 slider_mask.val( ui.value );
+    //             }
+    //         });
             
-        });
+    //     });
         
-        $(".js-slider-mask").keyup(function(){
-            var slider_mask = $(this).val();
-            var slider_meas = $(this).closest(".js-slider-wrapper").find(".js-slider-options").data("meas");
-            $(this).closest(".js-slider-wrapper").find(".js-slider").slider({value: slider_mask});
-            $(this).closest(".js-slider-wrapper").find(".js-slider-options").val( slider_mask + " " + slider_meas  );
-        });
-    }
+    //     $(".js-slider-mask").keyup(function(){
+    //         var slider_mask = $(this).val();
+    //         var slider_meas = $(this).closest(".js-slider-wrapper").find(".js-slider-options").data("meas");
+    //         $(this).closest(".js-slider-wrapper").find(".js-slider").slider({value: slider_mask});
+    //         $(this).closest(".js-slider-wrapper").find(".js-slider-options").val( slider_mask + " " + slider_meas  );
+    //     });
+    // }
     
     var thousandSeparator = function(str) {
         var parts = (str + '').split('.'),
@@ -331,7 +379,7 @@ $(document).ready(function(){
     };
     
     if ( $(".js-slider-result").length ) {
-        
+
         $(".js-slider-wrapper").each(function(){
             
             
@@ -374,23 +422,23 @@ $(document).ready(function(){
         });
     }
     
-    $(".catalog-tabs__item").click(function(){
+    $(document).on("click", ".catalog-tabs__item:not(.catalog-tabs__item_active)", function () {
         
         var tab_index = $(this).index();
         
-        if ( $(this).hasClass("catalog-tabs__item_active") ) {
-            
-        } else {
-            $(".catalog-tabs__item_active").removeClass("catalog-tabs__item_active");
-            $(this).addClass("catalog-tabs__item_active");
-            $(".tabs-slider__slide:visible").hide();
-            $(".tabs-slider__slide:eq(" + tab_index + ")").fadeIn(500);
-            $(".catalog-slider").slick('refresh');
-            $(".catalog-slider .slick-arrow").each(function(){
-                var height_pic = $(".catalog-slider__pic:visible").height();
-                height_pic = height_pic/2;
-                $(this).css("top",height_pic);
-            });
+        $(".catalog-tabs__item_active").removeClass("catalog-tabs__item_active");
+        $(this).addClass("catalog-tabs__item_active");
+        $(".tabs-slider__slide:visible").hide();
+        $(".tabs-slider__slide:eq(" + tab_index + ")").fadeIn(500);
+        $(".catalog-slider").slick('refresh');
+        $(".catalog-slider .slick-arrow").each(function(){
+            var height_pic = $(".catalog-slider__pic:visible").height();
+            height_pic = height_pic/2;
+            $(this).css("top",height_pic);
+        });
+        if (tab_index == 2) {
+            $('.kredit-box .ajax-form').parsley()
+            maskForInput()
         }
         
         return false;
@@ -405,16 +453,18 @@ $(document).ready(function(){
         });
     }, 1000 );
     
-    $(".js-object-show").click(function(){
-        $(this).parent().find(".object-popup").fadeIn(500); 
-    });
+    // Catalog Открытие/Закрытие попапа на квартире
+    $(document).on("click", ".js-object-show", function () {
+        $(this).parent().find(".object-popup").fadeIn(500).find('.ajax-form').parsley()
+        validateAndSendForm()
+        maskForInput()
+    }).on("click", ".object-popup__close", function () {
+        $(this).parent().fadeOut(500);
+    })
     
-    $(".object-popup__close").click(function(){
-        $(this).parent().fadeOut(500); 
-    });
     
-    $(".object-category__item").click(function(){
-        
+    $(document).on("click", ".object-category__item", function () {
+
         var cat_index = $(this).index();
         
          if ( $(this).hasClass("object-category__item_active") ) {
@@ -433,21 +483,23 @@ $(document).ready(function(){
             }
          }
         return false;
-    });
+
+    })
     
-    $(".js-kredit-step").submit(function() {
-        next_step();
-        return false;
-    });
-    
+    $(document).on("submit", ".js-kredit-step", function () {
+        next_step()
+        return false
+    })
+
     function next_step() {
+        // validateAndSendForm()
         $(".kredit-step_active").removeClass("kredit-step_active").hide().next().fadeIn(500).addClass("kredit-step_active");
     }
     
-    $(".js-all-banks").click(function(){
+    $(document).on("click", ".js-all-banks", function (){
         $(".bank-list__input").attr("checked","checked");
         return false;
-    });
+    })
 
     $(".js-yes-price").mouseover(function(){
         $(".modal-exit__zhurnal").addClass("active");

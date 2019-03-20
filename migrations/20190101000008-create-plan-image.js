@@ -9,7 +9,13 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       iPlanID: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'plan',
+          key: 'iPlanID',
+        },
+        onUpdate: 'NO ACTION',
+        onDelete: 'CASCADE',
       },
       sPlanImage: {
         type: Sequelize.STRING

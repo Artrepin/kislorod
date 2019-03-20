@@ -224,9 +224,11 @@
                       input.bank-list__input(type='checkbox')
                       img.bank-list__logo(src='/images/catalog/nvidia.png', alt='')
                   a.fw_medium.bank-list__all.mt15.js-all-banks(href='#') Отправить заявку во все банки-партнеры
+                .col-min-12
+                  <div class="g-recaptcha" data-sitekey= #{env.RECAPTCHA_PUBLIC} data-theme="dark" data-callback="RecaptchaSuccess"></div>
                 .col-min-6
                   .button-building.mt60
-                    button.button.button_big.button_blue.button_blue2(type='submit', name='send')
+                    button.button.button_big.button_blue.button_blue2.gcaptcha(type='submit', name='send', disabled)
                       | Отправить заявку на ипотеку
                       span.button__arrow.icon-arrow
                       img.button-building__img(src='/images/catalog/building.png', alt='')
@@ -269,7 +271,7 @@
                   .modal-exit__zhurnal-line
                   .modal-exit__zhurnal-ellipse
                      img.modal-exit__zhurnal-img(src='/images/exit_zhurnal.png', alt='')
-               form.modal-exit__form.ajax-form(action='send.php', method='post', data-parsley-validate='', enctype='multipart/form-data')
+               form.modal-exit__form.ajax-form(action='/send', method='post', data-parsley-validate='', enctype='multipart/form-data')
                   .font_size18.ff_trajan.modal-exit__form-desc
                      | Скачайте презентацию и узнайте, как нужно 
                      br
@@ -281,11 +283,12 @@
                   .input-box.mt20
                      input.input-text.input-text_border(type='tel', name='phone', required='', data-parsley-errors-messages-disabled='', placeholder='+7 (___) ___-__-__')
                      label.input-box__icon.icon-telephone
+                  <div class="g-recaptcha" data-sitekey= #{env.RECAPTCHA_PUBLIC} data-theme="dark" data-callback="RecaptchaSuccess"></div>
                   .modal-exit__buttons
-                     button.button.button_big.button_blue.button_blue2.modal-exit__yes.js-yes-price(type='submit', name='price')
+                     button.button.button_big.button_blue.button_blue2.modal-exit__yes.js-yes-price.gcaptcha(type='submit', name='price', disabled)
                         | Забрать подарок
                         span.button__arrow.icon-arrow.icon-arrow_rotate
-                     a.modal-exit__no.font_size14.fw_medium.color_white.fade05.js-no-price(href='#') Отказаться от подарка
+                     a.modal-exit__no.font_size14.fw_medium.color_white.fade05.js-no-price.js-popup-close(href='#' onclick="return false;") Отказаться от подарка
                   .polity-box.mt35
                      .polity-box__dot
                      .font_size12.fw_medium.fade05
