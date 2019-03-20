@@ -12,7 +12,7 @@ if($("#catalogvue").length) {
             axios.post('/catalog/init', {
 
             }).then((json) => {
-                console.log(json.data)
+                // console.log(json.data)
                 this.filters = json.data.filters,
                 this.selected = json.data.selected
 
@@ -80,7 +80,7 @@ if($("#catalogvue").length) {
                 }).then((json) => {
                     this.buildings = json.data.buildings
                     this.buildings.forEach(element => {
-                        console.log(element)
+                        // console.log(element)
                         
                         element.plansCount = element.plans.length
                         element.plansCountString = this.declOfNum(element.plansCount, ['планировка', 'планировки', 'планировок'])
@@ -117,6 +117,8 @@ if($("#catalogvue").length) {
             use: function (index) {
                 Vue.set(this, 'useBuilding', index)
                 Vue.nextTick(function () {
+                    // maskForInput()
+                    // validateAndSendForm()
                     $('.catalog-slider').slick({
                         arrows: true,
                         prevArrow: '<button class="slick-arrow slick-arrow_prev icon-right-arrow"></button>',

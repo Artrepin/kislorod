@@ -31,6 +31,31 @@ function RecaptchaSuccess (response) {
 }
 // *** //
 
+function thanck() {
+    $(".popup-wrap").fadeOut(500);
+    $(".popup").removeClass("popup_active");
+    $(".js-popup-thanck").fadeIn(500);
+    $(".js-popup-thanck .popup").addClass("popup_active");
+}
+
+function maskForInput () {
+    $("input[type='tel']").mask("+7 (999) 999-99-99").each(function() {
+
+        var title = $(this).attr("title");
+
+		$(this).val(title);
+
+	});
+}
+
+function validateAndSendForm () {
+    $(".ajax-form").ajaxForm({
+        success: function(){
+            thanck();
+        }
+    })
+}
+
 $(document).ready(function(){
 
     // Показ modal exit
@@ -43,13 +68,9 @@ $(document).ready(function(){
     })
     // *** //
 
-	$("input[name='telephone'], input[type='tel']").mask("+7 (999) 999-99-99").each(function() {
-
-		var title = $(this).attr("title");
-
-		$(this).val(title);
-
-	});
+    maskForInput()
+    validateAndSendForm()
+	
 	
 	$("input[type='text'], input[type='tel'], textarea").focus(function(){
 		if($(this).hasClass("error")) {
@@ -99,22 +120,8 @@ $(document).ready(function(){
         $("body").css("overflow","auto");
     });
     
-    function thanck() {
-        $(".popup-wrap").fadeOut(500);
-        $(".popup").removeClass("popup_active");
-        $(".js-popup-thanck").fadeIn(500);
-        $(".js-popup-thanck .popup").addClass("popup_active");
-    }
     
-    $(".ajax-form").ajaxForm({
-        beforeSubmit: function(){
-            $(this).parsley({
-            });
-        },
-        success: function(){
-            thanck();
-        }
-    });
+    
 	
 	/* components */
 	
@@ -170,19 +177,19 @@ $(document).ready(function(){
     //     }
     // })
 	
-	// $(".js-scroll-to").click(function() {
-    //     var attr_href = $(this).attr("href");
-    //     var data_href = $(this).data("href");
-    //     if ( data_href ) {
-    //         attr_href = data_href;
-    //     }
-	// 	$("html, body").animate({
-    //         scrollTop: $(attr_href).offset().top + "px"
-    //     }, {
-    //         duration: 1000
-    //     });
-    //     return false;
-    // });
+	$(".js-scroll-to").click(function() {
+        var attr_href = $(this).attr("href");
+        var data_href = $(this).data("href");
+        if ( data_href ) {
+            attr_href = data_href;
+        }
+		$("html, body").animate({
+            scrollTop: $(attr_href).offset().top + "px"
+        }, {
+            duration: 1000
+        });
+        return false;
+    });
 	
 	$(".js-svg").each(function(){
         var svg_src = $(this).data("svg-src");
@@ -415,23 +422,23 @@ $(document).ready(function(){
         });
     }
     
-    $(document).on("click", ".catalog-tabs__item", function () {
+    $(document).on("click", ".catalog-tabs__item:not(.catalog-tabs__item_active)", function () {
         
         var tab_index = $(this).index();
         
-        if ( $(this).hasClass("catalog-tabs__item_active") ) {
-            
-        } else {
-            $(".catalog-tabs__item_active").removeClass("catalog-tabs__item_active");
-            $(this).addClass("catalog-tabs__item_active");
-            $(".tabs-slider__slide:visible").hide();
-            $(".tabs-slider__slide:eq(" + tab_index + ")").fadeIn(500);
-            $(".catalog-slider").slick('refresh');
-            $(".catalog-slider .slick-arrow").each(function(){
-                var height_pic = $(".catalog-slider__pic:visible").height();
-                height_pic = height_pic/2;
-                $(this).css("top",height_pic);
-            });
+        $(".catalog-tabs__item_active").removeClass("catalog-tabs__item_active");
+        $(this).addClass("catalog-tabs__item_active");
+        $(".tabs-slider__slide:visible").hide();
+        $(".tabs-slider__slide:eq(" + tab_index + ")").fadeIn(500);
+        $(".catalog-slider").slick('refresh');
+        $(".catalog-slider .slick-arrow").each(function(){
+            var height_pic = $(".catalog-slider__pic:visible").height();
+            height_pic = height_pic/2;
+            $(this).css("top",height_pic);
+        });
+        if (tab_index == 2) {
+            $('.kredit-box .ajax-form').parsley()
+            maskForInput()
         }
         
         return false;
@@ -448,7 +455,9 @@ $(document).ready(function(){
     
     // Catalog Открытие/Закрытие попапа на квартире
     $(document).on("click", ".js-object-show", function () {
-        $(this).parent().find(".object-popup").fadeIn(500)
+        $(this).parent().find(".object-popup").fadeIn(500).find('.ajax-form').parsley()
+        validateAndSendForm()
+        maskForInput()
     }).on("click", ".object-popup__close", function () {
         $(this).parent().fadeOut(500);
     })
@@ -478,18 +487,19 @@ $(document).ready(function(){
     })
     
     $(document).on("submit", ".js-kredit-step", function () {
-        next_step();
-        return false;
+        next_step()
+        return false
     })
 
     function next_step() {
+        // validateAndSendForm()
         $(".kredit-step_active").removeClass("kredit-step_active").hide().next().fadeIn(500).addClass("kredit-step_active");
     }
     
-    $(".js-all-banks").click(function(){
+    $(document).on("click", ".js-all-banks", function (){
         $(".bank-list__input").attr("checked","checked");
         return false;
-    });
+    })
 
     $(".js-yes-price").mouseover(function(){
         $(".modal-exit__zhurnal").addClass("active");
