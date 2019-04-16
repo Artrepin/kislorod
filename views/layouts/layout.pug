@@ -27,6 +27,7 @@ html(lang="en" prefix="og: http://ogp.me/ns#")
 
         block main
 
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCJY_aMrGVDItL2zOXcosmEOfITCqm3pIM">
         script(src="//www.google.com/recaptcha/api.js?hl=ru" async defer)
         if env.NODE_ENV == 'development'
             script(src='/vue/vue.js')
@@ -77,4 +78,4 @@ html(lang="en" prefix="og: http://ogp.me/ns#")
                 fbq('track', 'PageView');
             noscript
                 img(height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2182739471989387&ev=PageView&noscript=1")
-        script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyCJY_aMrGVDItL2zOXcosmEOfITCqm3pIM&v=3.exp')
+        
