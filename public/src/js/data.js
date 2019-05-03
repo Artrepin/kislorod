@@ -381,8 +381,7 @@ $(document).ready(function(){
     if ( $(".js-slider-result").length ) {
 
         $(".js-slider-wrapper").each(function(){
-            
-            
+
             var slider_options = $(this).find(".js-slider-options"),
                 slider_val = slider_options.data("value"),
                 slider_min = slider_options.data("min"),
@@ -420,6 +419,9 @@ $(document).ready(function(){
             });
             
         });
+
+        
+        // $(".js-slider-result").slide()
     }
     
     $(document).on("click", ".catalog-tabs__item:not(.catalog-tabs__item_active)", function () {
