@@ -19,7 +19,9 @@ module.exports = (sequelize, DataTypes) => {
   sequelizePaginate.paginate(department)
 
   department.associate = function(models) {
-    // associations can be defined here
+    department.hasMany(models.people, {
+      foreignKey: 'iDepartmentID'
+    })
   };
   return department;
 };

@@ -13,6 +13,7 @@ $(document).on("click", ".play-box__thumb", function(){
                 }    
             }
         })
+    return false
 })
 
 function openYT (yt) {

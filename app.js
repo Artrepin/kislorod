@@ -198,10 +198,16 @@ app.post('/catalog/building', async (req, res) => {
     res.json(data)
 })
 
-app.get('/about', recaptcha.middleware.render, (req, res) => {
+app.get('/about', recaptcha.middleware.render, async (req, res) => {
     data.title = "О центре недвижимости «Кислород»"
     data.description = "Агентство элитной недвижимости в городе Сочи"
     data.captcha = res.recaptcha
+    // data.people = await People.findAll({
+    //     include: [Department]
+    // })
+    data.department = await Department.findAll({
+        include: [People]
+    })
     res.render('about/about', data)
 })
 
@@ -800,17 +806,27 @@ app.post('/admin/PeopleUpdate', async (req, res) => {
     res.json(data)
 })
 app.post('/admin/PeopleUpload', async (req, res) => {
+    var filename = randomString() + '.jpg'
+
     var storage = multer.diskStorage({
         destination: function (req, file, cb) {
             cb(null, './public/images/people')
         },
         filename: function (req, file, cb) {
-            cb(null, randomString() + '.jpg')
+            cb(null, 'temp_' + filename)
         }
     })
     var upload = multer({ storage: storage }).single('sPeopleImage')
     upload(req, res, function (err) {
-        res.send({ file: req.file, body: req.body })
+        sharp('./public/images/people/' + 'temp_' + filename)
+        .resize(500, 500)
+        .toFile('./public/images/people/' + filename, function(err, response) {
+            sharp.cache(false)
+            // fs.unlink('./public/images/building/stage/' + 'temp_' + filename)
+            req.file.filename = filename
+            res.send({ file: req.file, body: req.body })
+        })
+        // res.send({ file: req.file, body: req.body })
     })
 })
 app.post('/admin/PeopleDelete', async (req, res) => {

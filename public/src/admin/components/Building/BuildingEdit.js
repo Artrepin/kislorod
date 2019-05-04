@@ -89,7 +89,7 @@ export default {
         <div class="main-content building-edit">
 
             <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-body">Сохранено</div>
+                <div class="toast-body text-success">Сохранено</div>
             </div>
 
             <div class="header building-edit-header">

@@ -1,931 +1,929 @@
 extends ../layouts/layout.pug
 
 block main
-    .main-wrapper
-        .main-screen.main-screen_partner.bg_dark-blue.color_white
-           .main
-              img.main-screen__partner-dots(src='/images/about/dots.png', alt='')
-              include ../include/header.pug
-              .main-screen__content
-                 .col-sm-6
-                    .desc-screen.fw_medium Начните зарабатывать
-                    .mt25.main-screen__title2
-                       h1.font_size54 от 100 т.р. в месяц на продаже недвижимости в г. Сочи, 
-                    .main-screen__title3.mt20
-                       h3.font_size22 став партнером агентства недвижимости 
-                    .desc.mt30
-                       img.desc__icon(src='/images/icons/ribbon.png', alt='')
-                       p.font_size14.fade05.fw_medium
-                          | Избавим вас от всех операционных задач, 
-                          br
-                          | вам останется только заниматься продажами объектов
-                    button.button.button_big.button_blue.button_blue2.main-screen__to-vebinar.mt50.js-scroll-to(data-href='#vebinar')
-                       | Записаться на вебинар
-                       span.button__arrow.icon-arrow.icon-arrow_rotate
-              .main-screen__director
-                 .main-screen__director-img
-                    img(src='/images/partner/director.png', alt='')
-                 .catalog-slider__caption
-                    span.font_size14.fw_medium.fade05
-                       | Фамилия Имя Отчество 
-                       br
-                       | Что бы показать кто 
-                       br
-                       | вел вебинар
-        #vebinar.vebinar-screen
-           .main
-              img.vebinar-screen__dots(src='/images/director/dots.svg', alt='')
-              img.vebinar-screen__clock(src='/images/partner/clock.png', alt='')
-              .vebinar-screen__inside-wrap
-                 .row
-                    .col-sm-8
-                       h2.font_size44 Запишитесь на бесплатный вебинар, который пройдет сегодня в 17:00 и узнаете
-                    .col-sm-4.vebinar-screen__list
-                       .desc.mt10
-                          img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
-                          p.font_size14.fade05.fw_medium
-                             | Как работает наша 
-                             br
-                             | компания-застройщик
-                       .desc.mt25
-                          img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
-                          p.font_size14.fade05.fw_medium
-                             | За счет чего вы начнете 
-                             br
-                             | зарабатывать больше
-                       .desc.mt25
-                          img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
-                          p.font_size14.fade05.fw_medium
-                             | Кого мы бы хотели видеть 
-                             br
-                             | в качестве партнеров
-                 .row
-                    .col-sm-7.mt40
-                       a.catalog-slider__pic.vebinar-screen__video(href='#')
-                          img(src='/images/partner/vebinar.jpg', alt='')
-                          span.catalog-slider__icon.icon-play
-                       .vebinar-screen__time-active
-                          .vebinar-screen__time-box
-                             .font_size14.fw_medium.fade05.vebinar-screen__time-text Вебинар начнется через:
-                             .vebinar-screen__time.ff_trajan.fw_medium
-                                span.vebinar-screen__time-number.js-hours 5
-                                span.font_size22 часов
-                             .vebinar-screen__time.ff_trajan.fw_medium
-                                span.vebinar-screen__time-number.js-mins 27
-                                span.font_size22 минут
-                       .vebinar-screen__time-noactive.mt35
-                          .font_size22.ff_trajan.fw_medium Вы не успели на вебинар!
-                    .col-sm-5.mt40
-                       .form-box.vebinar-screen__form.form-box_white
-                          form.ajax-form(action='send.php', method='post', data-parsley-validate='', enctype='multipart/form-data')
-                             input(type='hidden', name='subj', value='Заявка: На вебинар')
-                             .input-box.mt10
-                                input.input-text.input-text_fill(type='tel', name='phone', required='', data-parsley-errors-messages-disabled='', placeholder='Введите телефон *')
-                                label.input-box__icon.icon-telephone
-                             .input-box.mt30
-                                input.input-text.input-text_fill(type='email', name='email', required='', data-parsley-errors-messages-disabled='', placeholder='Введите почту *')
-                                label.input-box__icon.icon-message
-                             button.button.button_big.button_blue.button_blue2.mt30(type='submit', name='vebinar')
-                                | Записаться на вебинар
-                                span.button__arrow.icon-arrow
-                             .polity-box.mt35
-                                .polity-box__dot
-                                .font_size12.fw_medium.fade05
-                                   | Вы соглашаетесь с условиями 
-                                   br
-                                   | обработки персональных данных 
-                                   br
-                                   a(href='#') ознакомиться
-        .team-screen.bg_dark-blue.color_white
-           .main
-              h2.font_size54
-                 | Сегодня ООО «Кислород» 
-                 br
-                 | — одна из самых быстрорастущих компаний региона.
-              .mt15
-                 p.font_size22.ff_trajan За последний  год мы выросли в обороте в 5 раз
-              .team-results.row
-                 .team-results__item.col-sm-4.col-min-6
-                    .team-results__number.color_yelow.ff_trajan
-                       | 2000
-                       span.team-results__number-min год
-                    .mt20.team-results__desc
-                       .font_size22.fw_medium.ff_trajan.fade05 Год основания компании
-                 .team-results__item.col-sm-4.col-min-6
-                    .team-results__number.color_yelow.ff_trajan 26
-                    .mt20.team-results__desc
-                       .font_size22.fw_medium.ff_trajan.fade05
-                          | банков 
-                          br
-                          | -партнеров
-                 .team-results__item.col-sm-4.col-min-6
-                    .team-results__number.color_yelow.ff_trajan 30+
-                    .mt20.team-results__desc
-                       .font_size22.fw_medium.ff_trajan.fade05
-                          | Сданных 
-                          br
-                          | проектов
-                 .team-results__item.col-sm-4.col-min-6
-                    .team-results__number.color_yelow.ff_trajan 300+
-                    .mt20.team-results__desc
-                       .font_size22.fw_medium.ff_trajan.fade05 Сотрудников
-                 .team-results__item.col-sm-4.col-min-6
-                    .team-results__number.color_yelow.ff_trajan
-                       | 90
-                       span.team-results__number-min
-                          | тыс м
-                          sup 2
-                    .mt20.team-results__desc
-                       .font_size22.fw_medium.ff_trajan.fade05
-                          | Жилой 
-                          br
-                          | недвижимости построено
-                 .team-results__item.col-sm-4.col-min-6
-                    .team-results__number.color_yelow.ff_trajan 450+
-                    .mt20.team-results__desc
-                       .font_size22.fw_medium.ff_trajan.fade05 Семей живут домах построенных нами
-              .team-screen__bottom
-                 img.team-screen__bottom-dots(src='/images/about/dots_team.png', alt='')
-                 .row
-                    .col-sm-7.col-min-12
-                       h2.font_size54 Вам не нужно будет искать клиентов 
-                       .mt10
-                          h3.font_size22 или заниматься операционными задачами
-                    .col-sm-5.col-min-12
-                       .desc.mt10
-                          img.desc__icon(src='/images/icons/ribbon.png', alt='')
-                          p.font_size14.fade05.fw_medium
-                             | Агентство «Кислород», в отличии от большинства 
-                             br
-                             | агентств недвижимости  занимается полным 
-                             br
-                             | сопровождением работы партнера. В том числе:
-                 .task-tabs.mt60
-                    a.task-tabs__item.task-tabs__item_active(href='#klients') Отдел по работе с клиентами
-                    a.task-tabs__item(href='#legal') Юридический отдел
-                    a.task-tabs__item(href='#kredit') Ипотечный отдел
-                 .task-slider
-                    .task-slider__slide
-                       .font_size44.ff_trajan
-                          | Вы получите весь опыт лучших продавцов и все необходимое 
-                          br
-                          | для эффективных продаж
-                       .row.mt20
-                          .col-sm-5
-                             .font_size22.ff_trajan Обучим всем технологиям продаж и расскажем 
-                          .col-sm-5
-                             .desc-text.mt5
-                                .font_size14.fw_medium.fade05
-                                   | Презентации объектов 
-                                   br
-                                   | и методички для клиентов
-                       .task-slider__zhurnal.mt40
-                          .task-slider__zhurnal-line
-                          .task-slider__zhurnal-ellipse
-                             img.modal-exit__zhurnal-img(src='/images/partner/escort.png', alt='')
-                       .task-slider__bottom
-                          .task-slider__bottom-item
-                             .task-slider__bottom-icon.icon-training.color_yelow
-                             .mt30
-                                .font_size14.fw_medium.fade05
-                                   | 2 раза в месяц мы проводим 
-                                   br
-                                   | полноценные 8-ми часовые семинары 
-                                   br
-                                   | по увеличению продаж
-                          .task-slider__bottom-item
-                             .task-slider__bottom-icon.icon-portfolio.color_yelow
-                             .mt30
-                                .font_size14.fw_medium.fade05
-                                   | Для каждого партнера разрабатываем 
-                                   br
-                                   | персональную стратегию работы на рынке
-                          .task-slider__bottom-item
-                             .task-slider__bottom-icon.icon-support.color_yelow
-                             .mt30
-                                .font_size14.fw_medium.fade05
-                                   | Рассказываем и советуем как привлекать 
-                                   br
-                                   | больше клиентов, как получать тройную 
-                                   br
-                                   | комиссию с 1 сделки
-                    .task-slider__slide
-                       .row
-                          .col-min-6
-                             .font_size44.ff_trajan
-                                | Сопровождаем 
-                                br
-                                | все юридические 
-                                br
-                                | вопросы
-                          .col-min-6
-                             .desc.mt10
-                                img.desc__icon(src='/images/icons/ribbon.png', alt='')
-                                p.font_size14.fade05.fw_medium
-                                   | Вам больше не нужно тратить 
-                                   br
-                                   | время на бумажную волокиту.
-                       .row.mt20
-                          .col-sm-4
-                             .font_size22.ff_trajan В компании работает юридический отдел
-                          .col-sm-4
-                             .desc-text
-                                .font_size14.fw_medium.fade05
-                                   | 5 специалистов, которые занимаются
-                                   | оформлением всех бумаг, составлением
-                                   | договоров и проверкой клиентов.
-                       .task-slider__zhurnal.mt40
-                          .task-slider__zhurnal-line
-                          .task-slider__zhurnal-ellipse
-                             img.modal-exit__zhurnal-img(src='/images/partner/sopr_img.png', alt='')
-                       .task-slider__bottom
-                          .task-slider__bottom-item
-                             .task-slider__bottom-icon.icon-court.color_yelow
-                             .mt30
-                                .font_size14.fw_medium.fade05
-                                   | Все сделки проводятся 
-                                   br
-                                   | и оформляются через 
-                                   br
-                                   | юридический отдел
-                          .task-slider__bottom-item
-                             .task-slider__bottom-icon.icon-wallet.color_yelow
-                             .mt30
-                                .font_size14.fw_medium.fade05
-                                   | Юридический отдел решает задачи 
-                                   br
-                                   | по оформлению и выплате 
-                                   br
-                                   | комиссионых за сделку
-                          .task-slider__bottom-item
-                             .task-slider__bottom-icon.icon-smartphone-call.color_yelow
-                             .mt30
-                                .font_size14.fw_medium.fade05
-                                   | Мы создали систему, в которой клиент
-                                   | подписывает договор и переводит деньги 
-                                   br
-                                   | одним кликом на смартфоне, вам не нужно
-                                   | никуда ехать
-                    .task-slider__slide
-                       .font_size44.ff_trajan
-                          | Позволяем использовать ресурсы 
-                          br
-                          | и доверие компании, чтобы 
-                          br
-                          | совершать крупные сделки
-                       .mt15
-                          .font_size14.fw_medium.fade05
-                             | У вас за плечами стоит компания, ресурсами которой вы можете распоряжаться. 
-                             br
-                             | Начиная от сайта, рекламы и CRM системы заканчивая репутацией и имиджем
-                       .row.mt30
-                          .col-sm-4
-                             .font_size22.ff_trajan
-                                | Ваш телефон всегда 
-                                br
-                                | будет звонить.
-                          .col-sm-5
-                             .font_size14.fw_medium.fade05
-                                | Ежемесячно мы получаем до 3 000 обращений 
-                                br
-                                | в компанию, с запросами о купле-продаже объектов. 
-                                br
-                                | С этими клиентами будете работать вы
-                       .task-slider__zhurnal.mt40
-                          .task-slider__zhurnal-line
-                          .task-slider__zhurnal-ellipse
-                             img.modal-exit__trafik-img(src='/images/partner/trafik_img.png', alt='')
-                       .task-slider__bottom
-                          .task-slider__bottom-item.task-slider__bottom-item_big
-                             .task-slider__bottom-icon.icon-court.color_yelow
-                             .mt30
-                                .font_size14.fw_medium.fade05
-                                   | Прибыль от продажи распределяется в пользу партнера. 
-                                   br
-                                   | С каждой сделки вы получаете от 10% комиссии
-                          .task-slider__bottom-item.task-slider__bottom-item_big
-                             .task-slider__bottom-icon.icon-portfolio.color_yelow
-                             .mt30
-                                .font_size14.fw_medium.fade05
-                                   | В результате вы получаете партнера, который закрывает 
-                                   br
-                                   | все ваши задачи. Вам остается только продавать
+	.main-wrapper
+		.main-screen.main-screen_partner.bg_dark-blue.color_white
+			.main
+				img.main-screen__partner-dots(src='/images/about/dots.png', alt='')
+				include ../include/header.pug
+				.main-screen__content
+					.col-sm-6
+						.desc-screen.fw_medium Начните зарабатывать
+						.mt25.main-screen__title2
+							h1.font_size54 от 100 т.р. в месяц на продаже недвижимости в г. Сочи, 
+						.main-screen__title3.mt20
+							h3.font_size22 став партнером агентства недвижимости 
+						.desc.mt30
+							img.desc__icon(src='/images/icons/ribbon.png', alt='')
+							p.font_size14.fade05.fw_medium
+								| Избавим вас от всех операционных задач, 
+								br
+								| вам останется только заниматься продажами объектов
+						button.button.button_big.button_blue.button_blue2.main-screen__to-vebinar.mt50.js-scroll-to(data-href='#vebinar')
+							| Записаться на вебинар
+							span.button__arrow.icon-arrow.icon-arrow_rotate
+				.main-screen__director(style="background: none")
+					.main-screen__director-img
+						img(src='/images/partner/vlasova.png', alt='')
+					.catalog-slider__caption
+						span.font_size14.fw_medium.fade05
+							| Анна Власова
+							br
+							| Заместитель руководителя Центра недвижимости Кислород
+		//- #vebinar.vebinar-screen
+			.main
+				img.vebinar-screen__dots(src='/images/director/dots.svg', alt='')
+				img.vebinar-screen__clock(src='/images/partner/clock.png', alt='')
+				.vebinar-screen__inside-wrap
+					.row
+						.col-sm-8
+							h2.font_size44 Запишитесь на бесплатный вебинар, который пройдет сегодня в 17:00 и узнаете
+						.col-sm-4.vebinar-screen__list
+							.desc.mt10
+								img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
+								p.font_size14.fade05.fw_medium
+									| Как работает наша 
+									br
+									| компания-застройщик
+							.desc.mt25
+								img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
+								p.font_size14.fade05.fw_medium
+									| За счет чего вы начнете 
+									br
+									| зарабатывать больше
+							.desc.mt25
+								img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
+								p.font_size14.fade05.fw_medium
+									| Кого мы бы хотели видеть 
+									br
+									| в качестве партнеров
+					.row
+						.col-sm-7.mt40
+							a.catalog-slider__pic.vebinar-screen__video(href='#')
+								img(src='/images/partner/vebinar.jpg', alt='')
+								span.catalog-slider__icon.icon-play
+							.vebinar-screen__time-active
+								.vebinar-screen__time-box
+									.font_size14.fw_medium.fade05.vebinar-screen__time-text Вебинар начнется через:
+									.vebinar-screen__time.ff_trajan.fw_medium
+										span.vebinar-screen__time-number.js-hours 5
+										span.font_size22 часов
+									.vebinar-screen__time.ff_trajan.fw_medium
+										span.vebinar-screen__time-number.js-mins 27
+										span.font_size22 минут
+							.vebinar-screen__time-noactive.mt35
+								.font_size22.ff_trajan.fw_medium Вы не успели на вебинар!
+						.col-sm-5.mt40
+							.form-box.vebinar-screen__form.form-box_white
+								form.ajax-form(action='send.php', method='post', data-parsley-validate='', enctype='multipart/form-data')
+									input(type='hidden', name='subj', value='Заявка: На вебинар')
+									.input-box.mt10
+										input.input-text.input-text_fill(type='tel', name='phone', required='', data-parsley-errors-messages-disabled='', placeholder='Введите телефон *')
+										label.input-box__icon.icon-telephone
+									.input-box.mt30
+										input.input-text.input-text_fill(type='email', name='email', required='', data-parsley-errors-messages-disabled='', placeholder='Введите почту *')
+										label.input-box__icon.icon-message
+									button.button.button_big.button_blue.button_blue2.mt30(type='submit', name='vebinar')
+										| Записаться на вебинар
+										span.button__arrow.icon-arrow
+									.polity-box.mt35
+										.polity-box__dot
+										.font_size12.fw_medium.fade05
+											| Вы соглашаетесь с условиями 
+											br
+											| обработки персональных данных 
+											br
+											a(href='#') ознакомиться
+		.team-screen.bg_dark-blue.color_white
+			.main
+				h2.font_size54
+					| Сегодня ООО «Кислород» 
+					br
+					| — одна из самых быстрорастущих компаний региона.
+				.mt15
+					p.font_size22.ff_trajan За последний  год мы выросли в обороте в 5 раз
+				.team-results.row
+					.team-results__item.col-sm-4.col-min-6
+						.team-results__number.color_yelow.ff_trajan
+							| 2000
+							span.team-results__number-min год
+						.mt20.team-results__desc
+							.font_size22.fw_medium.ff_trajan.fade05 Год основания компании
+					.team-results__item.col-sm-4.col-min-6
+						.team-results__number.color_yelow.ff_trajan 26
+						.mt20.team-results__desc
+							.font_size22.fw_medium.ff_trajan.fade05
+								| банков 
+								br
+								| -партнеров
+					.team-results__item.col-sm-4.col-min-6
+						.team-results__number.color_yelow.ff_trajan 30+
+						.mt20.team-results__desc
+							.font_size22.fw_medium.ff_trajan.fade05
+								| Сданных 
+								br
+								| проектов
+					.team-results__item.col-sm-4.col-min-6
+						.team-results__number.color_yelow.ff_trajan 300+
+						.mt20.team-results__desc
+							.font_size22.fw_medium.ff_trajan.fade05 Сотрудников
+					.team-results__item.col-sm-4.col-min-6
+						.team-results__number.color_yelow.ff_trajan
+							| 90
+							span.team-results__number-min
+								| тыс м
+								sup 2
+						.mt20.team-results__desc
+							.font_size22.fw_medium.ff_trajan.fade05
+								| Жилой 
+								br
+								| недвижимости построено
+					.team-results__item.col-sm-4.col-min-6
+						.team-results__number.color_yelow.ff_trajan 450+
+						.mt20.team-results__desc
+							.font_size22.fw_medium.ff_trajan.fade05 Семей живут домах построенных нами
+				.team-screen__bottom
+					img.team-screen__bottom-dots(src='/images/about/dots_team.png', alt='')
+					.row
+						.col-sm-7.col-min-12
+							h2.font_size54 Вам не нужно будет искать клиентов 
+							.mt10
+								h3.font_size22 или заниматься операционными задачами
+						.col-sm-5.col-min-12
+							.desc.mt10
+								img.desc__icon(src='/images/icons/ribbon.png', alt='')
+								p.font_size14.fade05.fw_medium
+									| Агентство «Кислород», в отличии от большинства 
+									br
+									| агентств недвижимости  занимается полным 
+									br
+									| сопровождением работы партнера. В том числе:
+					.task-tabs.mt60
+						a.task-tabs__item.task-tabs__item_active(href='#klients') Отдел по работе с клиентами
+						a.task-tabs__item(href='#legal') Юридический отдел
+						a.task-tabs__item(href='#kredit') Ипотечный отдел
+					.task-slider
+						.task-slider__slide
+							.font_size44.ff_trajan
+								| Вы получите весь опыт лучших продавцов и все необходимое 
+								br
+								| для эффективных продаж
+							.row.mt20
+								.col-sm-5
+									.font_size22.ff_trajan Обучим всем технологиям продаж и расскажем 
+								.col-sm-5
+									.desc-text.mt5
+										.font_size14.fw_medium.fade05
+											| Презентации объектов 
+											br
+											| и методички для клиентов
+							.task-slider__zhurnal.mt40
+								.task-slider__zhurnal-line
+								.task-slider__zhurnal-ellipse
+									img.modal-exit__zhurnal-img(src='/images/partner/escort.png', alt='')
+							.task-slider__bottom
+								.task-slider__bottom-item
+									.task-slider__bottom-icon.icon-training.color_yelow
+									.mt30
+										.font_size14.fw_medium.fade05
+											| 2 раза в месяц мы проводим 
+											br
+											| полноценные 8-ми часовые семинары 
+											br
+											| по увеличению продаж
+								.task-slider__bottom-item
+									.task-slider__bottom-icon.icon-portfolio.color_yelow
+									.mt30
+										.font_size14.fw_medium.fade05
+											| Для каждого партнера разрабатываем 
+											br
+											| персональную стратегию работы на рынке
+								.task-slider__bottom-item
+									.task-slider__bottom-icon.icon-support.color_yelow
+									.mt30
+										.font_size14.fw_medium.fade05
+											| Рассказываем и советуем как привлекать 
+											br
+											| больше клиентов, как получать тройную 
+											br
+											| комиссию с 1 сделки
+						.task-slider__slide
+							.row
+								.col-min-6
+									.font_size44.ff_trajan
+										| Сопровождаем 
+										br
+										| все юридические 
+										br
+										| вопросы
+								.col-min-6
+									.desc.mt10
+										img.desc__icon(src='/images/icons/ribbon.png', alt='')
+										p.font_size14.fade05.fw_medium
+											| Вам больше не нужно тратить 
+											br
+											| время на бумажную волокиту.
+							.row.mt20
+								.col-sm-4
+									.font_size22.ff_trajan В компании работает юридический отдел
+								.col-sm-4
+									.desc-text
+										.font_size14.fw_medium.fade05
+											| 5 специалистов, которые занимаются
+											| оформлением всех бумаг, составлением
+											| договоров и проверкой клиентов.
+							.task-slider__zhurnal.mt40
+								.task-slider__zhurnal-line
+								.task-slider__zhurnal-ellipse
+									img.modal-exit__zhurnal-img(src='/images/partner/sopr_img.png', alt='')
+							.task-slider__bottom
+								.task-slider__bottom-item
+									.task-slider__bottom-icon.icon-court.color_yelow
+									.mt30
+										.font_size14.fw_medium.fade05
+											| Все сделки проводятся 
+											br
+											| и оформляются через 
+											br
+											| юридический отдел
+								.task-slider__bottom-item
+									.task-slider__bottom-icon.icon-wallet.color_yelow
+									.mt30
+										.font_size14.fw_medium.fade05
+											| Юридический отдел решает задачи 
+											br
+											| по оформлению и выплате 
+											br
+											| комиссионых за сделку
+								.task-slider__bottom-item
+									.task-slider__bottom-icon.icon-smartphone-call.color_yelow
+									.mt30
+										.font_size14.fw_medium.fade05
+											| Мы создали систему, в которой клиент
+											| подписывает договор и переводит деньги 
+											br
+											| одним кликом на смартфоне, вам не нужно
+											| никуда ехать
+						.task-slider__slide
+							.font_size44.ff_trajan
+								| Позволяем использовать ресурсы 
+								br
+								| и доверие компании, чтобы 
+								br
+								| совершать крупные сделки
+							.mt15
+								.font_size14.fw_medium.fade05
+									| У вас за плечами стоит компания, ресурсами которой вы можете распоряжаться. 
+									br
+									| Начиная от сайта, рекламы и CRM системы заканчивая репутацией и имиджем
+							.row.mt30
+								.col-sm-4
+									.font_size22.ff_trajan
+										| Ваш телефон всегда 
+										br
+										| будет звонить.
+								.col-sm-5
+									.font_size14.fw_medium.fade05
+										| Ежемесячно мы получаем до 3 000 обращений 
+										br
+										| в компанию, с запросами о купле-продаже объектов. 
+										br
+										| С этими клиентами будете работать вы
+							.task-slider__zhurnal.mt40
+								.task-slider__zhurnal-line
+								.task-slider__zhurnal-ellipse
+									img.modal-exit__trafik-img(src='/images/partner/trafik_img.png', alt='')
+							.task-slider__bottom
+								.task-slider__bottom-item.task-slider__bottom-item_big
+									.task-slider__bottom-icon.icon-court.color_yelow
+									.mt30
+										.font_size14.fw_medium.fade05
+											| Прибыль от продажи распределяется в пользу партнера. 
+											br
+											| С каждой сделки вы получаете от 10% комиссии
+								.task-slider__bottom-item.task-slider__bottom-item_big
+									.task-slider__bottom-icon.icon-portfolio.color_yelow
+									.mt30
+										.font_size14.fw_medium.fade05
+											| В результате вы получаете партнера, который закрывает 
+											br
+											| все ваши задачи. Вам остается только продавать
 
-        .result-screen
-           .main
-              .row
-                 .col-sm-7
-                    h2.font_size44 Получайте от 60% комиссии с продажи недвижимости
-                 .col-sm-5
-                    .mt10.result-screen__desc
-                       img(src='/images/icons/ribbon_gold.png', alt='')
-                       .mt25
-                          .font_size22.ff_trajan
-                             | Посмотрите, сколько вы 
-                             br
-                             | сможете заработать, работая
-                             br
-                             | в центре недвижимости «Кислород»
-                 .col-sm-7
-                    .result-box
-                       .result-box__animate
-                          .result-box__circle.result-box__circle_yelow
-                          .result-box__circle.result-box__circle_blue
-                          .result-box__circle.result-box__circle_black
-                       .result-box__content.table
-                          .table__cell
-                             .font_size14.fw_medium
-                                | При текущих показателях 
-                                br
-                                | ваш доход составит:
-                             .color_yelow.mt15.ff_trajan
-                                span.font_size44
-                                   span.js-result-profit 304 000
-                                   |  ₽
-                                span.font_size22 /мес
-                             .result-box__line.mt25
-                             .mt30
-                                .font_size12.fw_medium.fade05
-                                   | Данные расчеты не учитывают доход 
-                                   br
-                                   | от продажи дополнительных услуг
-                 .col-sm-5
-                    form.result-form.form-box.form-box_white.mt50(action='#')
-                       .js-slider-wrapper
-                          label.ff_trajan.font_size18(for='price') Средняя комиссия, Р :
-                          .input-box.mt10
-                             input.result-form__mask.catalog-filter__input.input-text.input-text_border.js-slider-mask(type='number', value='')
-                             input#price.catalog-filter__input.input-text.input-text_fill.js-slider-options(type='text', value='250000', data-value='250000', data-min='100000', data-max='1000000', data-step='1000', data-meas='', disabled='')
-                             .result-form__slider.js-slider-result
-                          .catalog-filter__line.mt10
-                             .font_size14.fade05
-                                span.js-slider-min 100 000
-                             .font_size14.fade05
-                                span.js-slider-max 1 000 000
-                       .js-slider-wrapper.mt40
-                          label.ff_trajan.font_size18 Клиентов в месяц:
-                          .input-box.mt10
-                             input.result-form__mask.catalog-filter__input.input-text.input-text_border.js-slider-mask(type='number', value='')
-                             input#customers.catalog-filter__input.input-text.input-text_fill.js-slider-options(type='text', value='2', data-value='2', data-min='0', data-max='10', data-step='1', data-meas='', disabled='')
-                             .result-form__slider.js-slider-result
-                          .catalog-filter__line.mt10
-                             .font_size14.fade05
-                                span.js-slider-min 0
-                             .font_size14.fade05
-                                span.js-slider-max 10
-                       .js-slider-wrapper.mt40
-                          label.ff_trajan.font_size18 Конверсия в сделку, % 
-                          .input-box.mt10
-                             input.result-form__mask.catalog-filter__input.input-text.input-text_border.js-slider-mask(type='number', value='')
-                             input#conversion.catalog-filter__input.input-text.input-text_fill.js-slider-options(type='text', value='52', data-value='52', data-min='0', data-max='100', data-step='1', data-meas='', disabled='')
-                             .result-form__slider.js-slider-result
-                          .catalog-filter__line.mt10
-                             .font_size14.fade05
-                                span.js-slider-min 0
-                             .font_size14.fade05
-                                span.js-slider-max 100
-        .options-screen
-           .main
-              img.options-screen__dots(src='/images/catalog/offer__dots.svg', alt='')
-              .options-screen__inside-wrap
-                 .options-screen__head
-                    .options-screen__head-left
-                       img.options-screen__tie(src='/images/partner/tie.png', alt='')
-                    .options-screen__head-right
-                       h2.font_size44
-                          | Мы отбираем партнеров 
-                          br
-                          | по 3-м параметрам
-                       .mt10
-                          .font_size22.ff_trajan
-                             | Мы хотим видеть у себя тех,
-                             br
-                             | кто посещает себя работе на 100%
-                 .options-list
-                    .options-list__item
-                       img.options-list__img(src='/images/partner/experience.jpg', alt='')
-                       .options-list__content
-                          h3.font_size22.fw_medium
-                             | Опыт работы 
-                             br
-                             | от 3 лет
-                          .mt15
-                             p.font_size14.fw_medium.fade05
-                                | Нам нужны опытные риелторы, которые понимают особенности рынка, знают чем они занимаются,  и как разговаривать с клиентами
-                    .options-list__item
-                       img.options-list__img(src='/images/partner/income_level.jpg', alt='')
-                       .options-list__content
-                          h3.font_size22.fw_medium
-                             | Уровень дохода 
-                             br
-                             | от 100 т.р
-                          .mt15
-                             p.font_size14.fw_medium.fade05 Уровень дохода — это показатель вашего профессионализма.
-                    .options-list__item
-                       img.options-list__img(src='/images/partner/ready.jpg', alt='')
-                       .options-list__content
-                          h3.font_size22.fw_medium
-                             | Готовность к 
-                             br
-                             | эффективной работе
-                          .mt15
-                             p.font_size14.fw_medium.fade05
-                                | Мы создадим для вас систему, 
-                                br
-                                | в которой вы сможете заработать, 
-                                br
-                                | но для этого вам придется работать эффективно
-        .vebinar-screen.vebinar-screen2
-           .main
-              img.vebinar-screen__dots(src='/images/director/dots.svg', alt='')
-              img.vebinar-screen__clock(src='/images/partner/clock.png', alt='')
-              .vebinar-screen__inside-wrap
-                 .row
-                    .col-sm-8
-                       h2.font_size44
-                          | Узнайте больше о работе 
-                          br
-                          | с компанией, сегодня в 17:00 
-                          br
-                          | на бесплатном вебинаре
-                    .col-sm-4.vebinar-screen__list
-                       .desc.mt10
-                          img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
-                          p.font_size14.fade05.fw_medium
-                             | Как работает наша 
-                             br
-                             | компания-застройщик
-                       .desc.mt25
-                          img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
-                          p.font_size14.fade05.fw_medium
-                             | За счет чего вы начнете 
-                             br
-                             | зарабатывать больше
-                       .desc.mt25
-                          img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
-                          p.font_size14.fade05.fw_medium
-                             | Кого мы бы хотели видеть 
-                             br
-                             | в качестве партнеров
-                 .row
-                    .col-sm-7.mt40
-                       a.catalog-slider__pic.vebinar-screen__video(href='#')
-                          img(src='/images/partner/vebinar.jpg', alt='')
-                          span.catalog-slider__icon.icon-play
-                       .vebinar-screen__time-active
-                          .vebinar-screen__time-box
-                             .font_size14.fw_medium.fade05.vebinar-screen__time-text Вебинар начнется через:
-                             .vebinar-screen__time.ff_trajan.fw_medium
-                                span.vebinar-screen__time-number.js-hours 5
-                                span.font_size22 часов
-                             .vebinar-screen__time.ff_trajan.fw_medium
-                                span.vebinar-screen__time-number.js-mins 27
-                                span.font_size22 минут
-                       .vebinar-screen__time-noactive.mt35
-                          .font_size22.ff_trajan.fw_medium Вы не успели на вебинар!
-                    .col-sm-5.mt40
-                       .form-box.vebinar-screen__form.form-box_white
-                          form.ajax-form(action='send.php', method='post', data-parsley-validate='', enctype='multipart/form-data')
-                             input(type='hidden', name='subj', value='Заявка: На вебинар')
-                             .input-box.mt10
-                                input.input-text.input-text_fill(type='tel', name='phone', required='', data-parsley-errors-messages-disabled='', placeholder='Введите телефон *')
-                                label.input-box__icon.icon-telephone
-                             .input-box.mt30
-                                input.input-text.input-text_fill(type='email', name='email', required='', data-parsley-errors-messages-disabled='', placeholder='Введите почту *')
-                                label.input-box__icon.icon-message
-                             button.button.button_big.button_blue.button_blue2.mt30(type='submit', name='vebinar')
-                                | Записаться на вебинар
-                                span.button__arrow.icon-arrow
-                             .polity-box.mt35
-                                .polity-box__dot
-                                .font_size12.fw_medium.fade05
-                                   | Вы соглашаетесь с условиями 
-                                   br
-                                   | обработки персональных данных 
-                                   br
-                                   a(href='#') ознакомиться
-        .professional-screen
-           .main
-              img.professional-screen__dots(src='/images/director/dots.svg', alt='')
-              .professional-screen__inside-wrap
-                 .professional-screen__head
-                    h2.font_size44
-                       | В результате работы вы получаете 
-                       br
-                       | рост прибыли, лучший опыт, 
-                       br
-                       | новые навыки и команду 
-                       br
-                       | профессионалов
-                    .mt10
-                       .font_size22.ff_trajan
-                          | Посмотрите на результаты некоторых брокеров 
-                          br
-                          | работающих в партнерстве с ООО «Кислород»
-                 .professional-slider.mt65
-                    .professional-slider__left
-                       .professional-list.js-professional-list
-                          .professional-list__slide
-                             .professional-list__item
-                                .professional-list__foto
-                                   img(src='/images/partner/prodi.png', alt='')
-                                .professional-list__title
-                                   .font_size22.ff_trajan.fw_medium Алексея Семенова
-                          .professional-list__slide
-                             .professional-list__item
-                                .professional-list__foto
-                                   img(src='/images/partner/prodi.png', alt='')
-                                .professional-list__title
-                                   .font_size22.ff_trajan.fw_medium Алексея Семенова
-                          .professional-list__slide
-                             .professional-list__item
-                                .professional-list__foto
-                                   img(src='/images/partner/prodi.png', alt='')
-                                .professional-list__title
-                                   .font_size22.ff_trajan.fw_medium Алексея Семенова
-                          .professional-list__slide
-                             .professional-list__item
-                                .professional-list__foto
-                                   img(src='/images/partner/prodi.png', alt='')
-                                .professional-list__title
-                                   .font_size22.ff_trajan.fw_medium Алексея Семенова
-                          .professional-list__slide
-                             .professional-list__item
-                                .professional-list__foto
-                                   img(src='/images/partner/prodi.png', alt='')
-                                .professional-list__title
-                                   .font_size22.ff_trajan.fw_medium Алексея Семенова
-                          .professional-list__slide
-                             .professional-list__item
-                                .professional-list__foto
-                                   img(src='/images/partner/prodi.png', alt='')
-                                .professional-list__title
-                                   .font_size22.ff_trajan.fw_medium Алексея Семенова
-                    .professional-slider__right
-                       .professional-content.js-professional-content
-                          .professional-content__slide
-                             .professional-content__wrap
-                                h2.professional-content__title Увеличил средний чек  и заработал 1.5 млн.руб за 3 месяца
-                                a.catalog-slider__pic.fancybox.mt25(href='/images/partner/statistic.jpg')
-                                   img(src='/images/partner/statistic.jpg', alt='')
-                                   span.catalog-slider__caption
-                                      span.font_size14.fw_medium.fade05
-                                         | Выручка выросла на 58% 
-                                         br
-                                         | за последние 6 месяцев
-                                .row.professional-content__list
-                                   .col-min-4.mt50
-                                      .professional-content__list-icon.icon-training.color_yelow
-                                      .mt30
-                                         .font_size14.fw_medium
-                                            | Средняя комиссия: 
-                                            br
-                                            span.fade05 235 000 руб.
-                                   .col-min-4.mt50
-                                      .professional-content__list-icon.icon-portfolio.color_yelow
-                                      .mt30
-                                         .font_size14.fw_medium
-                                            | Количество клиентов: 
-                                            br
-                                            span.fade05 + 37 новых клиентов
-                                   .col-min-4.mt50
-                                      .professional-content__list-icon.icon-support.color_yelow
-                                      .mt30
-                                         .font_size14.fw_medium
-                                            | Конверсия в сделку, % 
-                                            br
-                                            span.fade05 35%
-                                .broker.mt60
-                                   .broker__foto
-                                      img(src='/images/partner/director2.png', alt='')
-                                   .broker__content
-                                      .broker__desc.fw_medium Брокер-партнер
-                                      .mt5
-                                         .font_size22.ff_trajan Алексея Семенова
-                                      .mt15
-                                         .font_size14.fw_medium.fade05
-                                            | «Отзыв клиента в текстовом формате, рассказывает о итоговом результате, цифрах и впечатлении от работы с компанией Отзыв клиента в текстовом формате, рассказывает о итоговом результате, цифрах и впечатлении от работы с компанией»
-                                      .broker__play.mt35
-                                         .catalog-slider__icon.icon-play
-                                         .font_size14.fw_medium.fade05
-                                            | Смотрите видео-кейс 
-                                            br
-                                            | с брокером партнером
-                          .professional-content__slide
-                             .professional-content__wrap
-                                h2.professional-content__title Увеличил средний чек  и заработал 1.5 млн.руб за 3 месяца
-                                a.catalog-slider__pic.fancybox.mt25(href='/images/partner/statistic.jpg')
-                                   img(src='/images/partner/statistic.jpg', alt='')
-                                   span.catalog-slider__caption
-                                      span.font_size14.fw_medium.fade05
-                                         | Выручка выросла на 58% 
-                                         br
-                                         | за последние 6 месяцев
-                                .row.professional-content__list
-                                   .col-min-4.mt50
-                                      .professional-content__list-icon.icon-training.color_yelow
-                                      .mt30
-                                         .font_size14.fw_medium
-                                            | Средняя комиссия: 
-                                            br
-                                            span.fade05 235 000 руб.
-                                   .col-min-4.mt50
-                                      .professional-content__list-icon.icon-portfolio.color_yelow
-                                      .mt30
-                                         .font_size14.fw_medium
-                                            | Количество клиентов: 
-                                            br
-                                            span.fade05 + 37 новых клиентов
-                                   .col-min-4.mt50
-                                      .professional-content__list-icon.icon-support.color_yelow
-                                      .mt30
-                                         .font_size14.fw_medium
-                                            | Конверсия в сделку, % 
-                                            br
-                                            span.fade05 35%
-                                .broker.mt60
-                                   .broker__foto
-                                      img(src='/images/partner/director2.png', alt='')
-                                   .broker__content
-                                      .broker__desc.fw_medium Брокер-партнер
-                                      .mt5
-                                         .font_size22.ff_trajan Алексея Семенова
-                                      .mt15
-                                         .font_size14.fw_medium.fade05
-                                            | «Отзыв клиента в текстовом формате, рассказывает о итоговом результате, цифрах и впечатлении от работы с компанией Отзыв клиента в текстовом формате, рассказывает о итоговом результате, цифрах и впечатлении от работы с компанией»
-                                      .broker__play.mt35
-                                         .catalog-slider__icon.icon-play
-                                         .font_size14.fw_medium.fade05
-                                            | Смотрите видео-кейс 
-                                            br
-                                            | с брокером партнером
-                          .professional-content__slide
-                             .professional-content__wrap
-                                h2.professional-content__title Увеличил средний чек  и заработал 1.5 млн.руб за 3 месяца
-                                a.catalog-slider__pic.fancybox.mt25(href='/images/partner/statistic.jpg')
-                                   img(src='/images/partner/statistic.jpg', alt='')
-                                   span.catalog-slider__caption
-                                      span.font_size14.fw_medium.fade05
-                                         | Выручка выросла на 58% 
-                                         br
-                                         | за последние 6 месяцев
-                                .row.professional-content__list
-                                   .col-min-4.mt50
-                                      .professional-content__list-icon.icon-training.color_yelow
-                                      .mt30
-                                         .font_size14.fw_medium
-                                            | Средняя комиссия: 
-                                            br
-                                            span.fade05 235 000 руб.
-                                   .col-min-4.mt50
-                                      .professional-content__list-icon.icon-portfolio.color_yelow
-                                      .mt30
-                                         .font_size14.fw_medium
-                                            | Количество клиентов: 
-                                            br
-                                            span.fade05 + 37 новых клиентов
-                                   .col-min-4.mt50
-                                      .professional-content__list-icon.icon-support.color_yelow
-                                      .mt30
-                                         .font_size14.fw_medium
-                                            | Конверсия в сделку, % 
-                                            br
-                                            span.fade05 35%
-                                .broker.mt60
-                                   .broker__foto
-                                      img(src='/images/partner/director2.png', alt='')
-                                   .broker__content
-                                      .broker__desc.fw_medium Брокер-партнер
-                                      .mt5
-                                         .font_size22.ff_trajan Алексея Семенова
-                                      .mt15
-                                         .font_size14.fw_medium.fade05
-                                            | «Отзыв клиента в текстовом формате, рассказывает о итоговом результате, цифрах и впечатлении от работы с компанией Отзыв клиента в текстовом формате, рассказывает о итоговом результате, цифрах и впечатлении от работы с компанией»
-                                      .broker__play.mt35
-                                         .catalog-slider__icon.icon-play
-                                         .font_size14.fw_medium.fade05
-                                            | Смотрите видео-кейс 
-                                            br
-                                            | с брокером партнером
-                          .professional-content__slide
-                             .professional-content__wrap
-                                h2.professional-content__title Увеличил средний чек  и заработал 1.5 млн.руб за 3 месяца
-                                a.catalog-slider__pic.fancybox.mt25(href='/images/partner/statistic.jpg')
-                                   img(src='/images/partner/statistic.jpg', alt='')
-                                   span.catalog-slider__caption
-                                      span.font_size14.fw_medium.fade05
-                                         | Выручка выросла на 58% 
-                                         br
-                                         | за последние 6 месяцев
-                                .row.professional-content__list
-                                   .col-min-4.mt50
-                                      .professional-content__list-icon.icon-training.color_yelow
-                                      .mt30
-                                         .font_size14.fw_medium
-                                            | Средняя комиссия: 
-                                            br
-                                            span.fade05 235 000 руб.
-                                   .col-min-4.mt50
-                                      .professional-content__list-icon.icon-portfolio.color_yelow
-                                      .mt30
-                                         .font_size14.fw_medium
-                                            | Количество клиентов: 
-                                            br
-                                            span.fade05 + 37 новых клиентов
-                                   .col-min-4.mt50
-                                      .professional-content__list-icon.icon-support.color_yelow
-                                      .mt30
-                                         .font_size14.fw_medium
-                                            | Конверсия в сделку, % 
-                                            br
-                                            span.fade05 35%
-                                .broker.mt60
-                                   .broker__foto
-                                      img(src='/images/partner/director2.png', alt='')
-                                   .broker__content
-                                      .broker__desc.fw_medium Брокер-партнер
-                                      .mt5
-                                         .font_size22.ff_trajan Алексея Семенова
-                                      .mt15
-                                         .font_size14.fw_medium.fade05
-                                            | «Отзыв клиента в текстовом формате, рассказывает о итоговом результате, цифрах и впечатлении от работы с компанией Отзыв клиента в текстовом формате, рассказывает о итоговом результате, цифрах и впечатлении от работы с компанией»
-                                      .broker__play.mt35
-                                         .catalog-slider__icon.icon-play
-                                         .font_size14.fw_medium.fade05
-                                            | Смотрите видео-кейс 
-                                            br
-                                            | с брокером партнером
-                          .professional-content__slide
-                             .professional-content__wrap
-                                h2.professional-content__title Увеличил средний чек  и заработал 1.5 млн.руб за 3 месяца
-                                a.catalog-slider__pic.fancybox.mt25(href='/images/partner/statistic.jpg')
-                                   img(src='/images/partner/statistic.jpg', alt='')
-                                   span.catalog-slider__caption
-                                      span.font_size14.fw_medium.fade05
-                                         | Выручка выросла на 58% 
-                                         br
-                                         | за последние 6 месяцев
-                                .row.professional-content__list
-                                   .col-min-4.mt50
-                                      .professional-content__list-icon.icon-training.color_yelow
-                                      .mt30
-                                         .font_size14.fw_medium
-                                            | Средняя комиссия: 
-                                            br
-                                            span.fade05 235 000 руб.
-                                   .col-min-4.mt50
-                                      .professional-content__list-icon.icon-portfolio.color_yelow
-                                      .mt30
-                                         .font_size14.fw_medium
-                                            | Количество клиентов: 
-                                            br
-                                            span.fade05 + 37 новых клиентов
-                                   .col-min-4.mt50
-                                      .professional-content__list-icon.icon-support.color_yelow
-                                      .mt30
-                                         .font_size14.fw_medium
-                                            | Конверсия в сделку, % 
-                                            br
-                                            span.fade05 35%
-                                .broker.mt60
-                                   .broker__foto
-                                      img(src='/images/partner/director2.png', alt='')
-                                   .broker__content
-                                      .broker__desc.fw_medium Брокер-партнер
-                                      .mt5
-                                         .font_size22.ff_trajan Алексея Семенова
-                                      .mt15
-                                         .font_size14.fw_medium.fade05
-                                            | «Отзыв клиента в текстовом формате, рассказывает о итоговом результате, цифрах и впечатлении от работы с компанией Отзыв клиента в текстовом формате, рассказывает о итоговом результате, цифрах и впечатлении от работы с компанией»
-                                      .broker__play.mt35
-                                         .catalog-slider__icon.icon-play
-                                         .font_size14.fw_medium.fade05
-                                            | Смотрите видео-кейс 
-                                            br
-                                            | с брокером партнером
-                          .professional-content__slide
-                             .professional-content__wrap
-                                h2.professional-content__title Увеличил средний чек  и заработал 1.5 млн.руб за 3 месяца
-                                a.catalog-slider__pic.fancybox.mt25(href='/images/partner/statistic.jpg')
-                                   img(src='/images/partner/statistic.jpg', alt='')
-                                   span.catalog-slider__caption
-                                      span.font_size14.fw_medium.fade05
-                                         | Выручка выросла на 58% 
-                                         br
-                                         | за последние 6 месяцев
-                                .row.professional-content__list
-                                   .col-min-4.mt50
-                                      .professional-content__list-icon.icon-training.color_yelow
-                                      .mt30
-                                         .font_size14.fw_medium
-                                            | Средняя комиссия: 
-                                            br
-                                            span.fade05 235 000 руб.
-                                   .col-min-4.mt50
-                                      .professional-content__list-icon.icon-portfolio.color_yelow
-                                      .mt30
-                                         .font_size14.fw_medium
-                                            | Количество клиентов: 
-                                            br
-                                            span.fade05 + 37 новых клиентов
-                                   .col-min-4.mt50
-                                      .professional-content__list-icon.icon-support.color_yelow
-                                      .mt30
-                                         .font_size14.fw_medium
-                                            | Конверсия в сделку, % 
-                                            br
-                                            span.fade05 35%
-                                .broker.mt60
-                                   .broker__foto
-                                      img(src='/images/partner/director2.png', alt='')
-                                   .broker__content
-                                      .broker__desc.fw_medium Брокер-партнер
-                                      .mt5
-                                         .font_size22.ff_trajan Алексея Семенова
-                                      .mt15
-                                         .font_size14.fw_medium.fade05
-                                            | «Отзыв клиента в текстовом формате, рассказывает о итоговом результате, цифрах и впечатлении от работы с компанией Отзыв клиента в текстовом формате, рассказывает о итоговом результате, цифрах и впечатлении от работы с компанией»
-                                      .broker__play.mt35
-                                         .catalog-slider__icon.icon-play
-                                         .font_size14.fw_medium.fade05
-                                            | Смотрите видео-кейс 
-                                            br
-                                            | с брокером партнером
-        .vebinar-screen.vebinar-screen_last
-           .main
-              img.vebinar-screen__dots(src='/images/director/dots.svg', alt='')
-              .vebinar-screen__inside-wrap
-                 .row
-                    .col-sm-8
-                       h2.font_size44
-                          | Запишитесь на встречу 
-                          br
-                          | с руководством компании
-                       .mt10
-                          .font_size22.fw_medium.ff_trajan
-                             | На встрече вы сможете обсудить условия 
-                             br
-                             | партнерства, а так же получите:
-                    .col-sm-4.vebinar-screen__list
-                       .desc.mt10
-                          img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
-                          p.font_size14.fade05.fw_medium
-                             | Презентацию о компании 
-                             br
-                             | с ответами на часто 
-                             br
-                             | задаваемые вопосы
-                       .desc.mt25
-                          img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
-                          p.font_size14.fade05.fw_medium
-                             | Возможность пообщаться 
-                             br
-                             | с другими партнерами
-                 .row
-                    .col-sm-7.mt40
-                       a.catalog-slider__pic.vebinar-screen__video(href='#')
-                          img(src='/images/partner/vebinar.jpg', alt='')
-                          span.catalog-slider__icon.icon-play
-                       .vebinar-screen__bottom
-                          .vebinar-screen__bottom-item.mt10
-                             .font_size22.fw_medium.ff_trajan
-                                | Алексей 
-                                br
-                                | иванов
-                             .mt10
-                                .font_size12.fw_medium.fade05
-                                   | Основатель 
-                                   br
-                                   | компании
-                          .vebinar-screen__bottom-item.mt20
-                             .desc-text
-                                .font_size12.fw_medium.fade05
-                                   | Посмотрите видео-обращение 
-                                   br
-                                   | Алексея с видео-нарезкой 
-                                   br
-                                   | его выступлений
-                    .col-sm-5.mt40
-                       .form-box.vebinar-screen__form.form-box_white
-                          form.ajax-form(action='send.php', method='post', data-parsley-validate='', enctype='multipart/form-data')
-                             .font_size22.fw_medium.ff_trajan Менеджер перезвонит, чтобы назначить удобную дату встречи
-                             input(type='hidden', name='subj', value='Заявка: На вебинар')
-                             .input-box.mt30
-                                input.input-text.input-text_fill(type='tel', name='phone', required='', data-parsley-errors-messages-disabled='', placeholder='Введите телефон *')
-                                label.input-box__icon.icon-telephone
-                             .input-box.mt30
-                                input.input-text.input-text_fill(type='email', name='email', required='', data-parsley-errors-messages-disabled='', placeholder='Введите почту *')
-                                label.input-box__icon.icon-message
-                             button.button.button_big.button_blue.button_blue2.mt30(type='submit', name='vebinar')
-                                | Записаться на вебинар
-                                span.button__arrow.icon-arrow
-                             .polity-box.mt35
-                                .polity-box__dot
-                                .font_size12.fw_medium.fade05
-                                   | Вы соглашаетесь с условиями 
-                                   br
-                                   | обработки персональных данных 
-                                   br
-                                   a(href='#') ознакомиться
+		.result-screen
+			.main
+				.row
+					.col-sm-7
+						h2.font_size44 Получайте от 60% комиссии с продажи недвижимости
+					.col-sm-5
+						.mt10.result-screen__desc
+							img(src='/images/icons/ribbon_gold.png', alt='')
+							.mt25
+								.font_size22.ff_trajan
+									| Посмотрите, сколько вы 
+									br
+									| сможете заработать, работая
+									br
+									| в центре недвижимости «Кислород»
+					.col-sm-7
+						.result-box
+							.result-box__animate
+								.result-box__circle.result-box__circle_yelow
+								.result-box__circle.result-box__circle_blue
+								.result-box__circle.result-box__circle_black
+							.result-box__content.table
+								.table__cell
+									.font_size14.fw_medium
+										| При текущих показателях 
+										br
+										| ваш доход составит:
+									.color_yelow.mt15.ff_trajan
+										span.font_size44
+											span.js-result-profit 304 000
+											|  ₽
+										span.font_size22 /мес
+									.result-box__line.mt25
+									.mt30
+										.font_size12.fw_medium.fade05
+											| Данные расчеты не учитывают доход 
+											br
+											| от продажи дополнительных услуг
+					.col-sm-5
+						form.result-form.form-box.form-box_white.mt50(action='#')
+							.js-slider-wrapper
+								label.ff_trajan.font_size18(for='price') Средняя комиссия, Р :
+								.input-box.mt10
+									input.result-form__mask.catalog-filter__input.input-text.input-text_border.js-slider-mask(type='number', value='')
+									input#price.catalog-filter__input.input-text.input-text_fill.js-slider-options(type='text', value='250000', data-value='250000', data-min='100000', data-max='1000000', data-step='1000', data-meas='', disabled='')
+									.result-form__slider.js-slider-result
+								.catalog-filter__line.mt10
+									.font_size14.fade05
+										span.js-slider-min 100 000
+									.font_size14.fade05
+										span.js-slider-max 1 000 000
+							.js-slider-wrapper.mt40
+								label.ff_trajan.font_size18 Клиентов в месяц:
+								.input-box.mt10
+									input.result-form__mask.catalog-filter__input.input-text.input-text_border.js-slider-mask(type='number', value='')
+									input#customers.catalog-filter__input.input-text.input-text_fill.js-slider-options(type='text', value='2', data-value='2', data-min='0', data-max='10', data-step='1', data-meas='', disabled='')
+									.result-form__slider.js-slider-result
+								.catalog-filter__line.mt10
+									.font_size14.fade05
+										span.js-slider-min 0
+									.font_size14.fade05
+										span.js-slider-max 10
+							.js-slider-wrapper.mt40
+								label.ff_trajan.font_size18 Конверсия в сделку, % 
+								.input-box.mt10
+									input.result-form__mask.catalog-filter__input.input-text.input-text_border.js-slider-mask(type='number', value='')
+									input#conversion.catalog-filter__input.input-text.input-text_fill.js-slider-options(type='text', value='52', data-value='52', data-min='0', data-max='100', data-step='1', data-meas='', disabled='')
+									.result-form__slider.js-slider-result
+								.catalog-filter__line.mt10
+									.font_size14.fade05
+										span.js-slider-min 0
+									.font_size14.fade05
+										span.js-slider-max 100
+		.options-screen
+			.main
+				img.options-screen__dots(src='/images/catalog/offer__dots.svg', alt='')
+				.options-screen__inside-wrap
+					.options-screen__head
+						.options-screen__head-left
+							img.options-screen__tie(src='/images/partner/tie.png', alt='')
+						.options-screen__head-right
+							h2.font_size44
+								| Мы отбираем партнеров 
+								br
+								| по 3-м параметрам
+							.mt10
+								.font_size22.ff_trajan
+									| Мы хотим видеть у себя тех,
+									br
+									| кто посещает себя работе на 100%
+					.options-list
+						.options-list__item
+							img.options-list__img(src='/images/partner/experience.jpg', alt='')
+							.options-list__content
+								h3.font_size22.fw_medium
+									| Опыт работы 
+									br
+									| от 3 лет
+								.mt15
+									p.font_size14.fw_medium.fade05
+										| Нам нужны опытные риелторы, которые понимают особенности рынка, знают чем они занимаются,  и как разговаривать с клиентами
+						.options-list__item
+							img.options-list__img(src='/images/partner/income_level.jpg', alt='')
+							.options-list__content
+								h3.font_size22.fw_medium
+									| Уровень дохода 
+									br
+									| от 100 т.р
+								.mt15
+									p.font_size14.fw_medium.fade05 Уровень дохода — это показатель вашего профессионализма.
+						.options-list__item
+							img.options-list__img(src='/images/partner/ready.jpg', alt='')
+							.options-list__content
+								h3.font_size22.fw_medium
+									| Готовность к 
+									br
+									| эффективной работе
+								.mt15
+									p.font_size14.fw_medium.fade05
+										| Мы создадим для вас систему, 
+										br
+										| в которой вы сможете заработать, 
+										br
+										| но для этого вам придется работать эффективно
+		//- .vebinar-screen.vebinar-screen2
+			.main
+				img.vebinar-screen__dots(src='/images/director/dots.svg', alt='')
+				img.vebinar-screen__clock(src='/images/partner/clock.png', alt='')
+				.vebinar-screen__inside-wrap
+					.row
+						.col-sm-8
+							h2.font_size44
+								| Узнайте больше о работе 
+								br
+								| с компанией, сегодня в 17:00 
+								br
+								| на бесплатном вебинаре
+						.col-sm-4.vebinar-screen__list
+							.desc.mt10
+								img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
+								p.font_size14.fade05.fw_medium
+									| Как работает наша 
+									br
+									| компания-застройщик
+							.desc.mt25
+								img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
+								p.font_size14.fade05.fw_medium
+									| За счет чего вы начнете 
+									br
+									| зарабатывать больше
+							.desc.mt25
+								img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
+								p.font_size14.fade05.fw_medium
+									| Кого мы бы хотели видеть 
+									br
+									| в качестве партнеров
+					.row
+						.col-sm-7.mt40
+							a.catalog-slider__pic.vebinar-screen__video(href='#')
+								img(src='/images/partner/vebinar.jpg', alt='')
+								span.catalog-slider__icon.icon-play
+							.vebinar-screen__time-active
+								.vebinar-screen__time-box
+									.font_size14.fw_medium.fade05.vebinar-screen__time-text Вебинар начнется через:
+									.vebinar-screen__time.ff_trajan.fw_medium
+										span.vebinar-screen__time-number.js-hours 5
+										span.font_size22 часов
+									.vebinar-screen__time.ff_trajan.fw_medium
+										span.vebinar-screen__time-number.js-mins 27
+										span.font_size22 минут
+							.vebinar-screen__time-noactive.mt35
+								.font_size22.ff_trajan.fw_medium Вы не успели на вебинар!
+						.col-sm-5.mt40
+							.form-box.vebinar-screen__form.form-box_white
+								form.ajax-form(action='send.php', method='post', data-parsley-validate='', enctype='multipart/form-data')
+									input(type='hidden', name='subj', value='Заявка: На вебинар')
+									.input-box.mt10
+										input.input-text.input-text_fill(type='tel', name='phone', required='', data-parsley-errors-messages-disabled='', placeholder='Введите телефон *')
+										label.input-box__icon.icon-telephone
+									.input-box.mt30
+										input.input-text.input-text_fill(type='email', name='email', required='', data-parsley-errors-messages-disabled='', placeholder='Введите почту *')
+										label.input-box__icon.icon-message
+									button.button.button_big.button_blue.button_blue2.mt30(type='submit', name='vebinar')
+										| Записаться на вебинар
+										span.button__arrow.icon-arrow
+									.polity-box.mt35
+										.polity-box__dot
+										.font_size12.fw_medium.fade05
+											| Вы соглашаетесь с условиями 
+											br
+											| обработки персональных данных 
+											br
+											a(href='#') ознакомиться
+		//- .professional-screen
+			.main
+				img.professional-screen__dots(src='/images/director/dots.svg', alt='')
+				.professional-screen__inside-wrap
+					.professional-screen__head
+						h2.font_size44
+							| В результате работы вы получаете 
+							br
+							| рост прибыли, лучший опыт, 
+							br
+							| новые навыки и команду 
+							br
+							| профессионалов
+						.mt10
+							.font_size22.ff_trajan
+								| Посмотрите на результаты некоторых брокеров 
+								br
+								| работающих в партнерстве с ООО «Кислород»
+					.professional-slider.mt65
+						.professional-slider__left
+							.professional-list.js-professional-list
+								.professional-list__slide
+									.professional-list__item
+										.professional-list__foto
+											img(src='/images/partner/prodi.png', alt='')
+										.professional-list__title
+											.font_size22.ff_trajan.fw_medium Алексея Семенова
+								.professional-list__slide
+									.professional-list__item
+										.professional-list__foto
+											img(src='/images/partner/prodi.png', alt='')
+										.professional-list__title
+											.font_size22.ff_trajan.fw_medium Алексея Семенова
+								.professional-list__slide
+									.professional-list__item
+										.professional-list__foto
+											img(src='/images/partner/prodi.png', alt='')
+										.professional-list__title
+											.font_size22.ff_trajan.fw_medium Алексея Семенова
+								.professional-list__slide
+									.professional-list__item
+										.professional-list__foto
+											img(src='/images/partner/prodi.png', alt='')
+										.professional-list__title
+											.font_size22.ff_trajan.fw_medium Алексея Семенова
+								.professional-list__slide
+									.professional-list__item
+										.professional-list__foto
+											img(src='/images/partner/prodi.png', alt='')
+										.professional-list__title
+											.font_size22.ff_trajan.fw_medium Алексея Семенова
+								.professional-list__slide
+									.professional-list__item
+										.professional-list__foto
+											img(src='/images/partner/prodi.png', alt='')
+										.professional-list__title
+											.font_size22.ff_trajan.fw_medium Алексея Семенова
+						.professional-slider__right
+							.professional-content.js-professional-content
+								.professional-content__slide
+									.professional-content__wrap
+										h2.professional-content__title Увеличил средний чек  и заработал 1.5 млн.руб за 3 месяца
+										a.catalog-slider__pic.fancybox.mt25(href='/images/partner/statistic.jpg')
+											img(src='/images/partner/statistic.jpg', alt='')
+											span.catalog-slider__caption
+												span.font_size14.fw_medium.fade05
+													| Выручка выросла на 58% 
+													br
+													| за последние 6 месяцев
+										.row.professional-content__list
+											.col-min-4.mt50
+												.professional-content__list-icon.icon-training.color_yelow
+												.mt30
+													.font_size14.fw_medium
+														| Средняя комиссия: 
+														br
+														span.fade05 235 000 руб.
+											.col-min-4.mt50
+												.professional-content__list-icon.icon-portfolio.color_yelow
+												.mt30
+													.font_size14.fw_medium
+														| Количество клиентов: 
+														br
+														span.fade05 + 37 новых клиентов
+											.col-min-4.mt50
+												.professional-content__list-icon.icon-support.color_yelow
+												.mt30
+													.font_size14.fw_medium
+														| Конверсия в сделку, % 
+														br
+														span.fade05 35%
+										.broker.mt60
+											.broker__foto
+												img(src='/images/partner/director2.png', alt='')
+											.broker__content
+												.broker__desc.fw_medium Брокер-партнер
+												.mt5
+													.font_size22.ff_trajan Алексея Семенова
+												.mt15
+													.font_size14.fw_medium.fade05
+														| «Отзыв клиента в текстовом формате, рассказывает о итоговом результате, цифрах и впечатлении от работы с компанией Отзыв клиента в текстовом формате, рассказывает о итоговом результате, цифрах и впечатлении от работы с компанией»
+												.broker__play.mt35
+													.catalog-slider__icon.icon-play
+													.font_size14.fw_medium.fade05
+														| Смотрите видео-кейс 
+														br
+														| с брокером партнером
+								.professional-content__slide
+									.professional-content__wrap
+										h2.professional-content__title Увеличил средний чек  и заработал 1.5 млн.руб за 3 месяца
+										a.catalog-slider__pic.fancybox.mt25(href='/images/partner/statistic.jpg')
+											img(src='/images/partner/statistic.jpg', alt='')
+											span.catalog-slider__caption
+												span.font_size14.fw_medium.fade05
+													| Выручка выросла на 58% 
+													br
+													| за последние 6 месяцев
+										.row.professional-content__list
+											.col-min-4.mt50
+												.professional-content__list-icon.icon-training.color_yelow
+												.mt30
+													.font_size14.fw_medium
+														| Средняя комиссия: 
+														br
+														span.fade05 235 000 руб.
+											.col-min-4.mt50
+												.professional-content__list-icon.icon-portfolio.color_yelow
+												.mt30
+													.font_size14.fw_medium
+														| Количество клиентов: 
+														br
+														span.fade05 + 37 новых клиентов
+											.col-min-4.mt50
+												.professional-content__list-icon.icon-support.color_yelow
+												.mt30
+													.font_size14.fw_medium
+														| Конверсия в сделку, % 
+														br
+														span.fade05 35%
+										.broker.mt60
+											.broker__foto
+												img(src='/images/partner/director2.png', alt='')
+											.broker__content
+												.broker__desc.fw_medium Брокер-партнер
+												.mt5
+													.font_size22.ff_trajan Алексея Семенова
+												.mt15
+													.font_size14.fw_medium.fade05
+														| «Отзыв клиента в текстовом формате, рассказывает о итоговом результате, цифрах и впечатлении от работы с компанией Отзыв клиента в текстовом формате, рассказывает о итоговом результате, цифрах и впечатлении от работы с компанией»
+												.broker__play.mt35
+													.catalog-slider__icon.icon-play
+													.font_size14.fw_medium.fade05
+														| Смотрите видео-кейс 
+														br
+														| с брокером партнером
+								.professional-content__slide
+									.professional-content__wrap
+										h2.professional-content__title Увеличил средний чек  и заработал 1.5 млн.руб за 3 месяца
+										a.catalog-slider__pic.fancybox.mt25(href='/images/partner/statistic.jpg')
+											img(src='/images/partner/statistic.jpg', alt='')
+											span.catalog-slider__caption
+												span.font_size14.fw_medium.fade05
+													| Выручка выросла на 58% 
+													br
+													| за последние 6 месяцев
+										.row.professional-content__list
+											.col-min-4.mt50
+												.professional-content__list-icon.icon-training.color_yelow
+												.mt30
+													.font_size14.fw_medium
+														| Средняя комиссия: 
+														br
+														span.fade05 235 000 руб.
+											.col-min-4.mt50
+												.professional-content__list-icon.icon-portfolio.color_yelow
+												.mt30
+													.font_size14.fw_medium
+														| Количество клиентов: 
+														br
+														span.fade05 + 37 новых клиентов
+											.col-min-4.mt50
+												.professional-content__list-icon.icon-support.color_yelow
+												.mt30
+													.font_size14.fw_medium
+														| Конверсия в сделку, % 
+														br
+														span.fade05 35%
+										.broker.mt60
+											.broker__foto
+												img(src='/images/partner/director2.png', alt='')
+											.broker__content
+												.broker__desc.fw_medium Брокер-партнер
+												.mt5
+													.font_size22.ff_trajan Алексея Семенова
+												.mt15
+													.font_size14.fw_medium.fade05
+														| «Отзыв клиента в текстовом формате, рассказывает о итоговом результате, цифрах и впечатлении от работы с компанией Отзыв клиента в текстовом формате, рассказывает о итоговом результате, цифрах и впечатлении от работы с компанией»
+												.broker__play.mt35
+													.catalog-slider__icon.icon-play
+													.font_size14.fw_medium.fade05
+														| Смотрите видео-кейс 
+														br
+														| с брокером партнером
+								.professional-content__slide
+									.professional-content__wrap
+										h2.professional-content__title Увеличил средний чек  и заработал 1.5 млн.руб за 3 месяца
+										a.catalog-slider__pic.fancybox.mt25(href='/images/partner/statistic.jpg')
+											img(src='/images/partner/statistic.jpg', alt='')
+											span.catalog-slider__caption
+												span.font_size14.fw_medium.fade05
+													| Выручка выросла на 58% 
+													br
+													| за последние 6 месяцев
+										.row.professional-content__list
+											.col-min-4.mt50
+												.professional-content__list-icon.icon-training.color_yelow
+												.mt30
+													.font_size14.fw_medium
+														| Средняя комиссия: 
+														br
+														span.fade05 235 000 руб.
+											.col-min-4.mt50
+												.professional-content__list-icon.icon-portfolio.color_yelow
+												.mt30
+													.font_size14.fw_medium
+														| Количество клиентов: 
+														br
+														span.fade05 + 37 новых клиентов
+											.col-min-4.mt50
+												.professional-content__list-icon.icon-support.color_yelow
+												.mt30
+													.font_size14.fw_medium
+														| Конверсия в сделку, % 
+														br
+														span.fade05 35%
+										.broker.mt60
+											.broker__foto
+												img(src='/images/partner/director2.png', alt='')
+											.broker__content
+												.broker__desc.fw_medium Брокер-партнер
+												.mt5
+													.font_size22.ff_trajan Алексея Семенова
+												.mt15
+													.font_size14.fw_medium.fade05
+														| «Отзыв клиента в текстовом формате, рассказывает о итоговом результате, цифрах и впечатлении от работы с компанией Отзыв клиента в текстовом формате, рассказывает о итоговом результате, цифрах и впечатлении от работы с компанией»
+												.broker__play.mt35
+													.catalog-slider__icon.icon-play
+													.font_size14.fw_medium.fade05
+														| Смотрите видео-кейс 
+														br
+														| с брокером партнером
+								.professional-content__slide
+									.professional-content__wrap
+										h2.professional-content__title Увеличил средний чек  и заработал 1.5 млн.руб за 3 месяца
+										a.catalog-slider__pic.fancybox.mt25(href='/images/partner/statistic.jpg')
+											img(src='/images/partner/statistic.jpg', alt='')
+											span.catalog-slider__caption
+												span.font_size14.fw_medium.fade05
+													| Выручка выросла на 58% 
+													br
+													| за последние 6 месяцев
+										.row.professional-content__list
+											.col-min-4.mt50
+												.professional-content__list-icon.icon-training.color_yelow
+												.mt30
+													.font_size14.fw_medium
+														| Средняя комиссия: 
+														br
+														span.fade05 235 000 руб.
+											.col-min-4.mt50
+												.professional-content__list-icon.icon-portfolio.color_yelow
+												.mt30
+													.font_size14.fw_medium
+														| Количество клиентов: 
+														br
+														span.fade05 + 37 новых клиентов
+											.col-min-4.mt50
+												.professional-content__list-icon.icon-support.color_yelow
+												.mt30
+													.font_size14.fw_medium
+														| Конверсия в сделку, % 
+														br
+														span.fade05 35%
+										.broker.mt60
+											.broker__foto
+												img(src='/images/partner/director2.png', alt='')
+											.broker__content
+												.broker__desc.fw_medium Брокер-партнер
+												.mt5
+													.font_size22.ff_trajan Алексея Семенова
+												.mt15
+													.font_size14.fw_medium.fade05
+														| «Отзыв клиента в текстовом формате, рассказывает о итоговом результате, цифрах и впечатлении от работы с компанией Отзыв клиента в текстовом формате, рассказывает о итоговом результате, цифрах и впечатлении от работы с компанией»
+												.broker__play.mt35
+													.catalog-slider__icon.icon-play
+													.font_size14.fw_medium.fade05
+														| Смотрите видео-кейс 
+														br
+														| с брокером партнером
+								.professional-content__slide
+									.professional-content__wrap
+										h2.professional-content__title Увеличил средний чек  и заработал 1.5 млн.руб за 3 месяца
+										a.catalog-slider__pic.fancybox.mt25(href='/images/partner/statistic.jpg')
+											img(src='/images/partner/statistic.jpg', alt='')
+											span.catalog-slider__caption
+												span.font_size14.fw_medium.fade05
+													| Выручка выросла на 58% 
+													br
+													| за последние 6 месяцев
+										.row.professional-content__list
+											.col-min-4.mt50
+												.professional-content__list-icon.icon-training.color_yelow
+												.mt30
+													.font_size14.fw_medium
+														| Средняя комиссия: 
+														br
+														span.fade05 235 000 руб.
+											.col-min-4.mt50
+												.professional-content__list-icon.icon-portfolio.color_yelow
+												.mt30
+													.font_size14.fw_medium
+														| Количество клиентов: 
+														br
+														span.fade05 + 37 новых клиентов
+											.col-min-4.mt50
+												.professional-content__list-icon.icon-support.color_yelow
+												.mt30
+													.font_size14.fw_medium
+														| Конверсия в сделку, % 
+														br
+														span.fade05 35%
+										.broker.mt60
+											.broker__foto
+												img(src='/images/partner/director2.png', alt='')
+											.broker__content
+												.broker__desc.fw_medium Брокер-партнер
+												.mt5
+													.font_size22.ff_trajan Алексея Семенова
+												.mt15
+													.font_size14.fw_medium.fade05
+														| «Отзыв клиента в текстовом формате, рассказывает о итоговом результате, цифрах и впечатлении от работы с компанией Отзыв клиента в текстовом формате, рассказывает о итоговом результате, цифрах и впечатлении от работы с компанией»
+												.broker__play.mt35
+													.catalog-slider__icon.icon-play
+													.font_size14.fw_medium.fade05
+														| Смотрите видео-кейс 
+														br
+														| с брокером партнером
+		.vebinar-screen.vebinar-screen_last
+			.main
+				img.vebinar-screen__dots(src='/images/director/dots.svg', alt='')
+				.vebinar-screen__inside-wrap
+					.row
+						.col-sm-8
+							h2.font_size44
+								| Запишитесь на встречу 
+								br
+								| с руководством компании
+							.mt10
+								.font_size22.fw_medium.ff_trajan
+									| На встрече вы сможете обсудить условия 
+									br
+									| партнерства, а так же получите:
+						.col-sm-4.vebinar-screen__list
+							.desc.mt10
+								img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
+								p.font_size14.fade05.fw_medium
+									| Презентацию о компании 
+									br
+									| с ответами на часто 
+									br
+									| задаваемые вопосы
+							.desc.mt25
+								img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
+								p.font_size14.fade05.fw_medium
+									| Возможность пообщаться 
+									br
+									| с другими партнерами
+					.row
+						.col-sm-7.mt40
+							a.catalog-slider__pic.vebinar-screen__video(href='#')
+								img(src='/images/partner/vebinar.jpg', alt='')
+								span.catalog-slider__icon.icon-play
+							.vebinar-screen__bottom
+								.vebinar-screen__bottom-item.mt10
+									.font_size22.fw_medium.ff_trajan
+										| Алексей 
+										br
+										| иванов
+									.mt10
+										.font_size12.fw_medium.fade05
+											| Основатель 
+											br
+											| компании
+								.vebinar-screen__bottom-item.mt20
+									.desc-text
+										.font_size12.fw_medium.fade05
+											| Посмотрите видео-обращение 
+											br
+											| Алексея с видео-нарезкой 
+											br
+											| его выступлений
+						.col-sm-5.mt40
+							.form-box.vebinar-screen__form.form-box_white
+								form.ajax-form(action='send.php', method='post', data-parsley-validate='', enctype='multipart/form-data')
+									.font_size22.fw_medium.ff_trajan Менеджер перезвонит, чтобы назначить удобную дату встречи
+									input(type='hidden', name='subj', value='Заявка: На вебинар')
+									.input-box.mt30
+										input.input-text.input-text_fill(type='tel', name='phone', required='', data-parsley-errors-messages-disabled='', placeholder='Введите телефон *')
+										label.input-box__icon.icon-telephone
+									.input-box.mt30
+										input.input-text.input-text_fill(type='email', name='email', required='', data-parsley-errors-messages-disabled='', placeholder='Введите почту *')
+										label.input-box__icon.icon-message
+									button.button.button_big.button_blue.button_blue2.mt30(type='submit', name='vebinar')
+										| Записаться на вебинар
+										span.button__arrow.icon-arrow
+									.polity-box.mt35
+										.polity-box__dot
+										.font_size12.fw_medium.fade05
+											| Вы соглашаетесь с условиями 
+											br
+											| обработки персональных данных 
+											br
+											a(href='#') ознакомиться
 
-        include ../include/footer.pug
+		include ../include/footer.pug
