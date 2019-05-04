@@ -18,33 +18,33 @@ block main
                        img.desc__icon(src='/images/icons/ribbon.png', alt='')
                        p.font_size14.fade05.fw_medium
                           | Подберем вашу идеальную квартиру, аппартаменты  или дом на бергу Черного моря и поможем продать старую квартиру
-              a.catalog-slider__pic(href='#')
+              a.catalog-slider__pic.play-box__thumb(href='#')
                  img(src='/images/about/video_thumb.jpg', alt='')
                  span.catalog-slider__icon.icon-play
                  span.catalog-slider__caption
                     span.font_size14.fw_medium.fade05
-                       | Посмотрите короткую 
+                       | Посмотрите короткую
                        br
-                       | видео-презентацию 
+                       | видео-презентацию
                        br
-                       | о жилом комплексе
-        .history-screen
+                       | о компании
+        //- .history-screen
            .main
               img.history-screen__dots(src='/images/about/history_dots.svg', alt='')
               .history-screen__inside-wrap
                  .row
                     .col-sm-7.col-min-12
                        h2.font_size44
-                          | История компании началась 19 лет назад, 
+                          | История компании началась 19 лет назад,
                           br
                           | с постройки первого
                     .col-sm-5.col-min-12
                        .desc.mt10.history-screen__desc
                           img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
                           p.font_size14.fade05.fw_medium
-                             | Первый коттеджный поселок 
+                             | Первый коттеджный поселок
                              br
-                             | был построен за 1.5 года  и полностью 
+                             | был построен за 1.5 года  и полностью
                              br
                              | распродан еще за месяц до сдачи
                  .history-line.mt40
@@ -212,38 +212,38 @@ block main
                           span.icon-search
         .team-screen.bg_dark-blue.color_white
            .main
-              h2.font_size54
-                 | Сегодня ООО «Кислород» 
+              h2.font_size54(style="padding-top: 5rem;")
+                 | Сегодня ООО «Кислород»
                  br
                  | — одна из самых быстрорастущих компаний региона.
               .mt15
-                 p.font_size22.ff_trajan За последний  год мы выросли в обороте в 5 раз 
+                 p.font_size22.ff_trajan За последний  год мы выросли в обороте в 5 раз
               .team-results.row
-                 .team-results__item.col-sm-4.col-min-6
+                 .team-results__item.col-sm-4.col-min-6(style="visibility: hidden;")
                     .team-results__number.color_yelow.ff_trajan
                        | 2000
                        span.team-results__number-min год
                     .mt20.team-results__desc
                        .font_size22.fw_medium.ff_trajan.fade05 Год основания компании
-                 .team-results__item.col-sm-4.col-min-6
+                 .team-results__item.col-sm-4.col-min-6(style="visibility: hidden;")
                     .team-results__number.color_yelow.ff_trajan 26
                     .mt20.team-results__desc
                        .font_size22.fw_medium.ff_trajan.fade05
-                          | банков 
+                          | банков
                           br
                           | -партнеров
-                 .team-results__item.col-sm-4.col-min-6
+                 .team-results__item.col-sm-4.col-min-6(style="visibility: hidden;")
                     .team-results__number.color_yelow.ff_trajan 30+
                     .mt20.team-results__desc
                        .font_size22.fw_medium.ff_trajan.fade05
-                          | Сданных 
+                          | Сданных
                           br
                           | проектов
-                 .team-results__item.col-sm-4.col-min-6
+                 .team-results__item.col-sm-4.col-min-6(style="visibility: hidden;")
                     .team-results__number.color_yelow.ff_trajan 300+
                     .mt20.team-results__desc
                        .font_size22.fw_medium.ff_trajan.fade05 Сотрудников
-                 .team-results__item.col-sm-4.col-min-6
+                 .team-results__item.col-sm-4.col-min-6(style="visibility: hidden;")
                     .team-results__number.color_yelow.ff_trajan
                        | 90
                        span.team-results__number-min
@@ -251,10 +251,10 @@ block main
                           sup 2
                     .mt20.team-results__desc
                        .font_size22.fw_medium.ff_trajan.fade05
-                          | Жилой 
+                          | Жилой
                           br
                           | недвижимости построено
-                 .team-results__item.col-sm-4.col-min-6
+                 .team-results__item.col-sm-4.col-min-6(style="visibility: hidden;")
                     .team-results__number.color_yelow.ff_trajan 450+
                     .mt20.team-results__desc
                        .font_size22.fw_medium.ff_trajan.fade05 Семей живут домах построенных нами
@@ -263,18 +263,18 @@ block main
                  .row
                     .col-sm-7.col-min-12
                        h2.font_size54
-                          | Во главе компании 
+                          | Во главе компании
                           br
                           | — профессионалы своего дела
                     .col-sm-5.col-min-12
                        .desc.mt10
                           img.desc__icon(src='/images/icons/ribbon.png', alt='')
                           p.font_size14.fade05.fw_medium
-                             | В основе нашей деятельности — безграничная любовь 
+                             | В основе нашей деятельности — безграничная любовь
                              br
-                             | к городу и краю.  Вся наша деятельность направлена 
+                             | к городу и краю.  Вся наша деятельность направлена
                              br
-                             | на то, чтобы город становился лучше,  а жителям 
+                             | на то, чтобы город становился лучше,  а жителям
                              br
                              | было комфортно в нем
                  .team-slider.js-team-slider
@@ -282,403 +282,107 @@ block main
                        .expert-box
                           .expert-box__center
                              .font_size22.ff_trajan.font_upper.fw_medium
-                                | Семенова 
+                                | Скрипко
                                 br
-                                | мария
+                                | Иван Борисович
                              .mt15
                                 .font_size14.fw_medium.fade05
-                                   | Менеджер по работе 
+                                   | Директор
                                    br
-                                   | с клиентами
+                                   | Центра недвижимости
+                                   br
+                                   | «Кислород»
                           .expert-box__foto
-                             img(src='/images/experts/1.png', alt='')
+                             img(src='/images/experts/top1.png', alt='')
                     .team-slider__slide
                        .expert-box
                           .expert-box__center
                              .font_size22.ff_trajan.font_upper.fw_medium
-                                | Вдовин 
+                                | Власова
                                 br
-                                | олег
+                                | Анна
                              .mt15
                                 .font_size14.fw_medium.fade05
-                                   | Менеджер по работе 
+                                   | Заместитель
                                    br
-                                   | с клиентами
+                                   | директора
                           .expert-box__foto
-                             img(src='/images/experts/2.png', alt='')
+                             img(src='/images/experts/top3.png', alt='')
                     .team-slider__slide
                        .expert-box
                           .expert-box__center
                              .font_size22.ff_trajan.font_upper.fw_medium
-                                | Семенова 
+                                | Балынская
                                 br
-                                | мария
+                                | Александра
                              .mt15
                                 .font_size14.fw_medium.fade05
-                                   | Менеджер по работе 
+                                   | Руководитель отдела
                                    br
-                                   | с клиентами
+                                   | реализации
                           .expert-box__foto
-                             img(src='/images/experts/3.png', alt='')
+                             img(src='/images/experts/top2.png', alt='')
         .main
            .department-screen
               .department-tabs
-                 a.department-tabs__item.department-tabs__item_active(href='#klients') Отдел по работе с клиентами
-                 a.department-tabs__item(href='#legal') Юридический отдел
-                 a.department-tabs__item(href='#kredit') Ипотечный отдел
+                each item, index in department
+                    a.department-tabs__item(href='#department_tab_' + item.iDepartmentID, class={'department-tabs__item_active': index == 0})= item.sDepartmentTitle
               .department-slides.mt70
-                 #klients.department-slide
+                each item, index in department
+                 .department-slide(id= "department_tab_"+item.iDepartmentID)
                     .department-slider.js-department-slider
-                       .department-slider__slide
-                          .department-slider__foto
-                             img(src='/images/about/sotnikova.jpg', alt='')
-                          .department-slider__name.mt45
-                             .font_size22.ff_trajan.fw_medium
-                                | Сотникова 
-                                br
-                                | татьяна
-                          .department-slider__desc.mt5
-                             .font_size14.fw_medium.fade05
-                                | Руководитель отдела 
-                                br
-                                | по работе с клиентами
-                          .mt20.department-slider__bottom
-                             a.fw_medium.link-more.js-popup-show(href='#', data-popup-name='js-popup-call', data-popup-subj='Получить консультацию Ивана')
-                                | Получить консультацию Ивана 
-                                span.icon-arrow.link-more__arrow
-                       .department-slider__slide
-                          .department-slider__foto
-                             img(src='/images/about/vlasova.jpg', alt='')
-                          .department-slider__name.mt45
-                             .font_size22.ff_trajan.fw_medium
-                                | Власова 
-                                br
-                                | анна
-                          .department-slider__desc.mt5
-                             .font_size14.fw_medium.fade05
-                                | Руководитель отдела 
-                                br
-                                | по работе с клиентами
-                          .mt20.department-slider__bottom
-                             a.fw_medium.link-more.js-popup-show(href='#', data-popup-name='js-popup-call', data-popup-subj='Получить консультацию Ивана')
-                                | Получить консультацию Ивана 
-                                span.icon-arrow.link-more__arrow
-                       .department-slider__slide
-                          .department-slider__foto
-                             img(src='/images/about/gavrikova.jpg', alt='')
-                          .department-slider__name.mt45
-                             .font_size22.ff_trajan.fw_medium
-                                | Гаврикова 
-                                br
-                                | Екатерина
-                          .department-slider__desc.mt5
-                             .font_size14.fw_medium.fade05
-                                | Руководитель отдела 
-                                br
-                                | по работе с клиентами
-                          .mt20.department-slider__bottom
-                             a.fw_medium.link-more.js-popup-show(href='#', data-popup-name='js-popup-call', data-popup-subj='Получить консультацию Ивана')
-                                | Получить консультацию Ивана 
-                                span.icon-arrow.link-more__arrow
-                       .department-slider__slide
-                          .department-slider__foto
-                             img(src='/images/about/balunskaya.jpg', alt='')
-                          .department-slider__name.mt45
-                             .font_size22.ff_trajan.fw_medium
-                                | Балынская 
-                                br
-                                | Александра
-                          .department-slider__desc.mt5
-                             .font_size14.fw_medium.fade05
-                                | Руководитель отдела 
-                                br
-                                | по работе с клиентами
-                          .mt20.department-slider__bottom
-                             a.fw_medium.link-more.js-popup-show(href='#', data-popup-name='js-popup-call', data-popup-subj='Получить консультацию Ивана')
-                                | Получить консультацию Ивана 
-                                span.icon-arrow.link-more__arrow
-                       .department-slider__slide
-                          .department-slider__foto
-                             img(src='/images/about/vlasova.jpg', alt='')
-                          .department-slider__name.mt45
-                             .font_size22.ff_trajan.fw_medium
-                                | Власова 
-                                br
-                                | анна
-                          .department-slider__desc.mt5
-                             .font_size14.fw_medium.fade05
-                                | Руководитель отдела 
-                                br
-                                | по работе с клиентами
-                          .mt20.department-slider__bottom
-                             a.fw_medium.link-more.js-popup-show(href='#', data-popup-name='js-popup-call', data-popup-subj='Получить консультацию Ивана')
-                                | Получить консультацию Ивана 
-                                span.icon-arrow.link-more__arrow
-                 #legal.department-slide
-                    .department-slider.js-department-slider
-                       .department-slider__slide
-                          .department-slider__foto
-                             img(src='/images/about/sotnikova.jpg', alt='')
-                          .department-slider__name.mt45
-                             .font_size22.ff_trajan.fw_medium
-                                | Сотникова 
-                                br
-                                | татьяна
-                          .department-slider__desc.mt5
-                             .font_size14.fw_medium.fade05
-                                | Руководитель отдела 
-                                br
-                                | по работе с клиентами
-                          .mt20.department-slider__bottom
-                             a.fw_medium.link-more.js-popup-show(href='#', data-popup-name='js-popup-call', data-popup-subj='Получить консультацию Ивана')
-                                | Получить консультацию Ивана 
-                                span.icon-arrow.link-more__arrow
-                       .department-slider__slide
-                          .department-slider__foto
-                             img(src='/images/about/vlasova.jpg', alt='')
-                          .department-slider__name.mt45
-                             .font_size22.ff_trajan.fw_medium
-                                | Власова 
-                                br
-                                | анна
-                          .department-slider__desc.mt5
-                             .font_size14.fw_medium.fade05
-                                | Руководитель отдела 
-                                br
-                                | по работе с клиентами
-                          .mt20.department-slider__bottom
-                             a.fw_medium.link-more.js-popup-show(href='#', data-popup-name='js-popup-call', data-popup-subj='Получить консультацию Ивана')
-                                | Получить консультацию Ивана 
-                                span.icon-arrow.link-more__arrow
-                       .department-slider__slide
-                          .department-slider__foto
-                             img(src='/images/about/gavrikova.jpg', alt='')
-                          .department-slider__name.mt45
-                             .font_size22.ff_trajan.fw_medium
-                                | Гаврикова 
-                                br
-                                | Екатерина
-                          .department-slider__desc.mt5
-                             .font_size14.fw_medium.fade05
-                                | Руководитель отдела 
-                                br
-                                | по работе с клиентами
-                          .mt20.department-slider__bottom
-                             a.fw_medium.link-more.js-popup-show(href='#', data-popup-name='js-popup-call', data-popup-subj='Получить консультацию Ивана')
-                                | Получить консультацию Ивана 
-                                span.icon-arrow.link-more__arrow
-                       .department-slider__slide
-                          .department-slider__foto
-                             img(src='/images/about/balunskaya.jpg', alt='')
-                          .department-slider__name.mt45
-                             .font_size22.ff_trajan.fw_medium
-                                | Балынская 
-                                br
-                                | Александра
-                          .department-slider__desc.mt5
-                             .font_size14.fw_medium.fade05
-                                | Руководитель отдела 
-                                br
-                                | по работе с клиентами
-                          .mt20.department-slider__bottom
-                             a.fw_medium.link-more.js-popup-show(href='#', data-popup-name='js-popup-call', data-popup-subj='Получить консультацию Ивана')
-                                | Получить консультацию Ивана 
-                                span.icon-arrow.link-more__arrow
-                       .department-slider__slide
-                          .department-slider__foto
-                             img(src='/images/about/vlasova.jpg', alt='')
-                          .department-slider__name.mt45
-                             .font_size22.ff_trajan.fw_medium
-                                | Власова 
-                                br
-                                | анна
-                          .department-slider__desc.mt5
-                             .font_size14.fw_medium.fade05
-                                | Руководитель отдела 
-                                br
-                                | по работе с клиентами
-                          .mt20.department-slider__bottom
-                             a.fw_medium.link-more.js-popup-show(href='#', data-popup-name='js-popup-call', data-popup-subj='Получить консультацию Ивана')
-                                | Получить консультацию Ивана 
-                                span.icon-arrow.link-more__arrow
-                 #kredit.department-slide
-                    .department-slider.js-department-slider
-                       .department-slider__slide
-                          .department-slider__foto
-                             img(src='/images/about/sotnikova.jpg', alt='')
-                          .department-slider__name.mt45
-                             .font_size22.ff_trajan.fw_medium
-                                | Сотникова 
-                                br
-                                | татьяна
-                          .department-slider__desc.mt5
-                             .font_size14.fw_medium.fade05
-                                | Руководитель отдела 
-                                br
-                                | по работе с клиентами
-                          .mt20.department-slider__bottom
-                             a.fw_medium.link-more.js-popup-show(href='#', data-popup-name='js-popup-call', data-popup-subj='Получить консультацию Ивана')
-                                | Получить консультацию Ивана 
-                                span.icon-arrow.link-more__arrow
-                       .department-slider__slide
-                          .department-slider__foto
-                             img(src='/images/about/vlasova.jpg', alt='')
-                          .department-slider__name.mt45
-                             .font_size22.ff_trajan.fw_medium
-                                | Власова 
-                                br
-                                | анна
-                          .department-slider__desc.mt5
-                             .font_size14.fw_medium.fade05
-                                | Руководитель отдела 
-                                br
-                                | по работе с клиентами
-                          .mt20.department-slider__bottom
-                             a.fw_medium.link-more.js-popup-show(href='#', data-popup-name='js-popup-call', data-popup-subj='Получить консультацию Ивана')
-                                | Получить консультацию Ивана 
-                                span.icon-arrow.link-more__arrow
-                       .department-slider__slide
-                          .department-slider__foto
-                             img(src='/images/about/gavrikova.jpg', alt='')
-                          .department-slider__name.mt45
-                             .font_size22.ff_trajan.fw_medium
-                                | Гаврикова 
-                                br
-                                | Екатерина
-                          .department-slider__desc.mt5
-                             .font_size14.fw_medium.fade05
-                                | Руководитель отдела 
-                                br
-                                | по работе с клиентами
-                          .mt20.department-slider__bottom
-                             a.fw_medium.link-more.js-popup-show(href='#', data-popup-name='js-popup-call', data-popup-subj='Получить консультацию Ивана')
-                                | Получить консультацию Ивана 
-                                span.icon-arrow.link-more__arrow
-                       .department-slider__slide
-                          .department-slider__foto
-                             img(src='/images/about/balunskaya.jpg', alt='')
-                          .department-slider__name.mt45
-                             .font_size22.ff_trajan.fw_medium
-                                | Балынская 
-                                br
-                                | Александра
-                          .department-slider__desc.mt5
-                             .font_size14.fw_medium.fade05
-                                | Руководитель отдела 
-                                br
-                                | по работе с клиентами
-                          .mt20.department-slider__bottom
-                             a.fw_medium.link-more.js-popup-show(href='#', data-popup-name='js-popup-call', data-popup-subj='Получить консультацию Ивана')
-                                | Получить консультацию Ивана 
-                                span.icon-arrow.link-more__arrow
-                       .department-slider__slide
-                          .department-slider__foto
-                             img(src='/images/about/vlasova.jpg', alt='')
-                          .department-slider__name.mt45
-                             .font_size22.ff_trajan.fw_medium
-                                | Власова 
-                                br
-                                | анна
-                          .department-slider__desc.mt5
-                             .font_size14.fw_medium.fade05
-                                | Руководитель отдела 
-                                br
-                                | по работе с клиентами
-                          .mt20.department-slider__bottom
-                             a.fw_medium.link-more.js-popup-show(href='#', data-popup-name='js-popup-call', data-popup-subj='Получить консультацию Ивана')
-                                | Получить консультацию Ивана 
-                                span.icon-arrow.link-more__arrow
+                       each people, index2 in item.people
+                            .department-slider__slide
+                                .department-slider__foto
+                                    img(src='/images/people/' + people.sPeopleImage, alt='')
+                                .department-slider__name.mt45
+                                    .font_size22.ff_trajan.fw_medium= people.sPeopleLastname + " " + people.sPeopleName
+                                .department-slider__desc.mt5
+                                    .font_size14.fw_medium.fade05= people.sPeoplePosition
+                                .mt20.department-slider__bottom
+                                    a.fw_medium.link-more.js-popup-show(href='#', data-popup-name='js-popup-call', data-popup-subj='Получить консультацию Ивана')
+                                        | Получить консультацию
+                                        span.icon-arrow.link-more__arrow
            .certification-screen.certification-screen_about.mt10
               img.certification-screen__dots(src='/images/about/license_dots.svg', alt='')
               img.certification-screen__dots_bottom(src='/images/about/reviews_dots.svg', alt='')
               h2.font_size44
-                 | Деятельность компании 
-                 br
-                 | подтверждена всеми необходимыми 
-                 br
-                 | лицензиями и допусками
+                | Деятельность компании
+                br
+                | подтверждена всеми необходимыми
+                br
+                | лицензиями и допусками
               .certification-screen__row.mt20
                  .certification-screen__left
                     .font_size22.ff_trajan
-                       | В Краснодарском крае вопрос 
+                       | В Краснодарском крае вопрос
                        br
                        | с документацией стоит особенно остро.
                  .certification-screen__right
                     .desc
                        img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
                        p.font_size14.fade05.fw_medium
-                          | Мы заранее заботимся о спокойствии 
+                          | Мы заранее заботимся о спокойствии
                           br
                           | наших клиентов и получаем все разрешительны документы еще до начала продаж и сдачи объекта
               .certification-slider.mt70
-                 .certification-slider__slide
-                    .certificat
-                       img.certificat__img(src='/images/certification/scan1.jpg', alt='')
-                       .certificat__caption
-                          .font_size14.fw_medium Лицензия на осуществление строительной деятельности №23913491-07
-                       a.fancybox.certificat__zoom(href='/images/certification/scan1.jpg', rel='certification')
-                          span.certificat__zoom-icon
-                 .certification-slider__slide
-                    .certificat
-                       img.certificat__img(src='/images/certification/scan2.jpg', alt='')
-                       .certificat__caption
-                          .font_size14.fw_medium Лицензия на осуществление строительной деятельности №23913491-07
-                       a.fancybox.certificat__zoom(href='/images/certification/scan1.jpg', rel='certification')
-                          span.certificat__zoom-icon
-                 .certification-slider__slide
-                    .certificat
-                       img.certificat__img(src='/images/certification/scan3.jpg', alt='')
-                       .certificat__caption
-                          .font_size14.fw_medium Лицензия на осуществление строительной деятельности №23913491-07
-                       a.fancybox.certificat__zoom(href='/images/certification/scan1.jpg', rel='certification')
-                          span.certificat__zoom-icon
-                 .certification-slider__slide
-                    .certificat
-                       img.certificat__img(src='/images/certification/scan1.jpg', alt='')
-                       .certificat__caption
-                          .font_size14.fw_medium Лицензия на осуществление строительной деятельности №23913491-07
-                       a.fancybox.certificat__zoom(href='/images/certification/scan1.jpg', rel='certification')
-                          span.certificat__zoom-icon
-                 .certification-slider__slide
-                    .certificat
-                       img.certificat__img(src='/images/certification/scan2.jpg', alt='')
-                       .certificat__caption
-                          .font_size14.fw_medium Лицензия на осуществление строительной деятельности №23913491-07
-                       a.fancybox.certificat__zoom(href='/images/certification/scan1.jpg', rel='certification')
-                          span.certificat__zoom-icon
-                 .certification-slider__slide
-                    .certificat
-                       img.certificat__img(src='/images/certification/scan3.jpg', alt='')
-                       .certificat__caption
-                          .font_size14.fw_medium Лицензия на осуществление строительной деятельности №23913491-07
-                       a.fancybox.certificat__zoom(href='/images/certification/scan1.jpg', rel='certification')
-                          span.certificat__zoom-icon
-              .certification-screen__bottom.mt40
-                 .certification-screen__bottom-text
-                    .font_size12.fw_medium.fade05
-                       | Посмотрите полный пакет 
-                       br
-                       | разрешительной документации
-                 a.button.button_big.button_blue.button_blue2.mt30(href='#')
-                    | Посмотреть все документы
-                    span.button__arrow.icon-arrow
-                 img.certification-screen__folder(src='/images/certification/folder.png', alt='')
+                include ../include/certification-slider__slide.pug
         .reviews-screen
            .main
               h2.font_size54
-                 | Посмотрите, что говорят 
+                 | Посмотрите, что говорят
                  br
                  | о нас наши клиенты
               .certification-screen__row.mt20
                  .certification-screen__left
-                    .font_size22.ff_trajan Больше 450 семей уже живут в домах и квартирах,  которые постро
+                    .font_size22.ff_trajan Больше 3000 семей уже живут в домах и квартирах, которые построены нашими руками
                  .certification-screen__right
                     .desc
                        img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
                        p.font_size14.fade05.fw_medium
-                          | Мы с радостью поделимся с вами контактами 
+                          | Мы с радостью поделимся с вами контактами
                           br
-                          | наших клиентов,  чтобы вы могли подробнее 
+                          | наших клиентов,  чтобы вы могли подробнее
                           br
                           | узнать о качестве нашей работы
            .reviews-slider.js-reviews-slider.mt50
@@ -688,20 +392,9 @@ block main
                     span.catalog-slider__icon.icon-play
                     span.catalog-slider__caption
                        span.font_size14.fw_medium.fade05
-                          | Видео-отзыв клиента 
+                          | Видео-отзыв клиента
                           br
-                          | Евгения караниколы 
-                          br
-                          | из города Сочи
-              .reviews-slider__slide
-                 a.catalog-slider__pic(href='#')
-                    img(src='/images/about/review2.jpg', alt='')
-                    span.catalog-slider__icon.icon-play
-                    span.catalog-slider__caption
-                       span.font_size14.fw_medium.fade05
-                          | Видео-отзыв клиента 
-                          br
-                          | Евгения караниколы 
+                          | Евгения караниколы
                           br
                           | из города Сочи
               .reviews-slider__slide
@@ -710,9 +403,9 @@ block main
                     span.catalog-slider__icon.icon-play
                     span.catalog-slider__caption
                        span.font_size14.fw_medium.fade05
-                          | Видео-отзыв клиента 
+                          | Видео-отзыв клиента
                           br
-                          | Евгения караниколы 
+                          | Евгения караниколы
                           br
                           | из города Сочи
               .reviews-slider__slide
@@ -721,9 +414,20 @@ block main
                     span.catalog-slider__icon.icon-play
                     span.catalog-slider__caption
                        span.font_size14.fw_medium.fade05
-                          | Видео-отзыв клиента 
+                          | Видео-отзыв клиента
                           br
-                          | Евгения караниколы 
+                          | Евгения караниколы
+                          br
+                          | из города Сочи
+              .reviews-slider__slide
+                 a.catalog-slider__pic(href='#')
+                    img(src='/images/about/review2.jpg', alt='')
+                    span.catalog-slider__icon.icon-play
+                    span.catalog-slider__caption
+                       span.font_size14.fw_medium.fade05
+                          | Видео-отзыв клиента
+                          br
+                          | Евгения караниколы
                           br
                           | из города Сочи
         .partner-screen.bg_dark-blue.color_white
@@ -737,32 +441,32 @@ block main
                  .row
                     .col-min-8
                        .mt15
-                          .font_size22.ff_trajan
-                             | Если вы — опытный риелтор 
-                             br
-                             | и хотите получить доступ
-                       a.button.button_big.button_blue.button_blue2.mt45(href='#')
+                          .font_size22.ff_trajan Если вы — опытный риэлтор и хотите получить рекламную и информационную поддержку, доступ к базам объектов, достойную зарплату и все ресурсы большой компании, то переходите на сайт для партнеров и заполняйте анкету
+                            //-  | Если вы — опытный риелтор
+                            //-  br
+                            //-  | и хотите получить доступ
+                       a.button.button_big.button_blue.button_blue2.mt45(href='/partner')
                           | Перейти на сайт для партнеров
                           span.button__arrow.icon-arrow
                     .col-min-4
-                       .partner-screen__text-man
+                    //-    .partner-screen__text-man
                           .mt20
                              .font_size14
-                                | Если вы — опытный риелтор 
+                                | Если вы — опытный риелтор
                                 br
                                 | и хотите получить доступ к
                           .number-text.color_yelow.mt15
                              .font_size120.number-text__number 37
                              .font_size22.ff_trajan.fw_medium
-                                | элитным 
+                                | элитным
                                 br
                                 | ЖК
                           .desc.partner-screen__desc
                              img.desc__icon(src='/images/icons/ribbon.png', alt='')
                              p.font_size14.fade05.fw_medium
-                                | Все ресурсы большой компании, 
+                                | Все ресурсы большой компании,
                                 br
-                                | то переходите на сайт для партнеров 
+                                | то переходите на сайт для партнеров
                                 br
                                 | и заполняйте анкету
 
