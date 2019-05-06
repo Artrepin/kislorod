@@ -645,17 +645,22 @@ $(document).ready(function(){
 			]
 		});
         
+        department_slider_slick_arrow()
+        
+    };
+    
+    function department_slider_slick_arrow () {
         if ( viewport().width > 1360 ) {
             setTimeout(function(){
                 $(".department-slider .slick-arrow").each(function(){
                     var height_pic = $(".department-slider__foto:visible").height();
                     height_pic = height_pic/2;
                     $(this).css("top",height_pic);
+                    console.log(height_pic)
                 });
             },1000);
         }
-        
-	};
+    }
     
     $(".department-tabs__item").click(function(){
         
@@ -677,6 +682,8 @@ $(document).ready(function(){
                 });
             }
         }
+
+        department_slider_slick_arrow()
         
         return false;
         
