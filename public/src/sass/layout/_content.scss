@@ -2427,7 +2427,8 @@ input::-webkit-inner-spin-button {
     &__slide {
         text-align: center;
         padding: 0 toem(15) 0 toem(15);
-        &:hover, &.slick-current {
+        // &:hover, &.slick-current {
+        &:hover {
             .department-slider__name, .department-slider__desc, .department-slider__bottom {
                 opacity: 1;
             }

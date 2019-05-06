@@ -103,31 +103,31 @@ block main
 				.mt15
 					p.font_size22.ff_trajan За последний  год мы выросли в обороте в 5 раз
 				.team-results.row
-					.team-results__item.col-sm-4.col-min-6
+					.team-results__item.col-sm-4.col-min-6(style="visibility: hidden")
 						.team-results__number.color_yelow.ff_trajan
 							| 2000
 							span.team-results__number-min год
 						.mt20.team-results__desc
 							.font_size22.fw_medium.ff_trajan.fade05 Год основания компании
-					.team-results__item.col-sm-4.col-min-6
+					.team-results__item.col-sm-4.col-min-6(style="visibility: hidden")
 						.team-results__number.color_yelow.ff_trajan 26
 						.mt20.team-results__desc
 							.font_size22.fw_medium.ff_trajan.fade05
 								| банков 
 								br
 								| -партнеров
-					.team-results__item.col-sm-4.col-min-6
+					.team-results__item.col-sm-4.col-min-6(style="visibility: hidden")
 						.team-results__number.color_yelow.ff_trajan 30+
 						.mt20.team-results__desc
 							.font_size22.fw_medium.ff_trajan.fade05
 								| Сданных 
 								br
 								| проектов
-					.team-results__item.col-sm-4.col-min-6
+					.team-results__item.col-sm-4.col-min-6(style="visibility: hidden")
 						.team-results__number.color_yelow.ff_trajan 300+
 						.mt20.team-results__desc
 							.font_size22.fw_medium.ff_trajan.fade05 Сотрудников
-					.team-results__item.col-sm-4.col-min-6
+					.team-results__item.col-sm-4.col-min-6(style="visibility: hidden")
 						.team-results__number.color_yelow.ff_trajan
 							| 90
 							span.team-results__number-min
@@ -138,7 +138,7 @@ block main
 								| Жилой 
 								br
 								| недвижимости построено
-					.team-results__item.col-sm-4.col-min-6
+					.team-results__item.col-sm-4.col-min-6(style="visibility: hidden")
 						.team-results__number.color_yelow.ff_trajan 450+
 						.mt20.team-results__desc
 							.font_size22.fw_medium.ff_trajan.fade05 Семей живут домах построенных нами
@@ -313,7 +313,7 @@ block main
 			.main
 				.row
 					.col-sm-7
-						h2.font_size44 Получайте от 60% комиссии с продажи недвижимости
+						h2.font_size44 Получайте до 60% комиссии с продажи недвижимости
 					.col-sm-5
 						.mt10.result-screen__desc
 							img(src='/images/icons/ribbon_gold.png', alt='')
@@ -382,7 +382,7 @@ block main
 										span.js-slider-min 0
 									.font_size14.fade05
 										span.js-slider-max 100
-		.options-screen
+		.options-screen(style="padding-bottom: 0;")
 			.main
 				img.options-screen__dots(src='/images/catalog/offer__dots.svg', alt='')
 				.options-screen__inside-wrap
@@ -398,7 +398,7 @@ block main
 								.font_size22.ff_trajan
 									| Мы хотим видеть у себя тех,
 									br
-									| кто посещает себя работе на 100%
+									| кто посвящает себя работе на 100%
 					.options-list
 						.options-list__item
 							img.options-list__img(src='/images/partner/experience.jpg', alt='')
@@ -849,7 +849,7 @@ block main
 														| Смотрите видео-кейс 
 														br
 														| с брокером партнером
-		.vebinar-screen.vebinar-screen_last
+		//- .vebinar-screen.vebinar-screen_last
 			.main
 				img.vebinar-screen__dots(src='/images/director/dots.svg', alt='')
 				.vebinar-screen__inside-wrap
