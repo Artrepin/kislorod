@@ -381,8 +381,7 @@ $(document).ready(function(){
     if ( $(".js-slider-result").length ) {
 
         $(".js-slider-wrapper").each(function(){
-            
-            
+
             var slider_options = $(this).find(".js-slider-options"),
                 slider_val = slider_options.data("value"),
                 slider_min = slider_options.data("min"),
@@ -420,6 +419,9 @@ $(document).ready(function(){
             });
             
         });
+
+        
+        // $(".js-slider-result").slide()
     }
     
     $(document).on("click", ".catalog-tabs__item:not(.catalog-tabs__item_active)", function () {
@@ -643,17 +645,22 @@ $(document).ready(function(){
 			]
 		});
         
+        department_slider_slick_arrow()
+        
+    };
+    
+    function department_slider_slick_arrow () {
         if ( viewport().width > 1360 ) {
             setTimeout(function(){
                 $(".department-slider .slick-arrow").each(function(){
                     var height_pic = $(".department-slider__foto:visible").height();
                     height_pic = height_pic/2;
                     $(this).css("top",height_pic);
+                    console.log(height_pic)
                 });
             },1000);
         }
-        
-	};
+    }
     
     $(".department-tabs__item").click(function(){
         
@@ -675,6 +682,8 @@ $(document).ready(function(){
                 });
             }
         }
+
+        department_slider_slick_arrow()
         
         return false;
         

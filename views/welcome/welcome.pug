@@ -1086,27 +1086,29 @@ block main
                                 br
                                 | наших клиентов и получаем все разрешительны документы еще до начала продаж и сдачи объекта
                 .certification-slider.mt70
-                    .certification-slider__slide
-                        .certificat
-                            img.certificat__img(src='/images/certification/scan2.jpg', alt='')
-                            .certificat__caption
-                                .font_size14.fw_medium Сертификат "Система обучения сотрудников Профессионал". Технология Евгения Котова
-                            a.fancybox.certificat__zoom(href='/images/certification/scan2_big.jpg', rel='certification')
-                                span.certificat__zoom-icon
-                    .certification-slider__slide
-                        .certificat
-                            img.certificat__img(src='/images/certification/scan1.jpg', alt='')
-                            .certificat__caption
-                                .font_size14.fw_medium Сертификат официального партнера ПАО "Сбербанк"
-                            a.fancybox.certificat__zoom(href='/images/certification/scan1_big.jpg', rel='certification')
-                                span.certificat__zoom-icon
-                    .certification-slider__slide
-                        .certificat
-                            img.certificat__img(src='/images/certification/scan3.jpg', alt='')
-                            .certificat__caption
-                                .font_size14.fw_medium Сертификат "Система обучения сотрудников Профессионал". Технология Евгения Котова
-                            a.fancybox.certificat__zoom(href='/images/certification/scan3_big.jpg', rel='certification')
-                                span.certificat__zoom-icon
+                    include ../include/certification-slider__slide.pug
+                    
+                    //- .certification-slider__slide
+                    //-     .certificat
+                    //-         img.certificat__img(src='/images/certification/scan2.jpg', alt='')
+                    //-         .certificat__caption
+                    //-             .font_size14.fw_medium Сертификат "Система обучения сотрудников Профессионал". Технология Евгения Котова
+                    //-         a.fancybox.certificat__zoom(href='/images/certification/scan2_big.jpg', rel='certification')
+                    //-             span.certificat__zoom-icon
+                    //- .certification-slider__slide
+                    //-     .certificat
+                    //-         img.certificat__img(src='/images/certification/scan1.jpg', alt='')
+                    //-         .certificat__caption
+                    //-             .font_size14.fw_medium Сертификат официального партнера ПАО "Сбербанк"
+                    //-         a.fancybox.certificat__zoom(href='/images/certification/scan1_big.jpg', rel='certification')
+                    //-             span.certificat__zoom-icon
+                    //- .certification-slider__slide
+                    //-     .certificat
+                    //-         img.certificat__img(src='/images/certification/scan3.jpg', alt='')
+                    //-         .certificat__caption
+                    //-             .font_size14.fw_medium Сертификат "Система обучения сотрудников Профессионал". Технология Евгения Котова
+                    //-         a.fancybox.certificat__zoom(href='/images/certification/scan3_big.jpg', rel='certification')
+                    //-             span.certificat__zoom-icon
                     //- .certification-slider__slide
                         .certificat
                             img.certificat__img(src='/images/certification/scan2.jpg', alt='')
