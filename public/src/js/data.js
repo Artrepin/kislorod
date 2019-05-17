@@ -378,7 +378,7 @@ $(document).ready(function(){
         return output;
     };
     
-    iif ( $(".js-slider-result").length ) {
+    if ( $(".js-slider-result").length ) {
 
         $(".js-slider-wrapper").each(function(){
             
