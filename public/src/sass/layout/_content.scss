@@ -1907,11 +1907,16 @@ input::-webkit-inner-spin-button {
         border-radius: 4px;
     }
     &__thumb {
-        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         position: relative;
+        height: toem(200);
         img {
             display: block;
-            width: 100%;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
         }
     }
     &__zoom {
@@ -1977,10 +1982,12 @@ input::-webkit-inner-spin-button {
         cursor: pointer;
     }
     &__left {
-        width: 50%;
+        width: 52%;
+        padding-right: toem(15);
     }
     &__right {
-        width: 43%;
+        width: 45%;
+        padding-left: toem(15);
         form {
             max-width: toem(370);
         }
@@ -1989,16 +1996,22 @@ input::-webkit-inner-spin-button {
         }
     }
     &__img-big {
-        display: block;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: toem(350);
         img {
             display: block;
+            object-fit: contain;
             margin-left: auto;
             margin-right: auto;
             max-width: 100%;
+            max-height: 100%;
         }
     }
     &__gallery {
         display: flex;
+        align-items: center;
         &-item {
             width: 33.33%;
             padding: 0 toem(10) 0 toem(10);
@@ -2731,7 +2744,7 @@ input::-webkit-inner-spin-button {
     &__circle {
         position: absolute;
         border-radius: 100%;
-        transform: scale(0.5);
+        transform: scale(0.8);
         @include transition(0.2);
         &_yelow {
             width: 570/437*100%;
@@ -3714,14 +3727,22 @@ input::-webkit-inner-spin-button {
         &__right, &__left {
             width: 100%;
         }
+        &__left {
+            padding-right: 0;
+        }
         &__price {
             font-size: 42px;
         }
         &__right {
             margin-top: 30px;
+            padding-left: 0;
             form {
                 max-width: none;
             }
+        }
+        &__img-big {
+            height: auto;
+            padding-top: 20px;
         }
     }
     .department-slider__slide.slick-current {

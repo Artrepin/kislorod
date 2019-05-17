@@ -378,10 +378,11 @@ $(document).ready(function(){
         return output;
     };
     
-    if ( $(".js-slider-result").length ) {
+    iif ( $(".js-slider-result").length ) {
 
         $(".js-slider-wrapper").each(function(){
-
+            
+            
             var slider_options = $(this).find(".js-slider-options"),
                 slider_val = slider_options.data("value"),
                 slider_min = slider_options.data("min"),
@@ -407,11 +408,25 @@ $(document).ready(function(){
                         result = price * customers * conversion,
                         result = result.toFixed();
                         result2 = result/1000000;
-
-                    if ( result < 1500000 ) {
-                        $(".result-box__circle").css("transform","scale(" + result2 + ")");
+                    
+                    if ( result < 750000 ) {
+                        $(".result-box__circle").css("transform","scale(0.8)");
                     } else {
-                        $(".result-box__circle").css("transform","scale(1.7)");
+                        if ( result > 750000 ) {
+                            $(".result-box__circle").css("transform","scale(" + ( result2 ) + ")");
+                        } 
+                        if ( result > 1100000 ) {
+                            $(".result-box__circle").css("transform","scale(" + ( result2 * 0.8 ) + ")");
+                        }
+                        if ( result > 1500000 ) {
+                            $(".result-box__circle").css("transform","scale(" + ( result2 * 0.7 ) + ")");
+                        }
+                        if ( result > 2000000 ) {
+                            $(".result-box__circle").css("transform","scale(" + ( result2 * 0.6 ) + ")");
+                        }
+                        if ( result > 2500000 ) {
+                            $(".result-box__circle").css("transform","scale(1.5)");
+                        }
                     }
 
                     $(".js-result-profit").text(thousandSeparator(result));
@@ -419,9 +434,6 @@ $(document).ready(function(){
             });
             
         });
-
-        
-        // $(".js-slider-result").slide()
     }
     
     $(document).on("click", ".catalog-tabs__item:not(.catalog-tabs__item_active)", function () {
