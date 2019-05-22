@@ -300,9 +300,9 @@ block main
                                         .quiz__bottom-text
                                             | Все предложения 
                                             br
-                                            | актуальны на январь 
+                                            | актуальны, база 
                                             br
-                                            | 2019 года
+                                            | обновляется каждый день
                                     .quiz__bottom-item
                                         .quiz__bottom-img
                                             img(src='/images/quiz-screen/docs.png', alt='')
@@ -896,46 +896,32 @@ block main
                                         | Пройдите простой тест и узнайте вероятность одобрения ипотеки банками-партнерами онлайн за 2 минуты
         .bg_dark-blue
             .apartment-screen
-                .main
-                    img.apartment-screen__dots(src='/images/apartment/dots.png', alt='')
-                    .apartment-screen__top
-                        .apartment-screen__headline
-                            h2.font_size44 Поменяем вашу квартиру на новую
-                            .mt15
-                                p.font_size22.ff_trajan
-                                    | Если перед покупкой нового жилья вам необходимо продать предыдущую квартиру, мы справимся с этим.
-                        //- .apartment-screen__desc
-                            .font_size14.fw_medium
-                                | Мы хорошо умеем продавать вторичную недвижимость. 
-                                br
-                                | За последние 5 лет продали
-                            .mt15.color_yelow
-                                span.font_size120 3000
-                                span.font_size22.fw_medium.ff_trajan.font_upper квартир
-                            .mt35
-                                a.fw_medium.link-more(href='#')
-                                    | Узнать о продаже вторичной недвижимости 
-                                    span.icon-arrow.link-more__arrow
-                    .before-after.mt55
-                        .before-after__area.js-before-after
-                            .before-after__preview.before-after__preview_before
-                                img(src='/images/apartment/after_img.jpg', alt='')
-                                img(src='/images/apartment/after_img_m.jpg', alt='')
-                            .before-after__preview.before-after__preview_after.anim.js-after
-                                .before-after__img-wrap
-                                    img.js-after-img(src='/images/apartment/before_img.jpg', alt='')
-                                    img.js-after-img(src='/images/apartment/before_img_m.jpg', alt='')
-                                .before-after__line
-                                    .before-after__mouse
-                            .before-after__title
-                                .font_size22.ff_trajan ЖК «Метрополь»
-                    .apartment-screen__bottom.mt50
+               .main
+                  img.apartment-screen__dots(src='/images/apartment/dots.png', alt='')
+                  .apartment-screen__top
+                     .apartment-screen__headline
+                        h2.font_size44 Поменяем вашу квартиру на новую
+                        .mt15
+                           p.font_size22.ff_trajan
+                              | Если перед покупкой нового жилья вам необходимо продать предыдущую квартиру, мы справимся с этим.
+                     .apartment-screen__desc
                         .desc
-                            img.desc__icon(src='/images/icons/ribbon.png', alt='')
-                            p.font_size14.fade05.fw_medium
-                                | По программе 
-                                br
-                                | Трейд-Ин
+                           img.desc__icon(src='/images/icons/ribbon.png', alt='')
+                           p.font_size14.fade05.fw_medium
+                              | По программе 
+                              br
+                              | Трейд-Ин
+                  .before-after.mt55
+                     .before-after__area.js-before-after
+                        .before-after__preview.before-after__preview_before
+                           img(src='/images/apartment/after_img.jpg', alt='')
+                           img(src='/images/apartment/after_img_m.jpg', alt='')
+                        .before-after__preview.before-after__preview_after.anim.js-after
+                           .before-after__img-wrap
+                              img.js-after-img(src='/images/apartment/before_img.jpg', alt='')
+                              img.js-after-img(src='/images/apartment/before_img_m.jpg', alt='')
+                           .before-after__line
+                              .before-after__mouse
             .payments-screen
                 .main
                     .payments-screen__head
@@ -1200,7 +1186,7 @@ block main
                 .experts-screen__row
                     .experts-screen__left
                         .expert-box
-                            .expert-box__top
+                            // - .expert-box__top
                                 .font_size12.fw_medium.fade05
                                     | Лучший менеджер по работе 
                                     br
@@ -1214,9 +1200,9 @@ block main
                                     | Александра
                                 .mt15
                                     .font_size14.fw_medium
-                                        | Менеджер по работе 
+                                        | Руководитель отдела 
                                         br
-                                        | с клиентами
+                                        | продаж
                             .expert-box__foto
                                 img(src='/images/experts/woman.png', alt='')
                     .experts-screen__right

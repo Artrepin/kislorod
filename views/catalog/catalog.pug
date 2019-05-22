@@ -245,14 +245,14 @@ block main
                                                         .object-popup__close.icon-close
                                                         .object-popup__row
                                                             .object-popup__left
-                                                                a.object-popup__img-big.fancybox(href='/images/catalog/object.jpg', :rel="'object_0_' + apartament.iApartamentID")
+                                                                .object-popup__img-big
                                                                     img(:src="'/images/building/plan/' + plan.plan_images[0].sPlanImage", alt='')
                                                                 .object-popup__gallery.mt20(v-if="plan.plan_images.length > 1")
-                                                                    a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', :rel="'object_' + index + '_' + apartament.iApartamentID" v-for="(image, index3) in plan.plan_images")
+                                                                    a.object-popup__gallery-item
                                                                         img(:src="'/images/building/plan/' + image.sPlanImage", alt='')
-                                                                    //- a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
+                                                                    //- a.object-popup__gallery-item
                                                                         img(src='/images/catalog/object.jpg', alt='')
-                                                                    //- a.object-popup__gallery-item.fancybox(href='/images/catalog/object.jpg', rel='object85')
+                                                                    //- a.object-popup__gallery-item
                                                                         img(src='/images/catalog/object.jpg', alt='')
                                                             .object-popup__right
                                                                 .object-popup__title.ff_trajan Запишитесь на просмотр квартиры № {{ apartament.iApartamentNum }}
