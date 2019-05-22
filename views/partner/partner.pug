@@ -103,45 +103,45 @@ block main
 				.mt15
 					p.font_size22.ff_trajan За последний  год мы выросли в обороте в 5 раз
 				.team-results.row
-                    // - .team-results__item.col-sm-4.col-min-6
-                        .team-results__number.color_yelow.ff_trajan
-                           | 2000
-                           span.team-results__number-min год
-                        .mt20.team-results__desc
-                           .font_size22.fw_medium.ff_trajan.fade05 Год основания компании
-                    // - .team-results__item.col-sm-4.col-min-6
-                        .team-results__number.color_yelow.ff_trajan 26
-                        .mt20.team-results__desc
-                           .font_size22.fw_medium.ff_trajan.fade05
-                              | банков
-                              br
-                              | -партнеров
-                    // - .team-results__item.col-sm-4.col-min-6
-                        .team-results__number.color_yelow.ff_trajan 30+
-                        .mt20.team-results__desc
-                           .font_size22.fw_medium.ff_trajan.fade05
-                              | Сданных
-                              br
-                              | проектов
-                    // - .team-results__item.col-sm-4.col-min-6
-                        .team-results__number.color_yelow.ff_trajan 300+
-                        .mt20.team-results__desc
-                           .font_size22.fw_medium.ff_trajan.fade05 Сотрудников
-                    // - .team-results__item.col-sm-4.col-min-6
-                        .team-results__number.color_yelow.ff_trajan
-                           | 90
-                           span.team-results__number-min
-                              | тыс м
-                              sup 2
-                        .mt20.team-results__desc
-                           .font_size22.fw_medium.ff_trajan.fade05
-                              | Жилой
-                              br
-                              | недвижимости построено
-                    // - .team-results__item.col-sm-4.col-min-6
-                        .team-results__number.color_yelow.ff_trajan 450+
-                        .mt20.team-results__desc
-                           .font_size22.fw_medium.ff_trajan.fade05 Семей живут домах построенных нами
+					//- .team-results__item.col-sm-4.col-min-6
+						.team-results__number.color_yelow.ff_trajan
+							| 2000
+							span.team-results__number-min год
+						.mt20.team-results__desc
+							.font_size22.fw_medium.ff_trajan.fade05 Год основания компании
+					//- .team-results__item.col-sm-4.col-min-6
+						.team-results__number.color_yelow.ff_trajan 26
+						.mt20.team-results__desc
+							.font_size22.fw_medium.ff_trajan.fade05
+								| банков
+								br
+								| -партнеров
+					//- .team-results__item.col-sm-4.col-min-6
+						.team-results__number.color_yelow.ff_trajan 30+
+						.mt20.team-results__desc
+							.font_size22.fw_medium.ff_trajan.fade05
+								| Сданных
+								br
+								| проектов
+					//- .team-results__item.col-sm-4.col-min-6
+						.team-results__number.color_yelow.ff_trajan 300+
+						.mt20.team-results__desc
+							.font_size22.fw_medium.ff_trajan.fade05 Сотрудников
+					//- .team-results__item.col-sm-4.col-min-6
+						.team-results__number.color_yelow.ff_trajan
+							| 90
+							span.team-results__number-min
+								| тыс м
+								sup 2
+						.mt20.team-results__desc
+							.font_size22.fw_medium.ff_trajan.fade05
+								| Жилой
+								br
+								| недвижимости построено
+					//- .team-results__item.col-sm-4.col-min-6
+						.team-results__number.color_yelow.ff_trajan 450+
+						.mt20.team-results__desc
+							.font_size22.fw_medium.ff_trajan.fade05 Семей живут домах построенных нами
 				.team-screen__bottom
 					img.team-screen__bottom-dots(src='/images/about/dots_team.png', alt='')
 					.row
@@ -310,78 +310,78 @@ block main
 											| все ваши задачи. Вам остается только продавать
 
 		.result-screen
-           .main
-              .row
-                 .col-sm-7
-                    h2.font_size44 Получайте от 10% комиссии с продажи недвижимости
-                 .col-sm-5
-                    .mt10.result-screen__desc
-                       img(src='/images/icons/ribbon_gold.png', alt='')
-                       .mt25
-                          .font_size22.ff_trajan
-                             | Посмотрите, сколько вы 
-                             br
-                             | сможете заработать работая 
-                             br
-                             | с агентством «Кислород»
-                 .col-sm-7
-                    .result-box
-                       .result-box__animate
-                          .result-box__circle.result-box__circle_yelow
-                          .result-box__circle.result-box__circle_blue
-                          .result-box__circle.result-box__circle_black
-                       .result-box__content.table
-                          .table__cell
-                             .font_size14.fw_medium
-                                | При текущих показателях 
-                                br
-                                | ваш доход составит:
-                             .color_yelow.mt15.ff_trajan
-                                span.font_size44
-                                   span.js-result-profit 250 000
-                                   |  ₽
-                                span.font_size22 /мес
-                             .result-box__line.mt25
-                             .mt30
-                                .font_size12.fw_medium.fade05
-                                   | Данные расчеты не учитывают доход 
-                                   br
-                                   | от продажи дополнительных услуг
-                 .col-sm-5
-                    form.result-form.form-box.form-box_white.mt50(action='#')
-                       .js-slider-wrapper
-                          label.ff_trajan.font_size18(for='price') Средняя комиссия, Р :
-                          .input-box.mt10
-                             input.result-form__mask.catalog-filter__input.input-text.input-text_border.js-slider-mask(type='number', value='')
-                             input#price.catalog-filter__input.input-text.input-text_fill.js-slider-options(type='text', value='100000', data-value='100000', data-min='50000', data-max='1000000', data-step='1000', data-meas='', disabled='')
-                             .result-form__slider.js-slider-result
-                          .catalog-filter__line.mt10
-                             .font_size14.fade05
-                                span.js-slider-min 50 000
-                             .font_size14.fade05
-                                span.js-slider-max 1 000 000
-                       .js-slider-wrapper.mt40
-                          label.ff_trajan.font_size18 Клиентов в месяц:
-                          .input-box.mt10
-                             input.result-form__mask.catalog-filter__input.input-text.input-text_border.js-slider-mask(type='number', value='')
-                             input#customers.catalog-filter__input.input-text.input-text_fill.js-slider-options(type='text', value='2', data-value='2', data-min='0', data-max='10', data-step='1', data-meas='', disabled='')
-                             .result-form__slider.js-slider-result
-                          .catalog-filter__line.mt10
-                             .font_size14.fade05
-                                span.js-slider-min 0
-                             .font_size14.fade05
-                                span.js-slider-max 10
-                       .js-slider-wrapper.mt40
-                          label.ff_trajan.font_size18 Конверсия в сделку, % 
-                          .input-box.mt10
-                             input.result-form__mask.catalog-filter__input.input-text.input-text_border.js-slider-mask(type='number', value='')
-                             input#conversion.catalog-filter__input.input-text.input-text_fill.js-slider-options(type='text', value='25', data-value='25', data-min='0', data-max='100', data-step='1', data-meas='', disabled='')
-                             .result-form__slider.js-slider-result
-                          .catalog-filter__line.mt10
-                             .font_size14.fade05
-                                span.js-slider-min 0
-                             .font_size14.fade05
-                                span.js-slider-max 100
+			.main
+				.row
+					.col-sm-7
+						h2.font_size44 Получайте от 10% комиссии с продажи недвижимости
+					.col-sm-5
+						.mt10.result-screen__desc
+							img(src='/images/icons/ribbon_gold.png', alt='')
+							.mt25
+								.font_size22.ff_trajan
+									| Посмотрите, сколько вы 
+									br
+									| сможете заработать работая 
+									br
+									| с агентством «Кислород»
+					.col-sm-7
+						.result-box
+							.result-box__animate
+								.result-box__circle.result-box__circle_yelow
+								.result-box__circle.result-box__circle_blue
+								.result-box__circle.result-box__circle_black
+							.result-box__content.table
+							.table__cell
+								.font_size14.fw_medium
+									| При текущих показателях 
+									br
+									| ваш доход составит:
+								.color_yelow.mt15.ff_trajan
+									span.font_size44
+										span.js-result-profit 250 000
+										|  ₽
+									span.font_size22 /мес
+								.result-box__line.mt25
+								.mt30
+									.font_size12.fw_medium.fade05
+										| Данные расчеты не учитывают доход 
+										br
+										| от продажи дополнительных услуг
+					.col-sm-5
+						form.result-form.form-box.form-box_white.mt50(action='#')
+							.js-slider-wrapper
+								label.ff_trajan.font_size18(for='price') Средняя комиссия, Р :
+								.input-box.mt10
+									input.result-form__mask.catalog-filter__input.input-text.input-text_border.js-slider-mask(type='number', value='')
+									input#price.catalog-filter__input.input-text.input-text_fill.js-slider-options(type='text', value='100000', data-value='100000', data-min='50000', data-max='1000000', data-step='1000', data-meas='', disabled='')
+									.result-form__slider.js-slider-result
+								.catalog-filter__line.mt10
+									.font_size14.fade05
+										span.js-slider-min 50 000
+									.font_size14.fade05
+										span.js-slider-max 1 000 000
+							.js-slider-wrapper.mt40
+								label.ff_trajan.font_size18 Клиентов в месяц:
+								.input-box.mt10
+									input.result-form__mask.catalog-filter__input.input-text.input-text_border.js-slider-mask(type='number', value='')
+									input#customers.catalog-filter__input.input-text.input-text_fill.js-slider-options(type='text', value='2', data-value='2', data-min='0', data-max='10', data-step='1', data-meas='', disabled='')
+									.result-form__slider.js-slider-result
+								.catalog-filter__line.mt10
+									.font_size14.fade05
+										span.js-slider-min 0
+									.font_size14.fade05
+										span.js-slider-max 10
+							.js-slider-wrapper.mt40
+								label.ff_trajan.font_size18 Конверсия в сделку, % 
+								.input-box.mt10
+									input.result-form__mask.catalog-filter__input.input-text.input-text_border.js-slider-mask(type='number', value='')
+									input#conversion.catalog-filter__input.input-text.input-text_fill.js-slider-options(type='text', value='25', data-value='25', data-min='0', data-max='100', data-step='1', data-meas='', disabled='')
+									.result-form__slider.js-slider-result
+								.catalog-filter__line.mt10
+									.font_size14.fade05
+										span.js-slider-min 0
+									.font_size14.fade05
+										span.js-slider-max 100
 		.options-screen(style="padding-bottom: 0;")
 			.main
 				img.options-screen__dots(src='/images/catalog/offer__dots.svg', alt='')
