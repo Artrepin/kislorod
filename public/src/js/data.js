@@ -498,7 +498,17 @@ $(document).ready(function(){
          }
         return false;
 
-    })
+    });
+    
+    $(document).on("click", ".object-popup__gallery-item", function () {
+
+        var img_src = $(this).find("img").attr("src");
+        
+        $(".object-popup__img-big img").attr("src",img_src);
+        
+        return false;
+
+    });
     
     $(document).on("submit", ".js-kredit-step", function () {
         next_step()
