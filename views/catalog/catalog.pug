@@ -100,7 +100,7 @@ block main
                             .cases-slider__slide
                                 //- #map-object.cases-map(style="background:url('/images/map.png'); background-size: cover;")
                                 #map-object.cases-map
-                .catalog-tabs
+                .catalog-tabs(v-if="useBuilding >= 0 && buildings[useBuilding]")
                     a.catalog-tabs__item.catalog-tabs__item_active(href='#', onclick="return false") Общая информация
                     a.catalog-tabs__item(href='#', onclick="return false") Квартиры
                     a.catalog-tabs__item(href='#', onclick="return false") Ипотека
