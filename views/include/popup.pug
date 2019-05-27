@@ -205,7 +205,7 @@
                   | Выберите банки-партнеры, 
                   br
                   | к которым  необходимо отправить заявку на ипотеку
-              form.kredit-step__form.ajax-form.row(action='#', method='post', data-parsley-validate='', enctype='multipart/form-data')
+              form.kredit-step__form.ajax-form.row(action='/send', method='post', data-parsley-validate='', enctype='multipart/form-data')
                 .col-min-12
                   .bank-list
                     label.bank-list__item
@@ -225,7 +225,7 @@
                       img.bank-list__logo(src='/images/catalog/nvidia.png', alt='')
                   a.fw_medium.bank-list__all.mt15.js-all-banks(href='#') Отправить заявку во все банки-партнеры
                 .col-min-12
-                  <div class="g-recaptcha" data-sitekey= #{env.RECAPTCHA_PUBLIC} data-theme="dark" data-callback="RecaptchaSuccess"></div>
+                  <div class="g-recaptcha" data-sitekey= #{env.RECAPTCHA_PUBLIC} data-theme="dark" data-callback="RecaptchaSuccess"></div> 
                 .col-min-6
                   .button-building.mt60
                     button.button.button_big.button_blue.button_blue2.gcaptcha(type='submit', name='send', disabled)

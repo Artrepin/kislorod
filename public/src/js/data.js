@@ -49,11 +49,29 @@ function maskForInput () {
 }
 
 function validateAndSendForm () {
-    $(".ajax-form").ajaxForm({
+    $(".ajax-form").not(".js-kredit-step").not(".popup__kredit *").ajaxForm({
         success: function(){
             thanck();
         }
-    })
+		})
+	$(".popup__kredit .ajax-form").not(".js-kredit-step").on('submit', e => {
+
+		e.preventDefault()
+		e.stopPropagation()
+
+		$.ajax({
+			type: "POST",
+			url:"/send",
+			data:	$(".popup__kredit .ajax-form").serialize(),
+			success: function(){
+					thanck();
+			}
+
+		})
+
+
+	})
+
 }
 
 $(document).ready(function(){
@@ -511,7 +529,9 @@ $(document).ready(function(){
 
     });
     
-    $(document).on("submit", ".js-kredit-step", function () {
+    $(document).on("submit", ".js-kredit-step", function (e) {
+				e.preventDefault()
+			  e.stopPropagation()
         next_step()
         return false
     })
