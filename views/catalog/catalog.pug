@@ -143,6 +143,86 @@ block main
                                         .font_size14.fw_medium {{ advantage.sAdvantageTitle }}
 
                     .tabs-slider__slide
+                        .object-slide
+                            .object-slide__row
+                                .object-slide__title
+                                    //- .font_size44.ff_trajan {{ buildings[useBuilding].apartmentCount }} {{ buildings[useBuilding].apartmentCountString }} и {{ buildings[useBuilding].plansCount }} {{ buildings[useBuilding].plansCountString }} в {{ buildings[useBuilding].sBuildingTitle }}
+                                    .font_size44.ff_trajan Квартиры и планировки в {{ buildings[useBuilding].sBuildingTitle }}
+                                .object-slide__desc.mt10
+                                    .desc
+                                        img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
+                                        p.font_size14.fw_medium
+                                            | Посмотрите планировки 
+                                            br
+                                            | и цены на квартиры и пентхаусы
+                            .object-container.mt40
+                                .object-container__left
+                                    .object-category.ff_trajan
+                                        a.object-category__item(
+                                            href='#'
+                                            v-for="(plan, index) in buildings[useBuilding].plans"
+                                            v-bind:class="{ 'object-category__item_active': index == 0 }") {{ plan.sPlanName }}
+                                        //- object-category__item_active
+                                        //- a.object-category__item(href='#') Квартиры с одной спальней
+                                        //- a.object-category__item(href='#') Квартиры с двумя спальнями
+                                        //- a.object-category__item(href='#') Пентхаусы
+                                .object-container__right
+                                    .object-slider
+                                        .object-slider__slide(v-for="(plan, index) in buildings[useBuilding].plans")
+                                            .object-list.row
+                                                .object-list__item.col-sm-4.col-min-6(v-for="(apartament, index2) in plan.apartaments")
+                                                    .object-list__preview.js-object-show
+                                                        .object-list__thumb
+                                                            img(:src="'/images/building/plan/' + plan.plan_images[0].sPlanImage", alt='')
+                                                            .object-list__zoom.browse-button
+                                                                .icon-search
+                                                        .object-list__options.mt20
+                                                            .object-list__option
+                                                                | Квартира 
+                                                                br
+                                                                | № {{ apartament.iApartamentNum }}
+                                                            .object-list__option
+                                                                | Площадь: 
+                                                                br
+                                                                | {{ plan.fPlanArea }} м
+                                                                sup 2
+                                                        .object-list__price.color_yelow.ff_trajan {{ apartament.iApartamentPrice }} ₽
+                                                    .object-popup
+                                                        .object-popup__close.icon-close
+                                                        .object-popup__row
+                                                            .object-popup__left
+                                                                .object-popup__img-big
+                                                                    img(:src="'/images/building/plan/' + plan.plan_images[0].sPlanImage", alt='')
+                                                                .object-popup__gallery.mt20(v-if="plan.plan_images.length > 1")
+                                                                    a.object-popup__gallery-item
+                                                                        img(:src="'/images/building/plan/' + plan.plan_images[0].sPlanImage", alt='')
+                                                                    //- a.object-popup__gallery-item
+                                                                        img(src='/images/catalog/object.jpg', alt='')
+                                                                    //- a.object-popup__gallery-item
+                                                                        img(src='/images/catalog/object.jpg', alt='')
+                                                            .object-popup__right
+                                                                .object-popup__title.ff_trajan Запишитесь на просмотр квартиры № {{ apartament.iApartamentNum }}
+                                                                .mt10
+                                                                    .font_size14.fw_medium Площадь: {{ plan.fPlanArea }} кв.м
+                                                                .object-popup__price.color_yelow.ff_trajan {{ apartament.iApartamentPrice }} ₽
+                                                                form.ajax-form(action='/send', method='post', data-parsley-validate='', enctype='multipart/form-data')
+                                                                    input(type='hidden', name='subj', value='Записаться на просмотр квартиры № 84')
+                                                                    .input-box
+                                                                        input.input-text.input-text_fill(type='tel', name='phone', required='', data-parsley-errors-messages-disabled='', placeholder='+7 (___) ___-__-__')
+                                                                        label.input-box__icon.icon-telephone
+                                                                    button.button.button_big.button_blue.button_blue2.mt30(type='submit', name='call')
+                                                                        | Записаться на просмотр
+                                                                        span.button__arrow.icon-arrow
+                                                                    .polity-box.mt20
+                                                                        .polity-box__dot
+                                                                        .font_size12.fw_medium.fade05
+                                                                            | Вы соглашаетесь с условиями 
+                                                                            br
+                                                                            | обработки персональных данных 
+                                                                            br
+                                                                            | ознакомиться
+                     
+                    .tabs-slider__slide
                         .object-slide__row.mt45
                             .object-slide__title
                                 .font_size44.ff_trajan Рассчитайте ежемесячный платеж и вероятность 
