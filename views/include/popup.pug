@@ -209,21 +209,24 @@
                 .col-min-12
                   .bank-list
                     label.bank-list__item
-                      input.bank-list__input(type='checkbox')
-                      img.bank-list__logo(src='/images/vtb.jpg', alt='')
+                        input.bank-list__input(type='checkbox')
+                        img.bank-list__logo(src='/images/vtb.png', alt='')
                     label.bank-list__item
-                      input.bank-list__input(type='checkbox')
-                      img.bank-list__logo(src='/images/sberbank.png', alt='')
+                        input.bank-list__input(type='checkbox')
+                        img.bank-list__logo(src='/images/sber.png', alt='')
                     label.bank-list__item
-                      input.bank-list__input(type='checkbox')
-                      img.bank-list__logo(src='/images/raifaizen.jpg', alt='')
+                        input.bank-list__input(type='checkbox')
+                        img.bank-list__logo(src='/images/Raiffeisen_Bank.png', alt='')
                     label.bank-list__item
-                      input.bank-list__input(type='checkbox')
-                      img.bank-list__logo(src='/images/tinkoff-bank-general-logo-6.png', alt='')
+                        input.bank-list__input(type='checkbox')
+                        img.bank-list__logo(src='/images/tinkoff.png', alt='')
                     label.bank-list__item
-                      input.bank-list__input(type='checkbox')
-                      img.bank-list__logo(src='/images/logo-alfabank.png', alt='')
-                  a.fw_medium.bank-list__all.mt15.js-all-banks(href='#') Отправить заявку во все банки-партнеры
+                        input.bank-list__input(type='checkbox')
+                        img.bank-list__logo(src='/images/logo-alfabank.png', alt='')
+
+
+
+                a.fw_medium.bank-list__all.mt15.js-all-banks(href='#') Отправить заявку во все банки-партнеры
                 .col-min-12
                   <div class="g-recaptcha" data-sitekey= #{env.RECAPTCHA_PUBLIC} data-theme="dark" data-callback="RecaptchaSuccess"></div> 
                 .col-min-6
