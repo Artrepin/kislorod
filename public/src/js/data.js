@@ -436,6 +436,7 @@ $(document).ready(function(){
         });
     }
     
+
     $(document).on("click", ".catalog-tabs__item:not(.catalog-tabs__item_active)", function () {
         
         var tab_index = $(this).index();
@@ -445,11 +446,11 @@ $(document).ready(function(){
         $(".tabs-slider__slide:visible").hide();
         $(".tabs-slider__slide:eq(" + tab_index + ")").fadeIn(500);
         $(".catalog-slider").slick('refresh');
-        $(".catalog-slider .slick-arrow").each(function(){
-            var height_pic = $(".catalog-slider__pic:visible").height();
-            height_pic = height_pic/2;
-            $(this).css("top",height_pic);
-        });
+        // $(".catalog-slider .slick-arrow").each(function(){
+        //     var height_pic = $(".catalog-slider__pic:visible").height();
+        //     height_pic = height_pic/2;
+        //     $(this).css("top",height_pic);
+        // });
         if (tab_index == 2) {
             $('.kredit-box .ajax-form').parsley()
             maskForInput()
