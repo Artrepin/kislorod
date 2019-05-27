@@ -120,9 +120,9 @@ if($("#catalogvue").length) {
                         element.apartmentCountString = this.declOfNum(element.apartmentCount, ['квартира', 'квартиры', 'квартир'])
                         // console.log(apartmentCount)
                     });
-                    // Vue.nextTick(function () {
-                        // vm.use(0)
-                    // })
+                    Vue.nextTick(function () {
+                        vm.use(0)
+                    })
                 })
             },
             use: function (index) {
