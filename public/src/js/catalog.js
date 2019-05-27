@@ -164,7 +164,7 @@ if($("#catalogvue").length) {
 
 $(document).ready( () => {
 
-
+	$(".kredit-step .ajax-form").not(".js-kredit-step").off('submit')
 	$(".kredit-step .ajax-form").not(".js-kredit-step").on('submit', e => {
 
 		e.preventDefault()
