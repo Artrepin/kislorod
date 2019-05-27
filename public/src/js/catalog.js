@@ -165,8 +165,8 @@ if($("#catalogvue").length) {
 $(document).ready( () => {
 
 
-	$(".kredit-step .ajax-form").not(".js-kredit-step").off('submit')
-	$(".kredit-step .ajax-form").not(".js-kredit-step").on('submit', e => {
+	$(".tabs-slider .kredit-step .ajax-form").not(".js-kredit-step").off('submit')
+	$(".tabs-slider .kredit-step .ajax-form").not(".js-kredit-step").on('submit', e => {
 
 		e.preventDefault()
 		e.stopPropagation()
@@ -176,7 +176,7 @@ $(document).ready( () => {
 			url:"/send",
 			data:	$(".kredit-step .ajax-form").serialize(),
 			success: function(){
-        $(".kredit-step_active").removeClass("kredit-step_active").hide().next().fadeIn(500).addClass("kredit-step_active");
+        $(".tabs-slider .kredit-step_active").removeClass("kredit-step_active").hide().next().fadeIn(500).addClass("kredit-step_active");
 			}
 
 		})
