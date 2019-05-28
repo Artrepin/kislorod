@@ -100,12 +100,12 @@ block main
                             .cases-slider__slide
                                 //- #map-object.cases-map(style="background:url('/images/map.png'); background-size: cover;")
                                 #map-object.cases-map
-                .catalog-tabs(v-if="useBuilding >= 0 && buildings[useBuilding]")
+                .catalog-tabs
                     a.catalog-tabs__item.catalog-tabs__item_active(href='#', onclick="return false") Общая информация
                     a.catalog-tabs__item(href='#', onclick="return false") Квартиры
                     a.catalog-tabs__item(href='#', onclick="return false") Ипотека
                     a.catalog-tabs__item(href='#', onclick="return false") Ход строительства
-                .tabs-slider.mt30(v-if="useBuilding >= 0 && buildings[useBuilding]")
+                .tabs-slider.mt30
                     .tabs-slider__slide(v-if="useBuilding >= 0 && buildings[useBuilding]")
                         .catalog-slider
                             .catalog-slider__slide
@@ -142,7 +142,7 @@ block main
                                     li.catalog-slider__bottom-item(v-for="(advantage, index) in buildings[useBuilding].Advantages")
                                         .font_size14.fw_medium {{ advantage.sAdvantageTitle }}
 
-                    .tabs-slider__slide
+                    .tabs-slider__slide(v-if="useBuilding >= 0 && buildings[useBuilding]")
                         .object-slide
                             .object-slide__row
                                 .object-slide__title
