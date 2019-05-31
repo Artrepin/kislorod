@@ -14,6 +14,12 @@ app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }))
 const multer = require('multer')
 const sharp = require('sharp')
 
+var auth = require('http-auth');
+var basic = auth.basic({
+    realm: "Admin",
+    file: __dirname + "/.htpasswd"
+});
+
 const Building = require('./models').Building
 const Advantage = require('./models').Advantage
 const Stage = require('./models').Stage
@@ -334,11 +340,11 @@ app.post('/send', recaptcha.middleware.verify, (req, res) => {
 
 
 
-app.get('/admin', (req, res) => {
+app.get('/admin', auth.connect(basic), (req, res) => {
     res.render('admin', data)
 })
 
-app.post('/admin/BuildingList', async (req, res) => {
+app.post('/admin/BuildingList', auth.connect(basic), async (req, res) => {
     res.json({
         buildings: await Building.paginate({
             page: (req.body.p) ? req.body.p : 1,
@@ -346,13 +352,13 @@ app.post('/admin/BuildingList', async (req, res) => {
         })
     })
 })
-app.post('/admin/BuildingEdit', async (req, res) => {
+app.post('/admin/BuildingEdit', auth.connect(basic), async (req, res) => {
     res.json({
         building: await Building.getBuildingItem(req.body.iBuildingID),
         type: await Type.findAll()
     })
 })
-app.post('/admin/BuildingUpdate', async (req, res) => {
+app.post('/admin/BuildingUpdate', auth.connect(basic), async (req, res) => {
     var iBuildingID = (req.body.building.iBuildingID) ? req.body.building.iBuildingID : false
 
     if (iBuildingID) {
@@ -534,7 +540,7 @@ app.post('/admin/BuildingUpdate', async (req, res) => {
 
     res.json(await Building.getBuildingItem(iBuildingID))
 })
-app.post('/admin/BuildingRemove', async (req, res) => {
+app.post('/admin/BuildingRemove', auth.connect(basic), async (req, res) => {
     Building.destroy({
         where: {
             iBuildingID: req.body.building.iBuildingID,
@@ -543,7 +549,7 @@ app.post('/admin/BuildingRemove', async (req, res) => {
         res.json(response)
     })    
 })
-app.post('/admin/BuildingUploadAvatar', async (req, res) => {
+app.post('/admin/BuildingUploadAvatar', auth.connect(basic), async (req, res) => {
     var filename = randomString() + '.jpg'
     
     var storage = multer.diskStorage({
@@ -580,7 +586,7 @@ app.post('/admin/BuildingUploadAvatar', async (req, res) => {
         })
     })
 })
-app.post('/admin/BuildingUploadStage', async (req, res) => {
+app.post('/admin/BuildingUploadStage', auth.connect(basic), async (req, res) => {
     var filename = randomString() + '.jpg'
 
     var storage = multer.diskStorage({
@@ -604,7 +610,7 @@ app.post('/admin/BuildingUploadStage', async (req, res) => {
     })
 })
 
-app.post('/admin/BuildingEditPlan', async (req, res) => {
+app.post('/admin/BuildingEditPlan', auth.connect(basic), async (req, res) => {
     var data = {}
         data.building = await Building.getBuildingItem(req.body.iBuildingID)
         data.plan = await Plan.findAll(
@@ -618,7 +624,7 @@ app.post('/admin/BuildingEditPlan', async (req, res) => {
         data.type = await Type.findAll()
     res.json(data)
 })
-app.post('/admin/BuildingUploadPlan', async (req, res) => {
+app.post('/admin/BuildingUploadPlan', auth.connect(basic), async (req, res) => {
     var storage = multer.diskStorage({
         destination: function (req, file, cb) {
             cb(null, './public/images/building/plan')
@@ -632,7 +638,7 @@ app.post('/admin/BuildingUploadPlan', async (req, res) => {
         res.send({ file: req.file, body: req.body })
     })
 })
-app.post('/admin/BuildingUpdatePlan', async (req, res) => {
+app.post('/admin/BuildingUpdatePlan', auth.connect(basic), async (req, res) => {
 
     var iPlanID = (req.body.plan.iPlanID) ? req.body.plan.iPlanID : false
 
@@ -698,7 +704,7 @@ app.post('/admin/BuildingUpdatePlan', async (req, res) => {
 
     res.json(data)
 })
-app.post('/admin/BuildingDelPlan', (req, res) => {
+app.post('/admin/BuildingDelPlan', auth.connect(basic), (req, res) => {
     Plan.destroy({
         where: {
             iPlanID: req.body.iPlanID,
@@ -708,7 +714,7 @@ app.post('/admin/BuildingDelPlan', (req, res) => {
     })    
 })
 
-app.post('/admin/BuildingEditApartament', async (req, res) => {
+app.post('/admin/BuildingEditApartament', auth.connect(basic), async (req, res) => {
     var data = {}
         data.building = await Building.getBuildingItem(req.body.iBuildingID)
         data.apartament = await Apartament.findAll({
@@ -724,7 +730,7 @@ app.post('/admin/BuildingEditApartament', async (req, res) => {
         })
     res.json(data)
 })
-app.post('/admin/BuildingUpdateApartament', async (req, res) => {
+app.post('/admin/BuildingUpdateApartament', auth.connect(basic), async (req, res) => {
     var iApartamentID = (req.body.apartament.iApartamentID) ? req.body.apartament.iApartamentID : false
 
     if (iApartamentID) {
@@ -754,7 +760,7 @@ app.post('/admin/BuildingUpdateApartament', async (req, res) => {
     })
     res.json(apartament)
 })
-app.post('/admin/BuildingDelApartament', async (req, res) => {
+app.post('/admin/BuildingDelApartament', auth.connect(basic), async (req, res) => {
     // var iApartamentID = (req.body.apartament.iApartamentID) ? req.body.apartament.iApartamentID : false
     Apartament.destroy({
         where: {
@@ -765,7 +771,7 @@ app.post('/admin/BuildingDelApartament', async (req, res) => {
     })    
 })
 
-app.post('/admin/PeopleList', async (req, res) => {
+app.post('/admin/PeopleList', auth.connect(basic), async (req, res) => {
     var data = {}
         data.people = await People.findAll({
             include: [Department]
@@ -773,7 +779,7 @@ app.post('/admin/PeopleList', async (req, res) => {
         data.department = await Department.findAll()
     res.json(data)
 })
-app.post('/admin/PeopleUpdate', async (req, res) => {
+app.post('/admin/PeopleUpdate', auth.connect(basic), async (req, res) => {
     var data = {}
     var iPeopleID = (req.body.people.iPeopleID) ? req.body.people.iPeopleID : false
     if (iPeopleID) {
@@ -805,7 +811,7 @@ app.post('/admin/PeopleUpdate', async (req, res) => {
 
     res.json(data)
 })
-app.post('/admin/PeopleUpload', async (req, res) => {
+app.post('/admin/PeopleUpload', auth.connect(basic), async (req, res) => {
     var filename = randomString() + '.jpg'
 
     var storage = multer.diskStorage({
@@ -829,7 +835,7 @@ app.post('/admin/PeopleUpload', async (req, res) => {
         // res.send({ file: req.file, body: req.body })
     })
 })
-app.post('/admin/PeopleDelete', async (req, res) => {
+app.post('/admin/PeopleDelete', auth.connect(basic), async (req, res) => {
     People.destroy({
         where: {
             iPeopleID: req.body.iPeopleID
