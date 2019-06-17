@@ -2,7 +2,9 @@ export default {
     name: 'App',
     props: ['menu'],
     methods: {
-
+        test: function () {
+            
+        }
     },
     template: `
         <div class="app">

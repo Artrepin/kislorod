@@ -164,6 +164,7 @@ if($("#catalogvue").length) {
 
 $(document).ready( () => {
 
+    console.log('test')
 
 	function x(){
 		$(".tabs-slider .kredit-step .ajax-form").not(".js-kredit-step").off('submit')
