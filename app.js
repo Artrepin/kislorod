@@ -30,7 +30,7 @@ const Apartament = require('./models').apartament
 const People = require('./models').people
 const Department = require('./models').department
 
-var Recaptcha = require('express-recaptcha').Recaptcha;
+var Recaptcha = require('express-recaptcha').RecaptchaV3;
 var options = {
     theme: 'light',
     callback: 'RecaptchaSuccess',
