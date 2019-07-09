@@ -13,6 +13,8 @@ app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }))
 // const amocrm = require('./modules/amocrm')
 const multer = require('multer')
 const sharp = require('sharp')
+const moment = require('moment')
+moment.suppressDeprecationWarnings = true
 
 var auth = require('http-auth');
 var basic = auth.basic({
@@ -29,6 +31,9 @@ const plan_image = require('./models').plan_image
 const Apartament = require('./models').apartament
 const People = require('./models').people
 const Department = require('./models').department
+const Category = require('./models').Category
+const BuildingCategory = require('./models').BuildingCategory
+const Content = require('./models').Content
 
 var Recaptcha = require('express-recaptcha').Recaptcha;
 var options = {
@@ -79,13 +84,18 @@ app.use('/feather-icons', express.static(__dirname + '/node_modules/feather-icon
 
 const data = {}
 
-app.get('/', recaptcha.middleware.render, (req, res) => {
+app.get('/', recaptcha.middleware.render, async (req, res) => {
     data.title = "Центр недвижимости «Кислород»"
     data.description = "Агентство элитной недвижимости в городе Сочи"
     data.current_month = month_rus[new Date().getMonth()][0]
     data.current_year = new Date().getFullYear()
     data.buildings = []
     data.captcha = res.recaptcha
+		data.content = []
+		let content = await Content.findAll()
+		content.forEach(elem => {
+			data.content[elem.sContentKey] = elem.sContentValue
+		})
     res.render('welcome/welcome', data)
 })
 
@@ -117,6 +127,8 @@ app.post('/catalog/init', async (req, res) => {
                 min: Math.floor(await Plan.min('iRoomCount')),
                 max: Math.ceil(await Plan.max('iRoomCount'))
             },
+						type: await Building.aggregate('sBuildingType','DISTINCT',{plain: false}).map(item => item.DISTINCT),
+						category: await Category.findAll(),
             year: [
                 {
                     title: 'Не важно',
@@ -344,6 +356,23 @@ app.get('/admin', auth.connect(basic), (req, res) => {
     res.render('admin', data)
 })
 
+app.post('/admin/ContentGet', auth.connect(basic), async (req, res) => {
+	let cont = await Content.findAll()
+
+	res.json({
+		contents: cont
+	})
+})
+app.post('/admin/ContentEdit', auth.connect(basic), async (req, res) => {
+	console.log(req)
+	req.body.contents.forEach(elem => {
+		Content.update(elem,{
+			where:{
+				iContentId: elem.iContentId
+			}
+		})
+	})
+})
 app.post('/admin/BuildingList', auth.connect(basic), async (req, res) => {
     res.json({
         buildings: await Building.paginate({
@@ -353,10 +382,42 @@ app.post('/admin/BuildingList', auth.connect(basic), async (req, res) => {
     })
 })
 app.post('/admin/BuildingEdit', auth.connect(basic), async (req, res) => {
+		let building = await Building.getBuildingItem(req.body.iBuildingID)
+		building.people = await People.findAll()
+		console.log(building)
     res.json({
-        building: await Building.getBuildingItem(req.body.iBuildingID),
+        building: building,
+				people: await People.findAll(),
         type: await Type.findAll()
     })
+})
+
+app.post('/admin/CategoryList', auth.connect(basic),async (req, res) => {
+	let categories = await Category.findAll();
+	res.json({
+		categories: categories,
+	})
+
+})
+
+app.post('/admin/CategoryUpdate', auth.connect(basic), async (req, res) => {
+
+    var iCategoryID = (req.body.category.iCategoryID) ? req.body.category.iCategoryID : false
+		if(iCategoryID) {
+			await Category.update(req.body.category,{
+				where: {
+					iCategoryID: iCategoryID
+				}
+			})
+		}else{
+			await Category.create(req.body.category).then((response) => {
+				iCategoryID = response.iCategoryID
+			})
+		}
+		let categories = await Category.findAll();
+		res.json({
+			categories: categories,
+		})
 })
 app.post('/admin/BuildingUpdate', auth.connect(basic), async (req, res) => {
     var iBuildingID = (req.body.building.iBuildingID) ? req.body.building.iBuildingID : false
@@ -368,11 +429,25 @@ app.post('/admin/BuildingUpdate', auth.connect(basic), async (req, res) => {
             }
         })
     } else {
+				req.body.building.dBuildingDateAdded = moment().format('yyyy-mm-ddThh:mm:ss');
+				req.body.building.iBuildingViews = 0;
         await Building.create(req.body.building).then((response) => {
             iBuildingID = response.iBuildingID
         })
     }
 
+		await BuildingCategory.destroy({
+			where: {
+				iBuildingID: iBuildingID
+			}
+		})
+		req.body.building.categories.forEach( async (category) => {
+			let BC = {
+				iBuildingID:iBuildingID,
+				iCategoryID:category.iCategoryID
+			}
+			await	BuildingCategory.create(BC)
+		})
 
     const advantageUpdate = async () => {
         if (req.body.building.Advantages) {

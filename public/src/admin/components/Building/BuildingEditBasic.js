@@ -2,20 +2,35 @@ export default {
     name: 'BuildingEditBasic',
     created: function () {
         Vue.set(this.$parent, 'menuActive', 0)
+				this.get()
     },
     components: {
         'picture-input': PictureInput,
         'datepicker': vuejsDatepicker,
     },
     props: [
-        'building'
+        'building',
     ],
     data: function () {
         return {
+					categories: []
 
         }
     },
     methods: {
+				get: function(){
+					axios.post('/admin/CategoryList', {})
+					.then( (response) => {
+							this.categories = response.data.categories
+							for(let i =0; i< this.categories.length;i++){
+								for(let j = 0; j < this.building.categories.length; j++){
+									if( this.categories[i].iCategoryID == this.building.categories[j].iCategoryID){
+									}
+								}
+							}
+						console.log(this.categories)
+					})
+				},
         advantageAdd: function () {
             this.building.Advantages.push({})
         },
@@ -54,9 +69,41 @@ export default {
                                     <input type="text" class="form-control" v-model="building.sBuildingTitle">
                                 </div>
                                 <div class="form-group">
+                                    <label for="">Этажность</label>
+                                    <input type="text" class="form-control" v-model="building.fBuildingFloors">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">До моря</label>
+                                    <input type="text" class="form-control" v-model="building.fBuildingDistance">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Статус дома</label>
+                                    <input type="text" class="form-control" v-model="building.sBuildingStatus">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Микрорайон</label>
+                                    <input type="text" class="form-control" v-model="building.sBuildingDistrict">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Тип дома</label>
+                                    <input type="text" class="form-control" v-model="building.sBuildingType">
+                                </div>
+                                <div class="form-group">
                                     <label for="">Краткое описание объекта</label>
                                     <textarea class="form-control" rows="3" v-model="building.sBuildingDescription"></textarea>
                                 </div>
+																<div class="form-group">
+																		<label for="">Категории</label>
+
+																		<v-select label="sCategoryName" multiple v-model="building.categories" :options="categories"/>
+																</div>
+                                <div class="form-group">
+                                    <label for="">Консультант</label>
+																		<select class="form-control" v-model="building.iPeopleID">
+																			<option v-for="(people, index) in building.people" v-bind:value="people.iPeopleID">{{people.sPeopleName}} {{people.sPeopleLastname}}</option>
+																		</select>
+                                </div>
+
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group">
