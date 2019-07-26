@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true
     },
     sCategoryName: DataTypes.STRING,
+    sCategoryImage: DataTypes.STRING,
 		iCategorySort: DataTypes.INTEGER
   }, {
     timestamps: false,

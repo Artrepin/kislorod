@@ -10,13 +10,30 @@ export default{
 				current: false
 			}
 		},
+    components: {
+        'picture-input': PictureInput,
+        'datepicker': vuejsDatepicker,
+    },
 		methods: {
 			get: function(){
 					axios.post('/admin/CategoryList', {})
 					.then( (response) => {
-							this.categories = response.data.categories
+							Vue.set(this,"categories" , response.data.categories)
 					})
 			},
+      uploadAvatar: function (column) {
+          var formData = new FormData();
+              formData.append(column, this.$refs[column].file);
+          axios.post('/admin/CategoryUploadImage', formData, {
+              headers: {
+                  'Content-Type': 'multipart/form-data',
+                  'column': column,
+                  'id': this.categories[this.current].iCategoryID
+              }
+          }).then( (response) => {
+              Vue.set(this.categories[this.current], column, response.data.file.filename)
+          })
+      },
 			openModal: function () {
 					$('#modalCategoryEdit').modal()
 			},
@@ -42,14 +59,13 @@ export default{
 					$('#modalCategoryEdit').modal('hide')
 			},
 			update: function () {
-					console.log(this.categories)
-					console.log(this.current)
 					axios.post('/admin/CategoryUpdate', {
 							category: this.categories[this.current]
 					})
 					.then( (response) => {
 							Vue.set(this.categories, response.data.categories)
 							Vue.set(this, 'current', false)
+              this.get()
 							$('#modalCategoryEdit').modal('hide')
 					})
 			},
@@ -79,8 +95,27 @@ export default{
                                             <label for="">Порядок сортировки</label>
                                             <input type="text" class="form-control" v-model="categories[current].iCategorySort">
                                         </div>
+
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label>Изображение категории </label>
+                                    <picture-input
+                                        ref="sCategoryImage"
+                                        @change="uploadAvatar('sCategoryImage')"
+                                        width="1170"
+                                        height="450"
+                                        margin="0"
+                                        radius="0"
+                                        accept="image/jpeg,image/png"
+                                        size="50"
+                                        v-bind:prefill="Object.keys(categories[current]).length !== 0 && categories[current].sCategoryImage != null ? '/images/categories/'+categories[current].sCategoryImage : ''"
+                                        buttonClass="btn btn-primary btn-sm"
+                                        :hideChangeButton='true'
+                                        :customStrings="{
+                                            drag: 'Перетащите изображение<br>или<br>нажмите для выбора файла<br>(260px / 175px)'
+                                        }"></picture-input>
+                                  </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-primary" v-on:click.prevent="update">Сохранить</button>
@@ -96,7 +131,7 @@ export default{
                     <template v-for="(category, index) in categories">
                         <div class="col-xl-3 col-lg-4" v-if="category.iCategoryID">
                             <div class="card" v-on:click="clickCard(index)">
-                                <div class="card-img-top"></div>
+                                <div class="card-img-top"><img style="max-width:100%" v-bind:src="'/images/categories/'+category.sCategoryImage">  </div>
                                 <div class="card-body text-center">
                                     <h2 class="card-title">
                                         <template v-if="category.sCategoryName">{{ category.sCategoryName }}</template>

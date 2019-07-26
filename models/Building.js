@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true
     },
     sBuildingTitle: DataTypes.STRING,
+    sBuildingClass: DataTypes.STRING,
     sBuildingAvatar: DataTypes.STRING,
     sBuildingCoverSmall: DataTypes.STRING,
     sBuildingCoverBig: DataTypes.STRING,
@@ -74,7 +75,10 @@ module.exports = (sequelize, DataTypes) => {
           include: [
             {
               model: sequelize.models.plan_image
-            }
+            },
+						{
+							model: sequelize.models.apartament
+						}
           ]
         },
         {

@@ -1,0 +1,287 @@
+extends ../layouts/layout.pug
+
+block main
+    #catalogvue.main-wrapper
+        .main-screen.main-screen_catalog.bg_dark-blue.color_white
+            .main
+                include ../include/header.pug
+
+                .catalog
+                    .catalog__center.center
+                        .catalog__head
+                            ul.catalog__breadcrumbs.breadcrumbs
+                                li.breadcrumbs__item
+                                    a.breadcrumbs__link(href='#') Главная
+                                li.breadcrumbs__item Каталог
+                            h1.catalog__title
+                                | каталог 
+                                br
+                                | недвижимости
+                        .catalog__tabs.tabs.js-tabs
+                            .tabs__nav
+                                a.tabs__link.js-tabs-link(href='#',v-for='category in categories')
+                                    span.name {{ category.name }} 
+                                    span.tabs__counter ({{ category.count }})
+                            .tabs__container
+                                .tabs__item.js-tabs-item(style='display: block;',v-for='category in categories')
+                                    form.filters(action="#")
+                                        .filters__container
+                                            .filters__row
+                                                .filters__col
+                                                    .filters__category район города:
+                                                    .filters__field.field
+                                                        .field__wrap
+                                                            select.field__select.wide.nice-select.district
+                                                                option(v-for='district in category.filters.district') {{ district }}
+                                                .filters__col
+                                                    .filters__category Стоимость:
+                                                    .filters__in
+                                                        .filters__wrap
+                                                            span.js-price-start {{ category.filters.price.min }}
+                                                            span.filters__sign -
+                                                            span.js-price-finish {{ category.filters.price.max }}
+                                                            |  Р.
+                                                            .filters__range.js-price-slider
+                                                        .filters__text
+                                                            span.price-min {{ category.filters.price.min }}
+                                                            span.price-max {{ category.filters.price.max }}
+                                                .filters__col
+                                                    .filters__category Площадь:
+                                                    .filters__in
+                                                        .filters__wrap
+                                                            span.js-area-start {{ category.filters.area.min }}
+                                                            span.filters__sign -
+                                                            span.js-area-finish {{ category.filters.area.max }}
+                                                            |  м².
+                                                            .filters__range.js-area-slider
+                                                        .filters__text
+                                                            span.area-min {{ category.filters.area.min }}
+                                                            span.area-max {{ category.filters.area.max }}
+                                                .filters__col
+                                                    .filters__category готовность:
+                                                    .filters__field.field
+                                                        .field__wrap
+                                                            select.field__select.wide.nice-select.ready
+                                                                option(v-for='status in category.filters.status') {{ status }}
+                                                .filters__col
+                                                    .filters__category класс:
+                                                    .filters__field.field
+                                                        .field__wrap
+                                                            select.field__select.wide.nice-select.class
+                                                                option(v-for='bclass in category.filters.class') {{ bclass }}
+                                                .filters__col
+                                                    .filters__category Тип дома:
+                                                    .filters__field.field
+                                                        .field__wrap
+                                                            select.field__select.wide.nice-select.type
+                                                                option(v-for="type in category.filters.type") {{type}}
+                                        .filters__btns
+                                            button.filters__btn.btn.btn_blue(v-on:click.prevent="search")
+                                                span.btn__text Подобрать
+                                                span.btn__icon.icon-arrow.icon-arrow_rotate
+                        .catalog__quality
+                            .catalog__box
+                                .catalog__preview
+                                    img.catalog__pic(src='images/piggy-bank.svg', alt='', width='46')
+                                .catalog__text
+                                    | Никакой комиссии 
+                                    br
+                                    | за услуги
+                            .catalog__box
+                                .catalog__preview
+                                    img.catalog__pic(src='images/handshake.svg', alt='', width='60')
+                                .catalog__text
+                                    | Бесплатное 
+                                    br
+                                    | совпровождение 
+                                    br
+                                    | сделки
+                            .catalog__box
+                                .catalog__preview
+                                    img.catalog__pic(src='images/speech-bubble.svg', alt='', width='61')
+                                .catalog__text
+                                    | Поддержка и бонусы 
+                                    br
+                                    | каждому клиенту
+                            .catalog__box
+                                .catalog__preview
+                                    img.catalog__pic(src='images/office-block.svg', alt='', width='61')
+                                .catalog__text
+                                    | Реализуем ваше 
+                                    br
+                                    | вторичное жилье
+                        .catalog__container(v-if="buildings.length > 0")
+                            .catalog__result
+                                | Найдено 
+                                span.catalog__counter ({{ buildings_total }})
+                            .catalog__list
+                                .prod(v-for="building in buildings")
+                                    a.prod__preview(href='#')
+                                        img.prod__pic(v-bind:src="'images/building/'+  building.sBuildingAvatar", alt='')
+                                        .prod__status(v-id="building.status == 'сдан'" сдан)
+                                    .prod__body
+                                        .prod__head
+                                            .prod__region {{ building.district }}
+                                            .prod__name {{ building.name }}
+                                            button.prod__favorite(v-bind:id="building.id", onclick="toggleFavourite(this)")
+                                        .prod__desc
+                                            .prod__line
+                                                .prod__category площадь (м2):
+                                                .prod__box
+                                                    .prod__text от
+                                                    .prod__value {{ building.min_area }}
+                                                .prod__box
+                                                    .prod__text до
+                                                    .prod__value {{ building.max_area }}
+                                            .prod__line
+                                                .prod__category Цена (млн.руб):
+                                                .prod__box
+                                                    .prod__text от
+                                                    .prod__value {{ building.min_price }}
+                                                .prod__box
+                                                    .prod__text до
+                                                    .prod__value {{ building.max_price }}
+                                        .prod__btns
+                                          a.prod__btn.btn.btn_blue(v-bind:href="'/cart/' + building.id")
+                                                span.btn__text Подробнее
+                                                span.btn__icon.icon-arrow.icon-arrow_rotate
+
+
+
+        .experts-screen
+            .main
+                .experts-screen__dots
+                    img(src='/images/consultation_dots.svg', alt='')
+                .experts-screen__row
+                    .experts-screen__left
+                        .expert-box
+                            .expert-box__top
+                                .font_size12.fw_medium.fade05
+                                    | Лучший менеджер по работе 
+                                    br
+                                    | с клиентами в ноябре 
+                                    br
+                                    | 2018 года
+                            .expert-box__center
+                                .font_size22.ff_trajan.font_upper.fw_medium
+                                    | Вдовин 
+                                    br
+                                    | Олег
+                                .mt15
+                                    .font_size14.fw_medium
+                                        | Эксперт по 
+                                        br
+                                        | недвижимости
+                            .expert-box__foto
+                                img(src='/images/experts/2.png', alt='')
+                    .experts-screen__right
+                        h2.font_size44 Задайте вопрос нашему лучшему специалисту
+                        .mt20
+                            p.fw_medium.font_size22.font_upper.ff_trajan Так же вы получите:
+                        .consultation-list
+                            .consultation-list__item
+                                .desc
+                                    img.desc__icon(src='/images/icons/ribbon.png', alt='')
+                                    p.font_size14.fade05.fw_medium
+                                        | Презентацию 
+                                        br
+                                        | с каталогом 
+                                        br
+                                        | недвижимости
+                            .consultation-list__item
+                                .desc
+                                    img.desc__icon(src='/images/icons/ribbon.png', alt='')
+                                    p.font_size14.fade05.fw_medium
+                                        | Условия 
+                                        br
+                                        | оформления 
+                                        br
+                                        | рассрочки
+                            .consultation-list__item
+                                .desc
+                                    img.desc__icon(src='/images/icons/ribbon.png', alt='')
+                                    p.font_size14.fade05.fw_medium
+                                        | Личного менеджера 
+                                        br
+                                        | по подбору 
+                                        br
+                                        | квартиры
+                        .consultation-screen__form.form-box.form-box_dark
+                            .z-index2
+                                .form-box__title.ff_trajan.font_size22 Как вам удобно получить консультацию и материалы?
+                                form.ajax-form(action='send.php', method='post', data-parsley-validate='', enctype='multipart/form-data')
+                                    input(type='hidden', name='subj', value='Заявка: Задать вопрос специалисту')
+                                    .message-list.mt30
+                                        .message-list__item
+                                            label.message-checkbox
+                                                input.message-checkbox__input(type='radio', value='WhatsApp', name='message', checked='')
+                                                span.message-checkbox__btn
+                                                    span.message-checkbox__icon.icon-whatsapp
+                                                span.message-checkbox__text-wrap
+                                                    span.message-checkbox__text WhatsApp
+                                        .message-list__item
+                                            label.message-checkbox
+                                                input.message-checkbox__input(type='radio', value='Viber', name='message')
+                                                span.message-checkbox__btn
+                                                    span.message-checkbox__icon.message-checkbox__icon_viber.icon-viber
+                                                span.message-checkbox__text-wrap
+                                                    span.message-checkbox__text Viber
+                                        .message-list__item
+                                            label.message-checkbox
+                                                input.message-checkbox__input(type='radio', value='Telegram', name='message')
+                                                span.message-checkbox__btn
+                                                    span.message-checkbox__icon.icon-telegram
+                                                span.message-checkbox__text-wrap
+                                                    span.message-checkbox__text Telegram
+                                        .message-list__item
+                                            label.message-checkbox
+                                                input.message-checkbox__input(type='radio', value='E-mail', name='message')
+                                                span.message-checkbox__btn
+                                                    span.message-checkbox__icon.message-checkbox__icon_mail.icon-message
+                                                span.message-checkbox__text-wrap
+                                                    span.message-checkbox__text E-mail
+                                        .message-list__item
+                                            label.message-checkbox
+                                                input.message-checkbox__input(type='radio', value='Телефон', name='message')
+                                                span.message-checkbox__btn
+                                                    span.message-checkbox__icon.message-checkbox__icon_phone.icon-telephone
+                                                span.message-checkbox__text-wrap
+                                                    span.message-checkbox__text Телефон
+                                    .input-box
+                                        input.input-text.input-text_border(type='tel', name='phone', required='', data-parsley-errors-messages-disabled='', placeholder='+7 (___) ___-__-__')
+                                        label.input-box__icon.icon-telephone
+                                    .input-box.mt30
+                                        input.input-text.input-text_border(type='email', name='email', required='', data-parsley-errors-messages-disabled='', placeholder='mail@mail.com')
+                                        label.input-box__icon.icon-message
+                                    button.button.button_big.button_blue.button_blue2.mt30(type='submit', name='ask')
+                                        | Задать вопрос специалисту
+                                        span.button__arrow.icon-arrow
+                                    .polity-box.mt35
+                                        .polity-box__dot
+                                        .font_size12.fw_medium.fade05
+                                            | Вы соглашаетесь с условиями 
+                                            br
+                                            | обработки персональных данных 
+                                            br
+                                            a(href='#') ознакомиться
+        .popup-catalog.js-popup-catalog(style='display: block;')
+            .popup-catalog__overlay.js-catalog-close
+            .modal-wrapper.table
+                .cell
+                    .popup-catalog__modal
+                        .popup-catalog__close.js-catalog-close.js-svg(data-svg-src='/images/icons/close.svg')
+                        .popup-catalog__title
+                            | Выберите интересующую 
+                            br
+                            | вас категорию недвижимости:
+                        .popup-catalog__line
+                            .popup-catalog__line-romb
+                        .popup-catalog__list
+                            .popup-catalog__item(v-for="category in categories")
+                                img(v-bind:src="'/images/categories/'+category.image", alt='')
+                                .popup-catalog__text
+                                    span.popup-catalog__name {{category.name}}
+                                    span.popup-catalog__count ({{category.count}})
+                                .popup-catalog__arrow.js-svg(data-svg-src='/images/icons/right-arrow.svg')
+
+        include ../include/footer.pug

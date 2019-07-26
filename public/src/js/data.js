@@ -1,3 +1,39 @@
+
+function toggleFavourite(that){
+
+  console.log(that)
+  let $this = $(that)
+  $this.toggleClass("active")
+  let fav = JSON.parse(localStorage.getItem("fav") || "[]")
+  let id = $this.attr('id')
+  if($this.hasClass("active")){
+    fav.push(id)
+  }else{
+    fav = fav.filter(el => el != id)
+  }
+  console.log(fav)
+  localStorage.setItem("fav",JSON.stringify(fav))
+}
+
+function updateFavourite(){
+  let fav = JSON.parse(localStorage.getItem("fav") || "[]")
+  console.log("UPDATE FAV")
+
+  $("button.prod__favorite").each((ind,el) => {
+    el = $(el)
+    console.log(el)
+    let id =  el.attr("id")
+    console.log(fav,id)
+    if(fav.indexOf(id) != -1){
+      console.log("SET ACTIVE")
+      el.addClass("active")
+    }else{
+      console.log("SET INACTIVE")
+      el.removeClass("active")
+    }
+  })
+}
+
 // получить куки
 function getCookie(name) {
     var matches = document.cookie.match(new RegExp(
@@ -24,6 +60,98 @@ function setTimeShowModalExit () {
 }
 // *** //
 
+// tabs
+function connectTabs () {
+		var tabs = $('.js-tabs');
+		tabs.each(function () {
+				var thisTabs = $(this),
+				    nav = thisTabs.find('.js-tabs-link'),
+				    item = thisTabs.find('.js-tabs-item');
+				nav.on('click', function () {
+						var thisNav = $(this),
+						    indexNav = thisNav.index();
+						nav.removeClass('active');
+						thisNav.addClass('active');
+						item.hide();
+						item.eq(indexNav).fadeIn();
+						return false;
+				});
+		});
+        $(".popup-catalog__item").click(function(){
+            console.log("clicked")
+            var tab_index = $(this).index();
+            $('.js-tabs-link:eq(' + tab_index + ')').click();
+            $(".js-catalog-close").click();
+            $("html, body").animate({
+                scrollTop: $(".catalog__center").offset().top + "px"
+            }, {
+                duration: 1000
+            });
+        });
+
+    $(".js-catalog-close").click(function(){
+        $(".js-popup-catalog").fadeOut(500);
+        $("body").css("overflow","auto");
+    });
+    $('select').niceSelect();
+    $('select').niceSelect("update");
+    
+    $(function () {
+				var sliderPrice = $('.js-price-slider')
+        sliderPrice.each((index,slider) => {
+          let slide = $(slider)
+          let parent = slide.closest('.filters__in')
+          let min = parseInt(parent.find('.price-min').text())
+          let max = parseInt(parent.find('.price-max').text())
+				slide.slider({
+						range: true,
+						values: [min, max],
+						min: min,
+						max: max,
+						step: (max - min)/100,
+						slide: function slide(event, ui) {
+                var sliderPrice = $(event.target),
+                    startPrice = sliderPrice.closest('.filters__wrap').find('.js-price-start'),
+                    finishPrice = sliderPrice.closest('.filters__wrap').find('.js-price-finish');
+                console.log(ui)
+                console.log(sliderPrice,startPrice,finishPrice)
+								startValue = ui.values[0];
+								startPriceFixed = startValue.toFixed().replace(/(\d{1,3})(?=((\d{3})*)$)/g, " $1");
+								startPrice.text(startPriceFixed);
+								finishValue = ui.values[1];
+								finishPriceFixed = finishValue.toFixed().replace(/(\d{1,3})(?=((\d{3})*)$)/g, " $1");
+								finishPrice.text(finishPriceFixed);
+						}
+          });
+        })
+		});
+		$(function () {
+				var sliderArea = $('.js-area-slider')
+        sliderArea.each( (index,slider) => {
+          let slide = $(slider)
+          let parent = slide.closest('.filters__in')
+          let min = parseInt(parent.find('.area-min').text())
+          let max = parseInt(parent.find('.area-max').text())
+				slide.slider({
+						range: true,
+						values: [min, max],
+						min: min,
+						max: max,
+						step: (max - min)/100,
+						slide: function slide(event, ui) {
+                var sliderArea = $(event.target),
+                    startArea = sliderArea.closest('.filters__wrap').find('.js-area-start'),
+                    finishArea = sliderArea.closest('.filters__wrap').find('.js-area-finish');
+								startArea.text(ui.values[0]);
+								finishArea.text(ui.values[1]);
+						}
+          });
+        })
+		});
+
+
+
+}
 
 // Google Recaptch
 function RecaptchaSuccess (response) {
@@ -75,6 +203,55 @@ function validateAndSendForm () {
 }
 
 $(document).ready(function(){
+
+    if($('.js-catalog-slider').length) {
+        $(".js-catalog-slider").each(function(){
+            
+            var slider = $(this),
+            status = $(this).closest(".js-catalog-parent").find(".js-catalog-status");
+
+            slider.on('init reInit afterChange', function (event, slick, currentSlide, nextSlide) {
+                //currentSlide is undefined on init -- set it to 0 in this case (currentSlide is 0 based)
+                var i = (currentSlide ? currentSlide : 0) + 1;
+                if (i < 10) {
+                    status.html( i + '/' + slick.slideCount);
+                } else {
+                    status.html(i);
+                }
+            });
+
+            slider.slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                arrows: true,
+                dots: false,
+                infinite: true,
+                pauseOnHover: false,
+                prevArrow: '<button type="button" class="cart__arrow cart__arrow_prev"></button>',
+                nextArrow: '<button type="button" class="cart__arrow cart__arrow_next"></button>',
+                speed: 700
+            });
+        });
+	};
+
+
+		$(document).on("click", ".cart__tabs-link", function () {
+        
+        var index = $(this).index();
+        
+        if( $(this).hasClass("cart__tabs-link_active") ) { 
+        } else {
+            $(".cart__tabs-link_active").removeClass("cart__tabs-link_active");
+            $(this).addClass("cart__tabs-link_active");
+            
+            $(".cart__item:visible").hide();
+            $(".cart__item:eq(" + index + ")").fadeIn(500);
+            $(".js-catalog-slider").slick("refresh");
+            
+            return false;
+        }
+        
+    });
 
     // Показ modal exit
     $('html').mouseleave(function () {

@@ -34,6 +34,10 @@ const Department = require('./models').department
 const Category = require('./models').Category
 const BuildingCategory = require('./models').BuildingCategory
 const Content = require('./models').Content
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op
+
+let filter_cache = ""
 
 var Recaptcha = require('express-recaptcha').Recaptcha;
 var options = {
@@ -103,32 +107,60 @@ app.get('/catalog', recaptcha.middleware.render, async (req, res) => {
     data.title = "Каталог недвижимости"
     data.description = "Агентство элитной недвижимости в городе Сочи"
     data.captcha = res.recaptcha
-    res.render('catalog/catalog', data)
+    res.render('catalog/catalogtwo', data)
 })
 app.post('/catalog/init', async (req, res) => {
 
     var nowYear = new Date().getFullYear()
+		var categories = await Category.findAll()
+    console.log(filter_cache)
+    if(filter_cache != ""){
+      console.log("Used cache")
+      res.json(filter_cache)
+      return
+    }
 
     var data = {
-        filters: {
+				categories: {},
+    }
+
+		data.categories = await Promise.all(categories.map(async cat => {
+			let catname = cat.sCategoryName
+			let count = await BuildingCategory.count({where: {'iCategoryID': cat.iCategoryID}})
+      let image = cat.sCategoryImage
+			let buildings = await cat.getBuildings()
+			let building_ids = buildings.map(b => b.iBuildingID)
+			let init_arr = ['Не выбрано']
+
+
+
+
+			//console.log(bcats)
+			return {
+				name:catname,
+				count: count,
+        image: image,
+				filters: {
             price: {
-                min: Math.floor(await Apartament.min('iApartamentPrice')/1000000),
-                max: Math.ceil(await Apartament.max('iApartamentPrice')/1000000)
-            },
+							min: Math.floor(await Apartament.min('iApartamentPrice',{where: {iBuildingID: {[Op.in]: building_ids}}})),
+                max: Math.ceil(await Apartament.max('iApartamentPrice',{where: {iBuildingID: {[Op.in]: building_ids}}}))
+					},
             area: {
-                min: Math.floor(await Plan.min('fPlanArea')),
-                max: Math.ceil(await Plan.max('fPlanArea'))
+                min: Math.floor(await Plan.min('fPlanArea',{where: {iBuildingID: {[Op.in]: building_ids}}})),
+                max: Math.ceil(await Plan.max('fPlanArea',{where: {iBuildingID: {[Op.in]: building_ids}}}))
             },
             floor: {
-                min: Math.floor(await Apartament.min('iApartamentFloor')),
-                max: Math.ceil(await Apartament.max('iApartamentFloor'))
+                min: Math.floor(await Apartament.min('iApartamentFloor',{where: {iBuildingID: {[Op.in]: building_ids}}})),
+                max: Math.ceil(await Apartament.max('iApartamentFloor',{where: {iBuildingID: {[Op.in]: building_ids}}}))
             },
             room: {
-                min: Math.floor(await Plan.min('iRoomCount')),
-                max: Math.ceil(await Plan.max('iRoomCount'))
+                min: Math.floor(await Plan.min('iRoomCount',{where: {iBuildingID: {[Op.in]: building_ids}}})),
+                max: Math.ceil(await Plan.max('iRoomCount',{where: {iBuildingID: {[Op.in]: building_ids}}}))
             },
-						type: await Building.aggregate('sBuildingType','DISTINCT',{plain: false}).map(item => item.DISTINCT),
-						category: await Category.findAll(),
+						type: init_arr.concat(await Building.aggregate('sBuildingType','DISTINCT',{plain: false,where: {iBuildingID: {[Op.in]: building_ids}}}).map(item => item.DISTINCT)),
+						status: init_arr.concat(await Building.aggregate('sBuildingStatus','DISTINCT',{plain: false,where: {iBuildingID: {[Op.in]: building_ids}}}).map(item => item.DISTINCT)),
+						district: init_arr.concat(await Building.aggregate('sBuildingDistrict','DISTINCT',{plain: false,where: {iBuildingID: {[Op.in]: building_ids}}}).map(item => item.DISTINCT)),
+						class: init_arr.concat(await Building.aggregate('sBuildingClass','DISTINCT',{plain: false,where: {iBuildingID: {[Op.in]: building_ids}}}).map(item => item.DISTINCT)),
             year: [
                 {
                     title: 'Не важно',
@@ -148,72 +180,82 @@ app.post('/catalog/init', async (req, res) => {
                 },
             ]
         }
-    }
-
-    data.selected = {}
-    data.selected.price = data.filters.price.max
-    data.selected.area = data.filters.area.max
-    data.selected.floor = data.filters.floor.max
-    data.selected.room = data.filters.room.max
-    data.selected.year = data.filters.year[0].value
-
+			}
+		}))
+    filter_cache = data;
+    setTimeout(() => { filter_cache = "" },1000 * 60 * 60) //1 hour
     res.json(data)
 })
+
+app.get('/cart/:id',async (req, res) => {
+	let data = {}
+	data.title = "Просмотр ЖК"
+
+	res.render('cart/cart',{})
+})
+
+app.post('/getBuilding', async (req, res) => {
+
+	res.json(await Building.getBuildingItem(req.body.id))
+
+})
+
+app.get('/favourite',async (req, res) => {
+
+  let data = {}
+  data.title = "Избранное"
+  res.render('catalog/favourite', data)
+
+})
+
 app.post('/catalog/building', async (req, res) => {
-    const Sequelize = require('sequelize')
-    const Op = Sequelize.Op
-
-    var dBuildingReady = {}
-    if (req.body.selected.year) {
-        dBuildingReady = {
-            dBuildingReady: {
-                [Op.gte]: req.body.selected.year + '-01-01',
-                [Op.lte]: req.body.selected.year + '-12-31'
-            }
-        }
-    }
-
-    var data = {}
-        data.buildings = await Building.findAll({
-            where: dBuildingReady,
-            include: [
-                {
-                    model: Advantage
-                },{
-                    model: Stage
-                }, {
-                    model: Plan,
-                    required: true,
-                    where: {
-                        fPlanArea: {
-                            [Op.lte]: req.body.selected.area
-                        },
-                        iRoomCount: {
-                            [Op.lte]: req.body.selected.room
-                        }
-                    },
-                    include: [
-                        {
-                            model: Apartament,
-                            required: true,
-                            where: {
-                                iApartamentPrice: {
-                                    [Op.lte]: (req.body.selected.price*1000000)
-                                },
-                                iApartamentFloor: {
-                                    [Op.lte]: req.body.selected.floor
-                                }
-                            }
-                        },
-                        {
-                            model: plan_image,
-                            require: true
-                        }
-                    ]
-                }
-            ]
-        })
-    res.json(data)
+		let data = req.body.selected
+		params = {
+			where: {},
+			include: [
+				{
+					model: Plan,
+					required: true,
+					where: {
+						fPlanArea:{
+							[Op.between]: [data.min_area, data.max_area]
+						}
+					}
+				},
+				{
+					model: Apartament,
+					required: true,
+					where: {
+						iApartamentPrice:{
+							[Op.between]: [data.min_price, data.max_price]
+						}
+					}
+				},
+				{
+					model: Category,
+					as: 'categories',
+					required: true,
+					where: {
+						sCategoryName: data.cat
+					}
+				}
+			]
+		}
+		let unselected = 'Не выбрано'
+		if(data.class != unselected){
+			params.where.sBuildingClass = data.class
+		}
+		if(data.district != unselected){
+			params.where.sBuildingDistrict = data.district
+		}
+		if(data.type != unselected){
+			params.where.sBuildingType = data.type
+		}
+		if(data.ready != unselected){
+			params.where.sBuildingStatus = data.ready
+		}
+		console.log(params)
+		res.json(await Building.findAll(params))
 })
 
 app.get('/about', recaptcha.middleware.render, async (req, res) => {
@@ -235,6 +277,7 @@ app.get('/partner', recaptcha.middleware.render, (req, res) => {
     data.captcha = res.recaptcha
     res.render('partner/partner', data)
 })
+
 
 app.post('/send', recaptcha.middleware.verify, (req, res) => {
 
@@ -396,6 +439,17 @@ app.post('/admin/CategoryList', auth.connect(basic),async (req, res) => {
 	let categories = await Category.findAll();
 	res.json({
 		categories: categories,
+	})
+
+})
+
+app.post('/admin/CategoryDelete', auth.connect(basic),async (req, res) => {
+	Category.destroy({
+			where: {
+					iCategoryID: req.body.iCategoryID
+			}
+	}).then((response) => {
+			res.json(response)
 	})
 
 })
@@ -624,6 +678,34 @@ app.post('/admin/BuildingRemove', auth.connect(basic), async (req, res) => {
         res.json(response)
     })    
 })
+app.post('/admin/CategoryUploadImage', auth.connect(basic), async (req, res) => {
+    var filename = randomString() + '.jpg'
+    
+    var storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, './public/images/categories')
+        },
+        filename: function (req, file, cb) {
+            cb(null, 'temp_' + filename)
+        }
+    })
+
+    var upload = multer({ storage: storage }).single(req.headers.column)
+
+    upload(req, res, function (err) {
+        let x = 800
+        let y = 800
+        sharp('./public/images/categories/' + 'temp_' + filename)
+        .resize(x, y)
+        .toFile('./public/images/categories/' + filename, function(err, response) {
+            sharp.cache(false)
+            // fs.unlink('./public/images/building/' + 'temp_' + filename)
+            console.log(req)
+            req.file.filename = filename
+            res.send({ file: req.file, body: req.body })
+        })
+    })
+})
 app.post('/admin/BuildingUploadAvatar', auth.connect(basic), async (req, res) => {
     var filename = randomString() + '.jpg'
     
@@ -656,6 +738,7 @@ app.post('/admin/BuildingUploadAvatar', auth.connect(basic), async (req, res) =>
         .toFile('./public/images/building/' + filename, function(err, response) {
             sharp.cache(false)
             // fs.unlink('./public/images/building/' + 'temp_' + filename)
+            console.log(req)
             req.file.filename = filename
             res.send({ file: req.file, body: req.body })
         })

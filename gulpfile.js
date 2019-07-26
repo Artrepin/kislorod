@@ -41,12 +41,15 @@ gulp.task('js_min', function (done) {
         'public/src/js/components/jquery.ui.touch-punch.min.js',
         'public/src/js/components/jquery.fancybox.js',
         'public/src/js/components/jquery.maskedinput.js',
+        'public/src/js/components/jquery.nice-select.min.js',
         'public/src/js/components/jquery.form.js',
         'public/src/js/components/slick.js',
         'public/src/js/components/parsley.min.js',
         'public/src/js/data.js',
         'public/src/js/google_map.js',
         'public/src/js/catalog.js',
+        'public/src/js/cart.js',
+        'public/src/js/favourite.js',
         'public/src/js/welcome.js',
     ])
     .pipe(concat('app.js'))

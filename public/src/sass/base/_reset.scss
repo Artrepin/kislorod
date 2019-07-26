@@ -26,7 +26,8 @@ table, tr, td, th, thead {border-collapse: collapse;}
 input[type="button"],
 input[type="submit"],
 button {
-	cursor: pointer
+	cursor: pointer;
+    background: transparent;
 }
 a {
 	color: $link-color;

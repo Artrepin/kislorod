@@ -13,7 +13,10 @@ export default {
     ],
     data: function () {
         return {
-					categories: []
+					categories: [],
+            statuses: ['Строится',
+            'Сдается',
+            'Сдан']
 
         }
     },
@@ -73,12 +76,16 @@ export default {
                                     <input type="text" class="form-control" v-model="building.fBuildingFloors">
                                 </div>
                                 <div class="form-group">
+                                    <label for="">Класс</label>
+                                    <input type="text" class="form-control" v-model="building.sBuildingClass">
+                                </div>
+                                <div class="form-group">
                                     <label for="">До моря</label>
                                     <input type="text" class="form-control" v-model="building.fBuildingDistance">
                                 </div>
                                 <div class="form-group">
                                     <label for="">Статус дома</label>
-                                    <input type="text" class="form-control" v-model="building.sBuildingStatus">
+                                    <v-select v-model="building.sBuildingStatus" :options="statuses"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Микрорайон</label>
