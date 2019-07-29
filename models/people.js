@@ -13,7 +13,6 @@ module.exports = (sequelize, DataTypes) => {
     sPeopleLastname: DataTypes.STRING,
     sPeopleName: DataTypes.STRING,
     sPeoplePosition: DataTypes.STRING,
-    sPeopleDepartment: DataTypes.STRING,
     sPeopleImage: DataTypes.STRING
   }, {
     timestamps: false,

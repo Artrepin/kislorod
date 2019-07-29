@@ -959,7 +959,9 @@ app.post('/admin/BuildingDelApartament', auth.connect(basic), async (req, res) =
 app.post('/admin/PeopleList', auth.connect(basic), async (req, res) => {
     var data = {}
         data.people = await People.findAll({
+            include: [Department]
         })
+        data.department = await Department.findAll()
     res.json(data)
 })
 app.post('/admin/PeopleUpdate', auth.connect(basic), async (req, res) => {
@@ -967,7 +969,7 @@ app.post('/admin/PeopleUpdate', auth.connect(basic), async (req, res) => {
     var iPeopleID = (req.body.people.iPeopleID) ? req.body.people.iPeopleID : false
     if (iPeopleID) {
         await People.update({
-            sPeopleDepartment: req.body.people.sPeopleDepartment,
+            iDepartmentID: req.body.people.iDepartmentID,
             sPeopleLastname: req.body.people.sPeopleLastname,
             sPeopleName: req.body.people.sPeopleName,
             sPeoplePosition: req.body.people.sPeoplePosition,
@@ -989,6 +991,7 @@ app.post('/admin/PeopleUpdate', auth.connect(basic), async (req, res) => {
         })
     }
     data.people = await People.findByPk(iPeopleID, {
+        include: [Department]
     })
 
     res.json(data)
