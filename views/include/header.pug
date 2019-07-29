@@ -6,10 +6,11 @@
             a.header__logo(href='/')
                 img.header__pic(src='/images/logo.svg', alt='')
             nav.header__nav
-                a.header__link(href='/') главная
-                a.header__link.active(href='/catalog') каталог
-                a.header__link(href='/about') о компании
-                a.header__link(href='/partner') партнеры 
+                a.header__link#nav_catalog(href='/catalog') каталог
+                a.header__link#nav_about(href='/about') о компании
+                a.header__link#nav_favourite(href='/favourite') Избранное
+                a.header__link#nav_partner(href='/partner') партнеры 
+
             .header__box
                 a.header__phone(href='tel:+78622256505')
                     span.icon-telephone

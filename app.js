@@ -114,7 +114,7 @@ app.post('/catalog/init', async (req, res) => {
     var nowYear = new Date().getFullYear()
 		var categories = await Category.findAll()
     console.log(filter_cache)
-    if(filter_cache != ""){
+    if(filter_cache != "" && false){
       console.log("Used cache")
       res.json(filter_cache)
       return
