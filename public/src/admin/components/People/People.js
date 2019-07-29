@@ -16,7 +16,6 @@ export default {
             axios.post('/admin/PeopleList', {})
             .then( (response) => {
                 this.people = response.data.people
-                this.department = response.data.department
             })
         },
         openModal: function () {
@@ -119,9 +118,7 @@ export default {
                                         </div>
                                         <div class="form-group">
                                             <label for="">Отдел</label>
-                                            <select class="form-control" v-model="people[usePeople].iDepartmentID">
-                                                <option v-for="(department, index) in department" v-bind:value="department.iDepartmentID">{{ department.sDepartmentTitle }}</option>
-                                            </select>
+                                            <input type="text" class="form-control" v-model="people[usePeople].sPeopleDepartment">
                                         </div>
                                     </div>
                                 </div>
@@ -157,7 +154,7 @@ export default {
                                     </p>
                                     <hr>
                                     <p class="card-text text-muted card-desc">
-                                        <template v-if="people.department && people.department.sDepartmentTitle"><small>{{ people.department.sDepartmentTitle }}</small></template>
+                                        <template v-if="people.sPeopleDepartment"> {{people.sPeopleDepartment}}</template>
                                         <template v-else><br></template>
                                     </p>
                                 </div>

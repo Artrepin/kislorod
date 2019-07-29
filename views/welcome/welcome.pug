@@ -5,23 +5,23 @@ block main
         .main-screen.bg_dark-blue.color_white
             .fullscreen-bg
                video.fullscreen-bg__video(loop='', muted='', autoplay='', poster='')
-                  source(src='video/video.mp4', type='video/mp4')
+                  source(src=content.video_header, type='video/mp4')
                   source(src='video/video.webm', type='video/webm')
             .main
                 include ../include/header.pug
                 .main-screen__content
                     .main-screen__left
-                        .desc-screen.fw_medium Подберем вашу
+                        .desc-screen.fw_medium #{content.header_1_2}
                         .mt25.main-screen__title2
-                            h1.font_size54 Идеальную квартиру, на берегу Черного моря
+                            h1.font_size54 #{content.header_1_1}
                         .main-screen__title3.mt10
-                            h3.font_size22 и поможем  продать старую квартиру
+                            h3.font_size22 #{content.header_1_3}
                         .desc.mt30
                             img.desc__icon(src='/images/icons/ribbon.png', alt='')
                             p.font_size14.fade05.fw_medium
-                                | Проведем бесплатную оценку 
+                                | #{content.p_1} 
                                 br
-                                | для обмена на новую квартиру
+                                | #{content.p_1}
                     .main-screen__right
                         .play-box
                             .play.play-box__thumb
@@ -36,11 +36,11 @@ block main
                                     .play__iframe
                                         iframe(src='https://www.youtube.com/embed/gd1RtXXg2ag?autoplay=1&loop=1&rel=0&mute=1&playlist=gd1RtXXg2ag', allow='autoplay; encrypted-media;', allowfullscreen='')
                             .fw_medium.font_size14.fade05
-                                | Посмотрите короткую 
+                                | #{content.text_near_present_1} 
                                 br
-                                | видео-презентацию 
+                                | #{content.text_near_present_2} 
                                 br
-                                | о компании
+                                | #{content.text_near_present_3}
                         .mt55
                             .font_size14.fw_medium Получите подборку лучших предложений за #{current_month}
                             .year.mt10
@@ -51,39 +51,39 @@ block main
                             .mt50.main-screen__magazine
                                 img.main-screen__magazine-img(src='/images/main/magazine.png', alt='')
                                 button.button.button_big.button_blue.button_blue1.js-scroll-to(data-href='#quiz')
-                                    | Получить подборку предложений
+                                    | #{content.first_button}
                                     span.button__arrow.icon-arrow.icon-arrow_rotate
             .quiz-screen
                 .main
                     img.quiz-screen__dots(src='/images/quiz-screen/dots1.png', alt='')
                     #quiz.head-screen
                         h2.font_size44
-                            | Сэкономьте свое время 
+                            | #{content.header_2_1} 
                             br
-                            | на поиск, подбор 
+                            | #{content.header_2_2} 
                             br
-                            | и просмотр квартир
+                            | #{content.header_2_3}
                         .mt40
                             p.font_size14.fw_medium
-                                | Пройдите короткий тест и получите подборку 
+                                | #{content.text_before_test_1} 
                                 br
-                                | идеальных вариантов, которые на
+                                | #{content.text_before_test_2}
                         .quiz-screen__head.mt10
                             .number-text.color_yelow
                                 .font_size120.number-text__number 100%
                                 .font_size22.ff_trajan.fw_medium
-                                    | отвечают 
+                                    | #{content.text_before_test_3} 
                                     br
-                                    | вашим 
+                                    | #{content.text_before_test_4} 
                                     br
-                                    | требованиям
+                                    | #{content.text_before_test_5}
                             .desc
                                 img.desc__icon(src='/images/icons/ribbon.png', alt='')
                                 p.font_size14.fade05.fw_medium
-                                    | Осталось 
+                                    | #{content.quations_1} 
                                     span.js-count-quiz 5
                                     br
-                                    | вопросов из 5
+                                    | #{content.quations_2}
                     .mt60.quiz-scale
                         .quiz-scale__load
                             .quiz-scale__arrow.icon-play
@@ -93,16 +93,16 @@ block main
                                 h3.font_size22 Пройдите тест до конца
                                 .mt15
                                     p.font_size14.fade05.fw_medium
-                                        | И получите подборку лучших квартир, 
+                                        | #{content.text_left_near_test_1} 
                                         br
-                                        | пентхаусов и домов  под ваши заппросы
-                                img.quiz-screen__key.mt30(src='/images/quiz-screen/key.png', alt='')
+                                        | #{content.text_left_near_test_2}
+                                img.quiz-screen__key.mt30(src=content.key_img, alt='')
                             .quiz-screen__form1.mt50
-                                h3.font_size22 Не знаете что ответить?
+                                h3.font_size22 #{content.text_left_near_test_3}
                                 .mt15
-                                    p.font_size14.fade05.fw_medium Введите номер телефона, мы поможем подобрать нужный вариант
+                                    p.font_size14.fade05.fw_medium #{content.text_left_near_test_3}
                                 form.ajax-form.mt35(action='/send', method='post', data-parsley-validate='', enctype='multipart/form-data')
-                                    input(type='hidden', name='subj', value='Заявка с формы: Не знаете что ответить?')
+                                    input(type='hidden', name='subj', value='Заявка с формы: #{content.text_left_near_test_3}')
                                     .input-box
                                         input.input-text.input-text_border(type='tel', name='phone', required='', data-parsley-errors-messages-disabled='', placeholder='+7 (___) ___-__-__')
                                         label.input-box__icon.icon-telephone
@@ -113,7 +113,7 @@ block main
                                 .quiz__step
                                     .quiz__head
                                         .quiz__icon-office.icon-office-building.color_yelow
-                                        h2.font_size44 Выберите тип недвижимости: 
+                                        h2.font_size44 Выберите тип #{content.block_under_ask_quations_title_1_3}: 
                                     .quiz__content.mt40
                                         .quiz__answers
                                             .quiz__column
@@ -250,21 +250,21 @@ block main
                                             .bonus-list__item.desc.mt25
                                                 img.desc__icon(src='/images/icons/ribbon.png', alt='')
                                                 p.font_size14.fade05.fw_medium
-                                                    | Личного брокера 
+                                                    | #{content.vy_poluchite_block_1_1} 
                                                     br
-                                                    | по продаже квартиры
+                                                    | #{content.vy_poluchite_block_1_2}
                                             .bonus-list__item.desc.mt25
                                                 img.desc__icon(src='/images/icons/ribbon.png', alt='')
                                                 p.font_size14.fade05.fw_medium
-                                                    | Сроки по продаже 
+                                                    | #{content.vy_poluchite_block_2_1} 
                                                     br
-                                                    | старой квартиры
+                                                    | #{content.vy_poluchite_block_2_2}
                                             .bonus-list__item.desc.mt25
                                                 img.desc__icon(src='/images/icons/ribbon.png', alt='')
                                                 p.font_size14.fade05.fw_medium
-                                                    | Презентацию 
+                                                    | #{content.vy_poluchite_block_3_1} 
                                                     br
-                                                    | с планировками
+                                                    | #{content.vy_poluchite_block_3_2}
                                         .quiz-form__inputs
                                         form.ajax-form(action='/send', method='post', data-parsley-validate='', enctype='multipart/form-data')
                                             input(type='hidden', name='subj', value='Заявка с квиза')
@@ -322,11 +322,11 @@ block main
                                             br
                                             | на выгодных условия
                     .quiz-screen__form2.mt40
-                        h3.font_size22 Не знаете что ответить?
+                        h3.font_size22 #{content.text_left_near_test_3}
                         .mt15
-                            p.font_size14.fade05.fw_medium Введите номер телефона, мы поможем подобрать нужный вариант
+                            p.font_size14.fade05.fw_medium #{content.text_left_near_test_3}
                         form.ajax-form.mt35(action='/send', method='post', data-parsley-validate='', enctype='multipart/form-data')
-                            input(type='hidden', name='subj', value='Заявка с формы: Не знаете что ответить?')
+                            input(type='hidden', name='subj', value='Заявка с формы: #{content.text_left_near_test_3}')
                             .input-box
                                 input.input-text.input-text_border(type='tel', name='phone', required='', data-parsley-errors-messages-disabled='', placeholder='+7 (___) ___-__-__')
                                 label.input-box__icon.icon-telephone
@@ -337,24 +337,24 @@ block main
                         .agency-catalog__content
                             .agency-catalog__left
                                 h2.font_size44
-                                    | В каталоге 
+                                    | #{content.title_under_test_1} 
                                     br
-                                    | агентства
+                                    | #{content.title_under_test_2}
                                 .desc.mt30
                                     img.desc__icon(src='/images/icons/ribbon.png', alt='')
                                     p.font_size14.fade05.fw_medium
-                                        | Посмотрите информацию о каждом 
+                                        | #{content.info_under_catalog_title_1} 
                                         br
-                                        | из объектов  и выберите свой 
+                                        | #{content.info_under_catalog_title_2} 
                                         br
-                                        | идеальный вариант
+                                        | #{content.info_under_catalog_title_3}
                             .agency-catalog__numbers
                                 .number-text.color_yelow
                                     .font_size120.number-text__number 448
                                     .font_size22.ff_trajan.fw_medium
-                                        | жилых комплексов
+                                        | ЖИЛЫХ КОМПЛЕКСОВ
                                         br
-                                        | домов и земельных участков
+                                        | ДОМОВ И ЗЕМЕЛЬНЫХ УЧАСТКОВ
                                 //- .number-text.color_yelow
                                     .font_size120.number-text__number 3
                                     .font_size22.ff_trajan.fw_medium
@@ -399,7 +399,7 @@ block main
                                     .case__options.color_white
                                         .case__option
                                             .font_size14.fw_medium
-                                                | Квартир в продаже: 
+                                                | Квартир в #{content.otdel_rukovoditeil_about_2}е: 
                                                 br
                                                 | 18 квартир
                                         .case__option
@@ -413,7 +413,7 @@ block main
                                             .case__content.mt70
                                                 .case__title.font_size44.ff_trajan ЖК «Первый»
                                                 .desc.mt5
-                                                    img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
+                                                    img.desc__icon(src=content.golden_img, alt='')
                                                     p.font_size14.fw_medium
                                                         | Расположен в центре г. Сочи, на улице Ленина. 
                                                         br
@@ -431,7 +431,7 @@ block main
                                                 .play__arrow.icon-play.color_white
                                             center.mt25
                                                 .font_size14.fw_medium.fade05
-                                                    | Посмотрите короткую видео-презентацию 
+                                                    | #{content.text_near_present_1} #{content.text_near_present_2} 
                                                     br
                                                     | о жилом комплексе
                                     ul.case__bottom.mt35
@@ -446,7 +446,7 @@ block main
                                     .case__options.color_white
                                         .case__option
                                             .font_size14.fw_medium
-                                                | Квартир в продаже: 
+                                                | Квартир в #{content.otdel_rukovoditeil_about_2}е: 
                                                 br
                                                 | 18 квартир
                                         .case__option
@@ -460,7 +460,7 @@ block main
                                             .case__content.mt70
                                                 .case__title.font_size44.ff_trajan ЖК «Первый»
                                                 .desc.mt5
-                                                    img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
+                                                    img.desc__icon(src=content.golden_img, alt='')
                                                     p.font_size14.fw_medium
                                                         | Расположен в центре г. Сочи, на улице Ленина. 
                                                         br
@@ -478,7 +478,7 @@ block main
                                                 .play__arrow.icon-play.color_white
                                             center.mt25
                                                 .font_size14.fw_medium.fade05
-                                                    | Посмотрите короткую видео-презентацию 
+                                                    | #{content.text_near_present_1} #{content.text_near_present_2} 
                                                     br
                                                     | о жилом комплексе
                                     ul.case__bottom.mt35
@@ -493,7 +493,7 @@ block main
                                     .case__options.color_white
                                         .case__option
                                             .font_size14.fw_medium
-                                                | Квартир в продаже: 
+                                                | Квартир в #{content.otdel_rukovoditeil_about_2}е: 
                                                 br
                                                 | 18 квартир
                                         .case__option
@@ -507,7 +507,7 @@ block main
                                             .case__content.mt70
                                                 .case__title.font_size44.ff_trajan ЖК «Первый»
                                                 .desc.mt5
-                                                    img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
+                                                    img.desc__icon(src=content.golden_img, alt='')
                                                     p.font_size14.fw_medium
                                                         | Расположен в центре г. Сочи, на улице Ленина. 
                                                         br
@@ -525,7 +525,7 @@ block main
                                                 .play__arrow.icon-play.color_white
                                             center.mt25
                                                 .font_size14.fw_medium.fade05
-                                                    | Посмотрите короткую видео-презентацию 
+                                                    | #{content.text_near_present_1} #{content.text_near_present_2} 
                                                     br
                                                     | о жилом комплексе
                                     ul.case__bottom.mt35
@@ -540,7 +540,7 @@ block main
                                     .case__options.color_white
                                         .case__option
                                             .font_size14.fw_medium
-                                                | Квартир в продаже: 
+                                                | Квартир в #{content.otdel_rukovoditeil_about_2}е: 
                                                 br
                                                 | 18 квартир
                                         .case__option
@@ -554,7 +554,7 @@ block main
                                             .case__content.mt70
                                                 .case__title.font_size44.ff_trajan ЖК «Первый»
                                                 .desc.mt5
-                                                    img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
+                                                    img.desc__icon(src=content.golden_img, alt='')
                                                     p.font_size14.fw_medium
                                                         | Расположен в центре г. Сочи, на улице Ленина. 
                                                         br
@@ -572,7 +572,7 @@ block main
                                                 .play__arrow.icon-play.color_white
                                             center.mt25
                                                 .font_size14.fw_medium.fade05
-                                                    | Посмотрите короткую видео-презентацию 
+                                                    | #{content.text_near_present_1} #{content.text_near_present_2} 
                                                     br
                                                     | о жилом комплексе
                                     ul.case__bottom.mt35
@@ -587,7 +587,7 @@ block main
                                     .case__options.color_white
                                         .case__option
                                             .font_size14.fw_medium
-                                                | Квартир в продаже: 
+                                                | Квартир в #{content.otdel_rukovoditeil_about_2}е: 
                                                 br
                                                 | 18 квартир
                                         .case__option
@@ -601,7 +601,7 @@ block main
                                             .case__content.mt70
                                                 .case__title.font_size44.ff_trajan ЖК «Первый»
                                                 .desc.mt5
-                                                    img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
+                                                    img.desc__icon(src=content.golden_img, alt='')
                                                     p.font_size14.fw_medium
                                                         | Расположен в центре г. Сочи, на улице Ленина. 
                                                         br
@@ -619,7 +619,7 @@ block main
                                                 .play__arrow.icon-play.color_white
                                             center.mt25
                                                 .font_size14.fw_medium.fade05
-                                                    | Посмотрите короткую видео-презентацию 
+                                                    | #{content.text_near_present_1} #{content.text_near_present_2} 
                                                     br
                                                     | о жилом комплексе
                                     ul.case__bottom.mt35
@@ -634,7 +634,7 @@ block main
                                     .case__options.color_white
                                         .case__option
                                             .font_size14.fw_medium
-                                                | Квартир в продаже: 
+                                                | Квартир в #{content.otdel_rukovoditeil_about_2}е: 
                                                 br
                                                 | 18 квартир
                                         .case__option
@@ -648,7 +648,7 @@ block main
                                             .case__content.mt70
                                                 .case__title.font_size44.ff_trajan ЖК «Первый»
                                                 .desc.mt5
-                                                    img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
+                                                    img.desc__icon(src=content.golden_img, alt='')
                                                     p.font_size14.fw_medium
                                                         | Расположен в центре г. Сочи, на улице Ленина. 
                                                         br
@@ -666,7 +666,7 @@ block main
                                                 .play__arrow.icon-play.color_white
                                             center.mt25
                                                 .font_size14.fw_medium.fade05
-                                                    | Посмотрите короткую видео-презентацию 
+                                                    | #{content.text_near_present_1} #{content.text_near_present_2} 
                                                     br
                                                     | о жилом комплексе
                                     ul.case__bottom.mt35
@@ -681,7 +681,7 @@ block main
                                     .case__options.color_white
                                         .case__option
                                             .font_size14.fw_medium
-                                                | Квартир в продаже: 
+                                                | Квартир в #{content.otdel_rukovoditeil_about_2}е: 
                                                 br
                                                 | 18 квартир
                                         .case__option
@@ -695,7 +695,7 @@ block main
                                             .case__content.mt70
                                                 .case__title.font_size44.ff_trajan ЖК «Первый»
                                                 .desc.mt5
-                                                    img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
+                                                    img.desc__icon(src=content.golden_img, alt='')
                                                     p.font_size14.fw_medium
                                                         | Расположен в центре г. Сочи, на улице Ленина. 
                                                         br
@@ -713,7 +713,7 @@ block main
                                                 .play__arrow.icon-play.color_white
                                             center.mt25
                                                 .font_size14.fw_medium.fade05
-                                                    | Посмотрите короткую видео-презентацию 
+                                                    | #{content.text_near_present_1} #{content.text_near_present_2} 
                                                     br
                                                     | о жилом комплексе
                                     ul.case__bottom.mt35
@@ -728,7 +728,7 @@ block main
                                     .case__options.color_white
                                         .case__option
                                             .font_size14.fw_medium
-                                                | Квартир в продаже: 
+                                                | Квартир в #{content.otdel_rukovoditeil_about_2}е: 
                                                 br
                                                 | 18 квартир
                                         .case__option
@@ -742,7 +742,7 @@ block main
                                             .case__content.mt70
                                                 .case__title.font_size44.ff_trajan ЖК «Первый»
                                                 .desc.mt5
-                                                    img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
+                                                    img.desc__icon(src=content.golden_img, alt='')
                                                     p.font_size14.fw_medium
                                                         | Расположен в центре г. Сочи, на улице Ленина. 
                                                         br
@@ -760,7 +760,7 @@ block main
                                                 .play__arrow.icon-play.color_white
                                             center.mt25
                                                 .font_size14.fw_medium.fade05
-                                                    | Посмотрите короткую видео-презентацию 
+                                                    | #{content.text_near_present_1} #{content.text_near_present_2} 
                                                     br
                                                     | о жилом комплексе
                                     ul.case__bottom.mt35
@@ -778,24 +778,24 @@ block main
                     .catalog-screen__top
                         .catalog-screen__headline
                             h2.font_size44
-                                | Скачайте презентацию 
+                                | #{content.title_about_presentation_1} 
                                 br
-                                | с лучшими вариантами объектов недвижимости
+                                | #{content.title_about_presentation_2}
                             .mt20
-                                p.ff_trajan.font_size22 Вы подробно ознакомитесь с рынком  недвижимости Сочи всего за 10-15 минут
+                                p.ff_trajan.font_size22 #{content.subtitle_about_presentation}
                         .catalog-screen__desc
                             .desc.mt5
-                                img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
+                                img.desc__icon(src=content.golden_img, alt='')
                                 p.font_size14.fw_medium.fade05
-                                    | Вы увидите актуальную информацию по каждому жилому комплексу и сможете их сравнить
+                                    | #{content.info_right_block_about_presentation}
                     .catalog-screen__center
                         .catalog-screen__form.form-box.form-box_white
                             .form-box__title.ff_trajan.font_size22
-                                | Скачать презентацию 
+                                | #{content.download_form_title_1} 
                                 br
-                                | по всем ЖК
+                                | #{content.download_form_title_2}
                             form.ajax-form(action='/send', method='post', data-parsley-validate='', enctype='multipart/form-data')
-                                input(type='hidden', name='subj', value='Заявка: Скачать презентацию по всем ЖК')
+                                input(type='hidden', name='subj', value='Заявка: #{content.download_form_title_1} #{content.download_form_title_2}')
                                 .input-box.mt30
                                     input.input-text.input-text_fill(type='tel', name='phone', required='', data-parsley-errors-messages-disabled='', placeholder='+7 (___) ___-__-__')
                                     label.input-box__icon.icon-telephone
@@ -806,7 +806,7 @@ block main
                                 .catalog-screen__button
                                     img.catalog-screen__level(src='/images/cases/level1000.png', alt='')
                                     button.button.button_big.button_blue.button_blue2.mt30.gcaptcha(type='submit', name='call', disabled)
-                                        | Скачать презентацию
+                                        | #{content.download_form_title_1}
                                         span.button__arrow.icon-arrow
                                 .polity-box.mt35
                                     .polity-box__dot
@@ -827,16 +827,16 @@ block main
                                     a.sea-catalog__icon.icon-book(href='/catalog', target='_blank')
                                 center.mt20
                                     .font_size14.color_white.fw_medium
-                                        | Посмотреть каталог 
+                                        | #{content.link_to_catalog_1} 
                                         br
-                                        | на сайте в онлайне
+                                        | #{content.link_to_catalog_2}
         .kredit-screen
             .main
                 img.kredit-screen__dots(src='/images/dots_kredit.png', alt='')
                 .kredit-screen__headline
-                    .desc-screen.fw_medium Поможем в офомлении ипотеки
+                    .desc-screen.fw_medium #{content.help_with_mortgage}
                     .mt20
-                        h2.font_size54 Не только подберем квартиру, но и поможем приобрести ее 
+                        h2.font_size54 #{content.Buy_apartment_title} 
                 .kredit-screen__row
                     .kredit-screen__left.mt40
                         .kredit-list-container
@@ -857,60 +857,60 @@ block main
                                     .kredit-list__logo
                                         img(src='/images/logo-alfabank.png', alt='')
                     .kredit-screen__right
-                        .font_size14.fw_medium Вероятность одобрения ипотеки
+                        .font_size14.fw_medium #{content.mortgage_probability}
                         .number-text.mt10
                             .font_size120.number-text__number.color_yelow 96%
                             .font_size22.ff_trajan.fw_medium
-                                | одобрение ипотеки 
+                                | #{content.subtitle_odobrenie_ipoteki_1} 
                                 br
-                                | несмотря на плохую 
+                                | #{content.subtitle_odobrenie_ipoteki_2} 
                                 br
-                                | кредитную историю
+                                | #{content.subtitle_odobrenie_ipoteki_3}
                         .desc.mt5
-                            img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
+                            img.desc__icon(src=content.golden_img, alt='')
                             p.font_size14.fw_medium
-                                | Деньгами можно распорядиться более выгодно, 
+                                | #{content.info_ipoteka_1} 
                                 br
-                                | чем сразу вкладывать их в квартиру
+                                | #{content.info_ipoteka_2}
                         .kredit-economy.mt40
                             .kredit-economy__img
-                                img(src='/images/money_kredit.png', alt='')
+                                img(src=content.money_img, alt='')
                             .kredit-economy__text
-                                .font_size22.ff_trajan.fw_medium Вы экономите деньги благодаря партнерским отношениям между «Кислород» и банками
+                                .font_size22.ff_trajan.fw_medium #{content.subtitle_Kislorod_i_banki}
                         ul.kredit-service.mt15
                             li.kredit-service__item
-                                .font_size14.fw_medium Снижение на 0,5-1,0% процентных ставок
+                                .font_size14.fw_medium #{content.info_block_under_money_img_1}
                             li.kredit-service__item
-                                .font_size14.fw_medium Отмена запрета на досрочное погашение
+                                .font_size14.fw_medium #{content.info_block_under_money_img_2}
                             li.kredit-service__item
-                                .font_size14.fw_medium Согласование сложных ситуаций с банками
+                                .font_size14.fw_medium #{content.info_block_under_money_img_2}
                         .kredit-bottom.mt60
                             .kredit-bottom__img
-                                img(src='/images/key_kredit.png', alt='')
+                                img(src=content.key_kredit_img, alt='')
                             .kredit-bottom__button
                                 button.button.button_big.button_blue.button_blue2.js-popup-show(data-popup-name='js-popup-kredit')
-                                    | Узнать вероятность одобрения ипотеки
+                                    | #{content.button_about_ipoteka}
                                     span.button__arrow.icon-arrow
                                 .mt30
                                     .font_size12.fw_medium.fade05
-                                        | Пройдите простой тест и узнайте вероятность одобрения ипотеки банками-партнерами онлайн за 2 минуты
+                                        | #{content.info_abot_ipoteka_test}
         .bg_dark-blue
             .apartment-screen
                .main
                   img.apartment-screen__dots(src='/images/apartment/dots.png', alt='')
                   .apartment-screen__top
                      .apartment-screen__headline
-                        h2.font_size44 Поменяем вашу квартиру на новую
+                        h2.font_size44 #{content.change_apartments_title}
                         .mt15
                            p.font_size22.ff_trajan
-                              | Если перед покупкой нового жилья вам необходимо продать предыдущую квартиру, мы справимся с этим.
+                              | #{content.change_apartments_subtitle}
                      .apartment-screen__desc
                         .desc
                            img.desc__icon(src='/images/icons/ribbon.png', alt='')
                            p.font_size14.fade05.fw_medium
-                              | По программе 
+                              | #{content.change_apartments_title_right_block_1} 
                               br
-                              | Трейд-Ин
+                              | #{content.change_apartments_title_right_block_1}
                   .before-after.mt55
                      .before-after__area.js-before-after
                         .before-after__preview.before-after__preview_before
@@ -925,85 +925,85 @@ block main
             .payments-screen
                 .main
                     .payments-screen__head
-                        img.payments-screen__coin(src='/images/apartment/rub_coin.png', alt='')
+                        img.payments-screen__coin(src=content.img_rub_coin, alt='')
                         .payments-screen__title
-                            h2.font_size44 Используйте любые виды оплаты для покупки квартиры
+                            h2.font_size44 #{content.pay_title}
                     .payments-list
                         .payments-list__item.payments-list__m-flex
                             .payments-list__icon.color_yelow.icon-wallet
                             .payments-list__title.ff_trajan
-                                | Наличные 
+                                | #{content.cash_1} 
                                 br
-                                | Получите скидку 
+                                | #{content.cash_2} 
                                 br.hide
-                                | до 10%
+                                | #{content.cash_3}
                         .payments-list__item.payments-list__item_kredit
                             .payments-list__head.payments-list__m-flex
                                 .payments-list__icon.color_yelow.icon-residential
                                 .payments-list__title.ff_trajan
-                                    | Ипотека 
+                                    | #{content.ipoteka_1} 
                                     br
-                                    | Получите выгоду 1-2%
+                                    | #{content.ipoteka_2}
                             .payments-list__bottom.mt30
                                 .payments-list__desc.mt5
-                                    .font_size14.fw_medium.fade05 Работаем с 20 банками
+                                    .font_size14.fw_medium.fade05 #{content.ipoteka_dop_info_1}
                                 .payments-list__desc.mt5
-                                    .font_size14.fw_medium.fade05 Оформим за 24 часа
+                                    .font_size14.fw_medium.fade05 #{content.ipoteka_dop_info_2}
                                 .payments-list__desc.mt5
-                                    .font_size14.fw_medium.fade05 По 2-м документам
+                                    .font_size14.fw_medium.fade05 #{content.ipoteka_dop_info_3}
                         .payments-list__item.payments-list__m-flex
                             .payments-list__icon.color_yelow.icon-government
                             .payments-list__title.ff_trajan
-                                | Материнский 
+                                | #{content.capital_1} 
                                 br.hide
-                                | и военный капитал 
+                                | #{content.capital_2} 
                                 br
-                                | Поможем получить
+                                | #{content.capital_3}
                         .payments-list__item.payments-list__m-flex
                             .payments-list__icon.payments-list__icon_funds.color_yelow.icon-funds
                             .payments-list__title.ff_trajan
-                                | Рассрочка 
+                                | #{content.rosrochka_1} 
                                 br
-                                | Без первоначального взноса
+                                | #{content.rosrochka_2}
             .consultation-screen
                 .main
                     img.consultation-screen__dots(src='/images/consultation_dots.svg', alt='')
                     .consultation-screen__content
-                        h2.font_size44 Проведем бесплатную оценку вашей квартиры для обмена на новую
+                        h2.font_size44 #{content.p_1} вашей #{content.block_under_ask_quations_title_3_3} для обмена на новую
                         .mt20
-                            p.font_size22.ff_trajan.fw_medium.font_upper Так же вы получите:
+                            p.font_size22.ff_trajan.fw_medium.font_upper #{content.vy_poluchite_title}
                         .consultation-list
                             .consultation-list__item
                                 .desc
                                     img.desc__icon(src='/images/icons/ribbon.png', alt='')
                                     p.font_size14.fade05.fw_medium
-                                        | Личного брокера 
+                                        | #{content.vy_poluchite_block_1_1} 
                                         br
-                                        | по продаже квартиры
+                                        | #{content.vy_poluchite_block_1_2}
                             .consultation-list__item
                                 .desc
                                     img.desc__icon(src='/images/icons/ribbon.png', alt='')
                                     p.font_size14.fade05.fw_medium
-                                        | Сроки по продаже 
+                                        | #{content.vy_poluchite_block_2_1} 
                                         br
-                                        | старой квартиры
+                                        | #{content.vy_poluchite_block_2_2}
                             .consultation-list__item
                                 .desc
                                     img.desc__icon(src='/images/icons/ribbon.png', alt='')
                                     p.font_size14.fade05.fw_medium
-                                        | Презентацию 
+                                        | #{content.vy_poluchite_block_3_1} 
                                         br
-                                        | с планировками
+                                        | #{content.vy_poluchite_block_3_2}
                         .consultation-screen__form.form-box.form-box_dark
-                            .form-box__title.ff_trajan.font_size22 Менеджер перезвонит вам чтобы уточнить подробности по квартире
+                            .form-box__title.ff_trajan.font_size22 #{content.manager_call_title}
                             form.ajax-form(action='/send', method='post', data-parsley-validate='', enctype='multipart/form-data')
-                                input(type='hidden', name='subj', value='Заявка: Записаться на аудит')
+                                input(type='hidden', name='subj', value='Заявка: #{content.button_na_audit}')
                                 .input-box.mt30
                                     input.input-text.input-text_border(type='tel', name='phone', required='', data-parsley-errors-messages-disabled='', placeholder='+7 (___) ___-__-__')
                                     label.input-box__icon.icon-telephone
                                 <div class="g-recaptcha" data-sitekey= #{env.RECAPTCHA_PUBLIC} data-theme="dark" data-callback="RecaptchaSuccess"></div>
                                 button.button.button_big.button_blue.button_blue2.mt30.gcaptcha(type='submit', name='call', disabled)
-                                    | Записаться на аудит
+                                    | #{content.button_na_audit}
                                     span.button__arrow.icon-arrow
                                 .polity-box.mt35
                                     .polity-box__dot
@@ -1020,57 +1020,57 @@ block main
                 .head-screen
                     img.rating-screen__house(src='/images/rating/house.png', alt='')
                     h2.font_size44
-                        | Стоимость недвижимости 
+                        | #{content.stoimost_nedvijimosti_title_1} 
                         br
-                        | в г. Сочи  выросла на 51% 
+                        | #{content.stuomost_nedvijimosti_title_2} 
                         br
-                        | за последние 3 года
+                        | #{content.stoimost_nedvijimosti_title_3}
                     .mt20
                         p.font_size22.ff_trajan.font_upper
-                            | И будет рости за счет развития 
+                            | #{content.stoimost_nedvijimosti_title_4} 
                             br
-                            | региона еще ближайшие 3-5 лет
+                            | #{content.stoimost_nedvijimosti_title_5}
                     .desc.mt40
-                        img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
+                        img.desc__icon(src=content.golden_img, alt='')
                         p.font_size14.fade05.fw_medium
-                            | Все это время ее можно 
+                            | #{content.block_under_stoimost_nedvijimosti_title_1} 
                             br
-                            | сдавать в аренду и получать 
+                            | #{content.block_under_stoimost_nedvijimosti_title_2} 
                             br
-                            | дополнительную прибыль
+                            | #{content.block_under_stoimost_nedvijimosti_title_3}
                 .rating-screen__bottom
                     .rating-screen__profit
-                        .font_size14.fw_medium Через 5 лет вы сможете продать квартиру и заработать до
+                        .font_size14.fw_medium #{content.block_about_profit_1}
                         .mt20.rating-screen__persent
                             .font_size120.color_yelow 50%
                         .mt5
                             .font_size22.ff_trajan.fw_medium
-                                | от стоимости, 
+                                | #{content.block_about_profit_2} 
                                 br
-                                | дополнительно
+                                | #{content.block_about_profit_3}
                         //- button.button.button_big.button_blue.button_blue2.mt30
-                            | Скачать презентацию
+                            | #{content.download_form_title_1}
                             span.button__arrow.icon-arrow
             .certification-screen
                 h2.font_size44
-                    | Деятельность компании 
+                    | #{content.company_activity_title_1} 
                     br
-                    | подтверждена всеми необходимыми 
+                    | #{content.company_activity_title_2} 
                     br
-                    | лицензиями и допусками
+                    | #{content.company_activity_title_3}
                 .certification-screen__row.mt20
                     .certification-screen__left
                         .font_size22.ff_trajan
-                            | В Краснодарском крае вопрос 
+                            | #{content.documentattion_Krasnodar_1} 
                             br
-                            | с документацией стоит особенно остро.
+                            | #{content.documentattion_Krasnodar_2}
                     .certification-screen__right
                         .desc
-                            img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
+                            img.desc__icon(src=content.golden_img, alt='')
                             p.font_size14.fade05.fw_medium
-                                | Мы заранее заботимся о спокойствии 
+                                | #{content.block_right_company_activity_title_1} 
                                 br
-                                | наших клиентов и получаем все разрешительны документы еще до начала продаж и сдачи объекта
+                                | #{content.block_right_company_activity_title_2}
                 .certification-slider.mt70
                     include ../include/certification-slider__slide.pug
                     
@@ -1147,39 +1147,39 @@ block main
                 .head-screen
                     img.director-screen__gold(src='/images/director/gold.png', alt='')
                     h2.font_size44
-                        | …За 10 лет мы построили и сдали больше 40 000 м
+                        | #{content.jilaya_ploshad_title_1}
                         sup 2
-                        |  жилой площади
+                        |  #{content.jilaya_ploshad_title_2}
                     .desc.mt20
-                        img.desc__icon(src='/images/icons/ribbon_gold.png', alt='')
+                        img.desc__icon(src=content.golden_img, alt='')
                         p.font_size14.fade05.fw_medium
-                            | Мы знаем, что разрешительная документация 
+                            | #{content.razresh_documentation_1} 
                             br
-                            | для застройщика — это больная тема в нашем регионе. 
+                            | #{content.razresh_documentation_2} 
                             br
-                            | Мы тщательно проверяем объект прежде, чем предложить его вам
+                            | #{content.razresh_documentation_3}
                     .director-screen__info.mt70
                         .font_size22.fw_medium.ff_trajan
-                            | Скрипко Иван 
+                            | #{content.company_rukovoditeil_1} 
                             br
-                            | Борисович
+                            | #{content.company_rukovoditeil_2}
                         .mt15
-                            .font_size14.fw_medium Руководитель компании более
+                            .font_size14.fw_medium #{content.company_rukovoditeil_about_1}
                         .number-text.mt10
                             .font_size120.number-text__number.color_yelow 15
                             .font_size22.ff_trajan.fw_medium
                                 br
-                                | лет 
+                                | #{content.company_rukovoditeil_about_2} 
                                 br
-                                | в строительстве
+                                | #{content.company_rukovoditeil_about_3}
                         //- a.button.button_big.button_blue.button_blue2(href='#')
                             | Перейти 
                             br
                             | на страницу 
                             br
-                            | о компании 
+                            | #{content.text_near_present_3} 
                             span.icon-right-arrow
-        .experts-screen
+        .experts-screen.mainpage
             .main
                 .experts-screen__dots
                     img(src='/images/consultation_dots.svg', alt='')
@@ -1195,53 +1195,53 @@ block main
                                     | 2018 года
                             .expert-box__center
                                 .font_size22.ff_trajan.font_upper.fw_medium
-                                    | Балынская
+                                    | #{content.otdel_rukovoditeil_1}
                                     br
-                                    | Александра
+                                    | #{content.otdel_rukovoditeil_2}
                                 .mt15
                                     .font_size14.fw_medium
-                                        | Руководитель отдела 
+                                        | #{content.otdel_rukovoditeil_about_1} 
                                         br
-                                        | продаж
+                                        | #{content.otdel_rukovoditeil_about_2}
                             .expert-box__foto
                                 img(src='/images/experts/woman.png', alt='')
                     .experts-screen__right
-                        h2.font_size44 Задайте вопрос нашему лучшему специалисту
+                        h2.font_size44 #{content.ask_quations_title_1}
                         .mt20
-                            p.fw_medium.font_size22.font_upper.ff_trajan Так же вы получите:
+                            p.fw_medium.font_size22.font_upper.ff_trajan #{content.vy_poluchite_title}
                         .consultation-list
                             .consultation-list__item
                                 .desc
                                     img.desc__icon(src='/images/icons/ribbon.png', alt='')
                                     p.font_size14.fade05.fw_medium
-                                        | Презентацию 
+                                        | #{content.vy_poluchite_block_3_1} 
                                         br
-                                        | с каталогом 
+                                        | #{content.block_under_ask_quations_title_1_2} 
                                         br
-                                        | недвижимости
+                                        | #{content.block_under_ask_quations_title_1_3}
                             .consultation-list__item
                                 .desc
                                     img.desc__icon(src='/images/icons/ribbon.png', alt='')
                                     p.font_size14.fade05.fw_medium
-                                        | Условия 
+                                        | #{content.block_under_ask_quations_title_2_1} 
                                         br
-                                        | оформления 
+                                        | #{content.block_under_ask_quations_title_2_2} 
                                         br
-                                        | рассрочки
+                                        | #{content.block_under_ask_quations_title_2_3}
                             .consultation-list__item
                                 .desc
                                     img.desc__icon(src='/images/icons/ribbon.png', alt='')
                                     p.font_size14.fade05.fw_medium
-                                        | Личного менеджера 
+                                        | #{content.block_under_ask_quations_title_3_1} 
                                         br
-                                        | по подбору 
+                                        | #{content.block_under_ask_quations_title_3_2} 
                                         br
-                                        | квартиры
+                                        | #{content.block_under_ask_quations_title_3_3}
                         .consultation-screen__form.form-box.form-box_dark
                             .z-index2
-                                .form-box__title.ff_trajan.font_size22 Как вам удобно получить консультацию и материалы?
+                                .form-box__title.ff_trajan.font_size22 #{content.title_ask_quations_form}
                                 form.ajax-form(action='/send', method='post', data-parsley-validate='', enctype='multipart/form-data')
-                                    input(type='hidden', name='subj', value='Заявка: Задать вопрос специалисту')
+                                    input(type='hidden', name='subj', value='Заявка: #{content.button_ask_quations}')
                                     .message-list.mt30
                                         .message-list__item
                                             label.message-checkbox
@@ -1286,7 +1286,7 @@ block main
                                         label.input-box__icon.icon-message
                                     <div class="g-recaptcha" data-sitekey= #{env.RECAPTCHA_PUBLIC} data-theme="dark" data-callback="RecaptchaSuccess"></div>
                                     button.button.button_big.button_blue.button_blue2.mt30.gcaptcha(type='submit', name='ask', disabled)
-                                        | Задать вопрос специалисту
+                                        | #{content.button_ask_quations}
                                         span.button__arrow.icon-arrow
                                     .polity-box.mt35
                                         .polity-box__dot

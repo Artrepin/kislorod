@@ -6,12 +6,14 @@ html(lang="en")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
         title Административная панель Кислород
         <link href="https://fonts.googleapis.com/css?family=Comfortaa:300,400,700&amp;subset=cyrillic" rel="stylesheet">
+        <script src="https://unpkg.com/vue-select@latest"></script>
+        <link rel="stylesheet" href="https://unpkg.com/vue-select@latest/dist/vue-select.css">
         if env.NODE_ENV == 'development'
             //- link(rel="stylesheet", href="/bootstrap-vue/bootstrap-vue.css")
             link(rel="stylesheet", href="/src/admin/css/theme.css")
             //- link#stylesheetDark(rel="stylesheet", href="/src/admin/css/theme-dark.css")
         else
-            link(rel="stylesheet", href="/build/admin-f4f9e6fddd.min.css")
+            link(rel="stylesheet", href="/build/admin-10013658f0.min.css")
     body
         #app
 
@@ -28,5 +30,5 @@ html(lang="en")
             
             script(src='/src/admin/js/demo.js')        
         else
-            script(src='/build/admin-431236a3bf.min.js')
+            script(src='/build/admin-c69ce5fb76.min.js')
         script(src='/src/admin/js/main.js' type='module')

@@ -7,4 +7,5 @@
 /config/config.json
 /public/images/building
 /public/images/people
+/public/images/categories
 /.htpasswd

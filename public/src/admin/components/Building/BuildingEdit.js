@@ -25,9 +25,11 @@ export default {
             ],
             menuActive: 0,
             building: {
+								people: [],
                 Advantages: [],
                 Stages: [],
                 plans: [],
+                categories: [],
                 apartaments: []
             }
         }
@@ -45,10 +47,16 @@ export default {
                     iBuildingID: this.iBuildingID
                 })
                 .then( (response) => {
+									  response.data.building.people = response.data.people
                     this.building = response.data.building,
                     this.type = response.data.type
                 })
-            }    
+            }else{
+							axios.post('/admin/PeopleList',{})
+								.then((response) => {
+									this.building.people = response.data.people
+								})
+						}
         },
         update: function () {
             axios.post('/admin/BuildingUpdate', {

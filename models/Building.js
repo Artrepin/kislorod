@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true
     },
     sBuildingTitle: DataTypes.STRING,
+    sBuildingClass: DataTypes.STRING,
     sBuildingAvatar: DataTypes.STRING,
     sBuildingCoverSmall: DataTypes.STRING,
     sBuildingCoverBig: DataTypes.STRING,
@@ -17,7 +18,15 @@ module.exports = (sequelize, DataTypes) => {
     fBuildingLocationeX: DataTypes.FLOAT,
     fBuildingLocationeY: DataTypes.FLOAT,
     sBuildingYoutube: DataTypes.STRING,
-    dBuildingReady: DataTypes.DATEONLY
+    dBuildingReady: DataTypes.DATEONLY,
+		fBuildingFloors: DataTypes.FLOAT,
+		fBuildingDistance: DataTypes.FLOAT,
+		sBuildingStatus: DataTypes.STRING,
+		sBuildingDistrict: DataTypes.STRING,
+		sBuildingType: DataTypes.STRING,
+		dBuildingDateAdded: DataTypes.DATEONLY,
+		iBuildingViews : DataTypes.INTEGER,
+		iPeopleID: DataTypes.INTEGER,
   }, {
     timestamps: false,
     freezeTableName: true,
@@ -36,12 +45,25 @@ module.exports = (sequelize, DataTypes) => {
     Building.hasMany(models.apartament, {
       foreignKey: 'iBuildingID'
     })
+    Building.hasOne(models.people, {
+      foreignKey: 'iPeopleID'
+    })
+		Building.belongsToMany(models.Category,{
+			through: 'BuildingCategory',
+			foreignKey: 'iBuildingID',
+			as: 'categories',
+		})
   };
   sequelizePaginate.paginate(Building)
 
   Building.getBuildingItem = async function (iBuildingID) {
     var building = await Building.findByPk(iBuildingID, {
       include: [
+				{
+					model: sequelize.models.Category,
+					as: 'categories',
+					required: false
+				},
         {
           model: sequelize.models.Advantage
         },
@@ -53,7 +75,10 @@ module.exports = (sequelize, DataTypes) => {
           include: [
             {
               model: sequelize.models.plan_image
-            }
+            },
+						{
+							model: sequelize.models.apartament
+						}
           ]
         },
         {

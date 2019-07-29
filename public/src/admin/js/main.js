@@ -12,6 +12,10 @@ import BuildingEditPlan from '../components/Building/BuildingEditPlan.js'
 import BuildingEditApartment from '../components/Building/BuildingEditApartment.js'
 
 import People from '../components/People/People.js'
+import Category from '../components/Category/Category.js'
+import Content from '../components/Content/Content.js'
+
+
 
 Vue.component('building-edit-advantage', {
     props: [
@@ -47,6 +51,7 @@ Vue.component('building-edit-advantage', {
     `
 })
 
+
 Vue.component('app-header', {
     props: [
         'button',
@@ -78,6 +83,7 @@ Vue.component('app-header', {
     `
 })
 
+Vue.component('v-select', VueSelect.VueSelect);
 Vue.component('building-edit-header', {
     props: [
         'building',
@@ -244,6 +250,14 @@ const routes = [
         path: '/people/',
         component: People
     },
+    {
+				path: '/category/',
+        component: Category
+    },
+    {
+				path: '/content/',
+        component: Content
+    },
 ]
 
 const router = new VueRouter({
@@ -265,6 +279,14 @@ const app = new Vue({
                 {
                     title: 'Сотрудники',
                     uri: '/people'
+                },
+                {
+                    title: 'Категории',
+                    uri: '/category'
+                },
+                {
+                    title: 'Контент',
+                    uri: '/content'
                 },
             ]
         },
