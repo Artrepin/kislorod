@@ -279,6 +279,9 @@ app.get('/partner', recaptcha.middleware.render, (req, res) => {
 })
 
 
+
+
+
 app.post('/send', recaptcha.middleware.verify, (req, res) => {
 
     if (!req.recaptcha.error) {
@@ -678,6 +681,30 @@ app.post('/admin/BuildingRemove', auth.connect(basic), async (req, res) => {
         res.json(response)
     })    
 })
+
+app.post("/admin/GenericUploadImage",auth.connect(basic), async (req, res) => {
+    var filename = randomString() + '.jpg'
+    
+    var storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, './public/images/main')
+        },
+        filename: function (req, file, cb) {
+            cb(null, 'temp_' + filename)
+        }
+    })
+    var upload = multer({ storage: storage }).single("img")
+    upload(req, res, function (err) {
+        sharp('./public/images/main/' + 'temp_' + filename)
+        .toFile('./public/images/main/' + filename, function(err, response) {
+            sharp.cache(false)
+            // fs.unlink('./public/images/building/' + 'temp_' + filename)
+            req.file.filename = '/images/main/'+filename
+            res.send({ file: req.file, body: req.body })
+        })
+    })
+});
+
 app.post('/admin/CategoryUploadImage', auth.connect(basic), async (req, res) => {
     var filename = randomString() + '.jpg'
     
