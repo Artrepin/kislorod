@@ -112,7 +112,12 @@ app.get('/catalog', recaptcha.middleware.render, async (req, res) => {
 app.post('/catalog/init', async (req, res) => {
 
     var nowYear = new Date().getFullYear()
-		var categories = await Category.findAll()
+		var categories = await Category.findAll({
+      order:[
+        ['iCategorySort','ASC']
+      ]
+    
+    })
     console.log(filter_cache)
     if(filter_cache != "" && false){
       console.log("Used cache")

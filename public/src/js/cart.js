@@ -16,6 +16,12 @@ if($("#cartvue").length) {
         data: {
           building: []
         },
+        updated: function(){
+          Vue.nextTick(() => {
+            updateFavourite()
+          })
+
+        },
         created: function () {
             axios.post('/getBuilding', {
               id: window.location.pathname.replace('/cart/','')
@@ -49,6 +55,9 @@ if($("#cartvue").length) {
               element.apartmentCount = apartmentCount
               element.apartmentCountString = this.declOfNum(element.apartmentCount, ['квартира', 'квартиры', 'квартир'])
               set_map(element.fBuildingLocationeX,element.fBuildingLocationeY,element.sBuildingTitle,'/images/building' + element.sBuildingAvatar)
+              Vue.nextTick(() => {
+                updateFavourite()
+              })
 
 
             })

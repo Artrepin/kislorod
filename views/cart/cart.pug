@@ -30,7 +30,7 @@ block main
                     img(v-if="building.sBuildingAvatar != null" :src="'/images/building/' + building.sBuildingAvatar", alt='')
                 .cart__status.cart__status_left.js-catalog-status 1/12
               .cart-info__content
-                button.cart-info__favorite.prod__favorite.active
+                button.prod__favorite(v-bind:id='building.iBuildingID', onclick = 'toggleFavourite(this)')
                 .cart-info__section.cart-info__head
                   .cart-info__column
                     .cart-info__name
