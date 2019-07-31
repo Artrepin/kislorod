@@ -129,18 +129,7 @@ export default {
                                             <input type="text" class="form-control" v-model.number="building.plans[usePlan].fPlanArea">
                                         </div>
                                     </div>
-                                    <div class="col-sm">
-                                        <div class="form-group">
-                                            <label for="">Тип планировки</label>
-                                            <select class="form-control" v-model="building.plans[usePlan].iTypeID">
-                                                <option
-                                                    v-for="(type, index) in this.$parent.type"
-                                                    v-bind:value="type.iTypeID"
-                                                    >{{ type.sTypeTitle }}</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
+                                                                    </div>
                                 <div class="form-group form-group-image" v-for="(image, index) in building.plans[usePlan].plan_images" v-if="!image.del">
                                     <input type="hidden" class="form-control" v-model="image.sPlanImage">
                                     <picture-input

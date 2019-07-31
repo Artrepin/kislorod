@@ -23,6 +23,9 @@ if($("#favvue").length) {
         },
         created: function () {
           let fav = JSON.parse(localStorage.getItem("fav") || "[]")
+          if(!fav) fav =[];
+          fav = fav.filter(value => Number.isInteger(value))
+          console.log(fav)
           fav.forEach(id => {
             axios.post('/getBuilding',{
               id: id

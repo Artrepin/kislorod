@@ -107,6 +107,11 @@ app.get('/catalog', recaptcha.middleware.render, async (req, res) => {
     data.title = "Каталог недвижимости"
     data.description = "Агентство элитной недвижимости в городе Сочи"
     data.captcha = res.recaptcha
+    data.content = []
+		let content = await Content.findAll()
+		content.forEach(elem => {
+			data.content[elem.sContentKey] = elem.sContentValue
+		})
     res.render('catalog/catalogtwo', data)
 })
 app.post('/catalog/init', async (req, res) => {
@@ -208,6 +213,11 @@ app.post('/getBuilding', async (req, res) => {
 app.get('/favourite',async (req, res) => {
 
   let data = {}
+  data.content = [];
+		let content = await Content.findAll()
+		content.forEach(elem => {
+			data.content[elem.sContentKey] = elem.sContentValue
+		})
   data.title = "Избранное"
   res.render('catalog/favourite', data)
 

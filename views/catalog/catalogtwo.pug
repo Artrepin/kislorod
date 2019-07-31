@@ -148,14 +148,15 @@ block main
 
 
 
-        .experts-screen
+
+        .experts-screen.mainpage
             .main
                 .experts-screen__dots
                     img(src='/images/consultation_dots.svg', alt='')
                 .experts-screen__row
                     .experts-screen__left
                         .expert-box
-                            .expert-box__top
+                            // - .expert-box__top
                                 .font_size12.fw_medium.fade05
                                     | Лучший менеджер по работе 
                                     br
@@ -164,53 +165,53 @@ block main
                                     | 2018 года
                             .expert-box__center
                                 .font_size22.ff_trajan.font_upper.fw_medium
-                                    | Вдовин 
+                                    | #{content.otdel_rukovoditeil_1}
                                     br
-                                    | Олег
+                                    | #{content.otdel_rukovoditeil_2}
                                 .mt15
                                     .font_size14.fw_medium
-                                        | Эксперт по 
+                                        | #{content.otdel_rukovoditeil_about_1} 
                                         br
-                                        | недвижимости
+                                        | #{content.otdel_rukovoditeil_about_2}
                             .expert-box__foto
-                                img(src='/images/experts/2.png', alt='')
+                                img(src='/images/experts/woman.png', alt='')
                     .experts-screen__right
-                        h2.font_size44 Задайте вопрос нашему лучшему специалисту
+                        h2.font_size44 #{content.ask_quations_title_1}
                         .mt20
-                            p.fw_medium.font_size22.font_upper.ff_trajan Так же вы получите:
+                            p.fw_medium.font_size22.font_upper.ff_trajan #{content.vy_poluchite_title}
                         .consultation-list
                             .consultation-list__item
                                 .desc
                                     img.desc__icon(src='/images/icons/ribbon.png', alt='')
                                     p.font_size14.fade05.fw_medium
-                                        | Презентацию 
+                                        | #{content.vy_poluchite_block_3_1} 
                                         br
-                                        | с каталогом 
+                                        | #{content.block_under_ask_quations_title_1_2} 
                                         br
-                                        | недвижимости
+                                        | #{content.block_under_ask_quations_title_1_3}
                             .consultation-list__item
                                 .desc
                                     img.desc__icon(src='/images/icons/ribbon.png', alt='')
                                     p.font_size14.fade05.fw_medium
-                                        | Условия 
+                                        | #{content.block_under_ask_quations_title_2_1} 
                                         br
-                                        | оформления 
+                                        | #{content.block_under_ask_quations_title_2_2} 
                                         br
-                                        | рассрочки
+                                        | #{content.block_under_ask_quations_title_2_3}
                             .consultation-list__item
                                 .desc
                                     img.desc__icon(src='/images/icons/ribbon.png', alt='')
                                     p.font_size14.fade05.fw_medium
-                                        | Личного менеджера 
+                                        | #{content.block_under_ask_quations_title_3_1} 
                                         br
-                                        | по подбору 
+                                        | #{content.block_under_ask_quations_title_3_2} 
                                         br
-                                        | квартиры
+                                        | #{content.block_under_ask_quations_title_3_3}
                         .consultation-screen__form.form-box.form-box_dark
                             .z-index2
-                                .form-box__title.ff_trajan.font_size22 Как вам удобно получить консультацию и материалы?
-                                form.ajax-form(action='send.php', method='post', data-parsley-validate='', enctype='multipart/form-data')
-                                    input(type='hidden', name='subj', value='Заявка: Задать вопрос специалисту')
+                                .form-box__title.ff_trajan.font_size22 #{content.title_ask_quations_form}
+                                form.ajax-form(action='/send', method='post', data-parsley-validate='', enctype='multipart/form-data')
+                                    input(type='hidden', name='subj', value='Заявка: #{content.button_ask_quations}')
                                     .message-list.mt30
                                         .message-list__item
                                             label.message-checkbox
@@ -253,8 +254,9 @@ block main
                                     .input-box.mt30
                                         input.input-text.input-text_border(type='email', name='email', required='', data-parsley-errors-messages-disabled='', placeholder='mail@mail.com')
                                         label.input-box__icon.icon-message
-                                    button.button.button_big.button_blue.button_blue2.mt30(type='submit', name='ask')
-                                        | Задать вопрос специалисту
+                                    <div class="g-recaptcha" data-sitekey= #{env.RECAPTCHA_PUBLIC} data-theme="dark" data-callback="RecaptchaSuccess"></div>
+                                    button.button.button_big.button_blue.button_blue2.mt30.gcaptcha(type='submit', name='ask', disabled)
+                                        | #{content.button_ask_quations}
                                         span.button__arrow.icon-arrow
                                     .polity-box.mt35
                                         .polity-box__dot
@@ -264,6 +266,10 @@ block main
                                             | обработки персональных данных 
                                             br
                                             a(href='#') ознакомиться
+
+
+
+
         .popup-catalog.js-popup-catalog(style='display: block;')
             .popup-catalog__overlay.js-catalog-close
             .modal-wrapper.table

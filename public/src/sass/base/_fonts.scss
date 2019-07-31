@@ -18,7 +18,8 @@
 
 @font-face {
   font-family: 'Trajan Pro 3';
-  src: url("/fonts/TrajanPro3Light.woff") format("woff"), url("/fonts/fonts/TrajanPro3Light.woff2") format("woff2");
+  src: url('/fonts/TrajanPro3Light.woff') format('woff'), 
+       url('/fonts/TrajanPro3Light.woff2') format('woff2');
   font-weight: 300;
   font-style: normal;
 }
@@ -26,8 +27,8 @@
 @font-face {
     font-family: 'Trajan Pro 3';
     src: url('/fonts/TrajanPro3Regular.woff2') format('woff2'),
-        url('/fonts/TrajanPro3Regular.woff') format('woff'),
-        url('/fonts/TrajanPro3Regular.svg#TrajanPro3Regular') format('svg');
+         url('/fonts/TrajanPro3Regular.woff') format('woff'),
+         url('/fonts/TrajanPro3Regular.svg#TrajanPro3Regular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
