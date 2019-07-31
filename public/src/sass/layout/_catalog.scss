@@ -858,9 +858,6 @@ body:not(.touch-device) .prod:hover .prod__value {
     height: 60px;
   }
 
-  .tabs__nav {
-    padding: 0 20px;
-  }
 
   .tabs__link {
     height: 50px;
@@ -1234,5 +1231,12 @@ body:not(.touch-device) .prod:hover .prod__value {
 
   .burger {
     margin-right: 15px;
+  }
+}
+
+
+@media only screen and (max-width: 2000px) {
+  .tabs__nav {
+    padding: 0 20px;
   }
 }
