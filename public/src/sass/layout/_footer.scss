@@ -322,6 +322,8 @@
     }
     &__item {
         margin-top: 10px;
+        max-height: 190px;
+        overflow: hidden;
         position: relative;
         width: 32.7%;
         cursor: pointer;
@@ -1157,4 +1159,23 @@ h6 {
     orphans: 2;
     widows: 2;
     text-align: left;
+}
+
+
+.header__center{
+  padding: 0 0!important;
+}
+
+@media (max-width: 1439px){
+  .tabs__container {
+    padding: 80px 40px 200px;
+  }
+}
+
+.main-screen_catalog .main {
+  max-width: 9999px!important;
+}
+
+.cart__center {
+    max-width: 1170px!important;
 }

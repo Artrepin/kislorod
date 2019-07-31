@@ -223,6 +223,20 @@ app.get('/favourite',async (req, res) => {
 
 })
 
+app.post('/catalog/allbuilding', async (req, res) => {
+		res.json(await Building.findAll({
+      include:[
+        {
+          model:Plan,
+          required: true,
+        },
+        {
+          model: Apartament,
+          required: true,
+        }
+      ]
+    }))
+})
 app.post('/catalog/building', async (req, res) => {
 		let data = req.body.selected
 		params = {
@@ -766,8 +780,8 @@ app.post('/admin/BuildingUploadAvatar', auth.connect(basic), async (req, res) =>
         let x = 0
         let y = 0
         if (req.headers.column == 'sBuildingAvatar') {
-            x = 100
-            y = 100
+            x = 600
+            y = 600
         } else if (req.headers.column == 'sBuildingCoverSmall') {
             x = 1170
             y = 450

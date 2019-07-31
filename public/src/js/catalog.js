@@ -27,11 +27,13 @@ if($("#catalogvue").length) {
 
                   updateFavourite()
                 })
+            
                 if($(".js-tabs-link.active").length == 0){
                   $(".js-tabs-link").first().click()
                 }
         },
         created: function () {
+            this.getBuilding(true);
             axios.post('/catalog/init', {
 
             }).then((json) => {
@@ -67,8 +69,11 @@ if($("#catalogvue").length) {
                 //});
     
             },
-            getBuilding: function () {
-                axios.post('/catalog/building', {
+            getBuilding: async function (all=false) {
+              let url;
+                if(all) url = '/catalog/allbuilding';
+                else url = '/catalog/building';
+                axios.post(url, {
                     selected: this.selected
                 }).then((json) => {
                     Vue.set(this,'buildings', [])
@@ -79,7 +84,7 @@ if($("#catalogvue").length) {
                         data.id = element.iBuildingID
 												data.name = element.sBuildingTitle
 												data.district = element.sBuildingDistrict
-                        data.sBuildingAvatar = element.sBuildingCoverSmall
+                        data.sBuildingAvatar = element.sBuildingAvatar
                         data.status = element.sBuildingStatus
 
                         data.min_area = Infinity
