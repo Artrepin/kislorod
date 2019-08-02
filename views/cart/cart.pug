@@ -27,7 +27,7 @@ block main
               .cart-info__gallery
                 .cart-info__slider.js-catalog-slider
                   .cart-info__slide
-                    img(style="width:100%" v-if="building.sBuildingCoverSmall != null" :src="'/images/building/' + building.sBuildingCoverSmall", alt='')
+                    img(v-if="building.sBuildingCoverSmall != null" :src="'/images/building/' + building.sBuildingCoverSmall", alt='')
                 .cart__status.cart__status_left.js-catalog-status 1/12
               .cart-info__content
                 button.prod__favorite(v-bind:id='building.iBuildingID', onclick = 'toggleFavourite(this)')

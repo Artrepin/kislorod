@@ -783,11 +783,11 @@ app.post('/admin/BuildingUploadAvatar', auth.connect(basic), async (req, res) =>
             x = 600
             y = 600
         } else if (req.headers.column == 'sBuildingCoverSmall') {
-            x = 1170
-            y = 450
+            x = 1872  
+            y = 720
         } else if (req.headers.column == 'sBuildingCoverBig') {
-            x = 1170
-            y = 450
+            x = 1872
+            y = 720
         }
         sharp('./public/images/building/' + 'temp_' + filename)
         .resize(x, y)

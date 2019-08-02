@@ -322,7 +322,7 @@
     }
     &__item {
         margin-top: 10px;
-        max-height: 190px;
+        max-height: 212px;
         overflow: hidden;
         position: relative;
         width: 32.7%;
@@ -1179,3 +1179,31 @@ h6 {
 .cart__center {
     max-width: 1170px!important;
 }
+
+
+
+/* app.css | http://127.0.0.1:90/src/css/app.css */
+
+.popup-catalog__item {
+  max-height: 212px!important;
+}
+
+@media only screen and (max-width: 1279px) {
+  .catalog {
+    padding-top: 66px!important;
+  }
+}
+
+@media only screen and (max-width: 1439px) {
+  .header {
+    padding: 30px 15px!important;
+  }
+  .catalog {
+    padding-top: 115px!important;
+  }
+}
+
+.center {
+  padding: 0 15px!important;
+}
+
