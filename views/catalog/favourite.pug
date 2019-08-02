@@ -3,7 +3,7 @@ extends ../layouts/layout.pug
 block main
     #favvue.main-wrapper
         .main-screen.main-screen_catalog.bg_dark-blue.color_white
-            .main
+            .main.maincatalog
                 include ../include/header.pug
                 .catalog
                     .catalog__center.center
@@ -13,7 +13,7 @@ block main
                                     a.breadcrumbs__link(href='#') Главная
                                 li.breadcrumbs__item Избранное
                         .catalog__info(v-if="buildings.length == 0")
-                          span
+                          h2.font_size44
                             | Пока вы ничего не выбрали из нашего каталога
                           br
                           a

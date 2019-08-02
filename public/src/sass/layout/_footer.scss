@@ -1207,3 +1207,42 @@ h6 {
   padding: 0 15px!important;
 }
 
+
+/* app.css | http://127.0.0.1:90/src/css/app.css */
+
+.prod__preview {
+  height: 255px;
+  overflow: hidden;
+}
+
+
+
+/* app.css | http://127.0.0.1:90/src/css/app.css */
+
+.catalog {
+  /* padding-top: 265px; */
+  padding-top: 155px;
+}
+
+/* Element | http://127.0.0.1:90/catalog */
+
+@media (min-width: 1450px){
+  .maincatalog .header__center {
+    padding: 0 130px !important;
+  }
+}
+
+
+
+/* app.css | http://127.0.0.1:90/src/css/app.css */
+
+.team-screen__bottom {
+  /* margin-top: 2.5em; */
+  margin-top: 27.5em!important;
+}
+
+div.document-list__item:nth-child(2) {
+ /*! float: right; *//*! margin-left: 0px; */padding-left: 90px;
+}
+
+
